@@ -1,0 +1,252 @@
+    原始：
+    // 速度决策代价初始化
+    _weight_coefficients.speed_dp_w_ref_speed = 1000.0;
+    _weight_coefficients.speed_dp_w_a = 300.0;
+    _weight_coefficients.speed_dp_w_jerk = 300.0;
+    // _weight_coefficients.speed_dp_w_obs = 2000;
+    _weight_coefficients.speed_dp_w_obs = 1e5;
+    // 速度规划代价初始化
+    _weight_coefficients.speed_qp_w_ref_speed = 300.0;
+    _weight_coefficients.speed_qp_w_a = 100.0;
+    _weight_coefficients.speed_qp_w_jerk = 100.0;
+    
+    10.23.1101
+    调大平滑代价
+    // 速度决策代价初始化
+    _weight_coefficients.speed_dp_w_ref_speed = 1000.0;
+    _weight_coefficients.speed_dp_w_a = 400.0;
+    _weight_coefficients.speed_dp_w_jerk = 400.0;
+    // _weight_coefficients.speed_dp_w_obs = 2000;
+    _weight_coefficients.speed_dp_w_obs = 1e5;
+    // 速度规划代价初始化
+    _weight_coefficients.speed_qp_w_ref_speed = 300.0;
+    _weight_coefficients.speed_qp_w_a = 200.0;
+    _weight_coefficients.speed_qp_w_jerk = 200.0;
+    speed = 8， 0.4*9.8
+    timer1 = threading.Timer(10.0, spawn_vehicle_noroute, args=(vehicle_bp, spawn_points1[0]))
+    timer1.start()
+    timer2 = threading.Timer(110.0, spawn_vehicle, args=(vehicle_bp, spawn_points2[0], route_2))
+    timer2.start()
+    Efficiency: 4.027 Safety: 0.058 UD: 0.079 LCC: 0.005
+    
+
+    10.23.1129
+    加速
+    // 速度决策代价初始化
+    _weight_coefficients.speed_dp_w_ref_speed = 1000.0;
+    _weight_coefficients.speed_dp_w_a = 400.0;
+    _weight_coefficients.speed_dp_w_jerk = 400.0;
+    // _weight_coefficients.speed_dp_w_obs = 2000;
+    _weight_coefficients.speed_dp_w_obs = 1e5;
+    // 速度规划代价初始化
+    _weight_coefficients.speed_qp_w_ref_speed = 300.0;
+    _weight_coefficients.speed_qp_w_a = 200.0;
+    _weight_coefficients.speed_qp_w_jerk = 200.0;
+    speed = 10
+    乱起八糟
+
+    #------------------------------------------------------------------#
+    10.23.1433  先避让再加速超过
+    加大fixedtime为0.02
+    // 速度决策代价初始化
+    _weight_coefficients.speed_dp_w_ref_speed = 1000.0;
+    _weight_coefficients.speed_dp_w_a = 400.0;
+    _weight_coefficients.speed_dp_w_jerk = 400.0;
+    // _weight_coefficients.speed_dp_w_obs = 2000;
+    _weight_coefficients.speed_dp_w_obs = 1e5;
+    // 速度规划代价初始化
+    _weight_coefficients.speed_qp_w_ref_speed = 300.0;
+    _weight_coefficients.speed_qp_w_a = 200.0;
+    _weight_coefficients.speed_qp_w_jerk = 200.0;
+    speed = 10, timer1 = 40, timer2 = 77 * 5 
+
+    计算指标完成! Efficiency: 4.554 Safety: 0.061 UD: 0.100 LCC: 0.000
+    #------------------------------------------------------------------#
+
+    10.23.1457  减速避让均失败
+    原因：PID控制部分，减速还在给油门， 由于对方车辆转弯，减速，预测失效，没有留出足够的安全距离
+    改进措施：用单PID控制； 检查速度凸空间问题，加大障碍物代价； generate_convex_space 更改，generate_st_graph更改
+    加大fixedtime为0.02
+    // 速度决策代价初始化
+    _weight_coefficients.speed_dp_w_ref_speed = 1000.0;
+    _weight_coefficients.speed_dp_w_a = 400.0;
+    _weight_coefficients.speed_dp_w_jerk = 400.0;
+    // _weight_coefficients.speed_dp_w_obs = 2000;
+    _weight_coefficients.speed_dp_w_obs = 1e5;
+    // 速度规划代价初始化
+    _weight_coefficients.speed_qp_w_ref_speed = 300.0;
+    _weight_coefficients.speed_qp_w_a = 200.0;
+    _weight_coefficients.speed_qp_w_jerk = 200.0;
+    speed = 10
+    timer1 = threading.Timer(44, spawn_vehicle_noroute, args=(vehicle_bp, spawn_points1[0]))
+    timer1.start()
+    timer2 = threading.Timer( 76 * 5 , spawn_vehicle, args=(vehicle_bp, spawn_points2[0], route_2))
+    timer2.start()
+
+    #------------------------------------------------------------------#
+    10.23.1621  两次减速避让均成功，第一次有修改的余地,把t_out调大为1.0,然后再做为banchmark
+    单PID， 3 0 0.8 ； 加大fixedtime为0.02；
+    // 速度决策代价初始化
+    _weight_coefficients.speed_dp_w_ref_speed = 1000.0;
+    _weight_coefficients.speed_dp_w_a = 300.0;
+    _weight_coefficients.speed_dp_w_jerk = 300.0;
+    _weight_coefficients.speed_dp_w_obs = 1e5;
+    // 速度规划代价初始化
+    _weight_coefficients.speed_qp_w_ref_speed = 300.0;
+    _weight_coefficients.speed_qp_w_a = 100.0;
+    _weight_coefficients.speed_qp_w_jerk = 100.0;
+    speed = 10
+    timer1 = threading.Timer(44, spawn_vehicle_noroute, args=(vehicle_bp, spawn_points1[0]))
+    timer1.start()
+    timer2 = threading.Timer( 450 , spawn_vehicle, args=(vehicle_bp, spawn_points2[0], route_2))
+    timer2.start()
+    //刹车控制
+        if (std::abs(contor_signal) >= 2.5){
+        brake = std::min(std::abs(contor_signal)/5, 1.0);
+    }
+    计算指标完成! Efficiency: 3.730 Safety: 0.060 UD: 0.089 LCC: 0.001
+
+    #------------------------------------------------------------------#
+    10.23.1909  两次减速避让均成功,做为banchmark
+    单PID， 3 0 0.8 ； 加大fixedtime为0.02；
+    // 速度决策代价初始化同上
+    
+    speed = 10
+    timer1 = threading.Timer(44, spawn_vehicle_noroute, args=(vehicle_bp, spawn_points1[0]))
+    timer1.start()
+    timer2 = threading.Timer( 450 , spawn_vehicle, args=(vehicle_bp, spawn_points2[0], route_2))
+    timer2.start()
+    //刹车控制
+        if (std::abs(contor_signal) >= 2.5){
+        brake = std::min(std::abs(contor_signal)/5, 1.0);
+    }
+    if (cur_obs.at("t_in") <= 0.7){
+            for (size_t i = 0; i < s_ub.size(); i++)
+            {
+                s_ub[i] = std::max(cur_obs.at("s_in"),cur_obs.at("s_out"));
+                s_lb[i] = 0.0;
+            }
+            continue;
+        }
+    t_out = 0.8
+    计算指标完成! Efficiency: 3.700 Safety: 0.058 UD: 0.080 LCC: 0.001
+    #------------------------------------------------------------------#
+    10.23.1933  速度调为12，尝试加速超车均失败
+    原因：ST图直接从障碍物穿过去；决策频率较低
+    解决：调大障碍物代价，决策频率为10hz
+    单PID， 3 0 0.8 ； 加大fixedtime为0.02；
+    // 速度决策代价初始化同上
+    speed = 12
+    timer1 = threading.Timer(44, spawn_vehicle_noroute, args=(vehicle_bp, spawn_points1[0]))
+    timer1.start()
+    timer2 = threading.Timer( 450 , spawn_vehicle, args=(vehicle_bp, spawn_points2[0], route_2))
+    timer2.start()
+    //刹车控制
+        if (std::abs(contor_signal) >= 2.5){
+        brake = std::min(std::abs(contor_signal)/5, 1.0);
+    }
+    t_out = 0.8
+    #------------------------------------------------------------------#
+    10.24.1716  速度调为12，尝试加速超车
+    单PID， 3 0 0.8 ； 加大fixedtime为0.02；s = 80
+    _weight_coefficients.speed_dp_w_obs = 2e5;
+    ay_max = 0.5 * 9.8
+    speed = 12
+    timer1 = threading.Timer(44, spawn_vehicle_noroute, args=(vehicle_bp, spawn_points1[0]))
+    timer1.start()
+    timer2 = threading.Timer( 450 - 67 , spawn_vehicle, args=(vehicle_bp, spawn_points2[0], route_2))
+    timer2.start()
+    //刹车控制
+        if (std::abs(contor_signal) >= 2.5){
+        brake = std::min(std::abs(contor_signal)/5, 1.0);
+    }
+    t_out = 0.7
+    计算指标完成! Efficiency: 4.15296 Safety: 0.04950 UD: 0.10781 LCC: 0.00176 total_frame: 3831
+
+    #------------------------------------------------------------------#
+    10.25.1028  速度调为11，尝试先加速超车，后减速避让
+    结果：加速超车成功，第二辆车加速超车失败
+    原因：二次规划报错，估计是在t_in < 0.7时，规划上界出错
+    解决：在身后的动态障碍物（即s<0）不要参与规划
+    单PID， 3 0 0.8 ； 加大fixedtime为0.02；s = 80
+    _weight_coefficients.speed_dp_w_obs = 2e5;
+    ay_max = 0.5 * 9.8
+    speed = 11
+    timer1 = threading.Timer(44, spawn_vehicle_noroute, args=(vehicle_bp, spawn_points1[0]))
+    timer1.start()
+    timer2 = threading.Timer( 450 - 47 , spawn_vehicle, args=(vehicle_bp, spawn_points2[0], route_2))
+    timer2.start()
+    else // 动态障碍物
+        {
+            if (longitudinal_d <= 60 && longitudinal_d > -10 && lateral_d <= 25 && lateral_d >= -25){
+    //刹车控制
+        if (std::abs(contor_signal) >= 2.5){
+        brake = std::min(std::abs(contor_signal)/5, 1.0);
+    }
+    t_out = 0.7
+
+    if (std::abs(obs.l_dot) <= 0.1 || obs.s <=0.0)
+    {
+        continue;
+    }
+    计算指标完成! Efficiency: 4.19606 Safety: 0.06525 UD: 0.08506 LCC: 0.00065 total_frame: 4644.00000
+
+    #------------------------------------------------------------------#
+    10.25.1028  速度调为11，尝试先加速超车，后减速避让成功,静态障碍物筛选阈值为7.5m，作为banchmark
+    ay_max = 0.5 * 9.8
+    speed = 11
+    timer1 = threading.Timer(40, spawn_vehicle_noroute, args=(vehicle_bp, spawn_points1[0]))
+    timer1.start()
+    timer2 = threading.Timer( 373 , spawn_vehicle, args=(vehicle_bp, spawn_points2[0], route_2))
+    timer2.start()
+    else // 动态障碍物
+    {
+            if (longitudinal_d <= 60 && longitudinal_d > -10 && lateral_d <= 25 && lateral_d >= -25){
+    //刹车控制
+        if (std::abs(contor_signal) >= 2.5){
+        brake = std::min(std::abs(contor_signal)/5, 1.0);
+    }
+    t_out = 0.7
+    if (std::abs(obs.l_dot) <= 0.1 || obs.s <=0.0)
+    {
+        continue;
+    }
+    test1：计算指标完成! Efficiency: 4.02670 Safety: 0.06482 UD: 0.10442 LCC: 0.01482 total_frame: 4520.00000
+    test2：计算指标完成! Efficiency: 4.01879 Safety: 0.05694 UD: 0.09093 LCC: 0.01429 total_frame: 4619.00000
+
+    #----------------------尝试引入定位误差------------------------------#
+    #1.全程施加误差
+    方差0.5 ：计算指标完成! Efficiency: 4.09333 Safety: 0.05897 UD: 0.08724 LCC: 0.01447 total_frame: 4562.00000
+    new_stop:计算指标完成! Efficiency: 4.37528 Safety: 0.07015 UD: 0.10107 LCC: 0.01715 total_frame: 3849.00000
+    
+
+    #2.遇到动态障碍物时施加误差
+    #----------------------1.0------------------------------#
+    std::normal_distribution<double> distribution(0.0, 1.0);
+    timer1 = threading.Timer(40, spawn_vehicle_noroute, args=(vehicle_bp, spawn_points1[0]))
+    timer1.start()
+    timer2 = threading.Timer( 373 , spawn_vehicle, args=(vehicle_bp, spawn_points2[0], route_2))
+    timer2.start()
+    std::default_random_engine generator;
+    if ((msg->pose.pose.position.y >= -165.8 && msg->pose.pose.position.y <= -100.5 && msg->pose.pose.position.x >= 91 && msg->pose.pose.position.x <= 93) || (msg->pose.pose.position.y >= -80.0 && msg->pose.pose.position.y <= -58.0 && msg->pose.pose.position.x >= 290 && msg->pose.pose.position.x <= 340))
+    std::normal_distribution<double> distribution(0.0, 1.0);
+    test1：计算指标完成! Efficiency: 4.08571 Safety: 0.05347 UD: 0.11150 LCC: 0.00931 total_frame: 4619.00000
+    test2：计算指标完成! Efficiency: 4.20205 Safety: 0.06690 UD: 0.10836 LCC: 0.01443 total_frame: 4365.00000
+    计算指标完成! Efficiency: 4.14388 Safety: 0.060185 UD: 0.10993 LCC: 0.01187
+
+    #----------------------2.0------------------------------#
+    std::normal_distribution<double> distribution(0.0, 2.0);
+    timer1 = threading.Timer(40, spawn_vehicle_noroute, args=(vehicle_bp, spawn_points1[0]))
+    timer1.start()
+    timer2 = threading.Timer( 373 , spawn_vehicle, args=(vehicle_bp, spawn_points2[0], route_2))
+    timer2.start()
+
+    #----------------------0.5------------------------------#
+        std::normal_distribution<double> distribution(0.0, 0.5);
+    timer1 = threading.Timer(40, spawn_vehicle_noroute, args=(vehicle_bp, spawn_points1[0]))
+    timer1.start()
+    timer2 = threading.Timer( 373 , spawn_vehicle, args=(vehicle_bp, spawn_points2[0], route_2))
+    timer2.start()
+    test1：计算指标完成! Efficiency: 3.96214 Safety: 0.06176 UD: 0.10337 LCC: 0.01380 total_frame: 4566.00000
+    test2：计算指标完成! Efficiency: 4.12707 Safety: 0.06142 UD: 0.10274 LCC: 0.01621 total_frame: 4380.00000
+    计算指标完成! Efficiency: 4.044605 Safety: 0.06159 UD: 0.103055 LCC: 0.015005
