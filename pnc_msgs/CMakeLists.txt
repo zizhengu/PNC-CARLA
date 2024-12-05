@@ -19,8 +19,6 @@ endif()
 find_package(ament_cmake REQUIRED)
 # uncomment the following section in order to fill in
 
-
-
 find_package(rosidl_default_generators REQUIRED)
 
 
