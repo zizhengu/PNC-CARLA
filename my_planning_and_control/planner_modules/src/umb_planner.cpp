@@ -3,9 +3,14 @@ auto LOG = rclcpp::get_logger("UMBPlanner");
 
 UMBPlanner::UMBPlanner() : Node("UMBPlanner")
 {
+    google::InitGoogleLogging("UMBP");
+    google::SetLogDestination(google::GLOG_INFO, "/home/guzizhen/PNC-CARLA/debug_log/umbp_log/");
+    google::SetLogDestination(google::GLOG_WARNING, "/home/guzizhen/PNC-CARLA/debug_log/umbp_log/");
+    google::SetLogDestination(google::GLOG_ERROR, "/home/guzizhen/PNC-CARLA/debug_log/umbp_log/");
+
     _get_waypoint_client = this->create_client<carla_waypoint_types::srv::GetWaypoint>(
         "/carla_waypoint_publisher/ego_vehicle/get_waypoint");
-    _reference_speed = 11.0;
+    _reference_speed = 10.0;
 }
 
 bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference_line, const std::shared_ptr<VehicleState> ego_state,
@@ -51,6 +56,15 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     cartesion_set_to_frenet_set(planning_start_point, *reference_line, ego_state, temp_set);
     FrenetPoint planning_start_point_frenet = temp_set.front();
     planning_start_point_frenet.l_prime_prime = 0.0;
+
+    //----------------------------3.进行FPB-Tree前向传播--------------------------
+    TicToc timer;
+    if (!RunUmpb(ego_state, forward_prop_agent_set))
+    {
+        LOG(ERROR) << std::fixed << std::setprecision(4)
+                   << "[UMBP]****** UMBP Cycle FAILED  ******";
+        return false;
+    }
 }
 
 void UMBPlanner::GetFrenetSamplePoints(std::vector<std::vector<FrenetPoint>> &frenet_sample_point, const FrenetPoint &planning_start_sl,
@@ -72,81 +86,27 @@ void UMBPlanner::GetFrenetSamplePoints(std::vector<std::vector<FrenetPoint>> &fr
     }
 }
 
-bool UMBPlanner::RunUmpb()
+bool UMBPlanner::RunUmpb(const std::shared_ptr<VehicleState> ego_state, const ForwardPropAgentSet &forward_prop_agent_set)
 {
-}
+    auto behaviour_tree = _fpb_tree_ptr->get_behaviour_tree();
+    int num_sequence = behaviour_tree.size();
+    // * prepare for multi-threading
+    std::vector<std::thread> thread_set(num_sequence);
+    PrepareMultiThreadContainers(num_sequence);
 
-bool UMBPlanner::GetSurroundingForwardSimAgents(ForwardPropAgentSet &forward_prop_agent_set,
-                                                const std::vector<FrenetPoint> static_obs_frent_coords,
-                                                const std::vector<FrenetPoint> dynamic_obs_frent_coords)
-{
-    int obs_id = 1;
-    for (auto &&obs : static_obs_frent_coords)
+    // * threading
+    TicToc multi_thread_timer;
+    multi_thread_timer.tic();
+    for (size_t i = 0; i < static_cast<size_t>(num_sequence); i++)
     {
-        ForwardPropAgent cur_agent;
-        cur_agent.id = obs_id;
-        cur_agent.obs_frenet_point.s = obs.s;
-        cur_agent.obs_frenet_point.l = obs.l;
-        cur_agent.obs_frenet_point.s_dot = obs.s_dot;
-        cur_agent.obs_frenet_point.l_dot = obs.l_dot;
-        cur_agent.obs_frenet_point.s_dot_dot = obs.s_dot_dot;
-        cur_agent.obs_frenet_point.l_dot_dot = obs.l_dot_dot;
-        forward_prop_agent_set.forward_prop_agents.emplace(obs_id, cur_agent);
-        obs_id++;
+        thread_set[i] = std::thread(&UMBPlanner::PropogateActionSequence, this, ego_state,
+                                    forward_prop_agent_set, behaviour_tree[i], i);
     }
-    for (auto &&obs : dynamic_obs_frent_coords)
+
+    for (size_t i = 0; i < static_cast<size_t>(num_sequence); i++)
     {
-        ForwardPropAgent cur_agent;
-        cur_agent.id = obs_id;
-        cur_agent.obs_frenet_point.s = obs.s;
-        cur_agent.obs_frenet_point.l = obs.l;
-        cur_agent.obs_frenet_point.s_dot = obs.s_dot;
-        cur_agent.obs_frenet_point.l_dot = obs.l_dot;
-        cur_agent.obs_frenet_point.s_dot_dot = obs.s_dot_dot;
-        cur_agent.obs_frenet_point.l_dot_dot = obs.l_dot_dot;
-        forward_prop_agent_set.forward_prop_agents.emplace(obs_id, cur_agent);
-        obs_id++;
+        thread_set[i].join();
     }
-    return true;
-}
-
-bool UMBPlanner::PrepareMultiThreadContainers(const int num_sequence)
-{
-    RCLCPP_INFO(LOG, "[UMBP][Process]Prepare multi-threading-%.i ", num_sequence);
-
-    // 然后调整它的大小为 n_sequence，并用 0 填充
-    _sim_res.clear();
-    _sim_res.resize(num_sequence, 0);
-
-    _risky_res.clear();
-    _risky_res.resize(num_sequence, 0);
-
-    _sim_info.clear();
-    _sim_info.resize(num_sequence, std::string(""));
-
-    _final_cost.clear();
-    _final_cost.resize(num_sequence, 0.0);
-
-    // 可能用于存储每个线程的进度成本
-    _progress_cost.clear();
-    _progress_cost.resize(num_sequence);
-
-    // 用于存储每个线程的尾部成本
-    _tail_cost.clear();
-    _tail_cost.resize(num_sequence);
-
-    _forward_trajs.clear();
-    _forward_trajs.resize(num_sequence);
-
-    _forward_lat_behaviors.clear();
-    _forward_lat_behaviors.resize(num_sequence);
-
-    _forward_lon_behaviors.clear();
-    _forward_lon_behaviors.resize(num_sequence);
-
-    _surround_trajs.clear();
-    _surround_trajs.resize(num_sequence);
-    return true;
 }
 
 TrajectoryPoint UMBPlanner::CalculatePlanningStartPoint(std::shared_ptr<VehicleState> ego_state)
@@ -315,4 +275,83 @@ void UMBPlanner::ObstacleFileter(const std::shared_ptr<VehicleState> ego_state, 
             }
         }
     }
+}
+
+bool UMBPlanner::GetSurroundingForwardSimAgents(ForwardPropAgentSet &forward_prop_agent_set,
+                                                const std::vector<FrenetPoint> static_obs_frent_coords,
+                                                const std::vector<FrenetPoint> dynamic_obs_frent_coords)
+{
+    int obs_id = 1;
+    for (auto &&obs : static_obs_frent_coords)
+    {
+        ForwardPropAgent cur_agent;
+        cur_agent.id = obs_id;
+        cur_agent.obs_frenet_point.s = obs.s;
+        cur_agent.obs_frenet_point.l = obs.l;
+        cur_agent.obs_frenet_point.s_dot = obs.s_dot;
+        cur_agent.obs_frenet_point.l_dot = obs.l_dot;
+        cur_agent.obs_frenet_point.s_dot_dot = obs.s_dot_dot;
+        cur_agent.obs_frenet_point.l_dot_dot = obs.l_dot_dot;
+        forward_prop_agent_set.forward_prop_agents.emplace(obs_id, cur_agent);
+        obs_id++;
+    }
+    for (auto &&obs : dynamic_obs_frent_coords)
+    {
+        ForwardPropAgent cur_agent;
+        cur_agent.id = obs_id;
+        cur_agent.obs_frenet_point.s = obs.s;
+        cur_agent.obs_frenet_point.l = obs.l;
+        cur_agent.obs_frenet_point.s_dot = obs.s_dot;
+        cur_agent.obs_frenet_point.l_dot = obs.l_dot;
+        cur_agent.obs_frenet_point.s_dot_dot = obs.s_dot_dot;
+        cur_agent.obs_frenet_point.l_dot_dot = obs.l_dot_dot;
+        forward_prop_agent_set.forward_prop_agents.emplace(obs_id, cur_agent);
+        obs_id++;
+    }
+    return true;
+}
+
+bool UMBPlanner::PrepareMultiThreadContainers(const int num_sequence)
+{
+    RCLCPP_INFO(LOG, "[UMBP][Process]Prepare multi-threading-%.i ", num_sequence);
+
+    // 然后调整它的大小为 n_sequence，并用 0 填充
+    _sim_res.clear();
+    _sim_res.resize(num_sequence, 0);
+
+    _risky_res.clear();
+    _risky_res.resize(num_sequence, 0);
+
+    _sim_info.clear();
+    _sim_info.resize(num_sequence, std::string(""));
+
+    _final_cost.clear();
+    _final_cost.resize(num_sequence, 0.0);
+
+    // 可能用于存储每个线程的进度成本
+    _progress_cost.clear();
+    _progress_cost.resize(num_sequence);
+
+    // 用于存储每个线程的尾部成本
+    _tail_cost.clear();
+    _tail_cost.resize(num_sequence);
+
+    _forward_trajs.clear();
+    _forward_trajs.resize(num_sequence);
+
+    _forward_lat_behaviors.clear();
+    _forward_lat_behaviors.resize(num_sequence);
+
+    _forward_lon_behaviors.clear();
+    _forward_lon_behaviors.resize(num_sequence);
+
+    _surround_trajs.clear();
+    _surround_trajs.resize(num_sequence);
+    return true;
+}
+
+bool UMBPlanner::PropogateActionSequence(const std::shared_ptr<VehicleState> ego_state,
+                                         const ForwardPropAgentSet &surrounding_fsagents,
+                                         const std::vector<FpbAction> &action_seq, const int &seq_id)
+{
 }

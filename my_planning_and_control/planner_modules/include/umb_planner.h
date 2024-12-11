@@ -3,9 +3,12 @@
 #include <vector>
 #include <deque>
 #include <unordered_map>
+#include <glog/logging.h>
+#include <iomanip>
 #include "rclcpp/rclcpp.hpp"
 #include "common.h"
 #include "fpb_tree.h"
+#include "tic_toc.h"
 #include "polynomial_curve.h"
 #include "derived_object_msgs/msg/object.hpp"
 #include "carla_waypoint_types/srv/get_waypoint.hpp"
@@ -90,7 +93,7 @@ public:
     bool RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference_line, const std::shared_ptr<VehicleState> ego_state,
                  const std::vector<derived_object_msgs::msg::Object> &objects, std::vector<TrajectoryPoint> &trajectory);
 
-    bool RunUmpb();
+    bool RunUmpb(const std::shared_ptr<VehicleState> ego_state, const ForwardPropAgentSet &forward_prop_agent_set);
 
     void ObstacleFileter(const std::shared_ptr<VehicleState> ego_state, const std::vector<derived_object_msgs::msg::Object> &objects);
 
@@ -105,6 +108,10 @@ private:
                                         const std::vector<FrenetPoint> static_obs_frent_coords,
                                         const std::vector<FrenetPoint> dynamic_obs_frent_coords);
     bool PrepareMultiThreadContainers(const int num_sequence);
+
+    bool PropogateActionSequence(const std::shared_ptr<VehicleState> ego_state,
+                                 const ForwardPropAgentSet &surrounding_fsagents,
+                                 const std::vector<FpbAction> &action_seq, const int &seq_id);
 
     std::vector<derived_object_msgs::msg::Object> _static_obstacles;  // 静态障碍物
     std::vector<derived_object_msgs::msg::Object> _dynamic_obstacles; // 动态障碍物
