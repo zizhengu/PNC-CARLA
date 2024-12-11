@@ -1,0 +1,88 @@
+Log file created at: 2024/12/10 19:19:51
+Running on machine: Guzizhen
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+W1210 19:19:51.732988 12776 main_function.cpp:265] [UMBP]******************** RUN START: ******************
+W1210 19:19:51.733419 12776 main_function.cpp:274] (lon: 0, lat: 0, t: 1)
+W1210 19:19:51.733451 12776 main_function.cpp:274] (lon: 0, lat: 0, t: 1)
+W1210 19:19:51.733469 12776 main_function.cpp:274] (lon: 0, lat: 0, t: 1)
+W1210 19:19:51.733474 12776 main_function.cpp:276]  action_seq 0done!
+W1210 19:19:51.733493 12776 main_function.cpp:274] (lon: 0, lat: 1, t: 1)
+W1210 19:19:51.733510 12776 main_function.cpp:274] (lon: 0, lat: 1, t: 1)
+W1210 19:19:51.733515 12776 main_function.cpp:274] (lon: 0, lat: 1, t: 1)
+W1210 19:19:51.733520 12776 main_function.cpp:276]  action_seq 1done!
+W1210 19:19:51.733541 12776 main_function.cpp:274] (lon: 0, lat: 2, t: 1)
+W1210 19:19:51.733558 12776 main_function.cpp:274] (lon: 0, lat: 2, t: 1)
+W1210 19:19:51.733563 12776 main_function.cpp:274] (lon: 0, lat: 2, t: 1)
+W1210 19:19:51.733578 12776 main_function.cpp:276]  action_seq 2done!
+W1210 19:19:51.733599 12776 main_function.cpp:274] (lon: 0, lat: 0, t: 1)
+W1210 19:19:51.733606 12776 main_function.cpp:274] (lon: 0, lat: 0, t: 1)
+W1210 19:19:51.733620 12776 main_function.cpp:274] (lon: 0, lat: 1, t: 1)
+W1210 19:19:51.733628 12776 main_function.cpp:276]  action_seq 3done!
+W1210 19:19:51.733649 12776 main_function.cpp:274] (lon: 0, lat: 0, t: 1)
+W1210 19:19:51.733655 12776 main_function.cpp:274] (lon: 0, lat: 0, t: 1)
+W1210 19:19:51.733670 12776 main_function.cpp:274] (lon: 0, lat: 2, t: 1)
+W1210 19:19:51.733677 12776 main_function.cpp:276]  action_seq 4done!
+W1210 19:19:51.733697 12776 main_function.cpp:274] (lon: 0, lat: 0, t: 1)
+W1210 19:19:51.733714 12776 main_function.cpp:274] (lon: 0, lat: 1, t: 1)
+W1210 19:19:51.733721 12776 main_function.cpp:274] (lon: 0, lat: 1, t: 1)
+W1210 19:19:51.733726 12776 main_function.cpp:276]  action_seq 5done!
+W1210 19:19:51.733745 12776 main_function.cpp:274] (lon: 0, lat: 0, t: 1)
+W1210 19:19:51.733763 12776 main_function.cpp:274] (lon: 0, lat: 2, t: 1)
+W1210 19:19:51.733769 12776 main_function.cpp:274] (lon: 0, lat: 2, t: 1)
+W1210 19:19:51.733785 12776 main_function.cpp:276]  action_seq 6done!
+W1210 19:19:51.733805 12776 main_function.cpp:274] (lon: 1, lat: 0, t: 1)
+W1210 19:19:51.733812 12776 main_function.cpp:274] (lon: 1, lat: 0, t: 1)
+W1210 19:19:51.733827 12776 main_function.cpp:274] (lon: 1, lat: 0, t: 1)
+W1210 19:19:51.733834 12776 main_function.cpp:276]  action_seq 7done!
+W1210 19:19:51.733861 12776 main_function.cpp:274] (lon: 1, lat: 1, t: 1)
+W1210 19:19:51.733877 12776 main_function.cpp:274] (lon: 1, lat: 1, t: 1)
+W1210 19:19:51.733902 12776 main_function.cpp:274] (lon: 1, lat: 1, t: 1)
+W1210 19:19:51.733920 12776 main_function.cpp:276]  action_seq 8done!
+W1210 19:19:51.733930 12776 main_function.cpp:274] (lon: 1, lat: 2, t: 1)
+W1210 19:19:51.733947 12776 main_function.cpp:274] (lon: 1, lat: 2, t: 1)
+W1210 19:19:51.733951 12776 main_function.cpp:274] (lon: 1, lat: 2, t: 1)
+W1210 19:19:51.733965 12776 main_function.cpp:276]  action_seq 9done!
+W1210 19:19:51.733985 12776 main_function.cpp:274] (lon: 1, lat: 0, t: 1)
+W1210 19:19:51.733994 12776 main_function.cpp:274] (lon: 1, lat: 0, t: 1)
+W1210 19:19:51.733999 12776 main_function.cpp:274] (lon: 1, lat: 1, t: 1)
+W1210 19:19:51.734014 12776 main_function.cpp:276]  action_seq 10done!
+W1210 19:19:51.734035 12776 main_function.cpp:274] (lon: 1, lat: 0, t: 1)
+W1210 19:19:51.734042 12776 main_function.cpp:274] (lon: 1, lat: 0, t: 1)
+W1210 19:19:51.734057 12776 main_function.cpp:274] (lon: 1, lat: 2, t: 1)
+W1210 19:19:51.734064 12776 main_function.cpp:276]  action_seq 11done!
+W1210 19:19:51.734084 12776 main_function.cpp:274] (lon: 1, lat: 0, t: 1)
+W1210 19:19:51.734100 12776 main_function.cpp:274] (lon: 1, lat: 1, t: 1)
+W1210 19:19:51.734108 12776 main_function.cpp:274] (lon: 1, lat: 1, t: 1)
+W1210 19:19:51.734122 12776 main_function.cpp:276]  action_seq 12done!
+W1210 19:19:51.734134 12776 main_function.cpp:274] (lon: 1, lat: 0, t: 1)
+W1210 19:19:51.734169 12776 main_function.cpp:274] (lon: 1, lat: 2, t: 1)
+W1210 19:19:51.734174 12776 main_function.cpp:274] (lon: 1, lat: 2, t: 1)
+W1210 19:19:51.734190 12776 main_function.cpp:276]  action_seq 13done!
+W1210 19:19:51.734212 12776 main_function.cpp:274] (lon: 2, lat: 0, t: 1)
+W1210 19:19:51.734220 12776 main_function.cpp:274] (lon: 2, lat: 0, t: 1)
+W1210 19:19:51.734234 12776 main_function.cpp:274] (lon: 2, lat: 0, t: 1)
+W1210 19:19:51.734241 12776 main_function.cpp:276]  action_seq 14done!
+W1210 19:19:51.734261 12776 main_function.cpp:274] (lon: 2, lat: 1, t: 1)
+W1210 19:19:51.734277 12776 main_function.cpp:274] (lon: 2, lat: 1, t: 1)
+W1210 19:19:51.734283 12776 main_function.cpp:274] (lon: 2, lat: 1, t: 1)
+W1210 19:19:51.734299 12776 main_function.cpp:276]  action_seq 15done!
+W1210 19:19:51.734328 12776 main_function.cpp:274] (lon: 2, lat: 2, t: 1)
+W1210 19:19:51.734344 12776 main_function.cpp:274] (lon: 2, lat: 2, t: 1)
+W1210 19:19:51.734349 12776 main_function.cpp:274] (lon: 2, lat: 2, t: 1)
+W1210 19:19:51.734364 12776 main_function.cpp:276]  action_seq 16done!
+W1210 19:19:51.734385 12776 main_function.cpp:274] (lon: 2, lat: 0, t: 1)
+W1210 19:19:51.734403 12776 main_function.cpp:274] (lon: 2, lat: 0, t: 1)
+W1210 19:19:51.734411 12776 main_function.cpp:274] (lon: 2, lat: 1, t: 1)
+W1210 19:19:51.734426 12776 main_function.cpp:276]  action_seq 17done!
+W1210 19:19:51.734447 12776 main_function.cpp:274] (lon: 2, lat: 0, t: 1)
+W1210 19:19:51.734453 12776 main_function.cpp:274] (lon: 2, lat: 0, t: 1)
+W1210 19:19:51.734469 12776 main_function.cpp:274] (lon: 2, lat: 2, t: 1)
+W1210 19:19:51.734476 12776 main_function.cpp:276]  action_seq 18done!
+W1210 19:19:51.734496 12776 main_function.cpp:274] (lon: 2, lat: 0, t: 1)
+W1210 19:19:51.734514 12776 main_function.cpp:274] (lon: 2, lat: 1, t: 1)
+W1210 19:19:51.734519 12776 main_function.cpp:274] (lon: 2, lat: 1, t: 1)
+W1210 19:19:51.734535 12776 main_function.cpp:276]  action_seq 19done!
+W1210 19:19:51.734556 12776 main_function.cpp:274] (lon: 2, lat: 0, t: 1)
+W1210 19:19:51.734563 12776 main_function.cpp:274] (lon: 2, lat: 2, t: 1)
+W1210 19:19:51.734568 12776 main_function.cpp:274] (lon: 2, lat: 2, t: 1)
+W1210 19:19:51.734584 12776 main_function.cpp:276]  action_seq 20done!

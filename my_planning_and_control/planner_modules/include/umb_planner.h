@@ -1,0 +1,138 @@
+#pragma once
+#include <iostream>
+#include <vector>
+#include <deque>
+#include <unordered_map>
+#include "rclcpp/rclcpp.hpp"
+#include "common.h"
+#include "fpb_tree.h"
+#include "polynomial_curve.h"
+#include "derived_object_msgs/msg/object.hpp"
+#include "carla_waypoint_types/srv/get_waypoint.hpp"
+#include "std_msgs/msg/float64.hpp"
+#include "Eigen/Dense"
+#include "OsqpEigen/OsqpEigen.h"
+#include "matplot/matplot.h"
+
+class UMBPlanner : public rclcpp::Node
+{
+public:
+    using FpbAction = FpbTree::FpbAction;
+    using FpbLonAction = FpbTree::FpbLonAction;
+    using FpbLatAction = FpbTree::FpbLatAction;
+
+    struct ForwardPropAgent
+    {
+        int id = 0;
+        double time_from_start = 1.0;
+        FrenetPoint obs_frenet_point;
+        double width = 3.0;
+        double length = 5.0;
+    };
+
+    struct ForwardPropAgentSet
+    {
+        std::unordered_map<int, ForwardPropAgent> forward_prop_agents;
+    };
+
+    struct EfficiencyCost
+    {
+        double ego_to_desired_vel = 0.0;
+        double leading_to_desired_vel = 0.0;
+        double ave() const
+        {
+            return (ego_to_desired_vel + leading_to_desired_vel) / 2.0;
+        }
+    };
+
+    struct SafetyCost
+    {
+        double ego_to_obs = 0.0;
+        double ave() const
+        {
+            return ego_to_obs;
+        }
+    };
+
+    struct NavigationCost
+    {
+        double ref_line_change = 0.0;
+        double ave() const
+        {
+            return ref_line_change;
+        }
+    };
+
+    struct CostStructure
+    {
+        // * associate cost with micro action using this index
+        int behaviour_index;
+        // * efficiency
+        EfficiencyCost efficiency;
+        // * safety
+        SafetyCost safety;
+        // * navigation
+        NavigationCost navigation;
+        double cur_behav_weight = 1.0;
+        double efficiency_weight = 1.0;
+        double safety_weight = 1.0;
+        double navigation_weight = 1.0;
+        double ave() const
+        {
+            double SumCost = efficiency.ave() * efficiency_weight + safety.ave() * safety_weight + navigation.ave() * navigation_weight;
+
+            return SumCost * cur_behav_weight;
+        }
+    };
+
+    UMBPlanner();
+
+    bool RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference_line, const std::shared_ptr<VehicleState> ego_state,
+                 const std::vector<derived_object_msgs::msg::Object> &objects, std::vector<TrajectoryPoint> &trajectory);
+
+    bool RunUmpb();
+
+    void ObstacleFileter(const std::shared_ptr<VehicleState> ego_state, const std::vector<derived_object_msgs::msg::Object> &objects);
+
+    TrajectoryPoint CalculatePlanningStartPoint(std::shared_ptr<VehicleState> ego_state);
+
+    void GetFrenetSamplePoints(std::vector<std::vector<FrenetPoint>> &frenet_sample_point, const FrenetPoint &planning_start_sl,
+                               const double &s_sample_distance, const int &s_sample_num,
+                               const double &l_sample_distance, const int &l_sample_num);
+
+private:
+    bool GetSurroundingForwardSimAgents(ForwardPropAgentSet &forward_prop_agents,
+                                        const std::vector<FrenetPoint> static_obs_frent_coords,
+                                        const std::vector<FrenetPoint> dynamic_obs_frent_coords);
+    bool PrepareMultiThreadContainers(const int num_sequence);
+
+    std::vector<derived_object_msgs::msg::Object> _static_obstacles;  // 静态障碍物
+    std::vector<derived_object_msgs::msg::Object> _dynamic_obstacles; // 动态障碍物
+    std::deque<TrajectoryPoint> _previous_trajectory;                 // 上一周期的轨迹
+    std::deque<TrajectoryPoint> _switch_trajectory;                   // 拼接轨迹
+
+    rclcpp::Client<carla_waypoint_types::srv::GetWaypoint>::SharedPtr _get_waypoint_client;
+    rclcpp::Subscription<std_msgs::msg::Float64>::SharedPtr _reference_speed_subscriber;
+
+    double _reference_speed;
+    double _current_time;
+
+    // behaviour
+    std::shared_ptr<FpbTree> _fpb_tree_ptr;
+
+    // result
+    int _winner_id = 0;
+    double _winner_score = 0.0;
+    std::vector<FpbAction> _winner_action_seq;
+    std::vector<int> _sim_res;
+    std::vector<int> _risky_res;
+    std::vector<std::string> _sim_info;
+    std::vector<double> _final_cost;
+    std::vector<std::vector<CostStructure>> _progress_cost;
+    std::vector<CostStructure> _tail_cost;
+    std::vector<std::vector<FrenetPoint>> _forward_trajs;
+    std::vector<std::vector<FpbLatAction>> _forward_lat_behaviors;
+    std::vector<std::vector<FpbLonAction>> _forward_lon_behaviors;
+    std::vector<std::unordered_map<int, std::vector<FrenetPoint>>> _surround_trajs;
+    double _time_cost = 0.0;
+};

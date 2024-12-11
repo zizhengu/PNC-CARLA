@@ -51,6 +51,7 @@ target_include_directories(main_function PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../general_modules/include>
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../planner_modules/include>
   $<INSTALL_INTERFACE:include>)
+link_directories(/usr/lib/x86_64-linux-gnu/libglog.so)
 
 
 ament_target_dependencies(
@@ -73,6 +74,7 @@ target_link_libraries(
   OsqpEigen::OsqpEigen
   Matplot++::matplot
 )
+target_link_libraries(main_function /usr/lib/x86_64-linux-gnu/libglog.so)
 
 install(TARGETS main_function
   DESTINATION lib/${PROJECT_NAME})

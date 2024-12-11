@@ -55,8 +55,6 @@ EMPlanner::EMPlanner() : Node("emplanner"){
     _reference_speed = 11.0;
 }
 
-// TODO:
-// 弄清楚 reference_line、ego_state、obstacles是怎么传进来的
 void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> reference_line, const std::shared_ptr<VehicleState> ego_state,
                        const std::vector<derived_object_msgs::msg::Object> &obstacles, std::vector<TrajectoryPoint> &final_trajectory){
     /*

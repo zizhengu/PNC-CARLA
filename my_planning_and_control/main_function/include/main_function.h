@@ -4,6 +4,7 @@
 #include <deque>
 #include <vector>
 #include <unordered_map>
+#include <glog/logging.h>
 #include "rclcpp/rclcpp.hpp"
 // done
 // done
@@ -56,4 +57,7 @@
 // done
 #include "emplanner.h"
 #include "reference_line.h"
+#include "fpb_tree.h"
 // done
+
+
