@@ -25,7 +25,15 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(OsqpEigen REQUIRED)
 find_package(carla_waypoint_types REQUIRED)
+find_package(Protobuf REQUIRED)
 
+PROTOBUF_GENERATE_CPP(PROTO_SRCS PROTO_HDRS
+        /home/guzizhen/PNC-CARLA/my_planning_and_control/planner_modules/proto/umbp_config.proto
+)
+
+
+link_directories(/usr/lib/x86_64-linux-gnu/libglog.so)
+# target_link_libraries(umb_planner /usr/lib/x86_64-linux-gnu/libglog.so)
 
 
 if(BUILD_TESTING)

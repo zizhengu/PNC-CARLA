@@ -1,0 +1,50 @@
+name: "planning.eudm.Config"
+version: ""
+status: "editting"
+
+cost {
+  efficiency {
+    ego_lack_speed_to_desired_unit_cost: 0.3
+    ego_over_speed_to_desired_unit_cost: 0.03
+    ego_desired_speed_tolerate_gap: 1.0
+    leading_distance_th: 120.0
+    min_distance_ratio: 0.4
+    ego_speed_blocked_by_leading_unit_cost: 0.02
+    leading_speed_blocked_desired_vel_unit_cost: 0.1
+  }
+  safety {
+    rss_cost_enable: true
+    rss_over_speed_power_coeff: 0.25
+    rss_over_speed_linear_coeff: 0.5
+    rss_lack_speed_power_coeff: 0.35
+    rss_lack_speed_linear_coeff: 0.6
+    occu_lane_enable: true
+    occu_lane_unit_cost: 0.10
+  }
+  user {
+    late_operate_unit_cost: 0.25
+    cancel_operation_unit_cost: 8.0
+  }
+  navigation {
+    lane_change_left_unit_cost: 0.015
+    lane_change_right_unit_cost: 0.06
+    lane_change_unit_cost_vel_lb: 10.0
+    lane_change_left_recommendation_reward : 1.0
+    lane_change_right_recommendation_reward: 1.0
+  }
+  discount_factor: 0.7
+}
+
+propogate {
+  fpb {
+    layer_time: 1.0
+    step: 0.2
+    tree_height: 3
+  }
+  sample {
+    s_sample_distance: 5.0
+    s_sample_num: 12
+    l_sample_distance: 1.0
+    l_sample_num: 8
+  }
+}

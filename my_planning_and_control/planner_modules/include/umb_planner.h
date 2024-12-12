@@ -5,6 +5,9 @@
 #include <unordered_map>
 #include <glog/logging.h>
 #include <iomanip>
+#include <fstream>
+#include <string>
+#include "umbp_config.pb.h"
 #include "rclcpp/rclcpp.hpp"
 #include "common.h"
 #include "fpb_tree.h"
@@ -23,6 +26,7 @@ public:
     using FpbAction = FpbTree::FpbAction;
     using FpbLonAction = FpbTree::FpbLonAction;
     using FpbLatAction = FpbTree::FpbLatAction;
+    using Cfg = planning::umbp::Config;
 
     struct ForwardPropAgent
     {
@@ -36,6 +40,17 @@ public:
     struct ForwardPropAgentSet
     {
         std::unordered_map<int, ForwardPropAgent> forward_prop_agents;
+    };
+
+    struct Param
+    {
+        double layer_time = 1.0;
+        double step = 0.2;
+        double tree_height = 1.0;
+        double s_sample_distance = 5.0;
+        int s_sample_num = 12;
+        double l_sample_distance = 1.0;
+        int l_sample_num = 8;
     };
 
     struct EfficiencyCost
@@ -93,7 +108,7 @@ public:
     bool RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference_line, const std::shared_ptr<VehicleState> ego_state,
                  const std::vector<derived_object_msgs::msg::Object> &objects, std::vector<TrajectoryPoint> &trajectory);
 
-    bool RunUmpb(const std::shared_ptr<VehicleState> ego_state, const ForwardPropAgentSet &forward_prop_agent_set);
+    bool RunUmpb(const FrenetPoint ego_state, const ForwardPropAgentSet &forward_prop_agent_set);
 
     void ObstacleFileter(const std::shared_ptr<VehicleState> ego_state, const std::vector<derived_object_msgs::msg::Object> &objects);
 
@@ -104,14 +119,32 @@ public:
                                const double &l_sample_distance, const int &l_sample_num);
 
 private:
+    bool ReadConfig(const std::string config_path);
+
+    bool GetSimParam(const planning::umbp::Config &cfg,
+                     Param *sim_param);
+
     bool GetSurroundingForwardSimAgents(ForwardPropAgentSet &forward_prop_agents,
                                         const std::vector<FrenetPoint> static_obs_frent_coords,
                                         const std::vector<FrenetPoint> dynamic_obs_frent_coords);
     bool PrepareMultiThreadContainers(const int num_sequence);
 
-    bool PropogateActionSequence(const std::shared_ptr<VehicleState> ego_state,
+    bool PropogateActionSequence(const FrenetPoint ego_state,
                                  const ForwardPropAgentSet &surrounding_fsagents,
                                  const std::vector<FpbAction> &action_seq, const int &seq_id);
+
+    bool PropogateScenario(
+        const FrenetPoint &ego_state,
+        const ForwardPropAgentSet &surrounding_fsagents,
+        const std::vector<FpbAction> &action_seq, const int &seq_id,
+        const int &sub_seq_id, int *sub_sim_res,
+        int *sub_risky_res, std::string *sub_sim_info,
+        std::vector<CostStructure> *sub_progress_cost,
+        CostStructure *sub_tail_cost,
+        std::vector<FrenetPoint> *sub_forward_trajs,
+        std::vector<FpbLatAction> *sub_forward_lat_behaviors,
+        std::vector<FpbLonAction> *sub_forward_lon_behaviors,
+        std::unordered_map<int, std::vector<FrenetPoint>> *sub_surround_trajs);
 
     std::vector<derived_object_msgs::msg::Object> _static_obstacles;  // 静态障碍物
     std::vector<derived_object_msgs::msg::Object> _dynamic_obstacles; // 动态障碍物
@@ -126,6 +159,13 @@ private:
 
     // behaviour
     std::shared_ptr<FpbTree> _fpb_tree_ptr;
+
+    // Config
+    Cfg _cfg;
+    Param _sim_param;
+
+    // sample_points
+    std::vector<std::vector<FrenetPoint>> _local_sample_points;
 
     // result
     int _winner_id = 0;

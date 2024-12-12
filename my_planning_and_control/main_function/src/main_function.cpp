@@ -33,7 +33,7 @@ public:
     _reference_line = std::make_shared<std::vector<PathPoint>>();
     _planning_timer = this->create_wall_timer(std::chrono::milliseconds(int(_planning_time_step * 1000)), std::bind(&MyPlanningANDControl::planning_run_step, this));
     _emplanner = std::make_shared<EMPlanner>();
-    _fpb_tree_ptr = std::make_shared<FpbTree>(3, 1.0);
+    _umbplanner = std::make_shared<UMBPlanner>();
 
     // 订阅方
     // 创建里程计订阅方，订阅车辆当前位姿消息
@@ -137,8 +137,8 @@ private:
   std::shared_ptr<ReferenceLine> _reference_line_generator; // 参考线生成器
   std::shared_ptr<std::vector<PathPoint>> _reference_line;
   std::shared_ptr<EMPlanner> _emplanner;
+  std::shared_ptr<UMBPlanner> _umbplanner;
   std::vector<TrajectoryPoint> _trajectory;
-  std::shared_ptr<FpbTree> _fpb_tree_ptr;
 
   // 计算指标
   double _total_frame = 0.0;
@@ -258,26 +258,6 @@ public:
 
   void planning_run_step()
   {
-    google::InitGoogleLogging("UMBP");
-    google::SetLogDestination(google::GLOG_INFO, "/home/guzizhen/PNC-CARLA/debug_log/umbp_log/");
-    google::SetLogDestination(google::GLOG_WARNING, "/home/guzizhen/PNC-CARLA/debug_log/umbp_log/");
-    google::SetLogDestination(google::GLOG_ERROR, "/home/guzizhen/PNC-CARLA/debug_log/umbp_log/");
-    LOG(INFO) << std::fixed << std::setprecision(4)
-              << "[UMBP]******************** RUN START: " << "******************";
-
-    // Check fpb_tree
-    // int n_seq = _fpb_tree_ptr->get_behaviour_tree().size();
-    // for (int i = 0; i < n_seq; i++)
-    // {
-    //     auto action_seq = _fpb_tree_ptr->get_behaviour_tree()[i];
-    //     int num_actions = action_seq.size();
-    //     for (int j = 0; j < num_actions; j++)
-    //     {
-    //         LOG(INFO) << action_seq[j];
-    //     }
-    //     LOG(INFO) << " action_seq " << i << "done!";
-    // }
-
     if (_global_path->empty()) // 等待接受到路径
     {
       //   RCLCPP_INFO(this->get_logger(), "等待全局路径信息......");

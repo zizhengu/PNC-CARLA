@@ -1,3 +1,4 @@
+#pragma once
 #include <map>
 #include <memory>
 #include <string>
@@ -5,7 +6,8 @@
 #include <cassert>
 #include <iostream>
 
-class FpbTree{
+class FpbTree
+{
 public:
     enum class FpbLonAction
     {
@@ -46,7 +48,8 @@ public:
     FpbTree(const int &tree_height, const double &action_time);
     ~FpbTree() = default;
 
-    void set_current_action(const FpbAction &action){
+    void set_current_action(const FpbAction &action)
+    {
         current_action_ = action;
     }
 
@@ -55,28 +58,31 @@ public:
         return behaviour_tree_;
     }
 
-    static std::string GetLonActionName(const FpbLonAction &action) {
+    static std::string GetLonActionName(const FpbLonAction &action)
+    {
         std::string action_string;
-        switch (action){
-            case FpbLonAction::Maintain:
-            {
-                action_string = std::string("M");
-                break;
-            }
-            case FpbLonAction::Accelearte:
-            {
-                action_string = std::string("A");
-                break;
-            }
-            case FpbLonAction::Decelerate:
-            {
-                action_string = std::string("D");
-                break;
-            }
-            default:{
-                action_string = std::string("WrongInput");
-                break;
-            }
+        switch (action)
+        {
+        case FpbLonAction::Maintain:
+        {
+            action_string = std::string("M");
+            break;
+        }
+        case FpbLonAction::Accelearte:
+        {
+            action_string = std::string("A");
+            break;
+        }
+        case FpbLonAction::Decelerate:
+        {
+            action_string = std::string("D");
+            break;
+        }
+        default:
+        {
+            action_string = std::string("WrongInput");
+            break;
+        }
         }
         return action_string;
     };
@@ -86,30 +92,29 @@ public:
         std::string action_string;
         switch (action)
         {
-            case FpbLatAction::Keeping:
-            {
-                action_string = std::string("K");
-                break;
-            }
-            case FpbLatAction::SwitchLeft:
-            {
-                action_string = std::string("L");
-                break;
-            }
-            case FpbLatAction::SwitchRight:
-            {
-                action_string = std::string("R");
-                break;
-            }
-            default:
-            {
-                action_string = std::string("WrongInput");
-                break;
-            }
+        case FpbLatAction::Keeping:
+        {
+            action_string = std::string("K");
+            break;
+        }
+        case FpbLatAction::SwitchLeft:
+        {
+            action_string = std::string("L");
+            break;
+        }
+        case FpbLatAction::SwitchRight:
+        {
+            action_string = std::string("R");
+            break;
+        }
+        default:
+        {
+            action_string = std::string("WrongInput");
+            break;
+        }
         }
         return action_string;
     };
-
 
 private:
     bool GenarateFpbTree();

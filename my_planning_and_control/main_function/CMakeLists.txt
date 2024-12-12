@@ -38,12 +38,18 @@ find_package(tf2_geometry_msgs REQUIRED)
 find_package(OsqpEigen REQUIRED)
 find_package(Matplot++ REQUIRED)
 find_package(carla_waypoint_types REQUIRED)
+find_package(Protobuf REQUIRED)
+
+PROTOBUF_GENERATE_CPP(PROTO_SRCS PROTO_HDRS
+        /home/guzizhen/PNC-CARLA/my_planning_and_control/planner_modules/proto/umbp_config.proto
+)
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/../controller_modules/src SRC_CONTROL)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/../planner_modules/src SRC_PLANNING)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/../general_modules/src SRC_GENERAL)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/../planner_modules/include PROTO)
 # message(ERROR ${SRC_PLANNING})
-add_executable(main_function src/main_function.cpp ${SRC_CONTROL} ${SRC_PLANNING} ${SRC_GENERAL})
+add_executable(main_function src/main_function.cpp ${SRC_CONTROL} ${SRC_PLANNING} ${SRC_GENERAL} ${PROTO})
 
 target_include_directories(main_function PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -51,8 +57,9 @@ target_include_directories(main_function PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../general_modules/include>
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../planner_modules/include>
   $<INSTALL_INTERFACE:include>)
-link_directories(/usr/lib/x86_64-linux-gnu/libglog.so)
 
+link_directories(/usr/lib/x86_64-linux-gnu/libglog.so)
+link_directories(/usr/local/lib/libprotobuf.so)
 
 ament_target_dependencies(
   main_function
@@ -75,6 +82,8 @@ target_link_libraries(
   Matplot++::matplot
 )
 target_link_libraries(main_function /usr/lib/x86_64-linux-gnu/libglog.so)
+target_link_libraries(main_function /usr/local/lib/libprotobuf.so)
+
 
 install(TARGETS main_function
   DESTINATION lib/${PROJECT_NAME})

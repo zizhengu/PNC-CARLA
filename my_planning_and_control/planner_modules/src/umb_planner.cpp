@@ -1,5 +1,11 @@
 #include "umb_planner.h"
-auto LOG = rclcpp::get_logger("UMBPlanner");
+
+#include <glog/logging.h>
+#include <google/protobuf/io/zero_copy_stream_impl.h>
+#include <google/protobuf/text_format.h>
+#include <fcntl.h>
+#include <unistd.h>
+auto UMBP_LOG = rclcpp::get_logger("UMBPlanner");
 
 UMBPlanner::UMBPlanner() : Node("UMBPlanner")
 {
@@ -7,10 +13,49 @@ UMBPlanner::UMBPlanner() : Node("UMBPlanner")
     google::SetLogDestination(google::GLOG_INFO, "/home/guzizhen/PNC-CARLA/debug_log/umbp_log/");
     google::SetLogDestination(google::GLOG_WARNING, "/home/guzizhen/PNC-CARLA/debug_log/umbp_log/");
     google::SetLogDestination(google::GLOG_ERROR, "/home/guzizhen/PNC-CARLA/debug_log/umbp_log/");
+    LOG(INFO) << std::fixed << std::setprecision(4)
+              << "[UMBP]******************** RUN START: " << "******************";
 
     _get_waypoint_client = this->create_client<carla_waypoint_types::srv::GetWaypoint>(
         "/carla_waypoint_publisher/ego_vehicle/get_waypoint");
     _reference_speed = 10.0;
+    std::string config_path = "/home/guzizhen/PNC-CARLA/my_planning_and_control/planner_modules/config/umbp_config.pb.txt";
+
+    ReadConfig(config_path);
+    GetSimParam(_cfg, &_sim_param);
+
+    LOG(INFO) << " [UMBP]_sim_param.tree_height " << _sim_param.tree_height << " done!";
+    LOG(INFO) << " [UMBP]_sim_param.layer_time " << _sim_param.layer_time << " done!";
+    LOG(INFO) << " [UMBP]_sim_param.s_sample_distance " << _sim_param.s_sample_distance << " done!";
+    LOG(INFO) << " [UMBP]_sim_param.s_sample_num " << _sim_param.s_sample_num << " done!";
+
+    _fpb_tree_ptr = std::make_shared<FpbTree>(_sim_param.tree_height, _sim_param.layer_time);
+}
+
+bool UMBPlanner::ReadConfig(const std::string config_path)
+{
+    LOG(INFO) << " [UMBP] Loading umbp planner config";
+    using namespace google::protobuf;
+    int fd = open(config_path.c_str(), O_RDONLY);
+    io::FileInputStream fstream(fd);
+    TextFormat::Parse(&fstream, &_cfg);
+    if (!_cfg.IsInitialized())
+    {
+        LOG(ERROR) << "[UMBP]failed to parse config from " << config_path;
+        assert(false);
+    }
+    return true;
+}
+
+bool UMBPlanner::GetSimParam(const planning::umbp::Config &cfg, Param *sim_param)
+{
+    sim_param->layer_time = cfg.propogate().fpb().layer_time();
+    sim_param->step = cfg.propogate().fpb().step();
+    sim_param->tree_height = cfg.propogate().fpb().tree_height();
+    sim_param->s_sample_distance = cfg.propogate().sample().s_sample_distance();
+    sim_param->s_sample_num = cfg.propogate().sample().s_sample_num();
+    sim_param->l_sample_distance = cfg.propogate().sample().l_sample_distance();
+    sim_param->l_sample_num = cfg.propogate().sample().l_sample_num();
 }
 
 bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference_line, const std::shared_ptr<VehicleState> ego_state,
@@ -36,7 +81,7 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     ForwardPropAgentSet forward_prop_agent_set;
     if (!GetSurroundingForwardSimAgents(forward_prop_agent_set, static_obs_frent_coords, dynamic_obs_frent_coords))
     {
-        RCLCPP_INFO(LOG, "GetSurroundingForwardSimAgents False!");
+        LOG(ERROR) << "GetSurroundingForwardSimAgents False! ";
         return false;
     }
     else
@@ -44,7 +89,7 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
         for (const auto &pair : forward_prop_agent_set.forward_prop_agents)
         {
             const auto &agent = pair.second;
-            RCLCPP_INFO(LOG, "Agent_ID %.i: (s: %.3f,l: %.3f,s_dot: %.3f,l_dot: %.3f)",
+            RCLCPP_INFO(UMBP_LOG, "Agent_ID %.i: (s: %.3f,l: %.3f,s_dot: %.3f,l_dot: %.3f)",
                         agent.id, agent.obs_frenet_point.s, agent.obs_frenet_point.l,
                         agent.obs_frenet_point.s_dot, agent.obs_frenet_point.l_dot);
         }
@@ -57,14 +102,23 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     FrenetPoint planning_start_point_frenet = temp_set.front();
     planning_start_point_frenet.l_prime_prime = 0.0;
 
-    //----------------------------3.进行FPB-Tree前向传播--------------------------
+    //----------------------------3.进行Frenet采样--------------------------
+    std::vector<std::vector<FrenetPoint>> frenet_sample_point;
+    GetFrenetSamplePoints(frenet_sample_point, planning_start_point_frenet,
+                          _sim_param.s_sample_distance, _sim_param.s_sample_num,
+                          _sim_param.l_sample_distance, _sim_param.l_sample_num);
+    _local_sample_points = frenet_sample_point;
+
+    //----------------------------4.进行FPB-Tree前向传播--------------------------
     TicToc timer;
-    if (!RunUmpb(ego_state, forward_prop_agent_set))
+    if (!RunUmpb(planning_start_point_frenet, forward_prop_agent_set))
     {
         LOG(ERROR) << std::fixed << std::setprecision(4)
                    << "[UMBP]****** UMBP Cycle FAILED  ******";
         return false;
     }
+
+    return true;
 }
 
 void UMBPlanner::GetFrenetSamplePoints(std::vector<std::vector<FrenetPoint>> &frenet_sample_point, const FrenetPoint &planning_start_sl,
@@ -86,7 +140,7 @@ void UMBPlanner::GetFrenetSamplePoints(std::vector<std::vector<FrenetPoint>> &fr
     }
 }
 
-bool UMBPlanner::RunUmpb(const std::shared_ptr<VehicleState> ego_state, const ForwardPropAgentSet &forward_prop_agent_set)
+bool UMBPlanner::RunUmpb(const FrenetPoint ego_state, const ForwardPropAgentSet &forward_prop_agent_set)
 {
     auto behaviour_tree = _fpb_tree_ptr->get_behaviour_tree();
     int num_sequence = behaviour_tree.size();
@@ -107,6 +161,8 @@ bool UMBPlanner::RunUmpb(const std::shared_ptr<VehicleState> ego_state, const Fo
     {
         thread_set[i].join();
     }
+
+    return true;
 }
 
 TrajectoryPoint UMBPlanner::CalculatePlanningStartPoint(std::shared_ptr<VehicleState> ego_state)
@@ -229,7 +285,6 @@ TrajectoryPoint UMBPlanner::CalculatePlanningStartPoint(std::shared_ptr<VehicleS
 
 void UMBPlanner::ObstacleFileter(const std::shared_ptr<VehicleState> ego_state, const std::vector<derived_object_msgs::msg::Object> &obstacles)
 {
-    auto LOG = rclcpp::get_logger("emplanner");
     // 将障碍物分成动态与静态障碍物
     _static_obstacles.clear();
     _dynamic_obstacles.clear();
@@ -313,8 +368,7 @@ bool UMBPlanner::GetSurroundingForwardSimAgents(ForwardPropAgentSet &forward_pro
 
 bool UMBPlanner::PrepareMultiThreadContainers(const int num_sequence)
 {
-    RCLCPP_INFO(LOG, "[UMBP][Process]Prepare multi-threading-%.i ", num_sequence);
-
+    LOG(INFO) << " [UMBP][Process]Prepare multi-threading- " << num_sequence;
     // 然后调整它的大小为 n_sequence，并用 0 填充
     _sim_res.clear();
     _sim_res.resize(num_sequence, 0);
@@ -350,8 +404,76 @@ bool UMBPlanner::PrepareMultiThreadContainers(const int num_sequence)
     return true;
 }
 
-bool UMBPlanner::PropogateActionSequence(const std::shared_ptr<VehicleState> ego_state,
+bool UMBPlanner::PropogateActionSequence(const FrenetPoint ego_state,
                                          const ForwardPropAgentSet &surrounding_fsagents,
                                          const std::vector<FpbAction> &action_seq, const int &seq_id)
 {
+    // ~ For each ego sequence, we may further branch here, which will create
+    // ~ multiple sub threads. Currently, we use n_sub_threads = 1
+    int n_sub_threads = 1;
+
+    std::vector<int> sub_sim_res(n_sub_threads);
+    std::vector<int> sub_risky_res(n_sub_threads);
+    std::vector<std::string> sub_sim_info(n_sub_threads);
+    std::vector<std::vector<CostStructure>> sub_progress_cost(n_sub_threads);
+    std::vector<CostStructure> sub_tail_cost(n_sub_threads);
+    std::vector<std::vector<FrenetPoint>> sub_forward_trajs(n_sub_threads);
+    std::vector<std::vector<FpbLatAction>> sub_forward_lat_behaviors(n_sub_threads);
+    std::vector<std::vector<FpbLonAction>> sub_forward_lon_behaviors(n_sub_threads);
+    std::vector<std::unordered_map<int, std::vector<FrenetPoint>>> sub_surround_trajs(n_sub_threads);
+
+    for (int i = 0; i < n_sub_threads; i++)
+    {
+        int sim_res = 0;
+        int risky_res = 0;
+        std::string sim_info;
+        std::vector<CostStructure> progress_cost(n_sub_threads);
+        CostStructure tail_cost;
+        std::vector<FrenetPoint> forward_trajs(static_cast<int>(action_seq.size()) + 1);
+        std::vector<FpbLatAction> forward_lat_behaviors(static_cast<int>(action_seq.size()) + 1);
+        std::vector<FpbLonAction> forward_lon_behaviors(static_cast<int>(action_seq.size()) + 1);
+        std::unordered_map<int, std::vector<FrenetPoint>> surround_trajs;
+
+        if (!PropogateScenario(ego_state, surrounding_fsagents, action_seq, seq_id, 0, &sim_res,
+                               &risky_res, &sim_info, &progress_cost, &tail_cost, &forward_trajs,
+                               &forward_lat_behaviors, &forward_lon_behaviors, &surround_trajs))
+        {
+            LOG(ERROR) << std::fixed << std::setprecision(4)
+                       << "[UMBP]****** PropogateScenario FAILED  ******";
+            return false;
+        }
+        return true;
+    }
+}
+
+bool UMBPlanner::PropogateScenario(
+    const FrenetPoint &ego_state, const ForwardPropAgentSet &surrounding_fsagents,
+    const std::vector<FpbAction> &action_seq, const int &seq_id, const int &sub_seq_id,
+    int *sub_sim_res, int *sub_risky_res, std::string *sub_sim_info,
+    std::vector<CostStructure> *sub_progress_cost,
+    CostStructure *sub_tail_cost,
+    std::vector<FrenetPoint> *sub_forward_trajs,
+    std::vector<FpbLatAction> *sub_forward_lat_behaviors,
+    std::vector<FpbLonAction> *sub_forward_lon_behaviors,
+    std::unordered_map<int, std::vector<FrenetPoint>> *sub_surround_trajs)
+{
+    // declare variables which will be used to track traces from multiple layers
+    // std::vector<FrenetPoint> ego_traj_multilayers{ego_state};
+    // std::unordered_map<int, std::vector<FrenetPoint>> surround_trajs_multilayers;
+    // for (const auto &fpa : surrounding_fsagents.forward_prop_agents)
+    // {
+    //     surround_trajs_multilayers.emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
+    // }
+    // std::vector<FpbLatAction> ego_lat_behaviour_multilayers;
+    // std::vector<FpbLonAction> ego_lat_behaviour_multilayers;
+    // std::vector<CostStructure> cost_multilayers;
+    // std::set<int> risky_ids_multilayers;
+
+    // // prepare for more coed here
+
+    // for (int i = 0; i < static_cast<int>(action_seq.size()); i++)
+    // {
+    //     auto action_this_layer = action_seq[i];
+    // }
+    return true;
 }

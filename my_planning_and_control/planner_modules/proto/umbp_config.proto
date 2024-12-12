@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package planning.umbp;
+
+message EfficiencyCost {
+    double ego_lack_speed_to_desired_unit_cost = 1;
+    double ego_over_speed_to_desired_unit_cost = 2;
+    double ego_desired_speed_tolerate_gap = 3;
+    double leading_distance_th = 4;
+    double min_distance_ratio = 5;
+    double ego_speed_blocked_by_leading_unit_cost = 6;
+    double leading_speed_blocked_desired_vel_unit_cost = 7;
+}
+
+message SafetyCost {
+    bool rss_cost_enable = 1;
+    double rss_over_speed_power_coeff = 2;
+    double rss_over_speed_linear_coeff = 3;
+    double rss_lack_speed_power_coeff = 4;
+    double rss_lack_speed_linear_coeff = 5;
+    bool occu_lane_enable = 6;
+    double occu_lane_unit_cost = 7;
+}
+
+message UserCost {
+    double late_operate_unit_cost = 1;
+    double cancel_operation_unit_cost = 2;
+}
+
+message NavigationCost {
+    double lane_change_left_unit_cost = 1;
+    double lane_change_right_unit_cost = 2;
+    double lane_change_unit_cost_vel_lb = 3;
+    double lane_change_left_recommendation_reward = 4;
+    double lane_change_right_recommendation_reward = 5;
+}
+
+message FpbConfig {
+    double layer_time = 1;
+    double step = 2;
+    int32 tree_height = 3;
+}
+
+message SampleConfig {
+    double s_sample_distance = 1;
+    int32 s_sample_num = 2;
+    double l_sample_distance = 3;
+    int32 l_sample_num = 4;
+}
+
+message PropogateConfig {
+    FpbConfig fpb = 1;
+    SampleConfig sample = 2;
+}
+
+message CostConfig {
+    EfficiencyCost efficiency = 1;
+    SafetyCost safety = 2;
+    UserCost user = 3;
+    NavigationCost navigation = 4;
+    double discount_factor = 5;
+}
+
+
+message Config {
+  string name = 1;
+  string version = 2;
+  string status = 3;
+  CostConfig cost = 4;
+  PropogateConfig propogate = 5;
+}

@@ -2,7 +2,8 @@
 
 auto LOG = rclcpp::get_logger("emplanner");
 
-EMPlanner::EMPlanner() : Node("emplanner"){
+EMPlanner::EMPlanner() : Node("emplanner")
+{
     /**
      * 这一行创建了一个客户端，用于与名为 /carla_waypoint_publisher/ego_vehicle/get_waypoint 的服务进行通信
      * create_client 是 ROS 2 的方法，用于创建一个服务客户端，允许该节点向指定服务发送请求
@@ -40,23 +41,24 @@ EMPlanner::EMPlanner() : Node("emplanner"){
     _weight_coefficients.speed_qp_w_a = 200.0;
     _weight_coefficients.speed_qp_w_jerk = 200.0;
 
-    //绘图
+    // 绘图
     _path_plot_handle = matplot::figure();
     _trajectory_plot_handle = matplot::figure();
     _STL_plot_handle = matplot::figure();
 
     _plot_count = 0;
 
-    //路径二次规划热启动
+    // 路径二次规划热启动
     _path_qp_solver.settings()->setWarmStart(true);
     _speed_qp_solver.settings()->setWarmStart(true);
-    //TODO:
-    //改动这里，看看能不能加速
+    // TODO:
+    // 改动这里，看看能不能加速
     _reference_speed = 11.0;
 }
 
 void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> reference_line, const std::shared_ptr<VehicleState> ego_state,
-                       const std::vector<derived_object_msgs::msg::Object> &obstacles, std::vector<TrajectoryPoint> &final_trajectory){
+                                  const std::vector<derived_object_msgs::msg::Object> &obstacles, std::vector<TrajectoryPoint> &final_trajectory)
+{
     /*
     planning_run_step 是 EMPlanner 类中的一个成员函数，它可以通过某个 EMPlanner 对象来调用。
     这里的 this 代表 EMPlanner 类的当前实例。当你在成员函数 planning_run_step 中使用 this 时，它指向调用该函数的具体 EMPlanner 对象。
@@ -68,14 +70,16 @@ void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> 
     obstacle_fileter(ego_state, obstacles);
 
     // 1.2障碍物坐标转换
-    //std::vector<double> reference_index2s,储存车辆投影点到reference_line中每个点的距离
+    // std::vector<double> reference_index2s,储存车辆投影点到reference_line中每个点的距离
     auto reference_index2s = calculate_index_to_s(reference_line, ego_state);
     std::vector<FrenetPoint> static_obstacles_frent_coords;
-    if (!_static_obstacles.empty()){
+    if (!_static_obstacles.empty())
+    {
         cartesion_set_to_frenet_set(_static_obstacles, *reference_line, ego_state, static_obstacles_frent_coords);
     }
 
-    for (auto &&obs_frenet : static_obstacles_frent_coords){
+    for (auto &&obs_frenet : static_obstacles_frent_coords)
+    {
         RCLCPP_INFO(LOG, "静态障碍物信息(%.3f,%.3f)", obs_frenet.s, obs_frenet.l);
     }
 
@@ -109,22 +113,29 @@ void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> 
     // emplace_back()内的参数是结构体DpPathNode的构造函数的参数，无需直接给予它一整个DpPathNode对象
     path_dp_node_table.back().emplace_back(planning_start_point_frenet, 0.0, nullptr);
     auto path_dp_sample_front = path_dp_sample.front().front();
-    for (size_t level = 1; level < path_dp_sample.size(); level++){
+    for (size_t level = 1; level < path_dp_sample.size(); level++)
+    {
         path_dp_node_table.emplace_back();
-        if (level == 1){
-            for (auto &&current_sample_point : path_dp_sample[level]){
+        if (level == 1)
+        {
+            for (auto &&current_sample_point : path_dp_sample[level])
+            {
                 double min_cost = calculate_dp_cost(path_dp_sample_front, current_sample_point, static_obstacles_frent_coords, _weight_coefficients);
                 path_dp_node_table.back().emplace_back(current_sample_point, min_cost, std::make_shared<DpPathNode>(path_dp_node_table.front().front()));
             }
         }
-        else{
-            for (auto &&current_sample_point : path_dp_sample[level]){
+        else
+        {
+            for (auto &&current_sample_point : path_dp_sample[level])
+            {
                 size_t index;
                 double min_cost = std::numeric_limits<double>::max();
-                for (size_t i = 0; i < path_dp_node_table[level - 1].size(); i++){
+                for (size_t i = 0; i < path_dp_node_table[level - 1].size(); i++)
+                {
                     DpPathNode previous_node = path_dp_node_table[level - 1][i];
-                    double current_cost = previous_node.min_cost + calculate_dp_cost(previous_node.sl_point, current_sample_point,static_obstacles_frent_coords, _weight_coefficients);
-                    if (current_cost < min_cost){
+                    double current_cost = previous_node.min_cost + calculate_dp_cost(previous_node.sl_point, current_sample_point, static_obstacles_frent_coords, _weight_coefficients);
+                    if (current_cost < min_cost)
+                    {
                         min_cost = current_cost;
                         index = i;
                     }
@@ -137,8 +148,10 @@ void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> 
     // 3.2.3 利用path_dp_node_table找到最短路径
     size_t path_min_cost_index;
     double min_cost = std::numeric_limits<double>::max();
-    for (size_t i = 0; i < path_dp_node_table.back().size(); i++){
-        if (path_dp_node_table.back()[i].min_cost < min_cost){
+    for (size_t i = 0; i < path_dp_node_table.back().size(); i++)
+    {
+        if (path_dp_node_table.back()[i].min_cost < min_cost)
+        {
             min_cost = path_dp_node_table.back()[i].min_cost;
             path_min_cost_index = i;
         }
@@ -147,16 +160,18 @@ void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> 
 
     std::vector<FrenetPoint> dp_best_path;
     dp_best_path.emplace_back(path_useful_node.sl_point);
-    while(true){
+    while (true)
+    {
         path_useful_node = *(path_useful_node.pre_node);
         dp_best_path.emplace(dp_best_path.begin(), path_useful_node.sl_point);
-        if (dp_best_path.front().l == planning_start_point_frenet.l && dp_best_path.front().s == planning_start_point_frenet.s){
+        if (dp_best_path.front().l == planning_start_point_frenet.l && dp_best_path.front().s == planning_start_point_frenet.s)
+        {
             break;
         }
     }
     // RCLCPP_INFO(this->get_logger(), "路径规划——利用DP找到最短路径完成");
 
-    //3.2.4 对规划出的路径进行加密
+    // 3.2.4 对规划出的路径进行加密
     std::vector<FrenetPoint> final_dp_path;
     increased_dp_path(dp_best_path, 1.0, final_dp_path);
 
@@ -180,31 +195,35 @@ void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> 
     double ddl_desire = 0.0;
     path_QP_planning(final_dp_path, final_dp_path_l_min, final_dp_path_l_max, l_desire, dl_desire, ddl_desire, _weight_coefficients, init_qp_path);
 
-    //3.4将路径转换为轨迹
+    // 3.4将路径转换为轨迹
     auto path_trajectory = frenet_to_cartesion(init_qp_path, reference_line, reference_index2s);
 
     //-------------------------------------4.速度规划----------------------------------------
 
-    //4.1获取路径规划结果的index2s表
+    // 4.1获取路径规划结果的index2s表
     std::vector<double> path_index2s;
     path_index2s.emplace_back(0.0);
-    for (size_t i = 1; i < path_trajectory.size(); i++){
+    for (size_t i = 1; i < path_trajectory.size(); i++)
+    {
         path_index2s.emplace_back(path_index2s.back() + std::hypot(path_trajectory[i].x - path_trajectory[i - 1].x, path_trajectory[i].y - path_trajectory[i - 1].y));
     }
 
-    //4.2动态障碍物投影
+    // 4.2动态障碍物投影
     std::vector<FrenetPoint> dynamic_obstacles_frenet_coords;
-    if (!_dynamic_obstacles.empty()){
+    if (!_dynamic_obstacles.empty())
+    {
         cartesion_set_to_frenet_set(_dynamic_obstacles, path_trajectory, path_trajectory.front(), dynamic_obstacles_frenet_coords);
     }
 
-    for (auto &&obs_frenet : dynamic_obstacles_frenet_coords){
+    for (auto &&obs_frenet : dynamic_obstacles_frenet_coords)
+    {
         RCLCPP_INFO(LOG, "动态障碍物信息(s: %.3f,l: %.3f,s_dot: %.3f,l_dot: %.3f)", obs_frenet.s, obs_frenet.l, obs_frenet.s_dot, obs_frenet.l_dot);
     }
 
     // 4.3生成ST图，数据结构为向量中嵌套哈希表
     std::vector<std::unordered_map<std::string, double>> dynamic_obs_st_graph;
-    if (!dynamic_obstacles_frenet_coords.empty()){
+    if (!dynamic_obstacles_frenet_coords.empty())
+    {
         generate_st_graph(dynamic_obstacles_frenet_coords, 2.0, dynamic_obs_st_graph);
     }
     // for (auto &&st_graph : dynamic_obs_st_graph){
@@ -220,15 +239,18 @@ void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> 
     std::vector<std::vector<STPoint>> speed_dp_sample;
     get_speed_dp_sample(planning_start_point_st_coords, 0.5, 8.0, path_index2s, speed_dp_sample);
 
-    //4.5.2计算代价
+    // 4.5.2计算代价
     std::vector<std::vector<DpSpeedNode>> speed_dp_node_table;
     speed_dp_node_table.emplace_back();
     auto speed_dp_sample_front = speed_dp_sample.front().front();
     speed_dp_node_table.back().emplace_back(speed_dp_sample_front, 0.0, nullptr);
-    for (size_t level = 1; level < speed_dp_sample.size(); level++){
-        if (level == 1){
+    for (size_t level = 1; level < speed_dp_sample.size(); level++)
+    {
+        if (level == 1)
+        {
             speed_dp_node_table.emplace_back();
-            for (auto &&sample_point : speed_dp_sample[level]){
+            for (auto &&sample_point : speed_dp_sample[level])
+            {
                 STPoint pre_st_point = speed_dp_sample_front;
                 STPoint cur_st_point = sample_point;
                 double delta_t = cur_st_point.t - pre_st_point.t;
@@ -239,9 +261,11 @@ void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> 
                 speed_dp_node_table.back().emplace_back(cur_st_point, min_cost, std::make_shared<DpSpeedNode>(speed_dp_node_table.front().front()));
             }
         }
-        else{
+        else
+        {
             speed_dp_node_table.emplace_back();
-            for (int i = 0; i < (int)speed_dp_sample[level].size(); i++){
+            for (int i = 0; i < (int)speed_dp_sample[level].size(); i++)
+            {
                 double min_speed_dp_cost = std::numeric_limits<double>::max();
                 int pre_index = -1;
                 for (int j = 0; j < (int)speed_dp_sample[level - 1].size(); j++)
@@ -271,8 +295,10 @@ void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> 
     int index_level = -1;
     int index_row = -1;
     // 搜索上边界
-    for (int level = 1; level < (int)speed_dp_node_table.size(); level++){
-        if (speed_dp_node_table[level].front().min_cost < trajectory_min_cost){
+    for (int level = 1; level < (int)speed_dp_node_table.size(); level++)
+    {
+        if (speed_dp_node_table[level].front().min_cost < trajectory_min_cost)
+        {
             trajectory_min_cost = speed_dp_node_table[level].front().min_cost;
             index_level = level;
             index_row = 0;
@@ -290,13 +316,15 @@ void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> 
     }
 
     DpSpeedNode trajectory_useful_node(speed_dp_node_table[index_level][index_row]);
-    //建立速度剖面，数据结构为双端队列
+    // 建立速度剖面，数据结构为双端队列
     std::deque<STPoint> dp_speed_profile;
     dp_speed_profile.emplace_front(trajectory_useful_node.st_point);
-    while(true){
+    while (true)
+    {
         trajectory_useful_node = (*trajectory_useful_node.pre_node);
         dp_speed_profile.emplace_front(trajectory_useful_node.st_point);
-        if (trajectory_useful_node.st_point == speed_dp_sample_front){
+        if (trajectory_useful_node.st_point == speed_dp_sample_front)
+        {
             break;
         }
     }
@@ -309,11 +337,11 @@ void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> 
     // generate_convex_space(path_trajectory, path_index2s, dp_speed_profile, dynamic_obs_st_graph, 0.2 * 9.8, s_lb, s_ub, s_dot_lb, s_dot_ub);
     generate_convex_space(path_trajectory, path_index2s, dp_speed_profile, dynamic_obs_st_graph, 0.5 * 9.8, s_lb, s_ub, s_dot_lb, s_dot_ub);
     // RCLCPP_INFO(this->get_logger(), "速度规划——速度凸空间完成");
-    //4.6.2 二次规划
+    // 4.6.2 二次规划
     std::vector<STPoint> init_qp_speed_profile;
     speed_QP_planning(dp_speed_profile, s_lb, s_ub, _reference_speed, s_dot_lb, s_dot_ub, _weight_coefficients, init_qp_speed_profile);
     // RCLCPP_INFO(this->get_logger(), "速度规划——速度二次规划完成");
-    //4.6.3 加密二次规划所得到的速度曲线
+    // 4.6.3 加密二次规划所得到的速度曲线
     std::vector<STPoint> final_qp_speed_profile;
     increased_speed_profile(init_qp_speed_profile, final_qp_speed_profile);
     // RCLCPP_INFO(this->get_logger(), "速度规划——加密速度曲线完成");
@@ -324,37 +352,44 @@ void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> 
 
     // 5.2轨迹拼接
     final_trajectory.clear();
-    if( !_switch_trajectory.empty()){
-        for (auto &&trajectory_point : _switch_trajectory){
+    if (!_switch_trajectory.empty())
+    {
+        for (auto &&trajectory_point : _switch_trajectory)
+        {
             final_trajectory.emplace_back(trajectory_point);
         }
     }
-    for (auto &&trajectory_point : init_trajectory){
+    for (auto &&trajectory_point : init_trajectory)
+    {
         final_trajectory.emplace_back(trajectory_point);
     }
     // RCLCPP_INFO(this->get_logger(), "轨迹拼接完成");
 
     // 5.3上一周期轨迹赋值
     _previous_trajectory.clear();
-    for (auto &&trajectory_point: final_trajectory){
+    for (auto &&trajectory_point : final_trajectory)
+    {
         _previous_trajectory.emplace_back(trajectory_point);
     }
 
     //-------------------------------------6.绘制ST、SL图----------------------------------------
     // 6.1绘制SL图
-    if (_plot_count % 5 == 0){
+    if (_plot_count % 5 == 0)
+    {
         matplot::figure(_path_plot_handle);
         matplot::cla();
         std::vector<double> init_dp_path_s, init_dp_path_l;
         std::vector<double> final_dp_path_s, final_dp_path_l;
         std::vector<double> init_qp_path_s, init_qp_path_l;
-        //储存增密前的DP_PATH
-        for (size_t i = 0; i < dp_best_path.size(); i++){
+        // 储存增密前的DP_PATH
+        for (size_t i = 0; i < dp_best_path.size(); i++)
+        {
             init_dp_path_s.emplace_back(dp_best_path[i].s);
             init_dp_path_l.emplace_back(dp_best_path[i].l);
         }
         // 储存增密后的DP_PATH及QP_PATH
-        for (size_t i = 0; i < final_dp_path.size(); i++){
+        for (size_t i = 0; i < final_dp_path.size(); i++)
+        {
             final_dp_path_s.emplace_back(final_dp_path[i].s);
             final_dp_path_l.emplace_back(final_dp_path[i].l);
             init_qp_path_s.emplace_back(init_qp_path[i].s);
@@ -371,7 +406,8 @@ void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> 
         // QP_PATH
         matplot::plot(init_qp_path_s, init_qp_path_l, "go-")->line_width(2);
         // 静态障碍物
-        for (auto &&static_obs_sl_point : static_obstacles_frent_coords){
+        for (auto &&static_obs_sl_point : static_obstacles_frent_coords)
+        {
             matplot::line(static_obs_sl_point.s - 2.5, static_obs_sl_point.l + 1, static_obs_sl_point.s + 2.5, static_obs_sl_point.l + 1)->line_width(2);
             matplot::line(static_obs_sl_point.s + 2.5, static_obs_sl_point.l + 1, static_obs_sl_point.s + 2.5, static_obs_sl_point.l - 1)->line_width(2);
             matplot::line(static_obs_sl_point.s + 2.5, static_obs_sl_point.l - 1, static_obs_sl_point.s - 2.5, static_obs_sl_point.l - 1)->line_width(2);
@@ -380,31 +416,35 @@ void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> 
         matplot::title("SL Path and Obstacles");
     }
     // 6.2绘制ST图
-    if (_plot_count % 5 == 0){
+    if (_plot_count % 5 == 0)
+    {
         matplot::figure(_trajectory_plot_handle);
         matplot::cla();
         std::vector<double> init_t_set, init_s_set;
         std::vector<double> init_qp_speed_profile_t_set, init_qp_speed_profile_s_set;
         matplot::hold(true);
         // 储存DP_SPEED
-        for (auto &&st_point : dp_speed_profile){
+        for (auto &&st_point : dp_speed_profile)
+        {
             init_t_set.emplace_back(st_point.t);
             init_s_set.emplace_back(st_point.s);
         }
         matplot::plot(init_t_set, init_s_set, "bo-")->line_width(2);
 
         // 储存增密前QP_SPEED
-        for (auto &&st_point : init_qp_speed_profile){
+        for (auto &&st_point : init_qp_speed_profile)
+        {
             init_qp_speed_profile_t_set.emplace_back(st_point.t);
             init_qp_speed_profile_s_set.emplace_back(st_point.s);
         }
         matplot::plot(init_qp_speed_profile_t_set, init_qp_speed_profile_s_set, "g*-")->line_width(4);
 
         // ST图中的动态障碍物
-        for (auto &&st_graph_node : dynamic_obs_st_graph){
-            matplot::line(st_graph_node.at("t_in"), st_graph_node.at("s_in"),st_graph_node.at("t_out"), st_graph_node.at("s_out"))->line_width(4);
+        for (auto &&st_graph_node : dynamic_obs_st_graph)
+        {
+            matplot::line(st_graph_node.at("t_in"), st_graph_node.at("s_in"), st_graph_node.at("t_out"), st_graph_node.at("s_out"))->line_width(4);
         }
-        matplot::xlim({0,8});  // 使用std::vector<double> 初始化
+        matplot::xlim({0, 8});  // 使用std::vector<double> 初始化
         matplot::ylim({0, 80}); // 使用std::vector<double> 初始化
 
         matplot::title("ST Path and Dynamic Obstacles");
@@ -416,7 +456,7 @@ void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> 
         _plot_count = 0;
     }
     // RCLCPP_INFO(this->get_logger(), "轨迹包含点数:%d", final_trajectory.size());
-    //RCLCPP_INFO(this->get_logger(), "emplanner绘图完成");
+    // RCLCPP_INFO(this->get_logger(), "emplanner绘图完成");
 }
 
 /**
@@ -427,12 +467,14 @@ void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> 
  * 如果主车实际位置与目标点差距很大，用动力学方程外推,将外推结果作为规划起点
  */
 
-TrajectoryPoint EMPlanner::calculate_planning_start_point(std::shared_ptr<VehicleState> ego_state){
+TrajectoryPoint EMPlanner::calculate_planning_start_point(std::shared_ptr<VehicleState> ego_state)
+{
     _switch_trajectory.clear();
     TrajectoryPoint planning_start_point;
     // 如果第一次运行
     double delta_T = 0.1;
-    if (_previous_trajectory.empty()){
+    if (_previous_trajectory.empty())
+    {
         planning_start_point.x = ego_state->x;
         planning_start_point.y = ego_state->y;
         planning_start_point.v = 0.0;
@@ -443,19 +485,25 @@ TrajectoryPoint EMPlanner::calculate_planning_start_point(std::shared_ptr<Vehicl
         planning_start_point.time_stamped = _current_time + delta_T;
     }
     // 不是第一次运行，已经有了上一周期规划的轨迹
-    else {
+    else
+    {
         // 计算主车位置与目标点之间的误差
         size_t current_time_index = -1;
-        if (_current_time <= _previous_trajectory[0].time_stamped){
+        if (_current_time <= _previous_trajectory[0].time_stamped)
+        {
             current_time_index = 0;
         }
         // 获取当前时刻在上一周期轨迹对应的时间索引
-        for (size_t i = 0; i < _previous_trajectory.size() - 2; i++) {
-            if (_current_time > _previous_trajectory[i].time_stamped && _current_time <= _previous_trajectory[i + 1].time_stamped){
-                if ((_current_time - _previous_trajectory[i].time_stamped) <= (_previous_trajectory[i + 1].time_stamped - _current_time)){
+        for (size_t i = 0; i < _previous_trajectory.size() - 2; i++)
+        {
+            if (_current_time > _previous_trajectory[i].time_stamped && _current_time <= _previous_trajectory[i + 1].time_stamped)
+            {
+                if ((_current_time - _previous_trajectory[i].time_stamped) <= (_previous_trajectory[i + 1].time_stamped - _current_time))
+                {
                     current_time_index = i;
                 }
-                else{
+                else
+                {
                     current_time_index = i + 1;
                 }
             }
@@ -468,19 +516,25 @@ TrajectoryPoint EMPlanner::calculate_planning_start_point(std::shared_ptr<Vehicl
         double error_lateral = std::abs(host_to_target_point.dot(nor_target_point));       // 横向误差
 
         // 主车实际位置与目标点差距不大
-        if (error_lateral < 0.5 && error_longitudional < 1.5) {
+        if (error_lateral < 0.5 && error_longitudional < 1.5)
+        {
             // 在上一周期轨迹上搜索规划起点
             size_t start_time_index = -1;
             double start_time = _current_time + delta_T;
-            if (start_time <= _previous_trajectory[0].time_stamped){
+            if (start_time <= _previous_trajectory[0].time_stamped)
+            {
                 start_time_index = 0;
             }
-            for (size_t i = 0; i < _previous_trajectory.size() - 2; i++){
-                if (start_time > _previous_trajectory[i].time_stamped && start_time <= _previous_trajectory[i + 1].time_stamped){
-                    if ((start_time - _previous_trajectory[i].time_stamped) <= (_previous_trajectory[i + 1].time_stamped - start_time)){
+            for (size_t i = 0; i < _previous_trajectory.size() - 2; i++)
+            {
+                if (start_time > _previous_trajectory[i].time_stamped && start_time <= _previous_trajectory[i + 1].time_stamped)
+                {
+                    if ((start_time - _previous_trajectory[i].time_stamped) <= (_previous_trajectory[i + 1].time_stamped - start_time))
+                    {
                         start_time_index = i;
                     }
-                    else{
+                    else
+                    {
                         start_time_index = i + 1;
                     }
                 }
@@ -496,19 +550,24 @@ TrajectoryPoint EMPlanner::calculate_planning_start_point(std::shared_ptr<Vehicl
             planning_start_point.time_stamped = start_time;
 
             // 这个时候还要拼接上一段轨迹,向前拼20个点
-            if (start_time_index >= 20){
-                for (int i = start_time_index - 1; i >= 0 && (start_time_index - i) <= 20; i--){
+            if (start_time_index >= 20)
+            {
+                for (int i = start_time_index - 1; i >= 0 && (start_time_index - i) <= 20; i--)
+                {
                     _switch_trajectory.emplace_front(_previous_trajectory[i]); // 这个排列顺序是序号越大，时间越靠后的
                 }
             }
-            else if (start_time_index > 0){
-                for (int i = start_time_index - 1; i >= 0; i--){
+            else if (start_time_index > 0)
+            {
+                for (int i = start_time_index - 1; i >= 0; i--)
+                {
                     _switch_trajectory.emplace_front(_previous_trajectory[i]); // 这个排列顺序是序号越大，时间越靠后的
                 }
             }
         }
         // 主车实际位置与目标点差距很大
-        else {
+        else
+        {
             // 用动力学方程外推,认为在着100ms中加速度变化很小
             planning_start_point.ax = ego_state->ax;
             planning_start_point.ay = ego_state->ay;
@@ -533,36 +592,44 @@ void EMPlanner::obstacle_fileter(std::shared_ptr<VehicleState> ego_state, const 
     // 将障碍物分成动态与静态障碍物
     _static_obstacles.clear();
     _dynamic_obstacles.clear();
-    if (obstacles.empty()){
+    if (obstacles.empty())
+    {
         return;
     }
-    for (auto &&obs : obstacles){
-        if (obs.id == ego_state->id){
+    for (auto &&obs : obstacles)
+    {
+        if (obs.id == ego_state->id)
+        {
             continue;
         } // 障碍物不包含主车
 
         double v_obs = std::sqrt(std::pow(obs.twist.linear.x, 2.0) + std::pow(obs.twist.linear.y, 2.0) + std::pow(obs.twist.linear.z, 2.0)); // 障碍物速度
-        Eigen::Vector2d host_to_obs(obs.pose.position.x - ego_state->x, obs.pose.position.y - ego_state->y); // 主车到障碍物的向量
+        Eigen::Vector2d host_to_obs(obs.pose.position.x - ego_state->x, obs.pose.position.y - ego_state->y);                                 // 主车到障碍物的向量
         Eigen::Vector2d tau_host(std::cos(ego_state->heading), std::sin(ego_state->heading));
         Eigen::Vector2d nor_host(-std::sin(ego_state->heading), std::cos(ego_state->heading));
         double longitudinal_d = host_to_obs.dot(tau_host); // 纵向距离
         double lateral_d = host_to_obs.dot(nor_host);      // 横向距离
         // 静态障碍物，即使有加速度，一个规划周期是0.1s，障碍物以最大加速度加速也达不到很大的速度
-        if (v_obs <= 0.1){
-            //超出1.5个车长即变道
-            if (longitudinal_d <= 60 && longitudinal_d >= -7.5 && lateral_d <= 10 && lateral_d >= -10){
+        if (v_obs <= 0.1)
+        {
+            // 超出1.5个车长即变道
+            if (longitudinal_d <= 60 && longitudinal_d >= -7.5 && lateral_d <= 10 && lateral_d >= -10)
+            {
                 _static_obstacles.push_back(obs);
             }
-            else{
+            else
+            {
                 continue;
             }
         }
         else // 动态障碍物
         {
-            if (longitudinal_d <= 60 && longitudinal_d > -10 && lateral_d <= 25 && lateral_d >= -25){
+            if (longitudinal_d <= 60 && longitudinal_d > -10 && lateral_d <= 25 && lateral_d >= -25)
+            {
                 _dynamic_obstacles.push_back(obs);
             }
-            else{
+            else
+            {
                 continue;
             }
         }
