@@ -5,6 +5,7 @@
 #include <vector>
 #include <cassert>
 #include <iostream>
+#include "rclcpp/rclcpp.hpp"
 
 class FpbTree
 {

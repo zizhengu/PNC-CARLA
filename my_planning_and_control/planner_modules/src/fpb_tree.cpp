@@ -2,6 +2,7 @@
 
 FpbTree::FpbTree(const int &tree_height, const double &action_time)
 {
+
     tree_height_ = tree_height;
     action_time_ = action_time;
     GenarateFpbTree();
@@ -53,13 +54,6 @@ bool FpbTree::GenarateFpbTree()
             }
             behaviour_tree_.push_back(behaviour_seq);
         }
-    }
-    assert(int(behaviour_tree_.size()) == num_lon_action * 7);
-
-    for (size_t i = 0; i < behaviour_tree_.size(); ++i)
-    {
-        std::cout << "----------------------behaviour_tree_[i].size()------------------" << behaviour_tree_[i].size() << std::endl;
-        assert(int(behaviour_tree_[i].size()) == tree_height_);
     }
     return true;
 }

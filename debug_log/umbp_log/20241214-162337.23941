@@ -1,0 +1,4 @@
+Log file created at: 2024/12/14 16:23:37
+Running on machine: Guzizhen
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I1214 16:23:37.286674 23941 umb_planner.cpp:17] [UMBP]******************** RUN START: ******************

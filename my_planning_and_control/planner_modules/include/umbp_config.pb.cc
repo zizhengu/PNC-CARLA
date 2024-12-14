@@ -63,13 +63,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SafetyCost, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SafetyCost, rss_cost_enable_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SafetyCost, rss_over_speed_power_coeff_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SafetyCost, rss_over_speed_linear_coeff_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SafetyCost, rss_lack_speed_power_coeff_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SafetyCost, rss_lack_speed_linear_coeff_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SafetyCost, occu_lane_enable_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SafetyCost, occu_lane_unit_cost_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SafetyCost, ego_to_obs_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserCost, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -80,11 +74,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NavigationCost, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NavigationCost, lane_change_left_unit_cost_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NavigationCost, lane_change_right_unit_cost_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NavigationCost, lane_change_unit_cost_vel_lb_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NavigationCost, lane_change_left_recommendation_reward_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NavigationCost, lane_change_right_recommendation_reward_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NavigationCost, ref_line_change_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -100,6 +90,8 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, s_sample_num_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, l_sample_distance_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, l_sample_num_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, acc_ref_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, dec_ref_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropogateConfig, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -129,13 +121,13 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
 static const ::google::protobuf::internal::MigrationSchema schemas[] = {
   { 0, -1, sizeof(EfficiencyCost)},
   { 11, -1, sizeof(SafetyCost)},
-  { 22, -1, sizeof(UserCost)},
-  { 28, -1, sizeof(NavigationCost)},
-  { 37, -1, sizeof(FpbConfig)},
-  { 44, -1, sizeof(SampleConfig)},
-  { 52, -1, sizeof(PropogateConfig)},
-  { 58, -1, sizeof(CostConfig)},
-  { 67, -1, sizeof(Config)},
+  { 16, -1, sizeof(UserCost)},
+  { 22, -1, sizeof(NavigationCost)},
+  { 27, -1, sizeof(FpbConfig)},
+  { 34, -1, sizeof(SampleConfig)},
+  { 44, -1, sizeof(PropogateConfig)},
+  { 50, -1, sizeof(CostConfig)},
+  { 59, -1, sizeof(Config)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -240,40 +232,31 @@ void AddDescriptorsImpl() {
       "nce_th\030\004 \001(\001\022\032\n\022min_distance_ratio\030\005 \001(\001"
       "\022.\n&ego_speed_blocked_by_leading_unit_co"
       "st\030\006 \001(\001\0223\n+leading_speed_blocked_desire"
-      "d_vel_unit_cost\030\007 \001(\001\"\356\001\n\nSafetyCost\022\027\n\017"
-      "rss_cost_enable\030\001 \001(\010\022\"\n\032rss_over_speed_"
-      "power_coeff\030\002 \001(\001\022#\n\033rss_over_speed_line"
-      "ar_coeff\030\003 \001(\001\022\"\n\032rss_lack_speed_power_c"
-      "oeff\030\004 \001(\001\022#\n\033rss_lack_speed_linear_coef"
-      "f\030\005 \001(\001\022\030\n\020occu_lane_enable\030\006 \001(\010\022\033\n\023occ"
-      "u_lane_unit_cost\030\007 \001(\001\"N\n\010UserCost\022\036\n\026la"
-      "te_operate_unit_cost\030\001 \001(\001\022\"\n\032cancel_ope"
-      "ration_unit_cost\030\002 \001(\001\"\340\001\n\016NavigationCos"
-      "t\022\"\n\032lane_change_left_unit_cost\030\001 \001(\001\022#\n"
-      "\033lane_change_right_unit_cost\030\002 \001(\001\022$\n\034la"
-      "ne_change_unit_cost_vel_lb\030\003 \001(\001\022.\n&lane"
-      "_change_left_recommendation_reward\030\004 \001(\001"
-      "\022/\n\'lane_change_right_recommendation_rew"
-      "ard\030\005 \001(\001\"B\n\tFpbConfig\022\022\n\nlayer_time\030\001 \001"
-      "(\001\022\014\n\004step\030\002 \001(\001\022\023\n\013tree_height\030\003 \001(\005\"p\n"
-      "\014SampleConfig\022\031\n\021s_sample_distance\030\001 \001(\001"
-      "\022\024\n\014s_sample_num\030\002 \001(\005\022\031\n\021l_sample_dista"
-      "nce\030\003 \001(\001\022\024\n\014l_sample_num\030\004 \001(\005\"e\n\017Propo"
-      "gateConfig\022%\n\003fpb\030\001 \001(\0132\030.planning.umbp."
-      "FpbConfig\022+\n\006sample\030\002 \001(\0132\033.planning.umb"
-      "p.SampleConfig\"\335\001\n\nCostConfig\0221\n\nefficie"
-      "ncy\030\001 \001(\0132\035.planning.umbp.EfficiencyCost"
-      "\022)\n\006safety\030\002 \001(\0132\031.planning.umbp.SafetyC"
-      "ost\022%\n\004user\030\003 \001(\0132\027.planning.umbp.UserCo"
-      "st\0221\n\nnavigation\030\004 \001(\0132\035.planning.umbp.N"
-      "avigationCost\022\027\n\017discount_factor\030\005 \001(\001\"\223"
-      "\001\n\006Config\022\014\n\004name\030\001 \001(\t\022\017\n\007version\030\002 \001(\t"
-      "\022\016\n\006status\030\003 \001(\t\022\'\n\004cost\030\004 \001(\0132\031.plannin"
-      "g.umbp.CostConfig\0221\n\tpropogate\030\005 \001(\0132\036.p"
-      "lanning.umbp.PropogateConfigb\006proto3"
+      "d_vel_unit_cost\030\007 \001(\001\" \n\nSafetyCost\022\022\n\ne"
+      "go_to_obs\030\001 \001(\001\"N\n\010UserCost\022\036\n\026late_oper"
+      "ate_unit_cost\030\001 \001(\001\022\"\n\032cancel_operation_"
+      "unit_cost\030\002 \001(\001\")\n\016NavigationCost\022\027\n\017ref"
+      "_line_change\030\001 \001(\001\"B\n\tFpbConfig\022\022\n\nlayer"
+      "_time\030\001 \001(\001\022\014\n\004step\030\002 \001(\001\022\023\n\013tree_height"
+      "\030\003 \001(\005\"\222\001\n\014SampleConfig\022\031\n\021s_sample_dist"
+      "ance\030\001 \001(\001\022\024\n\014s_sample_num\030\002 \001(\005\022\031\n\021l_sa"
+      "mple_distance\030\003 \001(\001\022\024\n\014l_sample_num\030\004 \001("
+      "\005\022\017\n\007acc_ref\030\005 \001(\001\022\017\n\007dec_ref\030\006 \001(\001\"e\n\017P"
+      "ropogateConfig\022%\n\003fpb\030\001 \001(\0132\030.planning.u"
+      "mbp.FpbConfig\022+\n\006sample\030\002 \001(\0132\033.planning"
+      ".umbp.SampleConfig\"\335\001\n\nCostConfig\0221\n\neff"
+      "iciency\030\001 \001(\0132\035.planning.umbp.Efficiency"
+      "Cost\022)\n\006safety\030\002 \001(\0132\031.planning.umbp.Saf"
+      "etyCost\022%\n\004user\030\003 \001(\0132\027.planning.umbp.Us"
+      "erCost\0221\n\nnavigation\030\004 \001(\0132\035.planning.um"
+      "bp.NavigationCost\022\027\n\017discount_factor\030\005 \001"
+      "(\001\"\223\001\n\006Config\022\014\n\004name\030\001 \001(\t\022\017\n\007version\030\002"
+      " \001(\t\022\016\n\006status\030\003 \001(\t\022\'\n\004cost\030\004 \001(\0132\031.pla"
+      "nning.umbp.CostConfig\0221\n\tpropogate\030\005 \001(\013"
+      "2\036.planning.umbp.PropogateConfigb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1556);
+      descriptor, 1200);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "umbp_config.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
@@ -805,13 +788,7 @@ void EfficiencyCost::set_leading_speed_blocked_desired_vel_unit_cost(double valu
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int SafetyCost::kRssCostEnableFieldNumber;
-const int SafetyCost::kRssOverSpeedPowerCoeffFieldNumber;
-const int SafetyCost::kRssOverSpeedLinearCoeffFieldNumber;
-const int SafetyCost::kRssLackSpeedPowerCoeffFieldNumber;
-const int SafetyCost::kRssLackSpeedLinearCoeffFieldNumber;
-const int SafetyCost::kOccuLaneEnableFieldNumber;
-const int SafetyCost::kOccuLaneUnitCostFieldNumber;
+const int SafetyCost::kEgoToObsFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 SafetyCost::SafetyCost()
@@ -827,15 +804,12 @@ SafetyCost::SafetyCost(const SafetyCost& from)
       _internal_metadata_(NULL),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&rss_over_speed_power_coeff_, &from.rss_over_speed_power_coeff_,
-    reinterpret_cast<char*>(&occu_lane_enable_) -
-    reinterpret_cast<char*>(&rss_over_speed_power_coeff_) + sizeof(occu_lane_enable_));
+  ego_to_obs_ = from.ego_to_obs_;
   // @@protoc_insertion_point(copy_constructor:planning.umbp.SafetyCost)
 }
 
 void SafetyCost::SharedCtor() {
-  ::memset(&rss_over_speed_power_coeff_, 0, reinterpret_cast<char*>(&occu_lane_enable_) -
-    reinterpret_cast<char*>(&rss_over_speed_power_coeff_) + sizeof(occu_lane_enable_));
+  ego_to_obs_ = 0;
   _cached_size_ = 0;
 }
 
@@ -872,8 +846,7 @@ SafetyCost* SafetyCost::New(::google::protobuf::Arena* arena) const {
 
 void SafetyCost::Clear() {
 // @@protoc_insertion_point(message_clear_start:planning.umbp.SafetyCost)
-  ::memset(&rss_over_speed_power_coeff_, 0, reinterpret_cast<char*>(&occu_lane_enable_) -
-    reinterpret_cast<char*>(&rss_over_speed_power_coeff_) + sizeof(occu_lane_enable_));
+  ego_to_obs_ = 0;
 }
 
 bool SafetyCost::MergePartialFromCodedStream(
@@ -886,91 +859,13 @@ bool SafetyCost::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // bool rss_cost_enable = 1;
+      // double ego_to_obs = 1;
       case 1: {
-        if (tag == 8u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &rss_cost_enable_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // double rss_over_speed_power_coeff = 2;
-      case 2: {
-        if (tag == 17u) {
+        if (tag == 9u) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &rss_over_speed_power_coeff_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // double rss_over_speed_linear_coeff = 3;
-      case 3: {
-        if (tag == 25u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &rss_over_speed_linear_coeff_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // double rss_lack_speed_power_coeff = 4;
-      case 4: {
-        if (tag == 33u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &rss_lack_speed_power_coeff_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // double rss_lack_speed_linear_coeff = 5;
-      case 5: {
-        if (tag == 41u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &rss_lack_speed_linear_coeff_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // bool occu_lane_enable = 6;
-      case 6: {
-        if (tag == 48u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &occu_lane_enable_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // double occu_lane_unit_cost = 7;
-      case 7: {
-        if (tag == 57u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &occu_lane_unit_cost_)));
+                 input, &ego_to_obs_)));
         } else {
           goto handle_unusual;
         }
@@ -1001,39 +896,9 @@ failure:
 void SafetyCost::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:planning.umbp.SafetyCost)
-  // bool rss_cost_enable = 1;
-  if (this->rss_cost_enable() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->rss_cost_enable(), output);
-  }
-
-  // double rss_over_speed_power_coeff = 2;
-  if (this->rss_over_speed_power_coeff() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->rss_over_speed_power_coeff(), output);
-  }
-
-  // double rss_over_speed_linear_coeff = 3;
-  if (this->rss_over_speed_linear_coeff() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->rss_over_speed_linear_coeff(), output);
-  }
-
-  // double rss_lack_speed_power_coeff = 4;
-  if (this->rss_lack_speed_power_coeff() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->rss_lack_speed_power_coeff(), output);
-  }
-
-  // double rss_lack_speed_linear_coeff = 5;
-  if (this->rss_lack_speed_linear_coeff() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->rss_lack_speed_linear_coeff(), output);
-  }
-
-  // bool occu_lane_enable = 6;
-  if (this->occu_lane_enable() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(6, this->occu_lane_enable(), output);
-  }
-
-  // double occu_lane_unit_cost = 7;
-  if (this->occu_lane_unit_cost() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(7, this->occu_lane_unit_cost(), output);
+  // double ego_to_obs = 1;
+  if (this->ego_to_obs() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->ego_to_obs(), output);
   }
 
   // @@protoc_insertion_point(serialize_end:planning.umbp.SafetyCost)
@@ -1043,39 +908,9 @@ void SafetyCost::SerializeWithCachedSizes(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic;  // Unused
   // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.SafetyCost)
-  // bool rss_cost_enable = 1;
-  if (this->rss_cost_enable() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->rss_cost_enable(), target);
-  }
-
-  // double rss_over_speed_power_coeff = 2;
-  if (this->rss_over_speed_power_coeff() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->rss_over_speed_power_coeff(), target);
-  }
-
-  // double rss_over_speed_linear_coeff = 3;
-  if (this->rss_over_speed_linear_coeff() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->rss_over_speed_linear_coeff(), target);
-  }
-
-  // double rss_lack_speed_power_coeff = 4;
-  if (this->rss_lack_speed_power_coeff() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->rss_lack_speed_power_coeff(), target);
-  }
-
-  // double rss_lack_speed_linear_coeff = 5;
-  if (this->rss_lack_speed_linear_coeff() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->rss_lack_speed_linear_coeff(), target);
-  }
-
-  // bool occu_lane_enable = 6;
-  if (this->occu_lane_enable() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(6, this->occu_lane_enable(), target);
-  }
-
-  // double occu_lane_unit_cost = 7;
-  if (this->occu_lane_unit_cost() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(7, this->occu_lane_unit_cost(), target);
+  // double ego_to_obs = 1;
+  if (this->ego_to_obs() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->ego_to_obs(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.SafetyCost)
@@ -1086,39 +921,9 @@ size_t SafetyCost::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:planning.umbp.SafetyCost)
   size_t total_size = 0;
 
-  // double rss_over_speed_power_coeff = 2;
-  if (this->rss_over_speed_power_coeff() != 0) {
+  // double ego_to_obs = 1;
+  if (this->ego_to_obs() != 0) {
     total_size += 1 + 8;
-  }
-
-  // double rss_over_speed_linear_coeff = 3;
-  if (this->rss_over_speed_linear_coeff() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double rss_lack_speed_power_coeff = 4;
-  if (this->rss_lack_speed_power_coeff() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double rss_lack_speed_linear_coeff = 5;
-  if (this->rss_lack_speed_linear_coeff() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double occu_lane_unit_cost = 7;
-  if (this->occu_lane_unit_cost() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // bool rss_cost_enable = 1;
-  if (this->rss_cost_enable() != 0) {
-    total_size += 1 + 1;
-  }
-
-  // bool occu_lane_enable = 6;
-  if (this->occu_lane_enable() != 0) {
-    total_size += 1 + 1;
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -1147,26 +952,8 @@ void SafetyCost::MergeFrom(const SafetyCost& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.SafetyCost)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.rss_over_speed_power_coeff() != 0) {
-    set_rss_over_speed_power_coeff(from.rss_over_speed_power_coeff());
-  }
-  if (from.rss_over_speed_linear_coeff() != 0) {
-    set_rss_over_speed_linear_coeff(from.rss_over_speed_linear_coeff());
-  }
-  if (from.rss_lack_speed_power_coeff() != 0) {
-    set_rss_lack_speed_power_coeff(from.rss_lack_speed_power_coeff());
-  }
-  if (from.rss_lack_speed_linear_coeff() != 0) {
-    set_rss_lack_speed_linear_coeff(from.rss_lack_speed_linear_coeff());
-  }
-  if (from.occu_lane_unit_cost() != 0) {
-    set_occu_lane_unit_cost(from.occu_lane_unit_cost());
-  }
-  if (from.rss_cost_enable() != 0) {
-    set_rss_cost_enable(from.rss_cost_enable());
-  }
-  if (from.occu_lane_enable() != 0) {
-    set_occu_lane_enable(from.occu_lane_enable());
+  if (from.ego_to_obs() != 0) {
+    set_ego_to_obs(from.ego_to_obs());
   }
 }
 
@@ -1193,13 +980,7 @@ void SafetyCost::Swap(SafetyCost* other) {
   InternalSwap(other);
 }
 void SafetyCost::InternalSwap(SafetyCost* other) {
-  std::swap(rss_over_speed_power_coeff_, other->rss_over_speed_power_coeff_);
-  std::swap(rss_over_speed_linear_coeff_, other->rss_over_speed_linear_coeff_);
-  std::swap(rss_lack_speed_power_coeff_, other->rss_lack_speed_power_coeff_);
-  std::swap(rss_lack_speed_linear_coeff_, other->rss_lack_speed_linear_coeff_);
-  std::swap(occu_lane_unit_cost_, other->occu_lane_unit_cost_);
-  std::swap(rss_cost_enable_, other->rss_cost_enable_);
-  std::swap(occu_lane_enable_, other->occu_lane_enable_);
+  std::swap(ego_to_obs_, other->ego_to_obs_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
@@ -1211,102 +992,18 @@ void SafetyCost::InternalSwap(SafetyCost* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // SafetyCost
 
-// bool rss_cost_enable = 1;
-void SafetyCost::clear_rss_cost_enable() {
-  rss_cost_enable_ = false;
+// double ego_to_obs = 1;
+void SafetyCost::clear_ego_to_obs() {
+  ego_to_obs_ = 0;
 }
-bool SafetyCost::rss_cost_enable() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.SafetyCost.rss_cost_enable)
-  return rss_cost_enable_;
+double SafetyCost::ego_to_obs() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.SafetyCost.ego_to_obs)
+  return ego_to_obs_;
 }
-void SafetyCost::set_rss_cost_enable(bool value) {
+void SafetyCost::set_ego_to_obs(double value) {
   
-  rss_cost_enable_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.SafetyCost.rss_cost_enable)
-}
-
-// double rss_over_speed_power_coeff = 2;
-void SafetyCost::clear_rss_over_speed_power_coeff() {
-  rss_over_speed_power_coeff_ = 0;
-}
-double SafetyCost::rss_over_speed_power_coeff() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.SafetyCost.rss_over_speed_power_coeff)
-  return rss_over_speed_power_coeff_;
-}
-void SafetyCost::set_rss_over_speed_power_coeff(double value) {
-  
-  rss_over_speed_power_coeff_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.SafetyCost.rss_over_speed_power_coeff)
-}
-
-// double rss_over_speed_linear_coeff = 3;
-void SafetyCost::clear_rss_over_speed_linear_coeff() {
-  rss_over_speed_linear_coeff_ = 0;
-}
-double SafetyCost::rss_over_speed_linear_coeff() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.SafetyCost.rss_over_speed_linear_coeff)
-  return rss_over_speed_linear_coeff_;
-}
-void SafetyCost::set_rss_over_speed_linear_coeff(double value) {
-  
-  rss_over_speed_linear_coeff_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.SafetyCost.rss_over_speed_linear_coeff)
-}
-
-// double rss_lack_speed_power_coeff = 4;
-void SafetyCost::clear_rss_lack_speed_power_coeff() {
-  rss_lack_speed_power_coeff_ = 0;
-}
-double SafetyCost::rss_lack_speed_power_coeff() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.SafetyCost.rss_lack_speed_power_coeff)
-  return rss_lack_speed_power_coeff_;
-}
-void SafetyCost::set_rss_lack_speed_power_coeff(double value) {
-  
-  rss_lack_speed_power_coeff_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.SafetyCost.rss_lack_speed_power_coeff)
-}
-
-// double rss_lack_speed_linear_coeff = 5;
-void SafetyCost::clear_rss_lack_speed_linear_coeff() {
-  rss_lack_speed_linear_coeff_ = 0;
-}
-double SafetyCost::rss_lack_speed_linear_coeff() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.SafetyCost.rss_lack_speed_linear_coeff)
-  return rss_lack_speed_linear_coeff_;
-}
-void SafetyCost::set_rss_lack_speed_linear_coeff(double value) {
-  
-  rss_lack_speed_linear_coeff_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.SafetyCost.rss_lack_speed_linear_coeff)
-}
-
-// bool occu_lane_enable = 6;
-void SafetyCost::clear_occu_lane_enable() {
-  occu_lane_enable_ = false;
-}
-bool SafetyCost::occu_lane_enable() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.SafetyCost.occu_lane_enable)
-  return occu_lane_enable_;
-}
-void SafetyCost::set_occu_lane_enable(bool value) {
-  
-  occu_lane_enable_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.SafetyCost.occu_lane_enable)
-}
-
-// double occu_lane_unit_cost = 7;
-void SafetyCost::clear_occu_lane_unit_cost() {
-  occu_lane_unit_cost_ = 0;
-}
-double SafetyCost::occu_lane_unit_cost() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.SafetyCost.occu_lane_unit_cost)
-  return occu_lane_unit_cost_;
-}
-void SafetyCost::set_occu_lane_unit_cost(double value) {
-  
-  occu_lane_unit_cost_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.SafetyCost.occu_lane_unit_cost)
+  ego_to_obs_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.SafetyCost.ego_to_obs)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -1588,11 +1285,7 @@ void UserCost::set_cancel_operation_unit_cost(double value) {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int NavigationCost::kLaneChangeLeftUnitCostFieldNumber;
-const int NavigationCost::kLaneChangeRightUnitCostFieldNumber;
-const int NavigationCost::kLaneChangeUnitCostVelLbFieldNumber;
-const int NavigationCost::kLaneChangeLeftRecommendationRewardFieldNumber;
-const int NavigationCost::kLaneChangeRightRecommendationRewardFieldNumber;
+const int NavigationCost::kRefLineChangeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 NavigationCost::NavigationCost()
@@ -1608,15 +1301,12 @@ NavigationCost::NavigationCost(const NavigationCost& from)
       _internal_metadata_(NULL),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&lane_change_left_unit_cost_, &from.lane_change_left_unit_cost_,
-    reinterpret_cast<char*>(&lane_change_right_recommendation_reward_) -
-    reinterpret_cast<char*>(&lane_change_left_unit_cost_) + sizeof(lane_change_right_recommendation_reward_));
+  ref_line_change_ = from.ref_line_change_;
   // @@protoc_insertion_point(copy_constructor:planning.umbp.NavigationCost)
 }
 
 void NavigationCost::SharedCtor() {
-  ::memset(&lane_change_left_unit_cost_, 0, reinterpret_cast<char*>(&lane_change_right_recommendation_reward_) -
-    reinterpret_cast<char*>(&lane_change_left_unit_cost_) + sizeof(lane_change_right_recommendation_reward_));
+  ref_line_change_ = 0;
   _cached_size_ = 0;
 }
 
@@ -1653,8 +1343,7 @@ NavigationCost* NavigationCost::New(::google::protobuf::Arena* arena) const {
 
 void NavigationCost::Clear() {
 // @@protoc_insertion_point(message_clear_start:planning.umbp.NavigationCost)
-  ::memset(&lane_change_left_unit_cost_, 0, reinterpret_cast<char*>(&lane_change_right_recommendation_reward_) -
-    reinterpret_cast<char*>(&lane_change_left_unit_cost_) + sizeof(lane_change_right_recommendation_reward_));
+  ref_line_change_ = 0;
 }
 
 bool NavigationCost::MergePartialFromCodedStream(
@@ -1667,65 +1356,13 @@ bool NavigationCost::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // double lane_change_left_unit_cost = 1;
+      // double ref_line_change = 1;
       case 1: {
         if (tag == 9u) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &lane_change_left_unit_cost_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // double lane_change_right_unit_cost = 2;
-      case 2: {
-        if (tag == 17u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &lane_change_right_unit_cost_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // double lane_change_unit_cost_vel_lb = 3;
-      case 3: {
-        if (tag == 25u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &lane_change_unit_cost_vel_lb_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // double lane_change_left_recommendation_reward = 4;
-      case 4: {
-        if (tag == 33u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &lane_change_left_recommendation_reward_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // double lane_change_right_recommendation_reward = 5;
-      case 5: {
-        if (tag == 41u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &lane_change_right_recommendation_reward_)));
+                 input, &ref_line_change_)));
         } else {
           goto handle_unusual;
         }
@@ -1756,29 +1393,9 @@ failure:
 void NavigationCost::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:planning.umbp.NavigationCost)
-  // double lane_change_left_unit_cost = 1;
-  if (this->lane_change_left_unit_cost() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->lane_change_left_unit_cost(), output);
-  }
-
-  // double lane_change_right_unit_cost = 2;
-  if (this->lane_change_right_unit_cost() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->lane_change_right_unit_cost(), output);
-  }
-
-  // double lane_change_unit_cost_vel_lb = 3;
-  if (this->lane_change_unit_cost_vel_lb() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->lane_change_unit_cost_vel_lb(), output);
-  }
-
-  // double lane_change_left_recommendation_reward = 4;
-  if (this->lane_change_left_recommendation_reward() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->lane_change_left_recommendation_reward(), output);
-  }
-
-  // double lane_change_right_recommendation_reward = 5;
-  if (this->lane_change_right_recommendation_reward() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->lane_change_right_recommendation_reward(), output);
+  // double ref_line_change = 1;
+  if (this->ref_line_change() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->ref_line_change(), output);
   }
 
   // @@protoc_insertion_point(serialize_end:planning.umbp.NavigationCost)
@@ -1788,29 +1405,9 @@ void NavigationCost::SerializeWithCachedSizes(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic;  // Unused
   // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.NavigationCost)
-  // double lane_change_left_unit_cost = 1;
-  if (this->lane_change_left_unit_cost() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->lane_change_left_unit_cost(), target);
-  }
-
-  // double lane_change_right_unit_cost = 2;
-  if (this->lane_change_right_unit_cost() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->lane_change_right_unit_cost(), target);
-  }
-
-  // double lane_change_unit_cost_vel_lb = 3;
-  if (this->lane_change_unit_cost_vel_lb() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->lane_change_unit_cost_vel_lb(), target);
-  }
-
-  // double lane_change_left_recommendation_reward = 4;
-  if (this->lane_change_left_recommendation_reward() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->lane_change_left_recommendation_reward(), target);
-  }
-
-  // double lane_change_right_recommendation_reward = 5;
-  if (this->lane_change_right_recommendation_reward() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->lane_change_right_recommendation_reward(), target);
+  // double ref_line_change = 1;
+  if (this->ref_line_change() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->ref_line_change(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.NavigationCost)
@@ -1821,28 +1418,8 @@ size_t NavigationCost::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:planning.umbp.NavigationCost)
   size_t total_size = 0;
 
-  // double lane_change_left_unit_cost = 1;
-  if (this->lane_change_left_unit_cost() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double lane_change_right_unit_cost = 2;
-  if (this->lane_change_right_unit_cost() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double lane_change_unit_cost_vel_lb = 3;
-  if (this->lane_change_unit_cost_vel_lb() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double lane_change_left_recommendation_reward = 4;
-  if (this->lane_change_left_recommendation_reward() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double lane_change_right_recommendation_reward = 5;
-  if (this->lane_change_right_recommendation_reward() != 0) {
+  // double ref_line_change = 1;
+  if (this->ref_line_change() != 0) {
     total_size += 1 + 8;
   }
 
@@ -1872,20 +1449,8 @@ void NavigationCost::MergeFrom(const NavigationCost& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.NavigationCost)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.lane_change_left_unit_cost() != 0) {
-    set_lane_change_left_unit_cost(from.lane_change_left_unit_cost());
-  }
-  if (from.lane_change_right_unit_cost() != 0) {
-    set_lane_change_right_unit_cost(from.lane_change_right_unit_cost());
-  }
-  if (from.lane_change_unit_cost_vel_lb() != 0) {
-    set_lane_change_unit_cost_vel_lb(from.lane_change_unit_cost_vel_lb());
-  }
-  if (from.lane_change_left_recommendation_reward() != 0) {
-    set_lane_change_left_recommendation_reward(from.lane_change_left_recommendation_reward());
-  }
-  if (from.lane_change_right_recommendation_reward() != 0) {
-    set_lane_change_right_recommendation_reward(from.lane_change_right_recommendation_reward());
+  if (from.ref_line_change() != 0) {
+    set_ref_line_change(from.ref_line_change());
   }
 }
 
@@ -1912,11 +1477,7 @@ void NavigationCost::Swap(NavigationCost* other) {
   InternalSwap(other);
 }
 void NavigationCost::InternalSwap(NavigationCost* other) {
-  std::swap(lane_change_left_unit_cost_, other->lane_change_left_unit_cost_);
-  std::swap(lane_change_right_unit_cost_, other->lane_change_right_unit_cost_);
-  std::swap(lane_change_unit_cost_vel_lb_, other->lane_change_unit_cost_vel_lb_);
-  std::swap(lane_change_left_recommendation_reward_, other->lane_change_left_recommendation_reward_);
-  std::swap(lane_change_right_recommendation_reward_, other->lane_change_right_recommendation_reward_);
+  std::swap(ref_line_change_, other->ref_line_change_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
@@ -1928,74 +1489,18 @@ void NavigationCost::InternalSwap(NavigationCost* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // NavigationCost
 
-// double lane_change_left_unit_cost = 1;
-void NavigationCost::clear_lane_change_left_unit_cost() {
-  lane_change_left_unit_cost_ = 0;
+// double ref_line_change = 1;
+void NavigationCost::clear_ref_line_change() {
+  ref_line_change_ = 0;
 }
-double NavigationCost::lane_change_left_unit_cost() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.NavigationCost.lane_change_left_unit_cost)
-  return lane_change_left_unit_cost_;
+double NavigationCost::ref_line_change() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.NavigationCost.ref_line_change)
+  return ref_line_change_;
 }
-void NavigationCost::set_lane_change_left_unit_cost(double value) {
+void NavigationCost::set_ref_line_change(double value) {
   
-  lane_change_left_unit_cost_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.NavigationCost.lane_change_left_unit_cost)
-}
-
-// double lane_change_right_unit_cost = 2;
-void NavigationCost::clear_lane_change_right_unit_cost() {
-  lane_change_right_unit_cost_ = 0;
-}
-double NavigationCost::lane_change_right_unit_cost() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.NavigationCost.lane_change_right_unit_cost)
-  return lane_change_right_unit_cost_;
-}
-void NavigationCost::set_lane_change_right_unit_cost(double value) {
-  
-  lane_change_right_unit_cost_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.NavigationCost.lane_change_right_unit_cost)
-}
-
-// double lane_change_unit_cost_vel_lb = 3;
-void NavigationCost::clear_lane_change_unit_cost_vel_lb() {
-  lane_change_unit_cost_vel_lb_ = 0;
-}
-double NavigationCost::lane_change_unit_cost_vel_lb() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.NavigationCost.lane_change_unit_cost_vel_lb)
-  return lane_change_unit_cost_vel_lb_;
-}
-void NavigationCost::set_lane_change_unit_cost_vel_lb(double value) {
-  
-  lane_change_unit_cost_vel_lb_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.NavigationCost.lane_change_unit_cost_vel_lb)
-}
-
-// double lane_change_left_recommendation_reward = 4;
-void NavigationCost::clear_lane_change_left_recommendation_reward() {
-  lane_change_left_recommendation_reward_ = 0;
-}
-double NavigationCost::lane_change_left_recommendation_reward() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.NavigationCost.lane_change_left_recommendation_reward)
-  return lane_change_left_recommendation_reward_;
-}
-void NavigationCost::set_lane_change_left_recommendation_reward(double value) {
-  
-  lane_change_left_recommendation_reward_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.NavigationCost.lane_change_left_recommendation_reward)
-}
-
-// double lane_change_right_recommendation_reward = 5;
-void NavigationCost::clear_lane_change_right_recommendation_reward() {
-  lane_change_right_recommendation_reward_ = 0;
-}
-double NavigationCost::lane_change_right_recommendation_reward() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.NavigationCost.lane_change_right_recommendation_reward)
-  return lane_change_right_recommendation_reward_;
-}
-void NavigationCost::set_lane_change_right_recommendation_reward(double value) {
-  
-  lane_change_right_recommendation_reward_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.NavigationCost.lane_change_right_recommendation_reward)
+  ref_line_change_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.NavigationCost.ref_line_change)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -2330,6 +1835,8 @@ const int SampleConfig::kSSampleDistanceFieldNumber;
 const int SampleConfig::kSSampleNumFieldNumber;
 const int SampleConfig::kLSampleDistanceFieldNumber;
 const int SampleConfig::kLSampleNumFieldNumber;
+const int SampleConfig::kAccRefFieldNumber;
+const int SampleConfig::kDecRefFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 SampleConfig::SampleConfig()
@@ -2346,14 +1853,14 @@ SampleConfig::SampleConfig(const SampleConfig& from)
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&s_sample_distance_, &from.s_sample_distance_,
-    reinterpret_cast<char*>(&l_sample_num_) -
-    reinterpret_cast<char*>(&s_sample_distance_) + sizeof(l_sample_num_));
+    reinterpret_cast<char*>(&dec_ref_) -
+    reinterpret_cast<char*>(&s_sample_distance_) + sizeof(dec_ref_));
   // @@protoc_insertion_point(copy_constructor:planning.umbp.SampleConfig)
 }
 
 void SampleConfig::SharedCtor() {
-  ::memset(&s_sample_distance_, 0, reinterpret_cast<char*>(&l_sample_num_) -
-    reinterpret_cast<char*>(&s_sample_distance_) + sizeof(l_sample_num_));
+  ::memset(&s_sample_distance_, 0, reinterpret_cast<char*>(&dec_ref_) -
+    reinterpret_cast<char*>(&s_sample_distance_) + sizeof(dec_ref_));
   _cached_size_ = 0;
 }
 
@@ -2390,8 +1897,8 @@ SampleConfig* SampleConfig::New(::google::protobuf::Arena* arena) const {
 
 void SampleConfig::Clear() {
 // @@protoc_insertion_point(message_clear_start:planning.umbp.SampleConfig)
-  ::memset(&s_sample_distance_, 0, reinterpret_cast<char*>(&l_sample_num_) -
-    reinterpret_cast<char*>(&s_sample_distance_) + sizeof(l_sample_num_));
+  ::memset(&s_sample_distance_, 0, reinterpret_cast<char*>(&dec_ref_) -
+    reinterpret_cast<char*>(&s_sample_distance_) + sizeof(dec_ref_));
 }
 
 bool SampleConfig::MergePartialFromCodedStream(
@@ -2456,6 +1963,32 @@ bool SampleConfig::MergePartialFromCodedStream(
         break;
       }
 
+      // double acc_ref = 5;
+      case 5: {
+        if (tag == 41u) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &acc_ref_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // double dec_ref = 6;
+      case 6: {
+        if (tag == 49u) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &dec_ref_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0 ||
@@ -2500,6 +2033,16 @@ void SampleConfig::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->l_sample_num(), output);
   }
 
+  // double acc_ref = 5;
+  if (this->acc_ref() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->acc_ref(), output);
+  }
+
+  // double dec_ref = 6;
+  if (this->dec_ref() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(6, this->dec_ref(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:planning.umbp.SampleConfig)
 }
 
@@ -2525,6 +2068,16 @@ void SampleConfig::SerializeWithCachedSizes(
   // int32 l_sample_num = 4;
   if (this->l_sample_num() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->l_sample_num(), target);
+  }
+
+  // double acc_ref = 5;
+  if (this->acc_ref() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->acc_ref(), target);
+  }
+
+  // double dec_ref = 6;
+  if (this->dec_ref() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(6, this->dec_ref(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.SampleConfig)
@@ -2557,6 +2110,16 @@ size_t SampleConfig::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->l_sample_num());
+  }
+
+  // double acc_ref = 5;
+  if (this->acc_ref() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // double dec_ref = 6;
+  if (this->dec_ref() != 0) {
+    total_size += 1 + 8;
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -2597,6 +2160,12 @@ void SampleConfig::MergeFrom(const SampleConfig& from) {
   if (from.l_sample_num() != 0) {
     set_l_sample_num(from.l_sample_num());
   }
+  if (from.acc_ref() != 0) {
+    set_acc_ref(from.acc_ref());
+  }
+  if (from.dec_ref() != 0) {
+    set_dec_ref(from.dec_ref());
+  }
 }
 
 void SampleConfig::CopyFrom(const ::google::protobuf::Message& from) {
@@ -2626,6 +2195,8 @@ void SampleConfig::InternalSwap(SampleConfig* other) {
   std::swap(l_sample_distance_, other->l_sample_distance_);
   std::swap(s_sample_num_, other->s_sample_num_);
   std::swap(l_sample_num_, other->l_sample_num_);
+  std::swap(acc_ref_, other->acc_ref_);
+  std::swap(dec_ref_, other->dec_ref_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
@@ -2691,6 +2262,34 @@ void SampleConfig::set_l_sample_num(::google::protobuf::int32 value) {
   
   l_sample_num_ = value;
   // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.l_sample_num)
+}
+
+// double acc_ref = 5;
+void SampleConfig::clear_acc_ref() {
+  acc_ref_ = 0;
+}
+double SampleConfig::acc_ref() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.acc_ref)
+  return acc_ref_;
+}
+void SampleConfig::set_acc_ref(double value) {
+  
+  acc_ref_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.acc_ref)
+}
+
+// double dec_ref = 6;
+void SampleConfig::clear_dec_ref() {
+  dec_ref_ = 0;
+}
+double SampleConfig::dec_ref() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.dec_ref)
+  return dec_ref_;
+}
+void SampleConfig::set_dec_ref(double value) {
+  
+  dec_ref_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.dec_ref)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

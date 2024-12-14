@@ -4,7 +4,7 @@ status: "editting"
 
 cost {
   efficiency {
-    ego_lack_speed_to_desired_unit_cost: 0.3
+    ego_lack_speed_to_desired_unit_cost: 5.0
     ego_over_speed_to_desired_unit_cost: 0.03
     ego_desired_speed_tolerate_gap: 1.0
     leading_distance_th: 120.0
@@ -13,26 +13,16 @@ cost {
     leading_speed_blocked_desired_vel_unit_cost: 0.1
   }
   safety {
-    rss_cost_enable: true
-    rss_over_speed_power_coeff: 0.25
-    rss_over_speed_linear_coeff: 0.5
-    rss_lack_speed_power_coeff: 0.35
-    rss_lack_speed_linear_coeff: 0.6
-    occu_lane_enable: true
-    occu_lane_unit_cost: 0.10
+    ego_to_obs: 10.0
   }
   user {
     late_operate_unit_cost: 0.25
     cancel_operation_unit_cost: 8.0
   }
   navigation {
-    lane_change_left_unit_cost: 0.015
-    lane_change_right_unit_cost: 0.06
-    lane_change_unit_cost_vel_lb: 10.0
-    lane_change_left_recommendation_reward : 1.0
-    lane_change_right_recommendation_reward: 1.0
+    ref_line_change:2.0
   }
-  discount_factor: 0.7
+  discount_factor: 0.9
 }
 
 propogate {
@@ -46,5 +36,7 @@ propogate {
     s_sample_num: 12
     l_sample_distance: 1.0
     l_sample_num: 8
+    acc_ref : 3.0 
+    dec_ref : 4.0
   }
 }

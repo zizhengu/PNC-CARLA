@@ -300,7 +300,8 @@ public:
     //   RCLCPP_INFO(this->get_logger(), "mian debug1");
     // 调用emplanner获取轨迹
     auto current_time = this->get_clock()->now();
-    _emplanner->planning_run_step(_reference_line, _current_ego_state, _object_arrry, _trajectory);
+    // _emplanner->planning_run_step(_reference_line, _current_ego_state, _object_arrry, _trajectory);
+    _umbplanner->RunOnce(_reference_line, _current_ego_state, _object_arrry, _trajectory);
 
     //   RCLCPP_INFO(this->get_logger(), "mian debug2");
 #ifdef PLOT

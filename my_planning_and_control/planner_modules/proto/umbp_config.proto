@@ -13,13 +13,7 @@ message EfficiencyCost {
 }
 
 message SafetyCost {
-    bool rss_cost_enable = 1;
-    double rss_over_speed_power_coeff = 2;
-    double rss_over_speed_linear_coeff = 3;
-    double rss_lack_speed_power_coeff = 4;
-    double rss_lack_speed_linear_coeff = 5;
-    bool occu_lane_enable = 6;
-    double occu_lane_unit_cost = 7;
+    double ego_to_obs = 1;
 }
 
 message UserCost {
@@ -28,11 +22,7 @@ message UserCost {
 }
 
 message NavigationCost {
-    double lane_change_left_unit_cost = 1;
-    double lane_change_right_unit_cost = 2;
-    double lane_change_unit_cost_vel_lb = 3;
-    double lane_change_left_recommendation_reward = 4;
-    double lane_change_right_recommendation_reward = 5;
+    double ref_line_change = 1;
 }
 
 message FpbConfig {
@@ -46,6 +36,8 @@ message SampleConfig {
     int32 s_sample_num = 2;
     double l_sample_distance = 3;
     int32 l_sample_num = 4;
+    double acc_ref = 5;
+    double dec_ref = 6;
 }
 
 message PropogateConfig {

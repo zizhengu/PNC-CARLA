@@ -42,7 +42,7 @@ public:
         std::unordered_map<int, ForwardPropAgent> forward_prop_agents;
     };
 
-    struct Param
+    struct SimParam
     {
         double layer_time = 1.0;
         double step = 0.2;
@@ -51,6 +51,16 @@ public:
         int s_sample_num = 12;
         double l_sample_distance = 1.0;
         int l_sample_num = 8;
+        double acc_ref = 3.0;
+        double dec_ref = 4.0;
+    };
+
+    struct CostParam
+    {
+        double ego_to_obs = 10.0;
+        double ref_line_change = 2.0;
+        double discount_factor = 0.8;
+        double ego_lack_speed_to_desired_unit_cost = 0.3;
     };
 
     struct EfficiencyCost
@@ -59,7 +69,7 @@ public:
         double leading_to_desired_vel = 0.0;
         double ave() const
         {
-            return (ego_to_desired_vel + leading_to_desired_vel) / 2.0;
+            return (ego_to_desired_vel + leading_to_desired_vel) / 1.0;
         }
     };
 
@@ -122,18 +132,21 @@ private:
     bool ReadConfig(const std::string config_path);
 
     bool GetSimParam(const planning::umbp::Config &cfg,
-                     Param *sim_param);
+                     SimParam *sim_param);
+
+    bool GetCostParam(const planning::umbp::Config &cfg,
+                      CostParam *cost_param);
 
     bool GetSurroundingForwardSimAgents(ForwardPropAgentSet &forward_prop_agents,
                                         const std::vector<FrenetPoint> static_obs_frent_coords,
                                         const std::vector<FrenetPoint> dynamic_obs_frent_coords);
     bool PrepareMultiThreadContainers(const int num_sequence);
 
-    bool PropogateActionSequence(const FrenetPoint ego_state,
+    bool PropagateActionSequence(const FrenetPoint ego_state,
                                  const ForwardPropAgentSet &surrounding_fsagents,
                                  const std::vector<FpbAction> &action_seq, const int &seq_id);
 
-    bool PropogateScenario(
+    bool PropagateScenario(
         const FrenetPoint &ego_state,
         const ForwardPropAgentSet &surrounding_fsagents,
         const std::vector<FpbAction> &action_seq, const int &seq_id,
@@ -146,6 +159,12 @@ private:
         std::vector<FpbLonAction> *sub_forward_lon_behaviors,
         std::unordered_map<int, std::vector<FrenetPoint>> *sub_surround_trajs);
 
+    bool CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
+                       const std::unordered_map<int, std::vector<FrenetPoint>> &surround_trajs,
+                       std::vector<CostStructure> *cost, bool *is_risky, std::set<size_t> *risky_ids);
+
+    bool EvaluateMultiThreadSimResults(int *winner_id, double *winner_cost);
+
     std::vector<derived_object_msgs::msg::Object> _static_obstacles;  // 静态障碍物
     std::vector<derived_object_msgs::msg::Object> _dynamic_obstacles; // 动态障碍物
     std::deque<TrajectoryPoint> _previous_trajectory;                 // 上一周期的轨迹
@@ -156,13 +175,15 @@ private:
 
     double _reference_speed;
     double _current_time;
+    std::shared_ptr<VehicleState> _current_ego_state;
 
     // behaviour
     std::shared_ptr<FpbTree> _fpb_tree_ptr;
 
     // Config
     Cfg _cfg;
-    Param _sim_param;
+    SimParam _sim_param;
+    CostParam _cost_param;
 
     // sample_points
     std::vector<std::vector<FrenetPoint>> _local_sample_points;
@@ -171,15 +192,15 @@ private:
     int _winner_id = 0;
     double _winner_score = 0.0;
     std::vector<FpbAction> _winner_action_seq;
-    std::vector<int> _sim_res;
-    std::vector<int> _risky_res;
-    std::vector<std::string> _sim_info;
-    std::vector<double> _final_cost;
-    std::vector<std::vector<CostStructure>> _progress_cost;
-    std::vector<CostStructure> _tail_cost;
-    std::vector<std::vector<FrenetPoint>> _forward_trajs;
-    std::vector<std::vector<FpbLatAction>> _forward_lat_behaviors;
-    std::vector<std::vector<FpbLonAction>> _forward_lon_behaviors;
-    std::vector<std::unordered_map<int, std::vector<FrenetPoint>>> _surround_trajs;
+    std::vector<int> _sim_res = std::vector<int>(64);
+    std::vector<int> _risky_res = std::vector<int>(64);
+    std::vector<std::string> _sim_info = std::vector<std::string>(64);
+    std::vector<double> _final_cost = std::vector<double>(64);
+    std::vector<std::vector<CostStructure>> _progress_cost = std::vector<std::vector<CostStructure>>(64);
+    std::vector<CostStructure> _tail_cost = std::vector<CostStructure>(64);
+    std::vector<std::vector<FrenetPoint>> _forward_trajs = std::vector<std::vector<FrenetPoint>>(64);
+    std::vector<std::vector<FpbLatAction>> _forward_lat_behaviors = std::vector<std::vector<FpbLatAction>>(64);
+    std::vector<std::vector<FpbLonAction>> _forward_lon_behaviors = std::vector<std::vector<FpbLonAction>>(64);
+    std::vector<std::unordered_map<int, std::vector<FrenetPoint>>> _surround_trajs = std::vector<std::unordered_map<int, std::vector<FrenetPoint>>>(64);
     double _time_cost = 0.0;
 };
