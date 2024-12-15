@@ -1,8 +1,0 @@
-Log file created at: 2024/12/12 16:26:36
-Running on machine: Guzizhen
-Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
-I1212 16:26:36.736446 12310 umb_planner.cpp:25]  _sim_param.tree_height 3 done!
-I1212 16:26:36.736565 12310 umb_planner.cpp:26]  _sim_param.layer_time 1 done!
-I1212 16:26:36.736568 12310 umb_planner.cpp:27]  _sim_param.s_sample_distance 5 done!
-I1212 16:26:36.736569 12310 umb_planner.cpp:28]  _sim_param.l_sample_distance 1 done!
-F1212 16:26:36.813486 12310 utilities.cc:346] Check failed: !IsGoogleLoggingInitialized() You called InitGoogleLogging() twice!

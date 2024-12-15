@@ -151,7 +151,7 @@ private:
   double _current_omega, _previous_omega;
   rclcpp::Time _previous_time;
   bool _is_fisrt_evaluation = true;
-  int _add_localiation_noise_type = 1;
+  int _add_localiation_noise_type = 0;
 
 // 绘图
 #ifdef PLOT

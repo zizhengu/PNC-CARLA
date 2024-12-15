@@ -1,0 +1,33 @@
+Log file created at: 2024/12/14 16:49:46
+Running on machine: Guzizhen
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I1214 16:49:46.029538  6733 umb_planner.cpp:17] [UMBP]******************** RUN START: ******************
+I1214 16:49:46.034536  6733 umb_planner.cpp:39]  [UMBP] Loading umbp planner config
+I1214 16:49:46.038695  6733 umb_planner.cpp:29]  [UMBP]_sim_param.tree_height 3 done!
+I1214 16:49:46.038723  6733 umb_planner.cpp:30]  [UMBP]_sim_param.layer_time 1 done!
+I1214 16:49:46.038727  6733 umb_planner.cpp:31]  [UMBP]_sim_param.s_sample_distance 5 done!
+I1214 16:49:46.038730  6733 umb_planner.cpp:32]  [UMBP]_sim_param.s_sample_num 12 done!
+I1214 16:50:08.391785  6733 umb_planner.cpp:442]  [UMBP][Process]Prepare multi-threading- 21
+I1214 16:50:08.398612  6733 umb_planner.cpp:220] [UMBP][Result]0 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398646  6733 umb_planner.cpp:220] [UMBP][Result]1 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398650  6733 umb_planner.cpp:220] [UMBP][Result]2 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398655  6733 umb_planner.cpp:220] [UMBP][Result]3 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398658  6733 umb_planner.cpp:220] [UMBP][Result]4 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398661  6733 umb_planner.cpp:220] [UMBP][Result]5 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398663  6733 umb_planner.cpp:220] [UMBP][Result]6 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398665  6733 umb_planner.cpp:220] [UMBP][Result]7 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398669  6733 umb_planner.cpp:220] [UMBP][Result]8 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398671  6733 umb_planner.cpp:220] [UMBP][Result]9 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398674  6733 umb_planner.cpp:220] [UMBP][Result]10 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398679  6733 umb_planner.cpp:220] [UMBP][Result]11 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398681  6733 umb_planner.cpp:220] [UMBP][Result]12 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398684  6733 umb_planner.cpp:220] [UMBP][Result]13 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398686  6733 umb_planner.cpp:220] [UMBP][Result]14 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398690  6733 umb_planner.cpp:220] [UMBP][Result]15 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398694  6733 umb_planner.cpp:220] [UMBP][Result]16 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398696  6733 umb_planner.cpp:220] [UMBP][Result]17 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398699  6733 umb_planner.cpp:220] [UMBP][Result]18 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398702  6733 umb_planner.cpp:220] [UMBP][Result]19 [|][s:0|r:0|c:0.000] 
+I1214 16:50:08.398705  6733 umb_planner.cpp:220] [UMBP][Result]20 [|][s:0|r:0|c:0.000] 
+W1214 16:50:08.398707  6733 umb_planner.cpp:222] [UMBP][Result]Propagate sucess with 21 behaviors.
+I1214 16:50:08.399811  6733 umb_planner.cpp:232] [UMBP][Result] Best id: 0;Best socre179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.00

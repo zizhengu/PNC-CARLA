@@ -4,7 +4,7 @@ status: "editting"
 
 cost {
   efficiency {
-    ego_lack_speed_to_desired_unit_cost: 5.0
+    ego_lack_speed_to_desired_unit_cost: 4.0
     ego_over_speed_to_desired_unit_cost: 0.03
     ego_desired_speed_tolerate_gap: 1.0
     leading_distance_th: 120.0
@@ -13,7 +13,7 @@ cost {
     leading_speed_blocked_desired_vel_unit_cost: 0.1
   }
   safety {
-    ego_to_obs: 10.0
+    ego_to_obs: 80.0
   }
   user {
     late_operate_unit_cost: 0.25
@@ -32,8 +32,8 @@ propogate {
     tree_height: 3
   }
   sample {
-    s_sample_distance: 5.0
-    s_sample_num: 12
+    s_sample_distance: 2.0
+    s_sample_num: 30
     l_sample_distance: 1.0
     l_sample_num: 8
     acc_ref : 3.0 

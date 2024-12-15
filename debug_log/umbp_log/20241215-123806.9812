@@ -1,0 +1,664 @@
+Log file created at: 2024/12/15 12:38:06
+Running on machine: Guzizhen
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I1215 12:38:06.288841  9812 umb_planner.cpp:17] [UMBP]******************** RUN START: ******************
+I1215 12:38:06.290925  9812 umb_planner.cpp:39]  [UMBP] Loading umbp planner config
+I1215 12:38:06.292919  9812 umb_planner.cpp:29]  [UMBP]_sim_param.tree_height 3 done!
+I1215 12:38:06.293569  9812 umb_planner.cpp:30]  [UMBP]_sim_param.layer_time 1 done!
+I1215 12:38:06.293576  9812 umb_planner.cpp:31]  [UMBP]_sim_param.s_sample_distance 5 done!
+I1215 12:38:06.293579  9812 umb_planner.cpp:32]  [UMBP]_sim_param.s_sample_num 12 done!
+I1215 12:38:26.800876  9812 umb_planner.cpp:130]  [UMBP][process] planning_start_point_frenet (s: 0.00, l: 0.26)
+I1215 12:38:26.801661  9812 umb_planner.cpp:458]  [UMBP][Process]Prepare multi-threading - 21
+I1215 12:38:26.801898  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.801903  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 0
+I1215 12:38:26.801905  9812 umb_planner.cpp:504] action_seq: MK  
+I1215 12:38:26.801908  9812 umb_planner.cpp:504] action_seq: MK  
+I1215 12:38:26.801910  9812 umb_planner.cpp:504] action_seq: MK  
+I1215 12:38:26.801931  9812 umb_planner.cpp:600] Threading 0 begin PropagateScenario 
+I1215 12:38:26.801975  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.802011  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 5.000, 0.000 from 1; 10.000, 0.000 from 2; 15.000, 0.000 from 3; 20.000, 0.000 from 4; 25.000, 0.000 from 5; 
+I1215 12:38:26.802021  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.802026  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.802028  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.802031  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802049  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.802054  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.9670
+I1215 12:38:26.802058  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802062  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.802065  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802068  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802070  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.802074  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802078  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 23.3513
+I1215 12:38:26.802080  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.802083  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802085  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 15.6354
+I1215 12:38:26.802088  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.802090  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802093  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802095  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 173.6814 sub_tail_cost->navigation: 0.5142 sub_tail_cost->safety: 38.9867
+I1215 12:38:26.802137  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.802152  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.802160  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.802161  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 1
+I1215 12:38:26.802163  9812 umb_planner.cpp:504] action_seq: ML  
+I1215 12:38:26.802166  9812 umb_planner.cpp:504] action_seq: ML  
+I1215 12:38:26.802168  9812 umb_planner.cpp:504] action_seq: ML  
+I1215 12:38:26.802172  9812 umb_planner.cpp:600] Threading 1 begin PropagateScenario 
+I1215 12:38:26.802179  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.802382  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 5.000, -1.000 from 1; 10.000, -1.000 from 2; 15.000, -1.000 from 3; 20.000, -1.000 from 4; 25.000, -1.000 from 5; 
+I1215 12:38:26.802397  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.802402  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.802405  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.802408  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802412  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.6000
+I1215 12:38:26.802415  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.2219
+I1215 12:38:26.802417  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802420  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.2800
+I1215 12:38:26.802423  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802425  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802428  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.802430  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802433  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 21.7801
+I1215 12:38:26.802435  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.802438  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802440  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 14.8758
+I1215 12:38:26.802443  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.802445  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802448  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802450  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 172.9364 sub_tail_cost->navigation: 5.8928 sub_tail_cost->safety: 36.6560
+I1215 12:38:26.802465  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.802469  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.802474  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.802476  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 2
+I1215 12:38:26.802479  9812 umb_planner.cpp:504] action_seq: MR  
+I1215 12:38:26.802480  9812 umb_planner.cpp:504] action_seq: MR  
+I1215 12:38:26.802482  9812 umb_planner.cpp:504] action_seq: MR  
+I1215 12:38:26.802487  9812 umb_planner.cpp:600] Threading 2 begin PropagateScenario 
+I1215 12:38:26.802495  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.802507  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 5.000, 1.000 from 1; 10.000, 1.000 from 2; 15.000, 1.000 from 3; 20.000, 1.000 from 4; 25.000, 1.000 from 5; 
+I1215 12:38:26.802515  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.802516  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.802518  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.802521  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802523  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.6000
+I1215 12:38:26.802526  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.7256
+I1215 12:38:26.802528  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802531  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.2800
+I1215 12:38:26.802533  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802536  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802538  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.802549  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802552  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 20.7492
+I1215 12:38:26.802556  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.802558  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802560  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 14.3529
+I1215 12:38:26.802563  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.802565  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802567  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802570  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 173.4400 sub_tail_cost->navigation: 5.8928 sub_tail_cost->safety: 35.1021
+I1215 12:38:26.802579  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.802582  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.802585  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.802587  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 3
+I1215 12:38:26.802589  9812 umb_planner.cpp:504] action_seq: MK  
+I1215 12:38:26.802592  9812 umb_planner.cpp:504] action_seq: MK  
+I1215 12:38:26.802594  9812 umb_planner.cpp:504] action_seq: ML  
+I1215 12:38:26.802598  9812 umb_planner.cpp:600] Threading 3 begin PropagateScenario 
+I1215 12:38:26.802604  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.802615  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 5.000, 0.000 from 1; 10.000, 0.000 from 2; 15.000, -1.000 from 3; 20.000, -1.000 from 4; 25.000, -1.000 from 5; 
+I1215 12:38:26.802623  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.802624  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.802626  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.802628  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802631  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.802634  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.9670
+I1215 12:38:26.802636  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802639  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.802640  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802644  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802645  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.802647  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.5049
+I1215 12:38:26.802650  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 21.7801
+I1215 12:38:26.802654  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.802655  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802657  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 14.8758
+I1215 12:38:26.802660  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.802662  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802664  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802667  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 173.1863 sub_tail_cost->navigation: 3.0128 sub_tail_cost->safety: 36.6560
+I1215 12:38:26.802675  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.802678  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.802682  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.802683  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 4
+I1215 12:38:26.802690  9812 umb_planner.cpp:504] action_seq: MK  
+I1215 12:38:26.802692  9812 umb_planner.cpp:504] action_seq: MK  
+I1215 12:38:26.802695  9812 umb_planner.cpp:504] action_seq: MR  
+I1215 12:38:26.802697  9812 umb_planner.cpp:600] Threading 4 begin PropagateScenario 
+I1215 12:38:26.802703  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.802714  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 5.000, 0.000 from 1; 10.000, 0.000 from 2; 15.000, 1.000 from 3; 20.000, 1.000 from 4; 25.000, 1.000 from 5; 
+I1215 12:38:26.802721  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.802723  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.802726  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.802727  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802731  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.802732  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.9670
+I1215 12:38:26.802735  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802738  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.802740  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802743  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802745  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.802748  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.5049
+I1215 12:38:26.802750  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 20.7492
+I1215 12:38:26.802753  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.802755  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802757  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 14.3529
+I1215 12:38:26.802760  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.802762  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802765  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802767  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 173.1863 sub_tail_cost->navigation: 3.0128 sub_tail_cost->safety: 35.1021
+I1215 12:38:26.802775  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.802778  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.802781  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.802783  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 5
+I1215 12:38:26.802785  9812 umb_planner.cpp:504] action_seq: MK  
+I1215 12:38:26.802788  9812 umb_planner.cpp:504] action_seq: ML  
+I1215 12:38:26.802789  9812 umb_planner.cpp:504] action_seq: ML  
+I1215 12:38:26.802793  9812 umb_planner.cpp:600] Threading 5 begin PropagateScenario 
+I1215 12:38:26.802799  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.802810  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 5.000, 0.000 from 1; 10.000, -1.000 from 2; 15.000, -1.000 from 3; 20.000, -1.000 from 4; 25.000, -1.000 from 5; 
+I1215 12:38:26.802817  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.802819  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.802821  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.802824  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802826  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.802829  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.9670
+I1215 12:38:26.802840  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802842  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.2800
+I1215 12:38:26.802845  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.5049
+I1215 12:38:26.802847  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802850  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.802852  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802855  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 21.7801
+I1215 12:38:26.802857  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.802860  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802862  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 14.8758
+I1215 12:38:26.802865  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.802867  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802870  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802875  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 173.1863 sub_tail_cost->navigation: 4.2928 sub_tail_cost->safety: 36.6560
+I1215 12:38:26.802882  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.802886  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.802888  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.802891  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 6
+I1215 12:38:26.802892  9812 umb_planner.cpp:504] action_seq: MK  
+I1215 12:38:26.802894  9812 umb_planner.cpp:504] action_seq: MR  
+I1215 12:38:26.802896  9812 umb_planner.cpp:504] action_seq: MR  
+I1215 12:38:26.802901  9812 umb_planner.cpp:600] Threading 6 begin PropagateScenario 
+I1215 12:38:26.802906  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.802917  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 5.000, 0.000 from 1; 10.000, 1.000 from 2; 15.000, 1.000 from 3; 20.000, 1.000 from 4; 25.000, 1.000 from 5; 
+I1215 12:38:26.802923  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.802925  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.802927  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.802930  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802932  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.802935  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.9670
+I1215 12:38:26.802937  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802940  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.2800
+I1215 12:38:26.802942  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.5049
+I1215 12:38:26.802944  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802947  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.802949  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802951  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 20.7492
+I1215 12:38:26.802954  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.802958  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802959  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 14.3529
+I1215 12:38:26.802963  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.802964  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.802966  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.802974  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 173.1863 sub_tail_cost->navigation: 4.2928 sub_tail_cost->safety: 35.1021
+I1215 12:38:26.802982  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.802984  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.802987  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.802989  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 7
+I1215 12:38:26.802991  9812 umb_planner.cpp:504] action_seq: AK  
+I1215 12:38:26.802994  9812 umb_planner.cpp:504] action_seq: AK  
+I1215 12:38:26.802995  9812 umb_planner.cpp:504] action_seq: AK  
+I1215 12:38:26.802999  9812 umb_planner.cpp:600] Threading 7 begin PropagateScenario 
+I1215 12:38:26.803005  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.803016  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 5.000, 0.000 from 1; 10.000, 0.000 from 2; 15.000, 0.000 from 3; 20.000, 0.000 from 4; 25.000, 0.000 from 5; 
+I1215 12:38:26.803023  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.803025  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.803027  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.803030  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803032  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.803035  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.9670
+I1215 12:38:26.803037  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803040  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.803042  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803045  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803047  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.803049  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803052  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 23.3513
+I1215 12:38:26.803056  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.803057  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803059  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 15.6354
+I1215 12:38:26.803062  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.803064  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803066  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803069  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 173.6814 sub_tail_cost->navigation: 0.5142 sub_tail_cost->safety: 38.9867
+I1215 12:38:26.803077  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.803079  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.803083  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.803084  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 8
+I1215 12:38:26.803086  9812 umb_planner.cpp:504] action_seq: AL  
+I1215 12:38:26.803088  9812 umb_planner.cpp:504] action_seq: AL  
+I1215 12:38:26.803090  9812 umb_planner.cpp:504] action_seq: AL  
+I1215 12:38:26.803094  9812 umb_planner.cpp:600] Threading 8 begin PropagateScenario 
+I1215 12:38:26.803100  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.803112  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 5.000, -1.000 from 1; 10.000, -1.000 from 2; 15.000, -1.000 from 3; 20.000, -1.000 from 4; 25.000, -1.000 from 5; 
+I1215 12:38:26.803126  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.803128  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.803131  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.803133  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803136  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.6000
+I1215 12:38:26.803138  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.2219
+I1215 12:38:26.803141  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803144  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.2800
+I1215 12:38:26.803146  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803149  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803151  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.803153  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803156  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 21.7801
+I1215 12:38:26.803159  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.803161  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803164  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 14.8758
+I1215 12:38:26.803166  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.803169  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803171  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803174  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 172.9364 sub_tail_cost->navigation: 5.8928 sub_tail_cost->safety: 36.6560
+I1215 12:38:26.803182  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.803184  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.803189  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.803190  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 9
+I1215 12:38:26.803191  9812 umb_planner.cpp:504] action_seq: AR  
+I1215 12:38:26.803194  9812 umb_planner.cpp:504] action_seq: AR  
+I1215 12:38:26.803196  9812 umb_planner.cpp:504] action_seq: AR  
+I1215 12:38:26.803200  9812 umb_planner.cpp:600] Threading 9 begin PropagateScenario 
+I1215 12:38:26.803205  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.803217  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 5.000, 1.000 from 1; 10.000, 1.000 from 2; 15.000, 1.000 from 3; 20.000, 1.000 from 4; 25.000, 1.000 from 5; 
+I1215 12:38:26.803225  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.803225  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.803228  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.803231  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803233  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.6000
+I1215 12:38:26.803236  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.7256
+I1215 12:38:26.803238  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803241  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.2800
+I1215 12:38:26.803243  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803246  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803248  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.803251  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803253  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 20.7492
+I1215 12:38:26.803256  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.803264  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803267  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 14.3529
+I1215 12:38:26.803270  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.803272  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803274  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803277  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 173.4400 sub_tail_cost->navigation: 5.8928 sub_tail_cost->safety: 35.1021
+I1215 12:38:26.803285  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.803288  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.803292  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.803293  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 10
+I1215 12:38:26.803295  9812 umb_planner.cpp:504] action_seq: AK  
+I1215 12:38:26.803297  9812 umb_planner.cpp:504] action_seq: AK  
+I1215 12:38:26.803299  9812 umb_planner.cpp:504] action_seq: AL  
+I1215 12:38:26.803303  9812 umb_planner.cpp:600] Threading 10 begin PropagateScenario 
+I1215 12:38:26.803309  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.803320  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 5.000, 0.000 from 1; 10.000, 0.000 from 2; 15.000, -1.000 from 3; 20.000, -1.000 from 4; 25.000, -1.000 from 5; 
+I1215 12:38:26.803328  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.803329  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.803331  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.803334  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803336  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.803339  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.9670
+I1215 12:38:26.803341  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803344  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.803346  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803349  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803351  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.803354  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.5049
+I1215 12:38:26.803355  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 21.7801
+I1215 12:38:26.803359  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.803361  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803364  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 14.8758
+I1215 12:38:26.803366  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.803368  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803370  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803373  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 173.1863 sub_tail_cost->navigation: 3.0128 sub_tail_cost->safety: 36.6560
+I1215 12:38:26.803381  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.803385  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.803387  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.803390  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 11
+I1215 12:38:26.803391  9812 umb_planner.cpp:504] action_seq: AK  
+I1215 12:38:26.803393  9812 umb_planner.cpp:504] action_seq: AK  
+I1215 12:38:26.803395  9812 umb_planner.cpp:504] action_seq: AR  
+I1215 12:38:26.803398  9812 umb_planner.cpp:600] Threading 11 begin PropagateScenario 
+I1215 12:38:26.803411  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.803421  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 5.000, 0.000 from 1; 10.000, 0.000 from 2; 15.000, 1.000 from 3; 20.000, 1.000 from 4; 25.000, 1.000 from 5; 
+I1215 12:38:26.803428  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.803431  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.803432  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.803435  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803438  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.803440  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.9670
+I1215 12:38:26.803442  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803445  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.803447  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803450  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803452  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.803454  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.5049
+I1215 12:38:26.803457  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 20.7492
+I1215 12:38:26.803460  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.803462  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803465  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 14.3529
+I1215 12:38:26.803467  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.803469  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803472  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803474  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 173.1863 sub_tail_cost->navigation: 3.0128 sub_tail_cost->safety: 35.1021
+I1215 12:38:26.803483  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.803485  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.803488  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.803490  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 12
+I1215 12:38:26.803493  9812 umb_planner.cpp:504] action_seq: AK  
+I1215 12:38:26.803494  9812 umb_planner.cpp:504] action_seq: AL  
+I1215 12:38:26.803496  9812 umb_planner.cpp:504] action_seq: AL  
+I1215 12:38:26.803500  9812 umb_planner.cpp:600] Threading 12 begin PropagateScenario 
+I1215 12:38:26.803506  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.803517  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 5.000, 0.000 from 1; 10.000, -1.000 from 2; 15.000, -1.000 from 3; 20.000, -1.000 from 4; 25.000, -1.000 from 5; 
+I1215 12:38:26.803524  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.803526  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.803529  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.803531  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803534  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.803536  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.9670
+I1215 12:38:26.803539  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803541  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.2800
+I1215 12:38:26.803543  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.5049
+I1215 12:38:26.803551  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803555  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.803556  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803560  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 21.7801
+I1215 12:38:26.803561  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.803565  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803566  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 14.8758
+I1215 12:38:26.803570  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.803571  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803575  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803576  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 173.1863 sub_tail_cost->navigation: 4.2928 sub_tail_cost->safety: 36.6560
+I1215 12:38:26.803584  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.803587  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.803591  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.803592  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 13
+I1215 12:38:26.803594  9812 umb_planner.cpp:504] action_seq: AK  
+I1215 12:38:26.803596  9812 umb_planner.cpp:504] action_seq: AR  
+I1215 12:38:26.803598  9812 umb_planner.cpp:504] action_seq: AR  
+I1215 12:38:26.803602  9812 umb_planner.cpp:600] Threading 13 begin PropagateScenario 
+I1215 12:38:26.803608  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.803619  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 5.000, 0.000 from 1; 10.000, 1.000 from 2; 15.000, 1.000 from 3; 20.000, 1.000 from 4; 25.000, 1.000 from 5; 
+I1215 12:38:26.803627  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.803628  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.803630  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.803633  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803637  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.803638  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.9670
+I1215 12:38:26.803640  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803643  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.2800
+I1215 12:38:26.803646  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 24.5049
+I1215 12:38:26.803648  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803650  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.803653  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803656  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 20.7492
+I1215 12:38:26.803659  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.803661  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803663  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 14.3529
+I1215 12:38:26.803666  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.803668  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 25.0000
+I1215 12:38:26.803671  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803673  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 173.1863 sub_tail_cost->navigation: 4.2928 sub_tail_cost->safety: 35.1021
+I1215 12:38:26.803681  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.803683  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.803695  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.803697  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 14
+I1215 12:38:26.803699  9812 umb_planner.cpp:504] action_seq: DK  
+I1215 12:38:26.803701  9812 umb_planner.cpp:504] action_seq: DK  
+I1215 12:38:26.803704  9812 umb_planner.cpp:504] action_seq: DK  
+I1215 12:38:26.803707  9812 umb_planner.cpp:600] Threading 14 begin PropagateScenario 
+I1215 12:38:26.803714  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.803725  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 0.000, 0.000 from 1; 0.000, 0.000 from 2; 0.000, 0.000 from 3; 0.000, 0.000 from 4; 0.000, 0.000 from 5; 
+I1215 12:38:26.803732  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.803733  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.803736  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.803738  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803741  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.803743  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.803746  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803750  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.803751  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.803754  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803756  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.803758  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.803761  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803763  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.803766  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.803768  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803771  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.803773  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.803776  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803778  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 297.4289 sub_tail_cost->navigation: 0.5142 sub_tail_cost->safety: 0.0000
+I1215 12:38:26.803786  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.803788  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.803792  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.803793  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 15
+I1215 12:38:26.803795  9812 umb_planner.cpp:504] action_seq: DL  
+I1215 12:38:26.803797  9812 umb_planner.cpp:504] action_seq: DL  
+I1215 12:38:26.803799  9812 umb_planner.cpp:504] action_seq: DL  
+I1215 12:38:26.803803  9812 umb_planner.cpp:600] Threading 15 begin PropagateScenario 
+I1215 12:38:26.803809  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.803820  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 0.000, -1.000 from 1; 0.000, -1.000 from 2; 0.000, -1.000 from 3; 0.000, -1.000 from 4; 0.000, -1.000 from 5; 
+I1215 12:38:26.803826  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.803828  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.803831  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.803833  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803841  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.6000
+I1215 12:38:26.803844  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 43.7144
+I1215 12:38:26.803846  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803849  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.2800
+I1215 12:38:26.803853  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.803854  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803857  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.803859  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.803861  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803864  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.803866  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.803869  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803871  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.803874  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.803876  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803879  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 292.4289 sub_tail_cost->navigation: 5.8928 sub_tail_cost->safety: 0.0000
+I1215 12:38:26.803886  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.803889  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.803892  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.803894  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 16
+I1215 12:38:26.803896  9812 umb_planner.cpp:504] action_seq: DR  
+I1215 12:38:26.803898  9812 umb_planner.cpp:504] action_seq: DR  
+I1215 12:38:26.803900  9812 umb_planner.cpp:504] action_seq: DR  
+I1215 12:38:26.803905  9812 umb_planner.cpp:600] Threading 16 begin PropagateScenario 
+I1215 12:38:26.803910  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.803921  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 0.000, 1.000 from 1; 0.000, 1.000 from 2; 0.000, 1.000 from 3; 0.000, 1.000 from 4; 0.000, 1.000 from 5; 
+I1215 12:38:26.803927  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.803929  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.803932  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.803934  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803937  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.6000
+I1215 12:38:26.803939  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 46.2856
+I1215 12:38:26.803942  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803944  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.2800
+I1215 12:38:26.803947  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.803949  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803951  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.803954  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.803956  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803959  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.803961  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.803964  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803966  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.803973  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.803975  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.803978  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 295.0000 sub_tail_cost->navigation: 5.8928 sub_tail_cost->safety: 0.0000
+I1215 12:38:26.803987  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.803988  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.803992  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.803994  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 17
+I1215 12:38:26.803997  9812 umb_planner.cpp:504] action_seq: DK  
+I1215 12:38:26.803998  9812 umb_planner.cpp:504] action_seq: DK  
+I1215 12:38:26.804000  9812 umb_planner.cpp:504] action_seq: DL  
+I1215 12:38:26.804004  9812 umb_planner.cpp:600] Threading 17 begin PropagateScenario 
+I1215 12:38:26.804010  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.804021  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 0.000, 0.000 from 1; 0.000, 0.000 from 2; 0.000, -1.000 from 3; 0.000, -1.000 from 4; 0.000, -1.000 from 5; 
+I1215 12:38:26.804028  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.804029  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.804031  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.804034  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804037  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.804039  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.804041  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804044  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.804046  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.804049  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804051  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.804054  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 45.0000
+I1215 12:38:26.804056  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804059  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.804061  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.804064  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804066  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.804068  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.804071  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804073  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 292.4289 sub_tail_cost->navigation: 3.0128 sub_tail_cost->safety: 0.0000
+I1215 12:38:26.804081  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.804083  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.804087  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.804088  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 18
+I1215 12:38:26.804090  9812 umb_planner.cpp:504] action_seq: DK  
+I1215 12:38:26.804092  9812 umb_planner.cpp:504] action_seq: DK  
+I1215 12:38:26.804095  9812 umb_planner.cpp:504] action_seq: DR  
+I1215 12:38:26.804098  9812 umb_planner.cpp:600] Threading 18 begin PropagateScenario 
+I1215 12:38:26.804104  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.804116  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 0.000, 0.000 from 1; 0.000, 0.000 from 2; 0.000, 1.000 from 3; 0.000, 1.000 from 4; 0.000, 1.000 from 5; 
+I1215 12:38:26.804126  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.804128  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.804131  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.804133  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804136  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.804138  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.804140  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804143  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.804145  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.804147  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804150  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.804152  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 45.0000
+I1215 12:38:26.804155  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804157  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.804160  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.804162  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804164  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.804167  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.804169  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804172  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 292.4289 sub_tail_cost->navigation: 3.0128 sub_tail_cost->safety: 0.0000
+I1215 12:38:26.804179  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.804183  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.804185  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.804188  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 19
+I1215 12:38:26.804189  9812 umb_planner.cpp:504] action_seq: DK  
+I1215 12:38:26.804191  9812 umb_planner.cpp:504] action_seq: DL  
+I1215 12:38:26.804193  9812 umb_planner.cpp:504] action_seq: DL  
+I1215 12:38:26.804198  9812 umb_planner.cpp:600] Threading 19 begin PropagateScenario 
+I1215 12:38:26.804203  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.804214  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 0.000, 0.000 from 1; 0.000, -1.000 from 2; 0.000, -1.000 from 3; 0.000, -1.000 from 4; 0.000, -1.000 from 5; 
+I1215 12:38:26.804220  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.804222  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.804225  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.804227  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804230  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.804232  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.804235  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804237  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.2800
+I1215 12:38:26.804240  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 45.0000
+I1215 12:38:26.804242  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804245  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.804247  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.804255  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804257  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.804260  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.804262  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804265  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.804267  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.804270  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804272  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 292.4289 sub_tail_cost->navigation: 4.2928 sub_tail_cost->safety: 0.0000
+I1215 12:38:26.804279  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.804282  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.804286  9812 umb_planner.cpp:500] -------------------------------------------------
+I1215 12:38:26.804287  9812 umb_planner.cpp:501] Begin PropagateActionSequence threading 20
+I1215 12:38:26.804289  9812 umb_planner.cpp:504] action_seq: DK  
+I1215 12:38:26.804291  9812 umb_planner.cpp:504] action_seq: DR  
+I1215 12:38:26.804293  9812 umb_planner.cpp:504] action_seq: DR  
+I1215 12:38:26.804297  9812 umb_planner.cpp:600] Threading 20 begin PropagateScenario 
+I1215 12:38:26.804303  9812 umb_planner.cpp:620] sub_surround_trajs[1] 16.600, -0.141 from 0, 16.796, -0.141 from 1; 16.992, -0.141 from 2; 17.188, -0.141 from 3; 17.384, -0.141 from 4; 17.580, -0.141 from 5; 
+I1215 12:38:26.804314  9812 umb_planner.cpp:690] sub_forward_trajs 0.000, 0.257 from 0; 0.000, 0.000 from 1; 0.000, 1.000 from 2; 0.000, 1.000 from 3; 0.000, 1.000 from 4; 0.000, 1.000 from 5; 
+I1215 12:38:26.804322  9812 umb_planner.cpp:733]  Begin CalculateCost 
+I1215 12:38:26.804323  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.5142
+I1215 12:38:26.804325  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.804328  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804330  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.0000
+I1215 12:38:26.804333  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 48.7144
+I1215 12:38:26.804335  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804338  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.2800
+I1215 12:38:26.804340  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 45.0000
+I1215 12:38:26.804342  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804345  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 1.0240
+I1215 12:38:26.804347  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.804349  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804352  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.8192
+I1215 12:38:26.804355  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.804358  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804360  9812 umb_planner.cpp:739]  cost_tmp.navigation.ref_line_change 0.6554
+I1215 12:38:26.804363  9812 umb_planner.cpp:752]  cost_tmp.efficiency.ego_to_desired_vel 50.0000
+I1215 12:38:26.804364  9812 umb_planner.cpp:777]  cost_tmp.safety.ego_to_obs 0.0000
+I1215 12:38:26.804368  9812 umb_planner.cpp:715] sub_tail_cost->efficiency: 292.4289 sub_tail_cost->navigation: 4.2928 sub_tail_cost->safety: 0.0000
+I1215 12:38:26.804374  9812 umb_planner.cpp:570] index  0
+I1215 12:38:26.804378  9812 umb_planner.cpp:583] [UMBP] _tail_cost: 0.0000
+I1215 12:38:26.804385  9812 umb_planner.cpp:236] [UMBP][Result] 0 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804390  9812 umb_planner.cpp:236] [UMBP][Result] 1 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804394  9812 umb_planner.cpp:236] [UMBP][Result] 2 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804396  9812 umb_planner.cpp:236] [UMBP][Result] 3 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804404  9812 umb_planner.cpp:236] [UMBP][Result] 4 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804409  9812 umb_planner.cpp:236] [UMBP][Result] 5 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804411  9812 umb_planner.cpp:236] [UMBP][Result] 6 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804414  9812 umb_planner.cpp:236] [UMBP][Result] 7 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804419  9812 umb_planner.cpp:236] [UMBP][Result] 8 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804421  9812 umb_planner.cpp:236] [UMBP][Result] 9 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804425  9812 umb_planner.cpp:236] [UMBP][Result] 10 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804428  9812 umb_planner.cpp:236] [UMBP][Result] 11 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804431  9812 umb_planner.cpp:236] [UMBP][Result] 12 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804435  9812 umb_planner.cpp:236] [UMBP][Result] 13 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804438  9812 umb_planner.cpp:236] [UMBP][Result] 14 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804441  9812 umb_planner.cpp:236] [UMBP][Result] 15 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804445  9812 umb_planner.cpp:236] [UMBP][Result] 16 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804447  9812 umb_planner.cpp:236] [UMBP][Result] 17 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804451  9812 umb_planner.cpp:236] [UMBP][Result] 18 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804454  9812 umb_planner.cpp:236] [UMBP][Result] 19 [|][s:0|r:0|c:0.000] 
+I1215 12:38:26.804457  9812 umb_planner.cpp:236] [UMBP][Result] 20 [|][s:0|r:0|c:0.000] 
+W1215 12:38:26.804459  9812 umb_planner.cpp:238] [UMBP][Result]Propagate sucess with 21 behaviors.
+I1215 12:38:26.804893  9812 umb_planner.cpp:248] [UMBP][Result] Best id: 0;Best socre179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.00

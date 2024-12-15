@@ -26,10 +26,10 @@ UMBPlanner::UMBPlanner() : Node("UMBPlanner")
     GetSimParam(_cfg, &_sim_param);
     GetCostParam(_cfg, &_cost_param);
 
-    LOG(INFO) << " [UMBP]_sim_param.tree_height " << _sim_param.tree_height << " done!";
-    LOG(INFO) << " [UMBP]_sim_param.layer_time " << _sim_param.layer_time << " done!";
-    LOG(INFO) << " [UMBP]_sim_param.s_sample_distance " << _sim_param.s_sample_distance << " done!";
-    LOG(INFO) << " [UMBP]_sim_param.s_sample_num " << _sim_param.s_sample_num << " done!";
+    // LOG(INFO) << " [UMBP]_sim_param.tree_height " << _sim_param.tree_height << " done!";
+    // LOG(INFO) << " [UMBP]_sim_param.layer_time " << _sim_param.layer_time << " done!";
+    // LOG(INFO) << " [UMBP]_sim_param.s_sample_distance " << _sim_param.s_sample_distance << " done!";
+    // LOG(INFO) << " [UMBP]_sim_param.s_sample_num " << _sim_param.s_sample_num << " done!";
 
     _fpb_tree_ptr = std::make_shared<FpbTree>(_sim_param.tree_height, _sim_param.layer_time);
 }
@@ -91,7 +91,23 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     {
         cartesion_set_to_frenet_set(_dynamic_obstacles, *reference_line, ego_state, dynamic_obs_frent_coords);
     }
-
+    /**
+     * for (auto &&obs_frenet : static_obs_frent_coords)：适用于处理可能是临时对象的情况，或者在需要避免拷贝和能够修改元素时使用，但要小心容器元素的类型和可移动性。
+     * for (auto obs_frenet : static_obs_frent_coords)：每次通过拷贝传递元素，适用于不需要修改容器元素的简单情况，但性能较低。
+     * for (auto &obs_frenet : static_obs_frent_coords)：通过引用传递元素，避免了拷贝，适用于大多数情况，尤其是当你不想修改容器中的元素时。
+     */
+    for (auto &&obs_frenet : static_obs_frent_coords)
+    {
+        obs_frenet.s_dot = 0.0;
+        obs_frenet.l_dot = 0.0;
+        RCLCPP_INFO(UMBP_LOG, "static_obs_info(s: %.3f,l: %.3f, s_dot: %.3f,l_dot: %.3f)",
+                    obs_frenet.s, obs_frenet.l, obs_frenet.s_dot, obs_frenet.l_dot);
+    }
+    for (auto &&obs_frenet : dynamic_obs_frent_coords)
+    {
+        RCLCPP_INFO(UMBP_LOG, "dynamic_obs_info(s: %.3f,l: %.3f, s_dot: %.3f,l_dot: %.3f)",
+                    obs_frenet.s, obs_frenet.l, obs_frenet.s_dot, obs_frenet.l_dot);
+    }
     // 1.3 障碍物转换为前向传播智能体
     ForwardPropAgentSet forward_prop_agent_set;
     if (!GetSurroundingForwardSimAgents(forward_prop_agent_set, static_obs_frent_coords, dynamic_obs_frent_coords))
@@ -104,6 +120,8 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
         for (const auto &pair : forward_prop_agent_set.forward_prop_agents)
         {
             const auto &agent = pair.second;
+            // TODO:Check s_dot here
+            // print: Agent_ID 1: (s: 16.540,l: -0.118,s_dot: 0.196,l_dot: 0.000)
             RCLCPP_INFO(UMBP_LOG, "Agent_ID %.i: (s: %.3f,l: %.3f,s_dot: %.3f,l_dot: %.3f)",
                         agent.id, agent.obs_frenet_point.s, agent.obs_frenet_point.l,
                         agent.obs_frenet_point.s_dot, agent.obs_frenet_point.l_dot);
@@ -116,6 +134,8 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     cartesion_set_to_frenet_set(planning_start_point, *reference_line, ego_state, temp_set);
     FrenetPoint planning_start_point_frenet = temp_set.front();
     planning_start_point_frenet.l_prime_prime = 0.0;
+    LOG(INFO) << std::fixed << std::setprecision(2) << " [UMBP][process] " << "planning_start_point_frenet (s: "
+              << planning_start_point_frenet.s << ", l: " << planning_start_point_frenet.l << ")";
 
     //----------------------------3.进行Frenet采样--------------------------
     std::vector<std::vector<FrenetPoint>> frenet_sample_point;
@@ -123,7 +143,6 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
                           _sim_param.s_sample_distance, _sim_param.s_sample_num,
                           _sim_param.l_sample_distance, _sim_param.l_sample_num);
     _local_sample_points = frenet_sample_point;
-
     //----------------------------4.进行FPB-Tree前向传播--------------------------
     TicToc timer;
     if (!RunUmpb(planning_start_point_frenet, forward_prop_agent_set))
@@ -148,12 +167,10 @@ void UMBPlanner::GetFrenetSamplePoints(std::vector<std::vector<FrenetPoint>> &fr
                                        const double &s_sample_distance, const int &s_sample_num,
                                        const double &l_sample_distance, const int &l_sample_num)
 {
-    frenet_sample_point.emplace_back();
-    frenet_sample_point.back().emplace_back(planning_start_sl);
-    for (int level = 1; level <= s_sample_num; level++)
+    for (int level = 0; level <= s_sample_num; level++)
     {
         frenet_sample_point.emplace_back();
-        for (int i = 0; i <= l_sample_distance; i++)
+        for (int i = 0; i <= l_sample_num; i++)
         {
             FrenetPoint current_point;
             current_point.s = planning_start_sl.s + level * s_sample_distance;
@@ -165,6 +182,16 @@ void UMBPlanner::GetFrenetSamplePoints(std::vector<std::vector<FrenetPoint>> &fr
 
 bool UMBPlanner::RunUmpb(const FrenetPoint ego_state, const ForwardPropAgentSet &forward_prop_agent_set)
 {
+    _sim_res = std::vector<int>(64);
+    _risky_res = std::vector<int>(64);
+    _sim_info = std::vector<std::string>(64);
+    _final_cost = std::vector<double>(64);
+    _progress_cost = std::vector<std::vector<CostStructure>>(64);
+    _tail_cost = std::vector<CostStructure>(64);
+    _forward_trajs = std::vector<std::vector<FrenetPoint>>(64);
+    _forward_lat_behaviors = std::vector<std::vector<FpbLatAction>>(64);
+    _forward_lon_behaviors = std::vector<std::vector<FpbLonAction>>(64);
+    _surround_trajs = std::vector<std::unordered_map<int, std::vector<FrenetPoint>>>(64);
     auto behaviour_tree = _fpb_tree_ptr->get_behaviour_tree();
     int num_sequence = behaviour_tree.size();
     // * prepare for multi-threading
@@ -174,22 +201,28 @@ bool UMBPlanner::RunUmpb(const FrenetPoint ego_state, const ForwardPropAgentSet 
     // * threading
     TicToc multi_thread_timer;
     multi_thread_timer.tic();
-    for (size_t i = 0; i < static_cast<size_t>(num_sequence); i++)
-    {
-        thread_set[i] = std::thread(&UMBPlanner::PropagateActionSequence, this, ego_state,
-                                    forward_prop_agent_set, behaviour_tree[i], i);
-    }
+    // for (size_t i = 0; i < static_cast<size_t>(num_sequence); i++)
+    // {
+    //     thread_set[i] = std::thread(&UMBPlanner::PropagateActionSequence, this, ego_state,
+    //                                 forward_prop_agent_set, behaviour_tree[i], i);
+    // }
+
+    // for (size_t i = 0; i < static_cast<size_t>(num_sequence); i++)
+    // {
+    //     thread_set[i].join();
+    // }
 
     for (size_t i = 0; i < static_cast<size_t>(num_sequence); i++)
     {
-        thread_set[i].join();
+        PropagateActionSequence(ego_state, forward_prop_agent_set, behaviour_tree[i], i);
     }
 
     // * Summary results
     for (int i = 0; i < num_sequence; ++i)
     {
         std::ostringstream line_info;
-        line_info << "[UMBP][Result]" << i << " [";
+        line_info << "[UMBP][Result] " << i << " [";
+        // TODO: Check here empty _forward_lon_behaviors !
         for (const auto &a : _forward_lon_behaviors[i])
         {
             line_info << FpbTree::GetLonActionName(a);
@@ -229,10 +262,19 @@ bool UMBPlanner::RunUmpb(const FrenetPoint ego_state, const ForwardPropAgentSet 
             << "[Eudm][Fatal]fail to evaluate multi-thread sim results. Exit";
         return false;
     }
+
     LOG(INFO) << std::fixed << std::setprecision(2)
-              << "[UMBP][Result] Best id: "
-              << _winner_id << ";"
+              << "[UMBP][Result] Best id:"
+              << _winner_id << " ;"
               << "Best socre" << _winner_score;
+
+    std::vector<FrenetPoint> Fpb_win_points = _forward_trajs[_winner_id];
+    for (const auto &points : Fpb_win_points)
+    {
+        LOG(INFO) << std::fixed << std::setprecision(2) << "Fpb_win_points: (s: " << points.s << " l: " << points.l << ")";
+    }
+    LOG(INFO) << "----------------------------------";
+
     return true;
 }
 
@@ -439,7 +481,7 @@ bool UMBPlanner::GetSurroundingForwardSimAgents(ForwardPropAgentSet &forward_pro
 
 bool UMBPlanner::PrepareMultiThreadContainers(const int num_sequence)
 {
-    LOG(INFO) << " [UMBP][Process]Prepare multi-threading- " << num_sequence;
+    LOG(INFO) << " [UMBP][Process]Prepare multi-threading-" << num_sequence;
     // 然后调整它的大小为 n_sequence，并用 0 填充
     _sim_res.clear();
     _sim_res.resize(num_sequence, 0);
@@ -481,6 +523,12 @@ bool UMBPlanner::PropagateActionSequence(const FrenetPoint ego_state,
 {
     // ~ For each ego sequence, we may further branch here, which will create
     // ~ multiple sub threads. Currently, we use n_sub_threads = 1
+    LOG(INFO) << "-------------------------------------------------";
+    LOG(INFO) << "Begin PropagateActionSequence threading " << seq_id;
+    for (auto &a : action_seq)
+    {
+        LOG(INFO) << "action_seq: " << FpbTree::GetLonActionName(a.lon) << FpbTree::GetLatActionName(a.lat) << "  ";
+    }
     int n_sub_threads = 1;
 
     std::vector<int> sub_sim_res(n_sub_threads);
@@ -513,15 +561,32 @@ bool UMBPlanner::PropagateActionSequence(const FrenetPoint ego_state,
                        << "[UMBP]****** PropogateScenario FAILED  ******";
             return false;
         }
-        sub_sim_res.emplace_back(sim_res);
-        sub_risky_res.emplace_back(risky_res);
-        sub_sim_info.emplace_back(sim_info);
-        sub_progress_cost.emplace_back(progress_cost);
-        sub_tail_cost.emplace_back(tail_cost);
-        sub_forward_trajs.emplace_back(forward_trajs);
-        sub_forward_lat_behaviors.emplace_back(forward_lat_behaviors);
-        sub_forward_lon_behaviors.emplace_back(forward_lon_behaviors);
-        sub_surround_trajs.emplace_back(surround_trajs);
+        LOG(INFO) << std::fixed << std::setprecision(4)
+                  << "[UMBP] tail_cost: " << tail_cost.ave();
+        // sub_sim_res.emplace_back(sim_res);
+        // sub_risky_res.emplace_back(risky_res);
+        // sub_sim_info.emplace_back(sim_info);
+        // sub_progress_cost.emplace_back(progress_cost);
+        // sub_tail_cost.emplace_back(tail_cost);
+        // LOG(INFO) << std::fixed << std::setprecision(4)
+        //           << "[UMBP] sub_tail_cost: " << sub_tail_cost[i].ave();
+        // sub_forward_trajs.emplace_back(forward_trajs);
+        // sub_forward_lat_behaviors.emplace_back(forward_lat_behaviors);
+        // sub_forward_lon_behaviors.emplace_back(forward_lon_behaviors);
+        // sub_surround_trajs.emplace_back(surround_trajs);
+
+        // Directly assign the modified tail_cost
+        sub_sim_res[i] = sim_res;
+        sub_risky_res[i] = risky_res;
+        sub_sim_info[i] = sim_info;
+        sub_progress_cost[i] = progress_cost;
+        sub_tail_cost[i] = tail_cost;
+        LOG(INFO) << std::fixed << std::setprecision(4)
+                  << "[UMBP] sub_tail_cost: " << sub_tail_cost[i].ave();
+        sub_forward_trajs[i] = forward_trajs;
+        sub_forward_lat_behaviors[i] = forward_lat_behaviors;
+        sub_forward_lon_behaviors[i] = forward_lon_behaviors;
+        sub_surround_trajs[i] = surround_trajs;
     }
 
     double min_cost = std::numeric_limits<double>::max();
@@ -545,7 +610,7 @@ bool UMBPlanner::PropagateActionSequence(const FrenetPoint ego_state,
                    << "[UMBP]****** Find min cost FAILED  ******";
         return false;
     }
-
+    // TODO:Check here global var not be set!!!!
     _sim_res[seq_id] = sub_sim_res[index];
     _risky_res[seq_id] = sub_risky_res[index];
     _sim_info[seq_id] = sub_sim_info[index];
@@ -556,7 +621,6 @@ bool UMBPlanner::PropagateActionSequence(const FrenetPoint ego_state,
     _forward_lon_behaviors[seq_id] = sub_forward_lon_behaviors[index];
     _forward_lat_behaviors[seq_id] = sub_forward_lat_behaviors[index];
     _surround_trajs[seq_id] = sub_surround_trajs[index];
-
     return true;
 }
 
@@ -571,6 +635,7 @@ bool UMBPlanner::PropagateScenario(
     std::vector<FpbLonAction> *sub_forward_lon_behaviors,
     std::unordered_map<int, std::vector<FrenetPoint>> *sub_surround_trajs)
 {
+    LOG(INFO) << "Threading " << seq_id << " begin PropagateScenario ";
     // declare variables which will be used to track traces from multiple layers
     sub_forward_trajs->emplace_back(ego_state);
     sub_forward_lat_behaviors->emplace_back(FpbLatAction::Keeping);
@@ -582,14 +647,21 @@ bool UMBPlanner::PropagateScenario(
         for (size_t i = 0; i < action_seq.size() + 2; i++)
         {
             FrenetPoint new_frenet_point(sub_surround_trajs->at(fpa.first).back());
-            new_frenet_point.l += sub_surround_trajs->at(fpa.first).back().l_dot * _sim_param.l_sample_num;
-            new_frenet_point.s += sub_surround_trajs->at(fpa.first).back().s_dot * _sim_param.l_sample_num;
+            new_frenet_point.l += sub_surround_trajs->at(fpa.first).back().l_dot * _sim_param.layer_time;
+            new_frenet_point.s += sub_surround_trajs->at(fpa.first).back().s_dot * _sim_param.layer_time;
             /**
              * 使用 push_back  points.push_back(p);  // 需要先创建对象，再拷贝/移动
              * 使用 emplace_back points.emplace_back(1, 2);  // 直接在容器中构造对象，无需拷贝/移动
              */
             sub_surround_trajs->at(fpa.first).emplace_back(new_frenet_point);
         }
+        LOG(INFO) << std::fixed << std::setprecision(3) << "sub_surround_trajs[" << fpa.first << "]" << " "
+                  << sub_surround_trajs->at(fpa.first)[0].s << ", " << sub_surround_trajs->at(fpa.first)[0].l << " from 0, "
+                  << sub_surround_trajs->at(fpa.first)[1].s << ", " << sub_surround_trajs->at(fpa.first)[1].l << " from 1; "
+                  << sub_surround_trajs->at(fpa.first)[2].s << ", " << sub_surround_trajs->at(fpa.first)[2].l << " from 2; "
+                  << sub_surround_trajs->at(fpa.first)[3].s << ", " << sub_surround_trajs->at(fpa.first)[3].l << " from 3; "
+                  << sub_surround_trajs->at(fpa.first)[4].s << ", " << sub_surround_trajs->at(fpa.first)[4].l << " from 4; "
+                  << sub_surround_trajs->at(fpa.first)[5].s << ", " << sub_surround_trajs->at(fpa.first)[5].l << " from 5; ";
     }
 
     // get ego next sample point
@@ -599,6 +671,7 @@ bool UMBPlanner::PropagateScenario(
     for (size_t i = 0; i < action_seq.size(); i++)
     {
         delta_l_num = 0;
+        delta_s_num = 0;
         auto action_this_layer = action_seq[i];
         // lon behavtiour
         switch (action_this_layer.lon)
@@ -621,12 +694,12 @@ bool UMBPlanner::PropagateScenario(
         // lat behaviour
         if (action_this_layer.lat == FpbLatAction::SwitchLeft && !is_lat_action_done)
         {
-            delta_l_num = 1;
+            delta_l_num = -1;
             is_lat_action_done = true;
         }
         if (action_this_layer.lat == FpbLatAction::SwitchRight && !is_lat_action_done)
         {
-            delta_l_num = -1;
+            delta_l_num = 1;
             is_lat_action_done = true;
         }
 
@@ -634,6 +707,10 @@ bool UMBPlanner::PropagateScenario(
         s_index += delta_s_num;
         l_index += delta_l_num;
         next_sample_point = _local_sample_points[s_index][l_index];
+        if (next_sample_point.s < 1)
+        {
+            next_sample_point.s = _sim_param.s_sample_distance;
+        }
 
         sub_forward_trajs->emplace_back(next_sample_point);
         sub_forward_lat_behaviors->emplace_back(action_this_layer.lat);
@@ -647,10 +724,22 @@ bool UMBPlanner::PropagateScenario(
         l_index += delta_l_num;
         next_sample_point = _local_sample_points[s_index][l_index];
 
+        if (next_sample_point.s < 1)
+        {
+            next_sample_point.s = _sim_param.s_sample_distance;
+        }
         sub_forward_trajs->emplace_back(next_sample_point);
         sub_forward_lat_behaviors->emplace_back(action_seq.back().lat);
         sub_forward_lon_behaviors->emplace_back(action_seq.back().lon);
     }
+
+    LOG(INFO) << std::fixed << std::setprecision(3) << "sub_forward_trajs "
+              << sub_forward_trajs->at(0).s << ", " << sub_forward_trajs->at(0).l << " from 0; "
+              << sub_forward_trajs->at(1).s << ", " << sub_forward_trajs->at(1).l << " from 1; "
+              << sub_forward_trajs->at(2).s << ", " << sub_forward_trajs->at(2).l << " from 2; "
+              << sub_forward_trajs->at(3).s << ", " << sub_forward_trajs->at(3).l << " from 3; "
+              << sub_forward_trajs->at(4).s << ", " << sub_forward_trajs->at(4).l << " from 4; "
+              << sub_forward_trajs->at(5).s << ", " << sub_forward_trajs->at(5).l << " from 5; ";
 
     // calculate cost
     bool is_risky = false;
@@ -669,6 +758,12 @@ bool UMBPlanner::PropagateScenario(
         sub_tail_cost->safety.ego_to_obs += sub_progress_cost->at(i).safety.ego_to_obs;
     }
 
+    LOG(INFO) << std::fixed << std::setprecision(4)
+              << "sub_tail_cost->efficiency: " << sub_tail_cost->efficiency.ego_to_desired_vel
+              << " sub_tail_cost->navigation: " << sub_tail_cost->navigation.ref_line_change
+              << " sub_tail_cost->safety: " << sub_tail_cost->safety.ego_to_obs
+              << " sub_tail_cost.ave(): " << sub_tail_cost->ave();
+
     if (is_risky)
     {
         *sub_risky_res = 1;
@@ -682,12 +777,13 @@ bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
                                const std::unordered_map<int, std::vector<FrenetPoint>> &surround_trajs,
                                std::vector<CostStructure> *progress_cost, bool *is_risky, std::set<size_t> *risky_ids)
 {
-
     for (size_t i = 0; i < forward_trajs.size(); i++)
     {
+        // LOG(INFO) << "---------------------forward_trajs cost " << i << "-----------------";
         CostStructure cost_tmp;
         // navigation
-        cost_tmp.navigation.ref_line_change += (_cost_param.ref_line_change * std::abs(forward_trajs[i].l)) * std::pow(_cost_param.discount_factor, i);
+        cost_tmp.navigation.ref_line_change = (_cost_param.ref_line_change * std::abs(forward_trajs[i].l)) * std::pow(_cost_param.discount_factor, i);
+        // LOG(INFO) << std::fixed << std::setprecision(4) << " cost_tmp.navigation.ref_line_change " << cost_tmp.navigation.ref_line_change;
 
         // efficiency：包含自车与期望速度之间的差异代价
         double ego_velocity;
@@ -700,7 +796,7 @@ bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
             ego_velocity = std::hypot((forward_trajs[i].s - forward_trajs[i - 1].s), (forward_trajs[i].l - forward_trajs[i - 1].l)) / (_sim_param.layer_time);
         }
         cost_tmp.efficiency.ego_to_desired_vel = _cost_param.ego_lack_speed_to_desired_unit_cost * std::abs(ego_velocity - _reference_speed);
-
+        // LOG(INFO) << std::fixed << std::setprecision(4) << " cost_tmp.efficiency.ego_to_desired_vel " << cost_tmp.efficiency.ego_to_desired_vel;
         // safety:
         for (const auto &surr_traj : surround_trajs)
         {
@@ -711,11 +807,11 @@ bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
                            << "[UMBP]****** forward_trajs.size() != surr_traj.second.size()  ******";
             }
             double distance = std::hypot((forward_trajs[i].s - surr_traj.second[i].s), (forward_trajs[i].l - surr_traj.second[i].l));
-            if (distance >= 4)
+            if (distance >= 6)
             {
                 cost_tmp.safety.ego_to_obs += 0;
             }
-            else if (distance >= 1.0)
+            else if (distance >= 2.0)
             {
                 cost_tmp.safety.ego_to_obs += (_cost_param.ego_to_obs / distance) * std::pow(_cost_param.discount_factor, i);
             }
@@ -725,6 +821,7 @@ bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
                 risky_ids->emplace(i);
                 cost_tmp.safety.ego_to_obs += (_cost_param.ego_to_obs / (distance * distance + 1e-6)) * std::pow(_cost_param.discount_factor, i);
             }
+            // LOG(INFO) << std::fixed << std::setprecision(4) << " cost_tmp.safety.ego_to_obs " << cost_tmp.safety.ego_to_obs;
         }
         progress_cost->emplace_back(cost_tmp);
     }

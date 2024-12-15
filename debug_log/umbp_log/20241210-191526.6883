@@ -1,6 +1,0 @@
-Log file created at: 2024/12/10 19:15:26
-Running on machine: Guzizhen
-Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
-W1210 19:15:26.203867  6883 main_function.cpp:265] [UMBP]******************** RUN START: ******************
-W1210 19:15:26.204115  6883 main_function.cpp:268] 21
-F1210 19:15:26.257217  6883 utilities.cc:346] Check failed: !IsGoogleLoggingInitialized() You called InitGoogleLogging() twice!

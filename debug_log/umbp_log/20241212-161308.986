@@ -1,4 +1,0 @@
-Log file created at: 2024/12/12 16:13:08
-Running on machine: Guzizhen
-Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
-I1212 16:13:08.703811   986 umb_planner.cpp:25]  _sim_param.tree_height 0done!
