@@ -173,7 +173,7 @@ std::vector<double> calculate_index_to_s(std::shared_ptr<std::vector<PathPoint>>
         delta_s = index2s[match_point_index];
     }
 
-    // 4.整体pingyi
+    // 4.整平移
     for (auto &&element : index2s)
     {
         element -= delta_s;
@@ -311,10 +311,8 @@ TrajectoryPoint object_to_trajectory_point(const derived_object_msgs::msg::Objec
     TrajectoryPoint trajectory_point;
     trajectory_point.x = object.pose.position.x;
     trajectory_point.y = object.pose.position.y;
-    // “twist”是一个重要的概念，通常用于描述物体的线速度和角速度
     trajectory_point.v = std::sqrt(std::pow(object.twist.linear.x, 2) +
-                                   std::pow(object.twist.linear.y, 2) +
-                                   std::pow(object.twist.linear.z, 2));
+                                   std::pow(object.twist.linear.y, 2));
     trajectory_point.kappa = 0;
     trajectory_point.ax = object.accel.linear.x;
     trajectory_point.ax = object.accel.linear.y;

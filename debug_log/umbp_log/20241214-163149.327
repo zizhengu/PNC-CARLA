@@ -1,9 +1,0 @@
-Log file created at: 2024/12/14 16:31:49
-Running on machine: Guzizhen
-Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
-I1214 16:31:49.359141   327 umb_planner.cpp:17] [UMBP]******************** RUN START: ******************
-I1214 16:31:49.360831   327 umb_planner.cpp:39]  [UMBP] Loading umbp planner config
-I1214 16:31:49.361919   327 umb_planner.cpp:29]  [UMBP]_sim_param.tree_height 3 done!
-I1214 16:31:49.361948   327 umb_planner.cpp:30]  [UMBP]_sim_param.layer_time 1 done!
-I1214 16:31:49.361949   327 umb_planner.cpp:31]  [UMBP]_sim_param.s_sample_distance 5 done!
-I1214 16:31:49.361951   327 umb_planner.cpp:32]  [UMBP]_sim_param.s_sample_num 12 done!

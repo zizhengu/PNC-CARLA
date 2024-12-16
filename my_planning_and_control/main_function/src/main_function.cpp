@@ -272,15 +272,9 @@ public:
 
     // 获取参考线
     _reference_line->clear();
-    if (_reference_line_generator->run_step(_current_ego_state, _global_path, _reference_line))
+    if (!(_reference_line_generator->run_step(_current_ego_state, _global_path, _reference_line)))
     {
-#ifdef MAIN_DEBUG
-      //   RCLCPP_INFO(this->get_logger(), "参考线生成成功！");
-#endif
-    }
-    else
-    {
-      //   RCLCPP_INFO(this->get_logger(), "参考线生成失败！");
+      RCLCPP_INFO(this->get_logger(), "参考线生成失败！");
     }
 
     // 将参考线发布出去
@@ -297,56 +291,11 @@ public:
     }
 
     _reference_line_publisher->publish(nav_reference_line);
-    //   RCLCPP_INFO(this->get_logger(), "mian debug1");
-    // 调用emplanner获取轨迹
+    // 调用umbplanner获取轨迹
     auto current_time = this->get_clock()->now();
     // _emplanner->planning_run_step(_reference_line, _current_ego_state, _object_arrry, _trajectory);
     _umbplanner->RunOnce(_reference_line, _current_ego_state, _object_arrry, _trajectory);
 
-    //   RCLCPP_INFO(this->get_logger(), "mian debug2");
-#ifdef PLOT
-    // 绘图，因为rviz的可视化没整明白
-    if (_count_plot % 20 == 0)
-    {
-      matplot::figure(_reference_line_figure_handle);
-      matplot::cla();
-      std::vector<double> global_x, global_y, reference_x, reference_y, trajectory_x, trajectory_y;
-      for (auto &&path_point : *_global_path)
-      {
-        global_x.push_back(path_point.x);
-        global_y.push_back(path_point.y);
-      }
-
-      // matplot::hold(false);
-      matplot::plot(global_x, global_y, "go");
-      matplot::hold(true);
-      for (auto &&path_point : *_reference_line)
-      {
-        reference_x.push_back(path_point.x);
-        reference_y.push_back(path_point.y);
-      }
-      matplot::plot(reference_x, reference_y, "--rx");
-
-      int plot_index = 0;
-      for (auto &&trajectory_point : _trajectory)
-      {
-        if (plot_index % 10 == 0)
-        {
-          trajectory_x.emplace_back(trajectory_point.x);
-          trajectory_y.emplace_back(trajectory_point.y);
-        }
-        plot_index++;
-      }
-
-      matplot::plot(trajectory_x, trajectory_y, "-b*");
-
-      matplot::plot({_current_ego_state->x}, {_current_ego_state->y}, "ro");
-      matplot::hold(false);
-      // h->draw();
-    }
-    _count_plot++;
-
-#endif
     if (std::abs(_current_ego_state->v) > 0.01)
     {
       _total_v += std::abs(_current_ego_state->v);
@@ -396,7 +345,6 @@ public:
       double seconds = duration.seconds();
       double delta_heading = std::abs(_current_ego_state->heading - _previous_heading);
       _current_omega = delta_heading;
-      RCLCPP_INFO(this->get_logger(), "_previous_heading: %.3f)", _previous_heading);
       // 单位：rad
       //   if (std::abs(_current_omega - _previous_omega / seconds) > 1.0)
       if (std::abs(_current_omega - _previous_omega / seconds) > 0.2)
@@ -494,16 +442,6 @@ public:
 #endif
 
     // RCLCPP_INFO(this->get_logger(),"目标位置(%.2f,%.2f)",target_pose.pose.position.x,target_pose.pose.position.y);
-    //****发布标记
-    visualization_msgs::msg::Marker marker;
-    marker.type = 0;
-    marker.header.frame_id = "map";
-    marker.scale.x = 1.0;
-    marker.scale.y = 0.2;
-    marker.scale.z = 0.2;
-    marker.color.r = 255;
-    marker.color.a = 1.0;
-    _targer_pose_publisher->publish(marker);
 
     // 计算并发布控制指令
     carla_msgs::msg::CarlaEgoVehicleControl control_msg;
@@ -511,8 +449,6 @@ public:
     control_msg.manual_gear_shift = false;
     control_msg.reverse = false;
 
-    // TODO:单级别PID
-    //  添加刹车逻辑
     double speed_difference = target_point.v - _current_ego_state->v;
     if (speed_difference < 0)
     {

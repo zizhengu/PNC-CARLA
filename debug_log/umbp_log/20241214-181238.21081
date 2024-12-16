@@ -1,4 +1,0 @@
-Log file created at: 2024/12/14 18:12:38
-Running on machine: Guzizhen
-Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
-W1214 18:12:38.504526 21081 umb_planner.cpp:240] [UMBP][Result]Propagate sucess with 21 behaviors.

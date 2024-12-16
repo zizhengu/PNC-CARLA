@@ -165,6 +165,16 @@ private:
 
     bool EvaluateMultiThreadSimResults(int *winner_id, double *winner_cost);
 
+    bool IncreaseFpbPath(const std::vector<FrenetPoint> &fpb_path_init, const double &increased_distance,
+                         std::vector<FrenetPoint> &fpb_path_increased);
+
+    bool IncreaseFpbSpeedProfile(const std::vector<FrenetPoint> &fpb_path, const double &increased_time, const double &layer_time,
+                                 std::vector<STPoint> &speed_profile_increased);
+
+    bool GenerateTrajectory(const std::vector<STPoint> &final_speed_profile, const std::vector<TrajectoryPoint> &path_trajectory,
+                            const std::vector<double> &path_index2s, const double &planning_start_point_time_stamped,
+                            std::vector<TrajectoryPoint> &trajectory);
+
     std::vector<derived_object_msgs::msg::Object> _static_obstacles;  // 静态障碍物
     std::vector<derived_object_msgs::msg::Object> _dynamic_obstacles; // 动态障碍物
     std::deque<TrajectoryPoint> _previous_trajectory;                 // 上一周期的轨迹
@@ -187,6 +197,7 @@ private:
 
     // sample_points
     std::vector<std::vector<FrenetPoint>> _local_sample_points;
+    int _increased_sl_sample_num;
 
     // result
     int _winner_id = 0;
@@ -203,4 +214,10 @@ private:
     std::vector<std::vector<FpbLonAction>> _forward_lon_behaviors = std::vector<std::vector<FpbLonAction>>(64);
     std::vector<std::unordered_map<int, std::vector<FrenetPoint>>> _surround_trajs = std::vector<std::unordered_map<int, std::vector<FrenetPoint>>>(64);
     double _time_cost = 0.0;
+
+    // plot
+    matplot::figure_handle _path_plot_handle;
+    size_t _plot_count;
+    matplot::figure_handle _trajectory_plot_handle;
+    matplot::figure_handle _STL_plot_handle;
 };

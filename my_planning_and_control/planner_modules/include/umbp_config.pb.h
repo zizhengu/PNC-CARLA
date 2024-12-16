@@ -658,6 +658,12 @@ class SampleConfig : public ::google::protobuf::Message /* @@protoc_insertion_po
   double dec_ref() const;
   void set_dec_ref(double value);
 
+  // double lane_width = 7;
+  void clear_lane_width();
+  static const int kLaneWidthFieldNumber = 7;
+  double lane_width() const;
+  void set_lane_width(double value);
+
   // @@protoc_insertion_point(class_scope:planning.umbp.SampleConfig)
  private:
 
@@ -668,6 +674,7 @@ class SampleConfig : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::google::protobuf::int32 l_sample_num_;
   double acc_ref_;
   double dec_ref_;
+  double lane_width_;
   mutable int _cached_size_;
   friend struct  protobuf_umbp_5fconfig_2eproto::TableStruct;
 };
@@ -1337,6 +1344,20 @@ inline void SampleConfig::set_dec_ref(double value) {
   
   dec_ref_ = value;
   // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.dec_ref)
+}
+
+// double lane_width = 7;
+inline void SampleConfig::clear_lane_width() {
+  lane_width_ = 0;
+}
+inline double SampleConfig::lane_width() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.lane_width)
+  return lane_width_;
+}
+inline void SampleConfig::set_lane_width(double value) {
+  
+  lane_width_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.lane_width)
 }
 
 // -------------------------------------------------------------------

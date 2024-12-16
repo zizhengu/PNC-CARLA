@@ -36,7 +36,8 @@ propogate {
     s_sample_num: 30
     l_sample_distance: 1.0
     l_sample_num: 8
-    acc_ref : 3.0 
-    dec_ref : 4.0
+    acc_ref : 1.0 
+    dec_ref : 2.0
+    lane_width: 4.0
   }
 }

@@ -38,6 +38,7 @@ message SampleConfig {
     int32 l_sample_num = 4;
     double acc_ref = 5;
     double dec_ref = 6;
+    double lane_width = 7;
 }
 
 message PropogateConfig {
