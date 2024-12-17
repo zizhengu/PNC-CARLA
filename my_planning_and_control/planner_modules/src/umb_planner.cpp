@@ -21,7 +21,7 @@ UMBPlanner::UMBPlanner() : Node("UMBPlanner")
         "/carla_waypoint_publisher/ego_vehicle/get_waypoint");
 
     LOG(INFO) << "[UMBP]********** Setting _reference_speed " << "*************";
-    _reference_speed = 5.0;
+    _reference_speed = 4.0;
     std::string config_path = "/home/guzizhen/PNC-CARLA/my_planning_and_control/planner_modules/config/umbp_config.pb.txt";
 
     ReadConfig(config_path);
@@ -77,8 +77,9 @@ bool UMBPlanner::GetCostParam(const planning::umbp::Config &cfg,
 }
 
 bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference_line, const std::shared_ptr<VehicleState> ego_state,
-                         const std::vector<derived_object_msgs::msg::Object> &obstacles, std::vector<TrajectoryPoint> &final_trajectory)
+                         const std::vector<derived_object_msgs::msg::Object> &obstacles, std::vector<TrajectoryPoint> &final_trajectory, bool &emergency_stop_signal)
 {
+    emergency_stop_signal = false;
     _current_time = this->now().seconds();
     _current_ego_state = ego_state;
     //-----------------------------------1.障碍物处理--------------------------------------
@@ -142,6 +143,12 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
               << umbp_timer.toc() << "ms";
 
     std::vector<FrenetPoint> fpb_path = _forward_trajs[_winner_id];
+    if (fpb_path[1].s == fpb_path[2].s)
+    {
+        emergency_stop_signal = true;
+        RCLCPP_INFO(UMBP_LOG, "---------emergency_stop_signal!!! -------");
+        return true;
+    }
 
     //-------------------------------------5.路径规划----------------------------------------
     // 5.1 对决策的SL曲线进行加密
@@ -413,7 +420,7 @@ TrajectoryPoint UMBPlanner::CalculatePlanningStartPoint(std::shared_ptr<VehicleS
     else
     {
         // 计算主车位置与目标点之间的误差
-        size_t current_time_index = -1;
+        size_t current_time_index = 0;
         if (_current_time <= _previous_trajectory[0].time_stamped)
         {
             current_time_index = 0;
@@ -444,7 +451,7 @@ TrajectoryPoint UMBPlanner::CalculatePlanningStartPoint(std::shared_ptr<VehicleS
         if (error_lateral < 0.5 && error_longitudional < 1.5)
         {
             // 在上一周期轨迹上搜索规划起点
-            size_t start_time_index = -1;
+            size_t start_time_index = 0;
             double start_time = _current_time + delta_T;
             if (start_time <= _previous_trajectory[0].time_stamped)
             {
@@ -737,8 +744,10 @@ bool UMBPlanner::PropagateScenario(
     sub_forward_lon_behaviors->emplace_back(FpbLonAction::Maintain);
 
     std::unordered_map<int, std::vector<FrenetPoint>> sub_surround_trajs_iter;
+
     for (const auto &fpa : surrounding_fsagents.forward_prop_agents)
     {
+        sub_surround_trajs_iter.emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
         sub_surround_trajs->emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
         for (size_t i = 0; i < action_seq.size() + 2; i++)
         {
@@ -771,6 +780,10 @@ bool UMBPlanner::PropagateScenario(
         //                         end_point.s, end_point.l, end_point.l_prime, end_point.l_prime_prime);
         //     for (int j = 0; j < sample_num; j++)
         //     {
+        //         if ((i == 0) & (j == 0))
+        //         {
+        //             continue;
+        //         }
         //         FrenetPoint cur_point;
         //         double cur_s = start_point.s + j * sample_distance;
         //         cur_point.s = cur_s;
@@ -780,10 +793,8 @@ bool UMBPlanner::PropagateScenario(
         // }
         // sub_surround_trajs_iter.at(fpa.first).emplace_back(sub_surround_trajs->at(fpa.first).back());
 
-        // sub_surround_trajs->at(fpa.first).clear();
-        // sub_surround_trajs->at(fpa.first) = sub_surround_traj_inter;
         // int count = 0;
-        // for (auto &point : sub_surround_traj_inter)
+        // for (auto &point : sub_surround_trajs_iter.at(fpa.first))
         // {
         //     LOG(INFO) << std::fixed << std::setprecision(3) << "sub_surround_traj_inter " << count
         //               << " (s , l)" << point.s << point.l;
@@ -834,7 +845,8 @@ bool UMBPlanner::PropagateScenario(
         s_index += delta_s_num;
         l_index += delta_l_num;
         // TODO: add road bound
-        l_index = std::min(l_index, 6);
+        l_index = std::max(std::min(l_index, (int)(_sim_param.l_sample_num / 2 + 1)), 0);
+        s_index = std::min(s_index, (int)(_sim_param.s_sample_num - 1));
         next_sample_point = _local_sample_points[s_index][l_index];
         if (next_sample_point.s < 1)
         {
@@ -851,6 +863,8 @@ bool UMBPlanner::PropagateScenario(
         delta_l_num = 0;
         s_index += delta_s_num;
         l_index += delta_l_num;
+        l_index = std::max(std::min(l_index, (int)(_sim_param.l_sample_num / 2 + 1)), 0);
+        s_index = std::min(s_index, (int)(_sim_param.s_sample_num - 1));
         next_sample_point = _local_sample_points[s_index][l_index];
 
         if (next_sample_point.s < 1)
@@ -892,8 +906,6 @@ bool UMBPlanner::PropagateScenario(
     // }
     // sub_forward_trajs_inter.emplace_back(sub_forward_trajs->back());
 
-    // sub_forward_trajs->clear();
-    // sub_forward_trajs = &sub_forward_trajs_inter;
     // int count = 0;
     // for (auto &point : sub_forward_trajs_inter)
     // {
@@ -905,8 +917,8 @@ bool UMBPlanner::PropagateScenario(
     // calculate cost
     bool is_risky = false;
     std::set<size_t> risky_ids;
-    RCLCPP_INFO(UMBP_LOG, "Start CalculateCost");
     if (!CalculateCost(*sub_forward_trajs, *sub_surround_trajs, sub_progress_cost, &is_risky, &risky_ids))
+    // if (!CalculateCost(sub_forward_trajs_inter, sub_surround_trajs_iter, sub_progress_cost, &is_risky, &risky_ids))
     {
         return false;
         LOG(ERROR) << std::fixed << std::setprecision(4)
@@ -968,11 +980,11 @@ bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
                            << "[UMBP]****** forward_trajs.size() != surr_traj.second.size()  ******";
             }
             double distance = std::hypot((forward_trajs[i].s - surr_traj.second[i].s), (forward_trajs[i].l - surr_traj.second[i].l));
-            if (distance >= 6)
+            if (distance >= 8)
             {
                 cost_tmp.safety.ego_to_obs += 0;
             }
-            else if (distance >= 2.0)
+            else if (distance >= 3.0)
             {
                 cost_tmp.safety.ego_to_obs += (_cost_param.ego_to_obs / distance) * std::pow(_cost_param.discount_factor, i);
             }

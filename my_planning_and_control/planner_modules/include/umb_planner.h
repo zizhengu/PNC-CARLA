@@ -118,7 +118,7 @@ public:
     UMBPlanner();
 
     bool RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference_line, const std::shared_ptr<VehicleState> ego_state,
-                 const std::vector<derived_object_msgs::msg::Object> &objects, std::vector<TrajectoryPoint> &trajectory);
+                 const std::vector<derived_object_msgs::msg::Object> &objects, std::vector<TrajectoryPoint> &trajectory, bool &emergency_stop_signal);
 
     bool RunUmpb(const FrenetPoint ego_state, const ForwardPropAgentSet &forward_prop_agent_set);
 

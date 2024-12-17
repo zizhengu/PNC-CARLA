@@ -1,0 +1,43 @@
+Log file created at: 2024/12/17 11:39:49
+Running on machine: Guzizhen
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+W1217 11:39:49.946312 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:50.073704 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:50.157634 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:50.254626 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:50.355198 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:50.454326 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:50.556560 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:50.654232 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:50.750849 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:50.850955 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:50.950321 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:51.048197 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:51.150280 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:51.248361 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:51.348265 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:51.448060 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:51.550777 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:51.650756 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:51.749073 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:51.848124 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:51.948500 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:52.049273 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:52.149106 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:52.248216 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:52.393422 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:52.489804 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:52.587185 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:52.679527 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:52.807219 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:52.903532 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:52.991271 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:53.080737 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:53.178282 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:53.301577 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:53.396952 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:53.452062 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:53.550465 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:53.648950 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:53.748183 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.
+W1217 11:39:53.849586 18950 umb_planner.cpp:364] [UMBP][Result]Propagate sucess with 21 behaviors.

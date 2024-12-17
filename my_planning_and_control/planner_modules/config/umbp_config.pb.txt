@@ -13,14 +13,14 @@ cost {
     leading_speed_blocked_desired_vel_unit_cost: 0.1
   }
   safety {
-    ego_to_obs: 80.0
+    ego_to_obs: 100.0
   }
   user {
     late_operate_unit_cost: 0.25
     cancel_operation_unit_cost: 8.0
   }
   navigation {
-    ref_line_change:2.0
+    ref_line_change:0.1
   }
   discount_factor: 0.9
 }
@@ -34,8 +34,8 @@ propogate {
   sample {
     s_sample_distance: 2.0
     s_sample_num: 30
-    l_sample_distance: 1.0
-    l_sample_num: 8
+    l_sample_distance: 2.0
+    l_sample_num: 4
     acc_ref : 1.0 
     dec_ref : 2.0
     lane_width: 4.0

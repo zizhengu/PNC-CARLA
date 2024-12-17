@@ -130,6 +130,7 @@ private:
   std::shared_ptr<MPCController> _mpc_controller;
   rclcpp::TimerBase::SharedPtr _control_timer; // 控制器时钟
   double _control_time_step;
+  bool _emergency_stop_signal = false;
 
   // 规划环节
   double _planning_time_step;
@@ -294,7 +295,7 @@ public:
     // 调用umbplanner获取轨迹
     auto current_time = this->get_clock()->now();
     // _emplanner->planning_run_step(_reference_line, _current_ego_state, _object_arrry, _trajectory);
-    _umbplanner->RunOnce(_reference_line, _current_ego_state, _object_arrry, _trajectory);
+    _umbplanner->RunOnce(_reference_line, _current_ego_state, _object_arrry, _trajectory, _emergency_stop_signal);
 
     if (std::abs(_current_ego_state->v) > 0.01)
     {
@@ -388,6 +389,12 @@ public:
     if (_reference_speed <= 0.5)
     {
       emergency_stop();
+      return;
+    }
+    if (_emergency_stop_signal)
+    {
+      emergency_stop();
+      RCLCPP_INFO(this->get_logger(), "control module get _emergency_stop_signal !!!");
       return;
     }
 
