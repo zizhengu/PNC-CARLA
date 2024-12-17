@@ -217,18 +217,6 @@
         },
         {
             "type": "vehicle.nissan.micra",
-            "id": "vehicle_7",
-            "spawn_point": {
-                "x": 94.5,
-                "y": -61.1,
-                "z": 2.0,
-                "roll": 0.0,
-                "pitch": 0.0,
-                "yaw": 45.0
-            }
-        },
-        {
-            "type": "vehicle.nissan.micra",
             "id": "vehicle_8",
             "spawn_point": {
                 "x": 115.6,
