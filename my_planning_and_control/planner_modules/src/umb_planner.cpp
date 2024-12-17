@@ -677,13 +677,15 @@ bool UMBPlanner::PropagateActionSequence(const FrenetPoint ego_state,
         std::vector<FpbLonAction> forward_lon_behaviors;
         std::unordered_map<int, std::vector<FrenetPoint>> surround_trajs;
 
-        if (!PropagateScenario(ego_state, surrounding_fsagents, action_seq, seq_id, 0, &sim_res,
+        if (!PropagateScenario(ego_state, surrounding_fsagents, action_seq, seq_id, i, &sim_res,
                                &risky_res, &sim_info, &progress_cost, &tail_cost, &forward_trajs,
                                &forward_lat_behaviors, &forward_lon_behaviors, &surround_trajs))
         {
-            LOG(ERROR) << std::fixed << std::setprecision(4)
-                       << "[UMBP]****** PropogateScenario FAILED  ******";
-            return false;
+            LOG(INFO) << std::fixed << std::setprecision(4)
+                      << "[UMBP]****** ActionSequence " << seq_id << " PropogateScenario " << i << " FAILED  ******";
+            sim_res = 0;
+            sub_sim_res[i] = sim_res;
+            continue;
         }
         sub_sim_res[i] = sim_res;
         sub_risky_res[i] = risky_res;
@@ -696,11 +698,24 @@ bool UMBPlanner::PropagateActionSequence(const FrenetPoint ego_state,
         sub_surround_trajs[i] = surround_trajs;
     }
 
+    double sum = 0;
+    for (auto sim_res : sub_sim_res)
+    {
+        sum += sim_res;
+    }
+    if (sum < 1)
+    {
+        LOG(INFO) << std::fixed << std::setprecision(4)
+                  << "[UMBP]****** ActionSequence " << seq_id << " All Scenario  FAILED  ******";
+        return false;
+        _sim_res[seq_id] = static_cast<int>(0);
+    }
+
     double min_cost = std::numeric_limits<double>::max();
     int index = -1;
     for (int i = 0; i < n_sub_threads; i++)
     {
-        if (sub_tail_cost[i].ave() < min_cost)
+        if (sub_tail_cost[i].ave() < min_cost && sub_sim_res[i] == static_cast<int>(1))
         {
             min_cost = sub_tail_cost[i].ave();
             index = i;
@@ -712,9 +727,9 @@ bool UMBPlanner::PropagateActionSequence(const FrenetPoint ego_state,
     }
     if (index == -1)
     {
-        return false;
         LOG(ERROR) << std::fixed << std::setprecision(4)
                    << "[UMBP]****** Find min cost FAILED  ******";
+        _sim_res[seq_id] = static_cast<int>(0);
         return false;
     }
     _sim_res[seq_id] = sub_sim_res[index];
@@ -747,8 +762,131 @@ bool UMBPlanner::PropagateScenario(
     sub_forward_lat_behaviors->emplace_back(FpbLatAction::Keeping);
     sub_forward_lon_behaviors->emplace_back(FpbLonAction::Maintain);
 
-    std::unordered_map<int, std::vector<FrenetPoint>> sub_surround_trajs_iter;
+    // get ego next sample point
+    bool is_lat_action_done = false;
+    int delta_l_num = 0, delta_s_num = 0, s_index = 0, l_index = (int)(_sim_param.l_sample_num / 2);
+    FrenetPoint next_sample_point;
+    for (size_t i = 0; i < action_seq.size(); i++)
+    {
+        delta_l_num = 0;
+        delta_s_num = 0;
+        auto action_this_layer = action_seq[i];
+        // lon behavtiour
+        switch (action_this_layer.lon)
+        {
+        case FpbLonAction::Maintain:
+            delta_s_num = static_cast<int>(std::ceil(_current_ego_state->v / _sim_param.s_sample_distance));
+            break;
+        case FpbLonAction::Accelearte:
+            delta_s_num = static_cast<int>(std::ceil((_current_ego_state->v + _sim_param.acc_ref) / _sim_param.s_sample_distance));
+            break;
+        case FpbLonAction::Decelerate:
+            delta_s_num = static_cast<int>(std::floor(std::max(0.0, (_current_ego_state->v - _sim_param.dec_ref))) / _sim_param.s_sample_distance);
+            break;
+        default:
+            LOG(ERROR) << std::fixed << std::setprecision(4)
+                       << "[UMBP]****** switch (action_seq[0].lon) FAILED  ******";
+            return false;
+        }
 
+        // lat behaviour
+        if (action_this_layer.lat == FpbLatAction::SwitchLeft && !is_lat_action_done)
+        {
+            delta_l_num = -1;
+            is_lat_action_done = false;
+        }
+        if (action_this_layer.lat == FpbLatAction::SwitchRight && !is_lat_action_done)
+        {
+            delta_l_num = 1;
+            is_lat_action_done = false;
+        }
+
+        // get next_sample_point
+        s_index += delta_s_num;
+        l_index += delta_l_num;
+        // TODO: add road bound
+        l_index = std::max(std::min(l_index, (int)(_sim_param.l_sample_num)), 0);
+        s_index = std::min(s_index, (int)(_sim_param.s_sample_num - 1));
+        next_sample_point = _local_sample_points[s_index][l_index];
+        if (next_sample_point.l <= -ego_state.l - 2 || next_sample_point.l >= -ego_state.l + 6)
+        {
+            LOG(INFO) << std::fixed << std::setprecision(4)
+                      << "******Action Sequence " << seq_id << " Sub-Scenario " << sub_seq_id << "Reach Road Bound Restrict  ******";
+            return false;
+        }
+        if (next_sample_point.s < 1)
+        {
+            next_sample_point.s = _sim_param.s_sample_distance;
+        }
+
+        sub_forward_trajs->emplace_back(next_sample_point);
+        sub_forward_lat_behaviors->emplace_back(action_this_layer.lat);
+        sub_forward_lon_behaviors->emplace_back(action_this_layer.lon);
+    }
+
+    for (int i = 0; i < 2; i++)
+    {
+        delta_l_num = 0;
+        s_index += delta_s_num;
+        l_index += delta_l_num;
+        l_index = std::max(std::min(l_index, (int)(_sim_param.l_sample_num)), 0);
+        s_index = std::min(s_index, (int)(_sim_param.s_sample_num - 1));
+        next_sample_point = _local_sample_points[s_index][l_index];
+        if (next_sample_point.l <= -ego_state.l - 2 || next_sample_point.l >= -ego_state.l + 6)
+        {
+            LOG(INFO) << std::fixed << std::setprecision(4)
+                      << "******Action Sequence " << seq_id << " Sub-Scenario " << sub_seq_id << "Reach Road Bound Restrict  ******";
+            return false;
+        }
+        if (next_sample_point.s < 1)
+        {
+            next_sample_point.s = _sim_param.s_sample_distance;
+        }
+        sub_forward_trajs->emplace_back(next_sample_point);
+        sub_forward_lat_behaviors->emplace_back(action_seq.back().lat);
+        sub_forward_lon_behaviors->emplace_back(action_seq.back().lon);
+    }
+
+    LOG(INFO) << std::fixed << std::setprecision(3) << "sub_forward_trajs "
+              << sub_forward_trajs->at(0).s << ", " << sub_forward_trajs->at(0).l << " from 0; "
+              << sub_forward_trajs->at(1).s << ", " << sub_forward_trajs->at(1).l << " from 1; "
+              << sub_forward_trajs->at(2).s << ", " << sub_forward_trajs->at(2).l << " from 2; "
+              << sub_forward_trajs->at(3).s << ", " << sub_forward_trajs->at(3).l << " from 3; "
+              << sub_forward_trajs->at(4).s << ", " << sub_forward_trajs->at(4).l << " from 4; "
+              << sub_forward_trajs->at(5).s << ", " << sub_forward_trajs->at(5).l << " from 5; ";
+
+    // 五次多项式插值
+    std::vector<FrenetPoint> sub_forward_trajs_inter;
+    int sample_num = 10;
+    for (size_t i = 0; i < action_seq.size() + 2; i++)
+    {
+        auto start_point = sub_forward_trajs->at(i);
+        auto end_point = sub_forward_trajs->at(i + 1);
+        double sample_distance = static_cast<double>((end_point.s - start_point.s) / sample_num);
+        PolynomialCurve curve;
+        curve.curve_fitting(start_point.s, start_point.l, start_point.l_prime, start_point.l_prime_prime,
+                            end_point.s, end_point.l, end_point.l_prime, end_point.l_prime_prime);
+        for (int j = 0; j < sample_num; j++)
+        {
+            FrenetPoint cur_point;
+            double cur_s = start_point.s + j * sample_distance;
+            cur_point.s = cur_s;
+            cur_point.l = curve.value_evaluation(cur_s, 0);
+            sub_forward_trajs_inter.emplace_back(cur_point);
+        }
+    }
+    sub_forward_trajs_inter.emplace_back(sub_forward_trajs->back());
+
+    // int count = 0;
+    // for (auto &point : sub_forward_trajs_inter)
+    // {
+    //     LOG(INFO) << std::fixed << std::setprecision(3) << "sub_forward_trajs_inter " << count
+    //               << " (s , l)" << point.s << point.l;
+    //     count++;
+    // }
+
+    // get surrounding agent next sample point
+    std::unordered_map<int, std::vector<FrenetPoint>> sub_surround_trajs_iter;
     for (const auto &fpa : surrounding_fsagents.forward_prop_agents)
     {
         sub_surround_trajs_iter.emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
@@ -806,118 +944,6 @@ bool UMBPlanner::PropagateScenario(
         // }
     }
 
-    // get ego next sample point
-    bool is_lat_action_done = false;
-    int delta_l_num = 0, delta_s_num = 0, s_index = 0, l_index = (int)(_sim_param.l_sample_num / 2);
-    FrenetPoint next_sample_point;
-    for (size_t i = 0; i < action_seq.size(); i++)
-    {
-        delta_l_num = 0;
-        delta_s_num = 0;
-        auto action_this_layer = action_seq[i];
-        // lon behavtiour
-        switch (action_this_layer.lon)
-        {
-        case FpbLonAction::Maintain:
-            delta_s_num = static_cast<int>(std::ceil(_current_ego_state->v / _sim_param.s_sample_distance));
-            break;
-        case FpbLonAction::Accelearte:
-            delta_s_num = static_cast<int>(std::ceil((_current_ego_state->v + _sim_param.acc_ref) / _sim_param.s_sample_distance));
-            break;
-        case FpbLonAction::Decelerate:
-            delta_s_num = static_cast<int>(std::floor(std::max(0.0, (_current_ego_state->v - _sim_param.dec_ref))) / _sim_param.s_sample_distance);
-            break;
-        default:
-            LOG(ERROR) << std::fixed << std::setprecision(4)
-                       << "[UMBP]****** switch (action_seq[0].lon) FAILED  ******";
-            return false;
-        }
-
-        // lat behaviour
-        if (action_this_layer.lat == FpbLatAction::SwitchLeft && !is_lat_action_done)
-        {
-            delta_l_num = -1;
-            is_lat_action_done = false;
-        }
-        if (action_this_layer.lat == FpbLatAction::SwitchRight && !is_lat_action_done)
-        {
-            delta_l_num = 1;
-            is_lat_action_done = false;
-        }
-
-        // get next_sample_point
-        s_index += delta_s_num;
-        l_index += delta_l_num;
-        // TODO: add road bound
-        l_index = std::max(std::min(l_index, (int)(_sim_param.l_sample_num / 2 + 1)), 0);
-        s_index = std::min(s_index, (int)(_sim_param.s_sample_num - 1));
-        next_sample_point = _local_sample_points[s_index][l_index];
-        if (next_sample_point.s < 1)
-        {
-            next_sample_point.s = _sim_param.s_sample_distance;
-        }
-
-        sub_forward_trajs->emplace_back(next_sample_point);
-        sub_forward_lat_behaviors->emplace_back(action_this_layer.lat);
-        sub_forward_lon_behaviors->emplace_back(action_this_layer.lon);
-    }
-
-    for (int i = 0; i < 2; i++)
-    {
-        delta_l_num = 0;
-        s_index += delta_s_num;
-        l_index += delta_l_num;
-        l_index = std::max(std::min(l_index, (int)(_sim_param.l_sample_num / 2 + 1)), 0);
-        s_index = std::min(s_index, (int)(_sim_param.s_sample_num - 1));
-        next_sample_point = _local_sample_points[s_index][l_index];
-
-        if (next_sample_point.s < 1)
-        {
-            next_sample_point.s = _sim_param.s_sample_distance;
-        }
-        sub_forward_trajs->emplace_back(next_sample_point);
-        sub_forward_lat_behaviors->emplace_back(action_seq.back().lat);
-        sub_forward_lon_behaviors->emplace_back(action_seq.back().lon);
-    }
-
-    LOG(INFO) << std::fixed << std::setprecision(3) << "sub_forward_trajs "
-              << sub_forward_trajs->at(0).s << ", " << sub_forward_trajs->at(0).l << " from 0; "
-              << sub_forward_trajs->at(1).s << ", " << sub_forward_trajs->at(1).l << " from 1; "
-              << sub_forward_trajs->at(2).s << ", " << sub_forward_trajs->at(2).l << " from 2; "
-              << sub_forward_trajs->at(3).s << ", " << sub_forward_trajs->at(3).l << " from 3; "
-              << sub_forward_trajs->at(4).s << ", " << sub_forward_trajs->at(4).l << " from 4; "
-              << sub_forward_trajs->at(5).s << ", " << sub_forward_trajs->at(5).l << " from 5; ";
-
-    // 五次多项式插值
-    std::vector<FrenetPoint> sub_forward_trajs_inter;
-    int sample_num = 10;
-    for (size_t i = 0; i < action_seq.size() + 2; i++)
-    {
-        auto start_point = sub_forward_trajs->at(i);
-        auto end_point = sub_forward_trajs->at(i + 1);
-        double sample_distance = static_cast<double>((end_point.s - start_point.s) / sample_num);
-        PolynomialCurve curve;
-        curve.curve_fitting(start_point.s, start_point.l, start_point.l_prime, start_point.l_prime_prime,
-                            end_point.s, end_point.l, end_point.l_prime, end_point.l_prime_prime);
-        for (int j = 0; j < sample_num; j++)
-        {
-            FrenetPoint cur_point;
-            double cur_s = start_point.s + j * sample_distance;
-            cur_point.s = cur_s;
-            cur_point.l = curve.value_evaluation(cur_s, 0);
-            sub_forward_trajs_inter.emplace_back(cur_point);
-        }
-    }
-    sub_forward_trajs_inter.emplace_back(sub_forward_trajs->back());
-
-    // int count = 0;
-    // for (auto &point : sub_forward_trajs_inter)
-    // {
-    //     LOG(INFO) << std::fixed << std::setprecision(3) << "sub_forward_trajs_inter " << count
-    //               << " (s , l)" << point.s << point.l;
-    //     count++;
-    // }
-
     // calculate cost
     bool is_risky = false;
     std::set<size_t> risky_ids;
@@ -947,7 +973,7 @@ bool UMBPlanner::PropagateScenario(
         *sub_risky_res = 1;
     }
 
-    *sub_sim_res = 1;
+    *sub_sim_res = static_cast<int>(1);
     return true;
 }
 
