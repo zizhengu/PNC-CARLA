@@ -39,6 +39,8 @@ message SampleConfig {
     double acc_ref = 5;
     double dec_ref = 6;
     double lane_width = 7;
+    double increased_sl_distance = 8;
+    double increased_st_distance = 9;
 }
 
 message PropogateConfig {

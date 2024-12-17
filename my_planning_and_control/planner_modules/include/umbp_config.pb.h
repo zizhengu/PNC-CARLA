@@ -664,6 +664,18 @@ class SampleConfig : public ::google::protobuf::Message /* @@protoc_insertion_po
   double lane_width() const;
   void set_lane_width(double value);
 
+  // double increased_sl_distance = 8;
+  void clear_increased_sl_distance();
+  static const int kIncreasedSlDistanceFieldNumber = 8;
+  double increased_sl_distance() const;
+  void set_increased_sl_distance(double value);
+
+  // double increased_st_distance = 9;
+  void clear_increased_st_distance();
+  static const int kIncreasedStDistanceFieldNumber = 9;
+  double increased_st_distance() const;
+  void set_increased_st_distance(double value);
+
   // @@protoc_insertion_point(class_scope:planning.umbp.SampleConfig)
  private:
 
@@ -675,6 +687,8 @@ class SampleConfig : public ::google::protobuf::Message /* @@protoc_insertion_po
   double acc_ref_;
   double dec_ref_;
   double lane_width_;
+  double increased_sl_distance_;
+  double increased_st_distance_;
   mutable int _cached_size_;
   friend struct  protobuf_umbp_5fconfig_2eproto::TableStruct;
 };
@@ -1358,6 +1372,34 @@ inline void SampleConfig::set_lane_width(double value) {
   
   lane_width_ = value;
   // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.lane_width)
+}
+
+// double increased_sl_distance = 8;
+inline void SampleConfig::clear_increased_sl_distance() {
+  increased_sl_distance_ = 0;
+}
+inline double SampleConfig::increased_sl_distance() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.increased_sl_distance)
+  return increased_sl_distance_;
+}
+inline void SampleConfig::set_increased_sl_distance(double value) {
+  
+  increased_sl_distance_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.increased_sl_distance)
+}
+
+// double increased_st_distance = 9;
+inline void SampleConfig::clear_increased_st_distance() {
+  increased_st_distance_ = 0;
+}
+inline double SampleConfig::increased_st_distance() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.increased_st_distance)
+  return increased_st_distance_;
+}
+inline void SampleConfig::set_increased_st_distance(double value) {
+  
+  increased_st_distance_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.increased_st_distance)
 }
 
 // -------------------------------------------------------------------

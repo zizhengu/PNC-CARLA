@@ -39,5 +39,7 @@ propogate {
     acc_ref : 1.0 
     dec_ref : 2.0
     lane_width: 4.0
+    increased_sl_distance: 1.0
+    increased_st_distance: 0.02
   }
 }

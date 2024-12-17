@@ -53,6 +53,8 @@ public:
         int l_sample_num = 8;
         double acc_ref = 3.0;
         double dec_ref = 4.0;
+        double increased_sl_distance = 1.0;
+        double increased_st_distance = 0.02;
     };
 
     struct CostParam
