@@ -29,6 +29,8 @@ message FpbConfig {
     double layer_time = 1;
     double step = 2;
     int32 tree_height = 3;
+    double l_ref_to_left_road_bound = 4;
+    double l_ref_to_right_road_bound = 5;
 }
 
 message SampleConfig {

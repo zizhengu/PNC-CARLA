@@ -46,7 +46,9 @@ public:
     {
         double layer_time = 1.0;
         double step = 0.2;
-        double tree_height = 1.0;
+        int tree_height = 1.0;
+        double l_ref_to_left_road_bound = 6.0;
+        double l_ref_to_right_road_bound = 2.0;
         double s_sample_distance = 5.0;
         int s_sample_num = 12;
         double l_sample_distance = 1.0;
@@ -176,6 +178,9 @@ private:
     bool GenerateTrajectory(const std::vector<STPoint> &final_speed_profile, const std::vector<TrajectoryPoint> &path_trajectory,
                             const std::vector<double> &path_index2s, const double &planning_start_point_time_stamped,
                             std::vector<TrajectoryPoint> &trajectory);
+
+    double GetMinDistanceFromEgoToObs(const FrenetPoint &forward_traj, const FrenetPoint &surr_traj,
+                                      const double obs_length, const double obs_width);
 
     std::vector<derived_object_msgs::msg::Object> _static_obstacles;  // 静态障碍物
     std::vector<derived_object_msgs::msg::Object> _dynamic_obstacles; // 动态障碍物

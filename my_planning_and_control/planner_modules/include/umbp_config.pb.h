@@ -537,6 +537,18 @@ class FpbConfig : public ::google::protobuf::Message /* @@protoc_insertion_point
   double step() const;
   void set_step(double value);
 
+  // double l_ref_to_left_road_bound = 4;
+  void clear_l_ref_to_left_road_bound();
+  static const int kLRefToLeftRoadBoundFieldNumber = 4;
+  double l_ref_to_left_road_bound() const;
+  void set_l_ref_to_left_road_bound(double value);
+
+  // double l_ref_to_right_road_bound = 5;
+  void clear_l_ref_to_right_road_bound();
+  static const int kLRefToRightRoadBoundFieldNumber = 5;
+  double l_ref_to_right_road_bound() const;
+  void set_l_ref_to_right_road_bound(double value);
+
   // int32 tree_height = 3;
   void clear_tree_height();
   static const int kTreeHeightFieldNumber = 3;
@@ -549,6 +561,8 @@ class FpbConfig : public ::google::protobuf::Message /* @@protoc_insertion_point
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   double layer_time_;
   double step_;
+  double l_ref_to_left_road_bound_;
+  double l_ref_to_right_road_bound_;
   ::google::protobuf::int32 tree_height_;
   mutable int _cached_size_;
   friend struct  protobuf_umbp_5fconfig_2eproto::TableStruct;
@@ -1270,6 +1284,34 @@ inline void FpbConfig::set_tree_height(::google::protobuf::int32 value) {
   
   tree_height_ = value;
   // @@protoc_insertion_point(field_set:planning.umbp.FpbConfig.tree_height)
+}
+
+// double l_ref_to_left_road_bound = 4;
+inline void FpbConfig::clear_l_ref_to_left_road_bound() {
+  l_ref_to_left_road_bound_ = 0;
+}
+inline double FpbConfig::l_ref_to_left_road_bound() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.FpbConfig.l_ref_to_left_road_bound)
+  return l_ref_to_left_road_bound_;
+}
+inline void FpbConfig::set_l_ref_to_left_road_bound(double value) {
+  
+  l_ref_to_left_road_bound_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.FpbConfig.l_ref_to_left_road_bound)
+}
+
+// double l_ref_to_right_road_bound = 5;
+inline void FpbConfig::clear_l_ref_to_right_road_bound() {
+  l_ref_to_right_road_bound_ = 0;
+}
+inline double FpbConfig::l_ref_to_right_road_bound() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.FpbConfig.l_ref_to_right_road_bound)
+  return l_ref_to_right_road_bound_;
+}
+inline void FpbConfig::set_l_ref_to_right_road_bound(double value) {
+  
+  l_ref_to_right_road_bound_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.FpbConfig.l_ref_to_right_road_bound)
 }
 
 // -------------------------------------------------------------------

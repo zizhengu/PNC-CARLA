@@ -82,6 +82,8 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, layer_time_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, step_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, tree_height_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, l_ref_to_left_road_bound_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, l_ref_to_right_road_bound_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -127,10 +129,10 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] = {
   { 16, -1, sizeof(UserCost)},
   { 22, -1, sizeof(NavigationCost)},
   { 27, -1, sizeof(FpbConfig)},
-  { 34, -1, sizeof(SampleConfig)},
-  { 47, -1, sizeof(PropogateConfig)},
-  { 53, -1, sizeof(CostConfig)},
-  { 62, -1, sizeof(Config)},
+  { 36, -1, sizeof(SampleConfig)},
+  { 49, -1, sizeof(PropogateConfig)},
+  { 55, -1, sizeof(CostConfig)},
+  { 64, -1, sizeof(Config)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -239,30 +241,31 @@ void AddDescriptorsImpl() {
       "go_to_obs\030\001 \001(\001\"N\n\010UserCost\022\036\n\026late_oper"
       "ate_unit_cost\030\001 \001(\001\022\"\n\032cancel_operation_"
       "unit_cost\030\002 \001(\001\")\n\016NavigationCost\022\027\n\017ref"
-      "_line_change\030\001 \001(\001\"B\n\tFpbConfig\022\022\n\nlayer"
-      "_time\030\001 \001(\001\022\014\n\004step\030\002 \001(\001\022\023\n\013tree_height"
-      "\030\003 \001(\005\"\344\001\n\014SampleConfig\022\031\n\021s_sample_dist"
-      "ance\030\001 \001(\001\022\024\n\014s_sample_num\030\002 \001(\005\022\031\n\021l_sa"
-      "mple_distance\030\003 \001(\001\022\024\n\014l_sample_num\030\004 \001("
-      "\005\022\017\n\007acc_ref\030\005 \001(\001\022\017\n\007dec_ref\030\006 \001(\001\022\022\n\nl"
-      "ane_width\030\007 \001(\001\022\035\n\025increased_sl_distance"
-      "\030\010 \001(\001\022\035\n\025increased_st_distance\030\t \001(\001\"e\n"
-      "\017PropogateConfig\022%\n\003fpb\030\001 \001(\0132\030.planning"
-      ".umbp.FpbConfig\022+\n\006sample\030\002 \001(\0132\033.planni"
-      "ng.umbp.SampleConfig\"\335\001\n\nCostConfig\0221\n\ne"
-      "fficiency\030\001 \001(\0132\035.planning.umbp.Efficien"
-      "cyCost\022)\n\006safety\030\002 \001(\0132\031.planning.umbp.S"
-      "afetyCost\022%\n\004user\030\003 \001(\0132\027.planning.umbp."
-      "UserCost\0221\n\nnavigation\030\004 \001(\0132\035.planning."
-      "umbp.NavigationCost\022\027\n\017discount_factor\030\005"
-      " \001(\001\"\223\001\n\006Config\022\014\n\004name\030\001 \001(\t\022\017\n\007version"
-      "\030\002 \001(\t\022\016\n\006status\030\003 \001(\t\022\'\n\004cost\030\004 \001(\0132\031.p"
-      "lanning.umbp.CostConfig\0221\n\tpropogate\030\005 \001"
-      "(\0132\036.planning.umbp.PropogateConfigb\006prot"
-      "o3"
+      "_line_change\030\001 \001(\001\"\207\001\n\tFpbConfig\022\022\n\nlaye"
+      "r_time\030\001 \001(\001\022\014\n\004step\030\002 \001(\001\022\023\n\013tree_heigh"
+      "t\030\003 \001(\005\022 \n\030l_ref_to_left_road_bound\030\004 \001("
+      "\001\022!\n\031l_ref_to_right_road_bound\030\005 \001(\001\"\344\001\n"
+      "\014SampleConfig\022\031\n\021s_sample_distance\030\001 \001(\001"
+      "\022\024\n\014s_sample_num\030\002 \001(\005\022\031\n\021l_sample_dista"
+      "nce\030\003 \001(\001\022\024\n\014l_sample_num\030\004 \001(\005\022\017\n\007acc_r"
+      "ef\030\005 \001(\001\022\017\n\007dec_ref\030\006 \001(\001\022\022\n\nlane_width\030"
+      "\007 \001(\001\022\035\n\025increased_sl_distance\030\010 \001(\001\022\035\n\025"
+      "increased_st_distance\030\t \001(\001\"e\n\017Propogate"
+      "Config\022%\n\003fpb\030\001 \001(\0132\030.planning.umbp.FpbC"
+      "onfig\022+\n\006sample\030\002 \001(\0132\033.planning.umbp.Sa"
+      "mpleConfig\"\335\001\n\nCostConfig\0221\n\nefficiency\030"
+      "\001 \001(\0132\035.planning.umbp.EfficiencyCost\022)\n\006"
+      "safety\030\002 \001(\0132\031.planning.umbp.SafetyCost\022"
+      "%\n\004user\030\003 \001(\0132\027.planning.umbp.UserCost\0221"
+      "\n\nnavigation\030\004 \001(\0132\035.planning.umbp.Navig"
+      "ationCost\022\027\n\017discount_factor\030\005 \001(\001\"\223\001\n\006C"
+      "onfig\022\014\n\004name\030\001 \001(\t\022\017\n\007version\030\002 \001(\t\022\016\n\006"
+      "status\030\003 \001(\t\022\'\n\004cost\030\004 \001(\0132\031.planning.um"
+      "bp.CostConfig\0221\n\tpropogate\030\005 \001(\0132\036.plann"
+      "ing.umbp.PropogateConfigb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1282);
+      descriptor, 1352);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "umbp_config.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
@@ -1517,6 +1520,8 @@ void NavigationCost::set_ref_line_change(double value) {
 const int FpbConfig::kLayerTimeFieldNumber;
 const int FpbConfig::kStepFieldNumber;
 const int FpbConfig::kTreeHeightFieldNumber;
+const int FpbConfig::kLRefToLeftRoadBoundFieldNumber;
+const int FpbConfig::kLRefToRightRoadBoundFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 FpbConfig::FpbConfig()
@@ -1630,6 +1635,32 @@ bool FpbConfig::MergePartialFromCodedStream(
         break;
       }
 
+      // double l_ref_to_left_road_bound = 4;
+      case 4: {
+        if (tag == 33u) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &l_ref_to_left_road_bound_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // double l_ref_to_right_road_bound = 5;
+      case 5: {
+        if (tag == 41u) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &l_ref_to_right_road_bound_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0 ||
@@ -1669,6 +1700,16 @@ void FpbConfig::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->tree_height(), output);
   }
 
+  // double l_ref_to_left_road_bound = 4;
+  if (this->l_ref_to_left_road_bound() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->l_ref_to_left_road_bound(), output);
+  }
+
+  // double l_ref_to_right_road_bound = 5;
+  if (this->l_ref_to_right_road_bound() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->l_ref_to_right_road_bound(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:planning.umbp.FpbConfig)
 }
 
@@ -1691,6 +1732,16 @@ void FpbConfig::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->tree_height(), target);
   }
 
+  // double l_ref_to_left_road_bound = 4;
+  if (this->l_ref_to_left_road_bound() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->l_ref_to_left_road_bound(), target);
+  }
+
+  // double l_ref_to_right_road_bound = 5;
+  if (this->l_ref_to_right_road_bound() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->l_ref_to_right_road_bound(), target);
+  }
+
   // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.FpbConfig)
   return target;
 }
@@ -1706,6 +1757,16 @@ size_t FpbConfig::ByteSizeLong() const {
 
   // double step = 2;
   if (this->step() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // double l_ref_to_left_road_bound = 4;
+  if (this->l_ref_to_left_road_bound() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // double l_ref_to_right_road_bound = 5;
+  if (this->l_ref_to_right_road_bound() != 0) {
     total_size += 1 + 8;
   }
 
@@ -1748,6 +1809,12 @@ void FpbConfig::MergeFrom(const FpbConfig& from) {
   if (from.step() != 0) {
     set_step(from.step());
   }
+  if (from.l_ref_to_left_road_bound() != 0) {
+    set_l_ref_to_left_road_bound(from.l_ref_to_left_road_bound());
+  }
+  if (from.l_ref_to_right_road_bound() != 0) {
+    set_l_ref_to_right_road_bound(from.l_ref_to_right_road_bound());
+  }
   if (from.tree_height() != 0) {
     set_tree_height(from.tree_height());
   }
@@ -1778,6 +1845,8 @@ void FpbConfig::Swap(FpbConfig* other) {
 void FpbConfig::InternalSwap(FpbConfig* other) {
   std::swap(layer_time_, other->layer_time_);
   std::swap(step_, other->step_);
+  std::swap(l_ref_to_left_road_bound_, other->l_ref_to_left_road_bound_);
+  std::swap(l_ref_to_right_road_bound_, other->l_ref_to_right_road_bound_);
   std::swap(tree_height_, other->tree_height_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -1830,6 +1899,34 @@ void FpbConfig::set_tree_height(::google::protobuf::int32 value) {
   
   tree_height_ = value;
   // @@protoc_insertion_point(field_set:planning.umbp.FpbConfig.tree_height)
+}
+
+// double l_ref_to_left_road_bound = 4;
+void FpbConfig::clear_l_ref_to_left_road_bound() {
+  l_ref_to_left_road_bound_ = 0;
+}
+double FpbConfig::l_ref_to_left_road_bound() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.FpbConfig.l_ref_to_left_road_bound)
+  return l_ref_to_left_road_bound_;
+}
+void FpbConfig::set_l_ref_to_left_road_bound(double value) {
+  
+  l_ref_to_left_road_bound_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.FpbConfig.l_ref_to_left_road_bound)
+}
+
+// double l_ref_to_right_road_bound = 5;
+void FpbConfig::clear_l_ref_to_right_road_bound() {
+  l_ref_to_right_road_bound_ = 0;
+}
+double FpbConfig::l_ref_to_right_road_bound() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.FpbConfig.l_ref_to_right_road_bound)
+  return l_ref_to_right_road_bound_;
+}
+void FpbConfig::set_l_ref_to_right_road_bound(double value) {
+  
+  l_ref_to_right_road_bound_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.FpbConfig.l_ref_to_right_road_bound)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

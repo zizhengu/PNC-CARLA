@@ -4,7 +4,7 @@ status: "editting"
 
 cost {
   efficiency {
-    ego_lack_speed_to_desired_unit_cost: 4.0
+    ego_lack_speed_to_desired_unit_cost: 3.0
     ego_over_speed_to_desired_unit_cost: 0.03
     ego_desired_speed_tolerate_gap: 1.0
     leading_distance_th: 120.0
@@ -22,7 +22,7 @@ cost {
   navigation {
     ref_line_change:0.1
   }
-  discount_factor: 0.9
+  discount_factor: 0.8
 }
 
 propogate {
@@ -30,6 +30,8 @@ propogate {
     layer_time: 1.0
     step: 0.2
     tree_height: 3
+    l_ref_to_left_road_bound: 8
+    l_ref_to_right_road_bound: 2
   }
   sample {
     s_sample_distance: 2.0

@@ -14,6 +14,7 @@ UMBPlanner::UMBPlanner() : Node("UMBPlanner")
     google::SetLogDestination(google::GLOG_INFO, "/home/guzizhen/PNC-CARLA/debug_log/umbp_log/");
     google::SetLogDestination(google::GLOG_WARNING, "/home/guzizhen/PNC-CARLA/debug_log/umbp_log/");
     google::SetLogDestination(google::GLOG_ERROR, "/home/guzizhen/PNC-CARLA/debug_log/umbp_log/");
+    FLAGS_log_prefix = false;
     LOG(INFO) << std::fixed << std::setprecision(4)
               << "[UMBP]******************** RUN START: " << "******************";
 
@@ -21,7 +22,7 @@ UMBPlanner::UMBPlanner() : Node("UMBPlanner")
         "/carla_waypoint_publisher/ego_vehicle/get_waypoint");
 
     LOG(INFO) << "[UMBP]********** Setting _reference_speed " << "*************";
-    _reference_speed = 4.0;
+    _reference_speed = 6.0;
     std::string config_path = "/home/guzizhen/PNC-CARLA/my_planning_and_control/planner_modules/config/umbp_config.pb.txt";
 
     ReadConfig(config_path);
@@ -56,6 +57,10 @@ bool UMBPlanner::GetSimParam(const planning::umbp::Config &cfg, SimParam *sim_pa
     sim_param->layer_time = cfg.propogate().fpb().layer_time();
     sim_param->step = cfg.propogate().fpb().step();
     sim_param->tree_height = cfg.propogate().fpb().tree_height();
+    sim_param->tree_height = cfg.propogate().fpb().tree_height();
+    sim_param->l_ref_to_left_road_bound = cfg.propogate().fpb().l_ref_to_left_road_bound();
+    sim_param->l_ref_to_right_road_bound = cfg.propogate().fpb().l_ref_to_right_road_bound();
+
     sim_param->s_sample_distance = cfg.propogate().sample().s_sample_distance();
     sim_param->s_sample_num = cfg.propogate().sample().s_sample_num();
     sim_param->l_sample_distance = cfg.propogate().sample().l_sample_distance();
@@ -270,8 +275,8 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
             matplot::line(obs_s + 2.5, obs_l - 1, obs_s - 2.5, obs_l - 1)->line_width(2);
             matplot::line(obs_s - 2.5, obs_l - 1, obs_s - 2.5, obs_l + 1)->line_width(2);
         }
-        matplot::xlim({-5, 60}); // 使用std::vector<double> 初始化
-        matplot::ylim({-5, 5});  // 使用std::vector<double> 初始化
+        matplot::xlim({-5, 60});  // 使用std::vector<double> 初始化
+        matplot::ylim({-10, 10}); // 使用std::vector<double> 初始化
         matplot::title("SL Path and Obstacles");
     }
     _plot_count++;
@@ -804,11 +809,11 @@ bool UMBPlanner::PropagateScenario(
         // get next_sample_point
         s_index += delta_s_num;
         l_index += delta_l_num;
-        // TODO: add road bound
         l_index = std::max(std::min(l_index, (int)(_sim_param.l_sample_num)), 0);
         s_index = std::min(s_index, (int)(_sim_param.s_sample_num - 1));
         next_sample_point = _local_sample_points[s_index][l_index];
-        if (next_sample_point.l <= -ego_state.l - 2 || next_sample_point.l >= -ego_state.l + 6)
+        // check road bound
+        if (next_sample_point.l <= -ego_state.l - _sim_param.l_ref_to_right_road_bound || next_sample_point.l >= -ego_state.l + _sim_param.l_ref_to_left_road_bound)
         {
             LOG(INFO) << std::fixed << std::setprecision(4)
                       << "******Action Sequence " << seq_id << " Sub-Scenario " << sub_seq_id << "Reach Road Bound Restrict  ******";
@@ -832,7 +837,7 @@ bool UMBPlanner::PropagateScenario(
         l_index = std::max(std::min(l_index, (int)(_sim_param.l_sample_num)), 0);
         s_index = std::min(s_index, (int)(_sim_param.s_sample_num - 1));
         next_sample_point = _local_sample_points[s_index][l_index];
-        if (next_sample_point.l <= -ego_state.l - 2 || next_sample_point.l >= -ego_state.l + 6)
+        if (next_sample_point.l <= -ego_state.l - _sim_param.l_ref_to_right_road_bound || next_sample_point.l >= -ego_state.l + _sim_param.l_ref_to_left_road_bound)
         {
             LOG(INFO) << std::fixed << std::setprecision(4)
                       << "******Action Sequence " << seq_id << " Sub-Scenario " << sub_seq_id << "Reach Road Bound Restrict  ******";
@@ -992,11 +997,11 @@ bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
         double ego_velocity;
         if (i == static_cast<size_t>(0))
         {
-            ego_velocity = std::hypot((forward_trajs[i].s), (forward_trajs[i].l)) / (_sim_param.layer_time);
+            ego_velocity = std::abs(forward_trajs[i].s) / (_sim_param.layer_time);
         }
         else
         {
-            ego_velocity = std::hypot((forward_trajs[i].s - forward_trajs[i - 1].s), (forward_trajs[i].l - forward_trajs[i - 1].l)) / (_sim_param.layer_time);
+            ego_velocity = std::abs(forward_trajs[i].s - forward_trajs[i - 1].s) / (_sim_param.layer_time);
         }
         cost_tmp.efficiency.ego_to_desired_vel = _cost_param.ego_lack_speed_to_desired_unit_cost * std::abs(ego_velocity - _reference_speed);
         // LOG(INFO) << std::fixed << std::setprecision(4) << " cost_tmp.efficiency.ego_to_desired_vel " << cost_tmp.efficiency.ego_to_desired_vel;
@@ -1009,8 +1014,8 @@ bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
                 LOG(ERROR) << std::fixed << std::setprecision(4)
                            << "[UMBP]****** forward_trajs.size() != surr_traj.second.size()  ******";
             }
-            double distance = std::hypot((forward_trajs[i].s - surr_traj.second[i].s), (forward_trajs[i].l - surr_traj.second[i].l));
-            if (distance >= 10)
+            double distance = GetMinDistanceFromEgoToObs(forward_trajs[i], surr_traj.second[i], 5.0, 3.0);
+            if (distance >= 8.0)
             {
                 cost_tmp.safety.ego_to_obs += 0;
             }
@@ -1179,4 +1184,34 @@ bool UMBPlanner::GenerateTrajectory(const std::vector<STPoint> &final_speed_prof
         trajectory.emplace_back(trajectory_point);
     }
     return true;
+}
+
+double UMBPlanner::GetMinDistanceFromEgoToObs(const FrenetPoint &forward_traj, const FrenetPoint &surr_traj,
+                                              const double obs_length, const double obs_width)
+{
+    std::vector<FrenetPoint> obs_points;
+    FrenetPoint point_1, point_2, point_3, point_4;
+    point_1.s = surr_traj.s + obs_length / 2.0;
+    point_2.s = surr_traj.s + obs_length / 2.0;
+    point_3.s = surr_traj.s - obs_length / 2.0;
+    point_4.s = surr_traj.s - obs_length / 2.0;
+    point_1.l = surr_traj.l + obs_width / 2.0;
+    point_2.l = surr_traj.l - obs_width / 2.0;
+    point_3.l = surr_traj.l - obs_width / 2.0;
+    point_4.l = surr_traj.l + obs_width / 2.0;
+    obs_points.emplace_back(point_1);
+    obs_points.emplace_back(point_2);
+    obs_points.emplace_back(point_3);
+    obs_points.emplace_back(point_4);
+
+    double min_distance = std::numeric_limits<double>::max();
+    for (auto &point : obs_points)
+    {
+        double cur_distance = std::hypot((forward_traj.s - point.s), (forward_traj.l - point.l));
+        if (cur_distance < min_distance)
+        {
+            min_distance = cur_distance;
+        }
+    }
+    return min_distance;
 }

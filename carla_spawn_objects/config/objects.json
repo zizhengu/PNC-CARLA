@@ -216,6 +216,18 @@
             }
         },
         {
+            "type": "vehicle.audi.etron",
+            "id": "vehicle_2",
+            "spawn_point": {
+                "x": 92.4,
+                "y": -113.9,
+                "z": 2.0,
+                "roll": 0.0,
+                "pitch": 0.0,
+                "yaw": 90.0
+            }
+        },
+        {
             "type": "vehicle.nissan.micra",
             "id": "vehicle_8",
             "spawn_point": {
