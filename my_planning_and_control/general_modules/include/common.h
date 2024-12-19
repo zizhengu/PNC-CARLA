@@ -3,7 +3,7 @@
 #include <vector>
 #include "Eigen/Dense"
 #include "rclcpp/rclcpp.hpp"
-
+#include <cmath>
 #include "geometry_msgs/msg/pose.hpp"
 #include "derived_object_msgs/msg/object.hpp"
 
@@ -12,9 +12,10 @@
 #include "tf2/convert.h"
 #include "tf2_geometry_msgs/tf2_geometry_msgs.h"
 
-//轨迹点，包含速度
-struct TrajectoryPoint{
-    //初始化列表。
+// 轨迹点，包含速度
+struct TrajectoryPoint
+{
+    // 初始化列表。
     TrajectoryPoint() : x(0.0), y(0.0), heading(0.0), kappa(0.0), v(0.0),
                         ax(0.0), ay(0.0), a_tau(0.0), time_stamped(0.0) {};
     double x;
@@ -28,8 +29,9 @@ struct TrajectoryPoint{
     double time_stamped;
 };
 
-//路径点，不包含速度
-struct PathPoint{
+// 路径点，不包含速度
+struct PathPoint
+{
     PathPoint() : x(0.0), y(0.0), heading(0.0), kappa(0.0) {};
     double x;
     double y;
@@ -37,32 +39,43 @@ struct PathPoint{
     double kappa;
 };
 
-//Frenet坐标系,共八个坐标未知量待求，详情见决策规划讲义第一章第三讲
-struct FrenetPoint{
+// Frenet坐标系,共八个坐标未知量待求，详情见决策规划讲义第一章第三讲
+struct FrenetPoint
+{
     FrenetPoint() : s(0.0), l(0.0), s_dot(0.0), l_dot(0.0), l_prime(0.0),
-                    s_dot_dot(0.0), l_dot_dot(0.0), l_prime_prime(0.0) {};
+                    s_dot_dot(0.0), l_dot_dot(0.0), l_prime_prime(0.0), t(0.0) {};
     double s;
     double l;
     double s_dot;
     double l_dot;
-    double l_prime; //l_prime =  dl/ds
+    double l_prime; // l_prime =  dl/ds
     double s_dot_dot;
     double l_dot_dot;
     double l_prime_prime;
+    double t;
 };
 
-struct STPoint{
+struct STPoint
+{
     STPoint() : t(0.0), s(0.0), s_dot(0.0), s_dot_dot(0.0) {};
     double t, s, s_dot, s_dot_dot;
 
     // 常量引用能够提高效率并避免不必要的内存开销,内存管理。因此，在需要传递对象但又不希望修改它们时，使用常量引用是一个良好的选择
-    bool operator == (const STPoint &other)
+    bool operator==(const STPoint &other)
     {
         return (t == other.t) && (s == other.s) && (s_dot == other.s_dot) && (s_dot_dot == other.s_dot_dot);
     }
 };
 
-struct VehicleState{
+struct BezierPoint
+{
+    BezierPoint() : t(0.0), s(0.0), s_dot(0.0), s_dot_dot(0.0),
+                    l(0.0), l_dot(0.0), l_dot_dot(0.0) {};
+    double t, s, s_dot, s_dot_dot, l, l_dot, l_dot_dot;
+};
+
+struct VehicleState
+{
     VehicleState() : x(0.0), y(0.0), z(0.0), heading(0.0), v(0.0), ax(0.0), ay(0.0),
                      omega(0.0), alpha(0.0), time_stamp(0.0), id(0),
                      flag_imu(false), flag_ode(false), flag_info(false) {};
@@ -78,6 +91,35 @@ struct ControlCMD
     double throttle;
     double brake;
 };
+
+/**
+ * 贝塞尔曲线所需函数
+ */
+inline double factorial_bezier(int n)
+{
+    double result = 1.0;
+    for (int i = 1; i <= n; ++i)
+    {
+        result *= i;
+    }
+    return result;
+}
+
+// 计算组合数 C(n, k)
+inline double combination_bezier(int n, int k)
+{
+    return factorial_bezier(n) / (factorial_bezier(k) * factorial_bezier(n - k));
+}
+
+// 计算 Bernstein 多项式 B_i(t)
+inline double bernstein(int i, int n, double t)
+{
+    return combination_bezier(n, i) * std::pow(1 - t, n - i) * std::pow(t, i);
+}
+
+// 生成五阶贝塞尔曲线
+std::vector<FrenetPoint> GenerateBezierCurve(const std::vector<FrenetPoint> &controlPoints, double totalTime, int numSamples);
+
 // 计算路径的偏航角与曲率
 /**
  * 这是一个值传递（pass-by-value）的参数。
@@ -94,7 +136,7 @@ struct ControlCMD
  */
 void Calculate_heading_and_kappa(std::shared_ptr<std::vector<PathPoint>> path);
 
-//计算投影点
+// 计算投影点
 /**
  * path 待被投影路径
  * point 待投影点
@@ -107,7 +149,7 @@ void Calculate_projection_point(std::shared_ptr<std::vector<PathPoint>> path, co
 void Calculate_projection_point(std::shared_ptr<std::vector<PathPoint>> path, const TrajectoryPoint &trajectory_point,
                                 int &match_point_index, PathPoint &match_point, PathPoint &project_point);
 
-//计算index2s表
+// 计算index2s表
 std::vector<double> calculate_index_to_s(std::shared_ptr<std::vector<PathPoint>> path, std::shared_ptr<VehicleState> vehicle_state);
 
 //----------笛卡尔坐标到Frenet坐标转换----------
@@ -131,7 +173,7 @@ void cartesion_set_to_frenet_set(const std::vector<derived_object_msgs::msg::Obj
  * trajectory_point : planning_start_point
  * path: reference_line
  */
-void cartesion_set_to_frenet_set(const TrajectoryPoint &trajectory_point, const std::vector<PathPoint> &path, 
+void cartesion_set_to_frenet_set(const TrajectoryPoint &trajectory_point, const std::vector<PathPoint> &path,
                                  std::shared_ptr<VehicleState> vehicle_state,
                                  std::vector<FrenetPoint> &frenet_set);
 
@@ -148,7 +190,7 @@ std::vector<TrajectoryPoint> frenet_to_cartesion(const std::vector<FrenetPoint> 
                                                  const std::shared_ptr<std::vector<PathPoint>> cartesian_path,
                                                  const std::vector<double> cartesian_path_index2s);
 
-//object转换为轨迹点
+// object转换为轨迹点
 TrajectoryPoint object_to_trajectory_point(const derived_object_msgs::msg::Object object);
-//车辆状态转换为轨迹点
+// 车辆状态转换为轨迹点
 TrajectoryPoint vehicle_state_to_trajectory_point(const std::shared_ptr<VehicleState> vehicle_state);

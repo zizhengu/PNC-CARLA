@@ -295,8 +295,18 @@ public:
     // 调用umbplanner获取轨迹
     auto current_time = this->get_clock()->now();
     // _emplanner->planning_run_step(_reference_line, _current_ego_state, _object_arrry, _trajectory);
-    _umbplanner->RunOnce(_reference_line, _current_ego_state, _object_arrry, _trajectory, _emergency_stop_signal);
+    TicToc umbp_runonce_timer;
+    if (!(_umbplanner->RunOnce(_reference_line, _current_ego_state, _object_arrry, _trajectory, _emergency_stop_signal)))
+    {
+      LOG(ERROR) << std::fixed << std::setprecision(4)
+                 << "[UMBP]****** UMBP RunOnce FAILED  ******";
+      _emergency_stop_signal = true;
+    }
+    LOG(INFO) << std::fixed << std::setprecision(4)
+              << "[UMBP][Process] Umbp Runonce Time :"
+              << umbp_runonce_timer.toc() << "ms";
 
+    // Evaluate
     if (std::abs(_current_ego_state->v) > 0.01)
     {
       _total_v += std::abs(_current_ego_state->v);
@@ -401,16 +411,8 @@ public:
     // 由轨迹搜索出目标点
     TrajectoryPoint target_point;
     double cur_time = this->now().seconds();
-    double predicted_time = cur_time + 0.2;
+    double predicted_time = cur_time + 0.4;
     int target_point_index = -1;
-    // RCLCPP_INFO(this->get_logger(),"当前时刻:%.3f",cur_time.seconds());
-    // int index = 1;
-    // for (size_t i = 0; i < _trajectory->size(); i++)
-    // {
-    //   RCLCPP_INFO(this->get_logger(), "(序号%d:,x:%.3f, y:%.3f, heading:%.3f, v:%.3f, a_tau:%.3f, time_stampe:%.3f)",
-    //   index,_trajectory->at(i).x,_trajectory->at(i).y,_trajectory->at(i).heading,_trajectory->at(i).v,_trajectory->at(i).a_tau,_trajectory->at(i).time_stamped.seconds());
-    //   index++;
-    // }
 
     for (int i = 0; i < (int)_trajectory.size() - 1; i++)
     {
@@ -438,18 +440,6 @@ public:
     double k_a_tau = (_trajectory.at(target_point_index + 1).a_tau - _trajectory.at(target_point_index).a_tau) / delta_t;
     target_point.a_tau = _trajectory.at(target_point_index).a_tau + k_a_tau * dt;
 
-#ifdef MAIN_DEBUG
-    // RCLCPP_INFO(this->get_logger(),"当前位姿(%.3f,%.3f,%.3f,%.3f),期望位姿(%.3f,%.3f,%.3f,%.3f)",
-    // _current_ego_state->x,_current_ego_state->y,_current_ego_state->heading,_current_ego_state->v,
-    // target_point.x,target_point.y,target_point.heading, target_point.v);
-    // RCLCPP_INFO(this->get_logger(),"参考线起点位姿(%.3f,%.3f,%.3f),参考线终点位姿(%.3f,%.3f,%.3f)",
-    //             _reference_line->at(0).x,_reference_line->at(0).y,_reference_line->at(0).heading,
-    //             _reference_line->back().x,_reference_line->back().y,_reference_line->back().heading);
-
-#endif
-
-    // RCLCPP_INFO(this->get_logger(),"目标位置(%.2f,%.2f)",target_pose.pose.position.x,target_pose.pose.position.y);
-
     // 计算并发布控制指令
     carla_msgs::msg::CarlaEgoVehicleControl control_msg;
     control_msg.hand_brake = false;
@@ -468,7 +458,7 @@ public:
       control_msg.brake = 0.0;
     }
     control_msg.steer = _lateral_lqr_controller->run_step(target_point, *_current_ego_state, _control_time_step);
-
+    // RCLCPP_INFO(this->get_logger(), "End Calculate Contorl Msg !!!");
     // double cur_t = this->now().seconds();
     // ControlCMD cmd;
     // // 串联PID纵向控制

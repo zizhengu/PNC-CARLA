@@ -1,5 +1,34 @@
 #include "common.h"
 
+// 生成五阶贝塞尔曲线
+std::vector<FrenetPoint> GenerateBezierCurve(const std::vector<FrenetPoint> &controlPoints, double totalTime, int numSamples)
+{
+    std::vector<FrenetPoint> curve;
+    int n = controlPoints.size() - 1; // 贝塞尔曲线的阶数（这里是5）
+
+    for (int sample = 0; sample <= numSamples; ++sample)
+    {
+        double t_real = static_cast<double>(sample) / numSamples * totalTime; // 真实时间 t_real ∈ [0, totalTime]
+        double t_bezier = t_real / totalTime;                                 // 归一化到 t_bezier ∈ [0, 1]
+
+        double s = 0.0;
+        double l = 0.0;
+        FrenetPoint current_point;
+        for (int i = 0; i <= n; ++i)
+        {
+
+            double B = bernstein(i, n, t_bezier); // Bernstein 多项式值
+            s += B * controlPoints[i].s;
+            l += B * controlPoints[i].l;
+        }
+        current_point.s = s;
+        current_point.l = l;
+        current_point.t = t_real;
+        curve.emplace_back(current_point); // 生成曲线点
+    }
+    return curve;
+}
+
 void Calculate_heading_and_kappa(std::shared_ptr<std::vector<PathPoint>> path)
 {
     int n = path->size();

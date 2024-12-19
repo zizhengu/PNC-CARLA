@@ -34,12 +34,12 @@ propogate {
     l_ref_to_right_road_bound: 2
   }
   sample {
-    s_sample_distance: 2.0
-    s_sample_num: 30
-    l_sample_distance: 4.0
-    l_sample_num: 2
-    acc_ref : 1.0 
-    dec_ref : 2.0
+    s_sample_distance: 1.0
+    s_sample_num: 60
+    l_sample_distance: 2.0
+    l_sample_num: 4
+    acc_ref : 2.0 
+    dec_ref : 3.0
     lane_width: 4.0
     increased_sl_distance: 1.0
     increased_st_distance: 0.02

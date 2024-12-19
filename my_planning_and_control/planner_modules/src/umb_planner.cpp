@@ -121,6 +121,7 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     }
 
     //----------------------------2.确定规划起点并将其投影到frenet坐标系--------------------------
+    // RCLCPP_INFO(this->get_logger(), "Start CalculatePlanningStartPoint !!!");
     TrajectoryPoint planning_start_point = CalculatePlanningStartPoint(ego_state);
     std::vector<FrenetPoint> temp_set;
     cartesion_set_to_frenet_set(planning_start_point, *reference_line, ego_state, temp_set);
@@ -137,19 +138,21 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     _local_sample_points = frenet_sample_point;
 
     //----------------------------4.进行FPB-Tree前向传播--------------------------
+    // RCLCPP_INFO(this->get_logger(), "Start RunUmpb !!!");
     TicToc umbp_timer;
     if (!RunUmpb(planning_start_point_frenet, forward_prop_agent_set))
     {
         LOG(ERROR) << std::fixed << std::setprecision(4)
                    << "[UMBP]****** UMBP Cycle FAILED  ******";
-        return false;
+        emergency_stop_signal = true;
+        return true;
     }
     LOG(INFO) << std::fixed << std::setprecision(4)
               << "[UMBP][Process] RunUmpb Time :"
               << umbp_timer.toc() << "ms";
 
     std::vector<FrenetPoint> fpb_path = _forward_trajs[_winner_id];
-    if (fpb_path[1].s == fpb_path[2].s)
+    if (fpb_path[0].s == fpb_path[1].s)
     {
         emergency_stop_signal = true;
         RCLCPP_INFO(UMBP_LOG, "---------planning moudle emergency_stop_signal!!! -------");
@@ -157,13 +160,26 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     }
 
     //-------------------------------------5.路径规划----------------------------------------
-    // 5.1 对决策的SL曲线进行加密
+    // 5.1 对决策的SL曲线进行贝塞尔加密
     std::vector<FrenetPoint> fpb_path_increased;
-    if (!IncreaseFpbPath(fpb_path, _sim_param.increased_sl_distance, fpb_path_increased))
-    {
-        LOG(ERROR) << "[UMBP]****** IncreaseFpbPath FAILED  ******";
-        return false;
-    }
+    int beszier_num_points = 50;
+    _increased_sl_sample_num = static_cast<int>(beszier_num_points / 5);
+    fpb_path_increased = GenerateBezierCurve(fpb_path, static_cast<double>((fpb_path.size() - 1) * _sim_param.layer_time), beszier_num_points);
+
+    // if (!IncreaseFpbPath(fpb_path, _sim_param.increased_sl_distance, fpb_path_increased))
+    // {
+    //     LOG(INFO) << "[UMBP]****** IncreaseFpbPath FAILED  ******";
+    //     emergency_stop_signal = true;
+    //     return true;
+    // }
+
+    // for (const auto &points : fpb_path_increased)
+    // {
+    //     LOG(INFO) << std::fixed << std::setprecision(3)
+    //               << "fpb_path_increased: (t: " << points.t << " s: " << points.s
+    //               << " l: " << points.l << ")";
+    // }
+    // LOG(INFO) << "----------------------------------";
 
     // 5.2 将决策SL曲线转换为轨迹
     auto reference_index2s = calculate_index_to_s(reference_line, ego_state);
@@ -179,6 +195,7 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
                                   std::hypot(fpb_path_trajectory[i].x - fpb_path_trajectory[i - 1].x, fpb_path_trajectory[i].y - fpb_path_trajectory[i - 1].y));
     }
     // 6.2 对决策的ST曲线进行加密
+    // RCLCPP_INFO(this->get_logger(), "Start IncreaseFpbSpeedProfile !!!");
     std::vector<STPoint> fpb_speed_profile_increased;
     if (!IncreaseFpbSpeedProfile(fpb_path_increased, _sim_param.increased_st_distance, _sim_param.layer_time, fpb_speed_profile_increased))
     {
@@ -196,6 +213,7 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     //-------------------------------------7.生成最终规划----------------------------------------
     // 7.1 将路径规划结果和速度规划结果拼成轨迹
     std::vector<TrajectoryPoint> init_trajectory;
+    // RCLCPP_INFO(this->get_logger(), "Start GenerateTrajectory !!!");
     if (!GenerateTrajectory(fpb_speed_profile_increased, fpb_path_trajectory, path_index2s, planning_start_point.time_stamped, init_trajectory))
     {
         LOG(ERROR) << "[UMBP]****** GenerateTrajectory FAILED  ******";
@@ -203,6 +221,7 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     }
 
     // 7.2轨迹拼接
+    // RCLCPP_INFO(this->get_logger(), "Start Trajectory Combine !!!");
     final_trajectory.clear();
     if (!_switch_trajectory.empty())
     {
@@ -216,29 +235,17 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
         final_trajectory.emplace_back(trajectory_point);
     }
 
-    int print_count = 0;
-    for (const auto &points : final_trajectory)
-    {
-        if (print_count % 50 == 0)
-        {
-            LOG(INFO) << std::fixed << std::setprecision(2)
-                      << "final_trajectory: (t: " << points.time_stamped << " x: " << points.x
-                      << " y: " << points.y << " v: " << points.v
-                      << " ax: " << points.ax << " ay: " << points.ay << ")";
-        }
-        print_count += 1;
-    }
-    LOG(INFO) << "----------------------------------";
-
     // 7.3上一周期轨迹赋值
+    // RCLCPP_INFO(this->get_logger(), "Start Last Trajectory Combine !!!");
     _previous_trajectory.clear();
     for (auto &&trajectory_point : final_trajectory)
     {
         _previous_trajectory.emplace_back(trajectory_point);
     }
 
-    //-------------------------------------6.绘制ST、SL图----------------------------------------
-    // 6.1绘制SL图
+    //-------------------------------------8.绘制ST、SL图----------------------------------------
+    // 8.1绘制SL图
+    // RCLCPP_INFO(this->get_logger(), "Start Plot SL !!!");
     if (_plot_count % 5 == 0)
     {
         if (_plot_count == 0) // 初始化窗口，仅执行一次
@@ -332,7 +339,7 @@ bool UMBPlanner::RunUmpb(const FrenetPoint ego_state, const ForwardPropAgentSet 
     // {
     //     thread_set[i].join();
     // }
-
+    // RCLCPP_INFO(this->get_logger(), "Start PropagateActionSequence !!!");
     for (size_t i = 0; i < static_cast<size_t>(num_sequence); i++)
     {
         PropagateActionSequence(ego_state, forward_prop_agent_set, behaviour_tree[i], i);
@@ -375,26 +382,27 @@ bool UMBPlanner::RunUmpb(const FrenetPoint ego_state, const ForwardPropAgentSet 
     //     }
     //     LOG(INFO) << line_info.str();
     // }
+    int behavior_sucess_num = 0;
+    for (auto res : _sim_res)
+    {
+        behavior_sucess_num += res;
+    }
     LOG(INFO) << "[UMBP][Result]Propagate sucess with "
-              << num_sequence << " behaviors.";
+              << behavior_sucess_num << " behaviors.";
 
     // * Evaluate
-    // TicToc evaluate_timer;
-    // evaluate_timer.tic();
+    // RCLCPP_INFO(this->get_logger(), "Start EvaluateMultiThreadSimResults !!!");
     if (!EvaluateMultiThreadSimResults(&_winner_id, &_winner_score))
     {
         LOG(ERROR)
-            << "[Eudm][Fatal]fail to evaluate multi-thread sim results. Exit";
+            << "[Eudm][Fatal]fail to evaluate multi-thread sim results, no feasible result!!. Exit";
         return false;
     }
-    // LOG(INFO) << std::fixed << std::setprecision(4)
-    //           << "[UMBP][Process] EvaluateMultiThreadSimResults Time :"
-    //           << evaluate_timer.toc() << "ms";
 
     LOG(INFO) << std::fixed << std::setprecision(2)
               << "[UMBP][Result] Best id:"
               << _winner_id << " ;"
-              << "Best socre" << _winner_score;
+              << "Best socre " << _winner_score;
 
     std::vector<FrenetPoint> Fpb_win_points = _forward_trajs[_winner_id];
     for (const auto &points : Fpb_win_points)
@@ -549,7 +557,7 @@ void UMBPlanner::ObstacleFileter(const std::shared_ptr<VehicleState> ego_state, 
         if (v_obs <= 0.1)
         {
             // 超出1.5个车长即变道
-            if (longitudinal_d <= 60 && longitudinal_d >= -7.5 && lateral_d <= 10 && lateral_d >= -10)
+            if (longitudinal_d <= 60 && longitudinal_d >= -7.5 && lateral_d <= 20 && lateral_d >= -20)
             {
                 _static_obstacles.push_back(obs);
             }
@@ -681,7 +689,7 @@ bool UMBPlanner::PropagateActionSequence(const FrenetPoint ego_state,
         std::vector<FpbLatAction> forward_lat_behaviors;
         std::vector<FpbLonAction> forward_lon_behaviors;
         std::unordered_map<int, std::vector<FrenetPoint>> surround_trajs;
-
+        // RCLCPP_INFO(this->get_logger(), "Start PropagateScenario %.i !!!", seq_id);
         if (!PropagateScenario(ego_state, surrounding_fsagents, action_seq, seq_id, i, &sim_res,
                                &risky_res, &sim_info, &progress_cost, &tail_cost, &forward_trajs,
                                &forward_lat_behaviors, &forward_lon_behaviors, &surround_trajs))
@@ -715,7 +723,7 @@ bool UMBPlanner::PropagateActionSequence(const FrenetPoint ego_state,
         return false;
         _sim_res[seq_id] = static_cast<int>(0);
     }
-
+    // RCLCPP_INFO(this->get_logger(), "Start Get PropagateActionSequence %.i Min Cost!!!", seq_id);
     double min_cost = std::numeric_limits<double>::max();
     int index = -1;
     for (int i = 0; i < n_sub_threads; i++)
@@ -747,6 +755,7 @@ bool UMBPlanner::PropagateActionSequence(const FrenetPoint ego_state,
     _forward_lon_behaviors[seq_id] = sub_forward_lon_behaviors[index];
     _forward_lat_behaviors[seq_id] = sub_forward_lat_behaviors[index];
     _surround_trajs[seq_id] = sub_surround_trajs[index];
+    // RCLCPP_INFO(this->get_logger(), "Start Get PropagateActionSequence %.i Min Cost Done!!!", seq_id);
     return true;
 }
 
@@ -813,10 +822,10 @@ bool UMBPlanner::PropagateScenario(
         s_index = std::min(s_index, (int)(_sim_param.s_sample_num - 1));
         next_sample_point = _local_sample_points[s_index][l_index];
         // check road bound
-        if (next_sample_point.l <= -ego_state.l - _sim_param.l_ref_to_right_road_bound || next_sample_point.l >= -ego_state.l + _sim_param.l_ref_to_left_road_bound)
+        if (next_sample_point.l <= -ego_state.l - _sim_param.l_ref_to_right_road_bound + 0.5 || next_sample_point.l >= -ego_state.l + _sim_param.l_ref_to_left_road_bound)
         {
             LOG(INFO) << std::fixed << std::setprecision(4)
-                      << "******Action Sequence " << seq_id << " Sub-Scenario " << sub_seq_id << "Reach Road Bound Restrict  ******";
+                      << "******Action Sequence " << seq_id << " Sub-Scenario " << sub_seq_id << " Reach Road Bound Restrict  ******";
             return false;
         }
         if (next_sample_point.s < 1)
@@ -955,9 +964,9 @@ bool UMBPlanner::PropagateScenario(
     // if (!CalculateCost(*sub_forward_trajs, *sub_surround_trajs, sub_progress_cost, &is_risky, &risky_ids))
     if (!CalculateCost(sub_forward_trajs_inter, sub_surround_trajs_iter, sub_progress_cost, &is_risky, &risky_ids))
     {
+        LOG(INFO) << std::fixed << std::setprecision(4)
+                  << "******Action Sequence " << seq_id << " Sub-Scenario " << sub_seq_id << " May Crash with Obs, Dangerous !! ******";
         return false;
-        LOG(ERROR) << std::fixed << std::setprecision(4)
-                   << "[UMBP]****** CalculateCost Error  ******";
     }
 
     for (size_t i = 0; i < sub_progress_cost->size(); i++)
@@ -967,16 +976,17 @@ bool UMBPlanner::PropagateScenario(
         sub_tail_cost->safety.ego_to_obs += sub_progress_cost->at(i).safety.ego_to_obs;
     }
 
-    LOG(INFO) << std::fixed << std::setprecision(4)
-              << "sub_tail_cost->efficiency: " << sub_tail_cost->efficiency.ego_to_desired_vel
-              << " sub_tail_cost->navigation: " << sub_tail_cost->navigation.ref_line_change
-              << " sub_tail_cost->safety: " << sub_tail_cost->safety.ego_to_obs
-              << " sub_tail_cost.ave(): " << sub_tail_cost->ave();
-
     if (is_risky)
     {
         *sub_risky_res = 1;
     }
+
+    LOG(INFO) << std::fixed << std::setprecision(4)
+              << "sub_tail_cost->efficiency: " << sub_tail_cost->efficiency.ego_to_desired_vel << " // "
+              << " sub_tail_cost->navigation: " << sub_tail_cost->navigation.ref_line_change << " // "
+              << " sub_tail_cost->safety: " << sub_tail_cost->safety.ego_to_obs << " // "
+              << " sub_tail_cost.ave: " << sub_tail_cost->ave()
+              << " sub_risky_res: " << *sub_risky_res;
 
     *sub_sim_res = static_cast<int>(1);
     return true;
@@ -1008,13 +1018,14 @@ bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
         // safety:
         for (const auto &surr_traj : surround_trajs)
         {
+
             if (forward_trajs.size() != surr_traj.second.size())
             {
                 return false;
                 LOG(ERROR) << std::fixed << std::setprecision(4)
                            << "[UMBP]****** forward_trajs.size() != surr_traj.second.size()  ******";
             }
-            double distance = GetMinDistanceFromEgoToObs(forward_trajs[i], surr_traj.second[i], 5.0, 3.0);
+            double distance = GetMinDistanceFromEgoToObs(forward_trajs[i], surr_traj.second[i], 5.0, 2.5);
             if (distance >= 8.0)
             {
                 cost_tmp.safety.ego_to_obs += 0;
@@ -1023,11 +1034,21 @@ bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
             {
                 cost_tmp.safety.ego_to_obs += (_cost_param.ego_to_obs / distance) * std::pow(_cost_param.discount_factor, i);
             }
-            else
+            // else
+            // {
+            //     *is_risky = true;
+            //     risky_ids->emplace(i);
+            //     cost_tmp.safety.ego_to_obs += (_cost_param.ego_to_obs / (distance * distance + 1e-6)) * std::pow(_cost_param.discount_factor, i);
+            // }
+            else if (distance >= 0.5)
             {
                 *is_risky = true;
                 risky_ids->emplace(i);
                 cost_tmp.safety.ego_to_obs += (_cost_param.ego_to_obs / (distance * distance + 1e-6)) * std::pow(_cost_param.discount_factor, i);
+            }
+            else
+            {
+                return false;
             }
             // LOG(INFO) << std::fixed << std::setprecision(4) << " cost_tmp.safety.ego_to_obs " << cost_tmp.safety.ego_to_obs;
         }
@@ -1039,7 +1060,8 @@ bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
 bool UMBPlanner::EvaluateMultiThreadSimResults(int *winner_id, double *winner_cost)
 {
     double min_cost = std::numeric_limits<double>::max();
-    int best_id = 0;
+    size_t best_id = 0;
+    bool get_feasible_result = false;
     for (size_t i = 0; i < _fpb_tree_ptr->get_behaviour_tree().size(); i++)
     {
         if (_sim_res[i] == 0)
@@ -1051,7 +1073,12 @@ bool UMBPlanner::EvaluateMultiThreadSimResults(int *winner_id, double *winner_co
         {
             min_cost = cost;
             best_id = i;
+            get_feasible_result = true;
         }
+    }
+    if (!get_feasible_result)
+    {
+        return false;
     }
     *winner_id = best_id;
     *winner_cost = min_cost;
@@ -1113,12 +1140,6 @@ bool UMBPlanner::IncreaseFpbSpeedProfile(const std::vector<FrenetPoint> &fpb_pat
     cur_st_point.t = static_cast<double>((fpb_path.size() - 1) * dt);
     speed_profile_init.emplace_back(cur_st_point);
 
-    // for (const auto &points : speed_profile_init)
-    // {
-    //     LOG(INFO) << std::fixed << std::setprecision(2)
-    //               << "speed_profile_init: (t: " << points.t << " s: " << points.s
-    //               << " s_dot: " << points.s_dot << " s_dot_dot: " << points.s_dot_dot << ")";
-    // }
     // Get increased speed_profile
     for (size_t i = 0; i < speed_profile_init.size() - 1; i++)
     {
@@ -1158,10 +1179,14 @@ bool UMBPlanner::GenerateTrajectory(const std::vector<STPoint> &final_speed_prof
 
         // 从path_index2s中读取 x,y, heading, kappa
         double cur_s = final_speed_profile[i].s;
-        double nearest_index;
-        if (cur_s == path_index2s.back())
+        int nearest_index = -1;
+        if (cur_s >= path_index2s.back())
         {
             nearest_index = path_index2s.size() - 1;
+        }
+        if (cur_s <= path_index2s.front())
+        {
+            nearest_index = 0;
         }
         for (size_t j = 0; j < path_index2s.size() - 1; j++)
         {
@@ -1169,6 +1194,10 @@ bool UMBPlanner::GenerateTrajectory(const std::vector<STPoint> &final_speed_prof
             {
                 nearest_index = j;
             }
+        }
+        if (nearest_index == -1)
+        {
+            return false;
         }
         trajectory_point.x = path_trajectory[nearest_index].x +
                              ((path_trajectory[nearest_index + 1].x - path_trajectory[nearest_index].x) / (path_index2s[nearest_index + 1] - path_index2s[nearest_index])) * (cur_s - path_index2s[nearest_index]);
@@ -1204,7 +1233,14 @@ double UMBPlanner::GetMinDistanceFromEgoToObs(const FrenetPoint &forward_traj, c
     obs_points.emplace_back(point_3);
     obs_points.emplace_back(point_4);
 
+    // return std::hypot((forward_traj.s - surr_traj.s), (forward_traj.l - surr_traj.l));
     double min_distance = std::numeric_limits<double>::max();
+    if (forward_traj.s <= point_2.s && forward_traj.s >= point_4.s && forward_traj.l >= point_2.l && forward_traj.l <= point_4.l)
+    {
+        min_distance = 0.01;
+        return min_distance;
+    }
+
     for (auto &point : obs_points)
     {
         double cur_distance = std::hypot((forward_traj.s - point.s), (forward_traj.l - point.l));
