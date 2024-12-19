@@ -370,9 +370,9 @@ public:
 
     RCLCPP_INFO(this->get_logger(), "计算指标完成! Efficiency: %.5f Safety: %.5f UD: %.5f LCC: %.5f total_frame: %.5f", Efficiency, Safety, UD, LCC, _total_frame);
 
-    if (_current_ego_state->x <= 340 && _current_ego_state->x >= 338 && _current_ego_state->y <= -81 && _current_ego_state->y >= -82)
+    if (_current_ego_state->x <= 338 && _current_ego_state->x >= 336 && _current_ego_state->y <= -89 && _current_ego_state->y >= -90)
     {
-      exit(0); // 0表示正常退出
+      exit(0);
     }
   }
 

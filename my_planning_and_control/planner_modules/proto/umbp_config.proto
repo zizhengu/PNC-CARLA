@@ -58,6 +58,20 @@ message CostConfig {
     double discount_factor = 5;
 }
 
+message EgoConfig {
+    CarConfig car = 1;
+    MapConfig map = 2;
+}
+
+message CarConfig {
+    double car_width = 1;
+    double car_length = 2;
+}
+
+message MapConfig {
+    double reference_speed = 1;
+}
+
 
 message Config {
   string name = 1;
@@ -65,4 +79,5 @@ message Config {
   string status = 3;
   CostConfig cost = 4;
   PropogateConfig propogate = 5;
+  EgoConfig ego = 6;
 }

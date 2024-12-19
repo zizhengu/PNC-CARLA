@@ -67,6 +67,13 @@ public:
         double ego_lack_speed_to_desired_unit_cost = 0.3;
     };
 
+    struct EgoParam
+    {
+        double car_width = 3.0;
+        double car_length = 5.0;
+        double reference_speed = 6.0;
+    };
+
     struct EfficiencyCost
     {
         double ego_to_desired_vel = 0.0;
@@ -141,6 +148,9 @@ private:
     bool GetCostParam(const planning::umbp::Config &cfg,
                       CostParam *cost_param);
 
+    bool GetEgoParam(const planning::umbp::Config &cfg,
+                     EgoParam *ego_param);
+
     bool GetSurroundingForwardSimAgents(ForwardPropAgentSet &forward_prop_agents,
                                         const std::vector<FrenetPoint> static_obs_frent_coords,
                                         const std::vector<FrenetPoint> dynamic_obs_frent_coords);
@@ -201,7 +211,7 @@ private:
     Cfg _cfg;
     SimParam _sim_param;
     CostParam _cost_param;
-
+    EgoParam _ego_param;
     // sample_points
     std::vector<std::vector<FrenetPoint>> _local_sample_points;
     int _increased_sl_sample_num;

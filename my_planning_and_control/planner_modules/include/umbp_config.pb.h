@@ -31,6 +31,9 @@
 // @@protoc_insertion_point(includes)
 namespace planning {
 namespace umbp {
+class CarConfig;
+class CarConfigDefaultTypeInternal;
+extern CarConfigDefaultTypeInternal _CarConfig_default_instance_;
 class Config;
 class ConfigDefaultTypeInternal;
 extern ConfigDefaultTypeInternal _Config_default_instance_;
@@ -40,9 +43,15 @@ extern CostConfigDefaultTypeInternal _CostConfig_default_instance_;
 class EfficiencyCost;
 class EfficiencyCostDefaultTypeInternal;
 extern EfficiencyCostDefaultTypeInternal _EfficiencyCost_default_instance_;
+class EgoConfig;
+class EgoConfigDefaultTypeInternal;
+extern EgoConfigDefaultTypeInternal _EgoConfig_default_instance_;
 class FpbConfig;
 class FpbConfigDefaultTypeInternal;
 extern FpbConfigDefaultTypeInternal _FpbConfig_default_instance_;
+class MapConfig;
+class MapConfigDefaultTypeInternal;
+extern MapConfigDefaultTypeInternal _MapConfig_default_instance_;
 class NavigationCost;
 class NavigationCostDefaultTypeInternal;
 extern NavigationCostDefaultTypeInternal _NavigationCost_default_instance_;
@@ -927,6 +936,275 @@ class CostConfig : public ::google::protobuf::Message /* @@protoc_insertion_poin
 };
 // -------------------------------------------------------------------
 
+class EgoConfig : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:planning.umbp.EgoConfig) */ {
+ public:
+  EgoConfig();
+  virtual ~EgoConfig();
+
+  EgoConfig(const EgoConfig& from);
+
+  inline EgoConfig& operator=(const EgoConfig& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const EgoConfig& default_instance();
+
+  static inline const EgoConfig* internal_default_instance() {
+    return reinterpret_cast<const EgoConfig*>(
+               &_EgoConfig_default_instance_);
+  }
+
+  void Swap(EgoConfig* other);
+
+  // implements Message ----------------------------------------------
+
+  inline EgoConfig* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  EgoConfig* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const EgoConfig& from);
+  void MergeFrom(const EgoConfig& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(EgoConfig* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // .planning.umbp.CarConfig car = 1;
+  bool has_car() const;
+  void clear_car();
+  static const int kCarFieldNumber = 1;
+  const ::planning::umbp::CarConfig& car() const;
+  ::planning::umbp::CarConfig* mutable_car();
+  ::planning::umbp::CarConfig* release_car();
+  void set_allocated_car(::planning::umbp::CarConfig* car);
+
+  // .planning.umbp.MapConfig map = 2;
+  bool has_map() const;
+  void clear_map();
+  static const int kMapFieldNumber = 2;
+  const ::planning::umbp::MapConfig& map() const;
+  ::planning::umbp::MapConfig* mutable_map();
+  ::planning::umbp::MapConfig* release_map();
+  void set_allocated_map(::planning::umbp::MapConfig* map);
+
+  // @@protoc_insertion_point(class_scope:planning.umbp.EgoConfig)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::planning::umbp::CarConfig* car_;
+  ::planning::umbp::MapConfig* map_;
+  mutable int _cached_size_;
+  friend struct  protobuf_umbp_5fconfig_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class CarConfig : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:planning.umbp.CarConfig) */ {
+ public:
+  CarConfig();
+  virtual ~CarConfig();
+
+  CarConfig(const CarConfig& from);
+
+  inline CarConfig& operator=(const CarConfig& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CarConfig& default_instance();
+
+  static inline const CarConfig* internal_default_instance() {
+    return reinterpret_cast<const CarConfig*>(
+               &_CarConfig_default_instance_);
+  }
+
+  void Swap(CarConfig* other);
+
+  // implements Message ----------------------------------------------
+
+  inline CarConfig* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  CarConfig* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const CarConfig& from);
+  void MergeFrom(const CarConfig& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(CarConfig* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // double car_width = 1;
+  void clear_car_width();
+  static const int kCarWidthFieldNumber = 1;
+  double car_width() const;
+  void set_car_width(double value);
+
+  // double car_length = 2;
+  void clear_car_length();
+  static const int kCarLengthFieldNumber = 2;
+  double car_length() const;
+  void set_car_length(double value);
+
+  // @@protoc_insertion_point(class_scope:planning.umbp.CarConfig)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  double car_width_;
+  double car_length_;
+  mutable int _cached_size_;
+  friend struct  protobuf_umbp_5fconfig_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class MapConfig : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:planning.umbp.MapConfig) */ {
+ public:
+  MapConfig();
+  virtual ~MapConfig();
+
+  MapConfig(const MapConfig& from);
+
+  inline MapConfig& operator=(const MapConfig& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MapConfig& default_instance();
+
+  static inline const MapConfig* internal_default_instance() {
+    return reinterpret_cast<const MapConfig*>(
+               &_MapConfig_default_instance_);
+  }
+
+  void Swap(MapConfig* other);
+
+  // implements Message ----------------------------------------------
+
+  inline MapConfig* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  MapConfig* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const MapConfig& from);
+  void MergeFrom(const MapConfig& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(MapConfig* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // double reference_speed = 1;
+  void clear_reference_speed();
+  static const int kReferenceSpeedFieldNumber = 1;
+  double reference_speed() const;
+  void set_reference_speed(double value);
+
+  // @@protoc_insertion_point(class_scope:planning.umbp.MapConfig)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  double reference_speed_;
+  mutable int _cached_size_;
+  friend struct  protobuf_umbp_5fconfig_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
 class Config : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:planning.umbp.Config) */ {
  public:
   Config();
@@ -1054,6 +1332,15 @@ class Config : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   ::planning::umbp::PropogateConfig* release_propogate();
   void set_allocated_propogate(::planning::umbp::PropogateConfig* propogate);
 
+  // .planning.umbp.EgoConfig ego = 6;
+  bool has_ego() const;
+  void clear_ego();
+  static const int kEgoFieldNumber = 6;
+  const ::planning::umbp::EgoConfig& ego() const;
+  ::planning::umbp::EgoConfig* mutable_ego();
+  ::planning::umbp::EgoConfig* release_ego();
+  void set_allocated_ego(::planning::umbp::EgoConfig* ego);
+
   // @@protoc_insertion_point(class_scope:planning.umbp.Config)
  private:
 
@@ -1063,6 +1350,7 @@ class Config : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   ::google::protobuf::internal::ArenaStringPtr status_;
   ::planning::umbp::CostConfig* cost_;
   ::planning::umbp::PropogateConfig* propogate_;
+  ::planning::umbp::EgoConfig* ego_;
   mutable int _cached_size_;
   friend struct  protobuf_umbp_5fconfig_2eproto::TableStruct;
 };
@@ -1702,6 +1990,138 @@ inline void CostConfig::set_discount_factor(double value) {
 
 // -------------------------------------------------------------------
 
+// EgoConfig
+
+// .planning.umbp.CarConfig car = 1;
+inline bool EgoConfig::has_car() const {
+  return this != internal_default_instance() && car_ != NULL;
+}
+inline void EgoConfig::clear_car() {
+  if (GetArenaNoVirtual() == NULL && car_ != NULL) delete car_;
+  car_ = NULL;
+}
+inline const ::planning::umbp::CarConfig& EgoConfig::car() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.EgoConfig.car)
+  return car_ != NULL ? *car_
+                         : *::planning::umbp::CarConfig::internal_default_instance();
+}
+inline ::planning::umbp::CarConfig* EgoConfig::mutable_car() {
+  
+  if (car_ == NULL) {
+    car_ = new ::planning::umbp::CarConfig;
+  }
+  // @@protoc_insertion_point(field_mutable:planning.umbp.EgoConfig.car)
+  return car_;
+}
+inline ::planning::umbp::CarConfig* EgoConfig::release_car() {
+  // @@protoc_insertion_point(field_release:planning.umbp.EgoConfig.car)
+  
+  ::planning::umbp::CarConfig* temp = car_;
+  car_ = NULL;
+  return temp;
+}
+inline void EgoConfig::set_allocated_car(::planning::umbp::CarConfig* car) {
+  delete car_;
+  car_ = car;
+  if (car) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:planning.umbp.EgoConfig.car)
+}
+
+// .planning.umbp.MapConfig map = 2;
+inline bool EgoConfig::has_map() const {
+  return this != internal_default_instance() && map_ != NULL;
+}
+inline void EgoConfig::clear_map() {
+  if (GetArenaNoVirtual() == NULL && map_ != NULL) delete map_;
+  map_ = NULL;
+}
+inline const ::planning::umbp::MapConfig& EgoConfig::map() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.EgoConfig.map)
+  return map_ != NULL ? *map_
+                         : *::planning::umbp::MapConfig::internal_default_instance();
+}
+inline ::planning::umbp::MapConfig* EgoConfig::mutable_map() {
+  
+  if (map_ == NULL) {
+    map_ = new ::planning::umbp::MapConfig;
+  }
+  // @@protoc_insertion_point(field_mutable:planning.umbp.EgoConfig.map)
+  return map_;
+}
+inline ::planning::umbp::MapConfig* EgoConfig::release_map() {
+  // @@protoc_insertion_point(field_release:planning.umbp.EgoConfig.map)
+  
+  ::planning::umbp::MapConfig* temp = map_;
+  map_ = NULL;
+  return temp;
+}
+inline void EgoConfig::set_allocated_map(::planning::umbp::MapConfig* map) {
+  delete map_;
+  map_ = map;
+  if (map) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:planning.umbp.EgoConfig.map)
+}
+
+// -------------------------------------------------------------------
+
+// CarConfig
+
+// double car_width = 1;
+inline void CarConfig::clear_car_width() {
+  car_width_ = 0;
+}
+inline double CarConfig::car_width() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.CarConfig.car_width)
+  return car_width_;
+}
+inline void CarConfig::set_car_width(double value) {
+  
+  car_width_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.CarConfig.car_width)
+}
+
+// double car_length = 2;
+inline void CarConfig::clear_car_length() {
+  car_length_ = 0;
+}
+inline double CarConfig::car_length() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.CarConfig.car_length)
+  return car_length_;
+}
+inline void CarConfig::set_car_length(double value) {
+  
+  car_length_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.CarConfig.car_length)
+}
+
+// -------------------------------------------------------------------
+
+// MapConfig
+
+// double reference_speed = 1;
+inline void MapConfig::clear_reference_speed() {
+  reference_speed_ = 0;
+}
+inline double MapConfig::reference_speed() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.MapConfig.reference_speed)
+  return reference_speed_;
+}
+inline void MapConfig::set_reference_speed(double value) {
+  
+  reference_speed_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.MapConfig.reference_speed)
+}
+
+// -------------------------------------------------------------------
+
 // Config
 
 // string name = 1;
@@ -1938,7 +2358,52 @@ inline void Config::set_allocated_propogate(::planning::umbp::PropogateConfig* p
   // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.propogate)
 }
 
+// .planning.umbp.EgoConfig ego = 6;
+inline bool Config::has_ego() const {
+  return this != internal_default_instance() && ego_ != NULL;
+}
+inline void Config::clear_ego() {
+  if (GetArenaNoVirtual() == NULL && ego_ != NULL) delete ego_;
+  ego_ = NULL;
+}
+inline const ::planning::umbp::EgoConfig& Config::ego() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.Config.ego)
+  return ego_ != NULL ? *ego_
+                         : *::planning::umbp::EgoConfig::internal_default_instance();
+}
+inline ::planning::umbp::EgoConfig* Config::mutable_ego() {
+  
+  if (ego_ == NULL) {
+    ego_ = new ::planning::umbp::EgoConfig;
+  }
+  // @@protoc_insertion_point(field_mutable:planning.umbp.Config.ego)
+  return ego_;
+}
+inline ::planning::umbp::EgoConfig* Config::release_ego() {
+  // @@protoc_insertion_point(field_release:planning.umbp.Config.ego)
+  
+  ::planning::umbp::EgoConfig* temp = ego_;
+  ego_ = NULL;
+  return temp;
+}
+inline void Config::set_allocated_ego(::planning::umbp::EgoConfig* ego) {
+  delete ego_;
+  ego_ = ego;
+  if (ego) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.ego)
+}
+
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

@@ -14,27 +14,22 @@ UMBPlanner::UMBPlanner() : Node("UMBPlanner")
     google::SetLogDestination(google::GLOG_INFO, "/home/guzizhen/PNC-CARLA/debug_log/umbp_log/");
     google::SetLogDestination(google::GLOG_WARNING, "/home/guzizhen/PNC-CARLA/debug_log/umbp_log/");
     google::SetLogDestination(google::GLOG_ERROR, "/home/guzizhen/PNC-CARLA/debug_log/umbp_log/");
-    FLAGS_log_prefix = false;
-    LOG(INFO) << std::fixed << std::setprecision(4)
-              << "[UMBP]******************** RUN START: " << "******************";
 
     _get_waypoint_client = this->create_client<carla_waypoint_types::srv::GetWaypoint>(
         "/carla_waypoint_publisher/ego_vehicle/get_waypoint");
 
-    LOG(INFO) << "[UMBP]********** Setting _reference_speed " << "*************";
-    _reference_speed = 6.0;
     std::string config_path = "/home/guzizhen/PNC-CARLA/my_planning_and_control/planner_modules/config/umbp_config.pb.txt";
-
     ReadConfig(config_path);
     GetSimParam(_cfg, &_sim_param);
     GetCostParam(_cfg, &_cost_param);
+    GetEgoParam(_cfg, &_ego_param);
 
-    // LOG(INFO) << " [UMBP]_sim_param.tree_height " << _sim_param.tree_height << " done!";
-    // LOG(INFO) << " [UMBP]_sim_param.layer_time " << _sim_param.layer_time << " done!";
-    // LOG(INFO) << " [UMBP]_sim_param.s_sample_distance " << _sim_param.s_sample_distance << " done!";
-    // LOG(INFO) << " [UMBP]_sim_param.s_sample_num " << _sim_param.s_sample_num << " done!";
-
+    _reference_speed = _ego_param.reference_speed;
     _fpb_tree_ptr = std::make_shared<FpbTree>(_sim_param.tree_height, _sim_param.layer_time);
+
+    FLAGS_log_prefix = false;
+    LOG(INFO) << std::fixed << std::setprecision(4)
+              << "[UMBP]******************** RUN START: " << "******************";
 }
 
 bool UMBPlanner::ReadConfig(const std::string config_path)
@@ -78,6 +73,15 @@ bool UMBPlanner::GetCostParam(const planning::umbp::Config &cfg,
     cost_param->ego_lack_speed_to_desired_unit_cost = cfg.cost().efficiency().ego_lack_speed_to_desired_unit_cost();
     cost_param->ego_to_obs = cfg.cost().safety().ego_to_obs();
     cost_param->ref_line_change = cfg.cost().navigation().ref_line_change();
+    return true;
+}
+
+bool UMBPlanner::GetEgoParam(const planning::umbp::Config &cfg,
+                             EgoParam *ego_param)
+{
+    ego_param->car_length = cfg.ego().car().car_length();
+    ego_param->car_width = cfg.ego().car().car_width();
+    ego_param->reference_speed = cfg.ego().map().reference_speed();
     return true;
 }
 
@@ -301,7 +305,7 @@ void UMBPlanner::GetFrenetSamplePoints(std::vector<std::vector<FrenetPoint>> &fr
         {
             FrenetPoint current_point;
             current_point.s = planning_start_sl.s + level * s_sample_distance;
-            current_point.l = (int(l_sample_num / 2) - i) * l_sample_distance;
+            current_point.l = planning_start_sl.l + (int(l_sample_num / 2) - i) * l_sample_distance;
             frenet_sample_point.back().emplace_back(current_point);
         }
     }
@@ -1025,7 +1029,7 @@ bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
                 LOG(ERROR) << std::fixed << std::setprecision(4)
                            << "[UMBP]****** forward_trajs.size() != surr_traj.second.size()  ******";
             }
-            double distance = GetMinDistanceFromEgoToObs(forward_trajs[i], surr_traj.second[i], 5.0, 2.5);
+            double distance = GetMinDistanceFromEgoToObs(forward_trajs[i], surr_traj.second[i], 5.0, 5.0);
             if (distance >= 8.0)
             {
                 cost_tmp.safety.ego_to_obs += 0;

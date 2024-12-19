@@ -35,6 +35,12 @@ class PropogateConfigDefaultTypeInternal : public ::google::protobuf::internal::
 } _PropogateConfig_default_instance_;
 class CostConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<CostConfig> {
 } _CostConfig_default_instance_;
+class EgoConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<EgoConfig> {
+} _EgoConfig_default_instance_;
+class CarConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<CarConfig> {
+} _CarConfig_default_instance_;
+class MapConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<MapConfig> {
+} _MapConfig_default_instance_;
 class ConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<Config> {
 } _Config_default_instance_;
 
@@ -43,7 +49,7 @@ namespace protobuf_umbp_5fconfig_2eproto {
 
 namespace {
 
-::google::protobuf::Metadata file_level_metadata[9];
+::google::protobuf::Metadata file_level_metadata[12];
 
 }  // namespace
 
@@ -113,6 +119,23 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CostConfig, navigation_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CostConfig, discount_factor_),
   ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EgoConfig, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EgoConfig, car_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EgoConfig, map_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CarConfig, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CarConfig, car_width_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CarConfig, car_length_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapConfig, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapConfig, reference_speed_),
+  ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -121,6 +144,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, status_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, cost_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, propogate_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, ego_),
 };
 
 static const ::google::protobuf::internal::MigrationSchema schemas[] = {
@@ -132,7 +156,10 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] = {
   { 36, -1, sizeof(SampleConfig)},
   { 49, -1, sizeof(PropogateConfig)},
   { 55, -1, sizeof(CostConfig)},
-  { 64, -1, sizeof(Config)},
+  { 64, -1, sizeof(EgoConfig)},
+  { 70, -1, sizeof(CarConfig)},
+  { 76, -1, sizeof(MapConfig)},
+  { 81, -1, sizeof(Config)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -144,6 +171,9 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&_SampleConfig_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_PropogateConfig_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_CostConfig_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&_EgoConfig_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&_CarConfig_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&_MapConfig_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_Config_default_instance_),
 };
 
@@ -165,7 +195,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 9);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 12);
 }
 
 }  // namespace
@@ -187,8 +217,14 @@ void TableStruct::Shutdown() {
   delete file_level_metadata[6].reflection;
   _CostConfig_default_instance_.Shutdown();
   delete file_level_metadata[7].reflection;
-  _Config_default_instance_.Shutdown();
+  _EgoConfig_default_instance_.Shutdown();
   delete file_level_metadata[8].reflection;
+  _CarConfig_default_instance_.Shutdown();
+  delete file_level_metadata[9].reflection;
+  _MapConfig_default_instance_.Shutdown();
+  delete file_level_metadata[10].reflection;
+  _Config_default_instance_.Shutdown();
+  delete file_level_metadata[11].reflection;
 }
 
 void TableStruct::InitDefaultsImpl() {
@@ -203,6 +239,9 @@ void TableStruct::InitDefaultsImpl() {
   _SampleConfig_default_instance_.DefaultConstruct();
   _PropogateConfig_default_instance_.DefaultConstruct();
   _CostConfig_default_instance_.DefaultConstruct();
+  _EgoConfig_default_instance_.DefaultConstruct();
+  _CarConfig_default_instance_.DefaultConstruct();
+  _MapConfig_default_instance_.DefaultConstruct();
   _Config_default_instance_.DefaultConstruct();
   _PropogateConfig_default_instance_.get_mutable()->fpb_ = const_cast< ::planning::umbp::FpbConfig*>(
       ::planning::umbp::FpbConfig::internal_default_instance());
@@ -216,10 +255,16 @@ void TableStruct::InitDefaultsImpl() {
       ::planning::umbp::UserCost::internal_default_instance());
   _CostConfig_default_instance_.get_mutable()->navigation_ = const_cast< ::planning::umbp::NavigationCost*>(
       ::planning::umbp::NavigationCost::internal_default_instance());
+  _EgoConfig_default_instance_.get_mutable()->car_ = const_cast< ::planning::umbp::CarConfig*>(
+      ::planning::umbp::CarConfig::internal_default_instance());
+  _EgoConfig_default_instance_.get_mutable()->map_ = const_cast< ::planning::umbp::MapConfig*>(
+      ::planning::umbp::MapConfig::internal_default_instance());
   _Config_default_instance_.get_mutable()->cost_ = const_cast< ::planning::umbp::CostConfig*>(
       ::planning::umbp::CostConfig::internal_default_instance());
   _Config_default_instance_.get_mutable()->propogate_ = const_cast< ::planning::umbp::PropogateConfig*>(
       ::planning::umbp::PropogateConfig::internal_default_instance());
+  _Config_default_instance_.get_mutable()->ego_ = const_cast< ::planning::umbp::EgoConfig*>(
+      ::planning::umbp::EgoConfig::internal_default_instance());
 }
 
 void InitDefaults() {
@@ -258,14 +303,20 @@ void AddDescriptorsImpl() {
       "safety\030\002 \001(\0132\031.planning.umbp.SafetyCost\022"
       "%\n\004user\030\003 \001(\0132\027.planning.umbp.UserCost\0221"
       "\n\nnavigation\030\004 \001(\0132\035.planning.umbp.Navig"
-      "ationCost\022\027\n\017discount_factor\030\005 \001(\001\"\223\001\n\006C"
-      "onfig\022\014\n\004name\030\001 \001(\t\022\017\n\007version\030\002 \001(\t\022\016\n\006"
-      "status\030\003 \001(\t\022\'\n\004cost\030\004 \001(\0132\031.planning.um"
-      "bp.CostConfig\0221\n\tpropogate\030\005 \001(\0132\036.plann"
-      "ing.umbp.PropogateConfigb\006proto3"
+      "ationCost\022\027\n\017discount_factor\030\005 \001(\001\"Y\n\tEg"
+      "oConfig\022%\n\003car\030\001 \001(\0132\030.planning.umbp.Car"
+      "Config\022%\n\003map\030\002 \001(\0132\030.planning.umbp.MapC"
+      "onfig\"2\n\tCarConfig\022\021\n\tcar_width\030\001 \001(\001\022\022\n"
+      "\ncar_length\030\002 \001(\001\"$\n\tMapConfig\022\027\n\017refere"
+      "nce_speed\030\001 \001(\001\"\272\001\n\006Config\022\014\n\004name\030\001 \001(\t"
+      "\022\017\n\007version\030\002 \001(\t\022\016\n\006status\030\003 \001(\t\022\'\n\004cos"
+      "t\030\004 \001(\0132\031.planning.umbp.CostConfig\0221\n\tpr"
+      "opogate\030\005 \001(\0132\036.planning.umbp.PropogateC"
+      "onfig\022%\n\003ego\030\006 \001(\0132\030.planning.umbp.EgoCo"
+      "nfigb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1352);
+      descriptor, 1572);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "umbp_config.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
@@ -3462,11 +3513,858 @@ void CostConfig::set_discount_factor(double value) {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int EgoConfig::kCarFieldNumber;
+const int EgoConfig::kMapFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+EgoConfig::EgoConfig()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    protobuf_umbp_5fconfig_2eproto::InitDefaults();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:planning.umbp.EgoConfig)
+}
+EgoConfig::EgoConfig(const EgoConfig& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_car()) {
+    car_ = new ::planning::umbp::CarConfig(*from.car_);
+  } else {
+    car_ = NULL;
+  }
+  if (from.has_map()) {
+    map_ = new ::planning::umbp::MapConfig(*from.map_);
+  } else {
+    map_ = NULL;
+  }
+  // @@protoc_insertion_point(copy_constructor:planning.umbp.EgoConfig)
+}
+
+void EgoConfig::SharedCtor() {
+  ::memset(&car_, 0, reinterpret_cast<char*>(&map_) -
+    reinterpret_cast<char*>(&car_) + sizeof(map_));
+  _cached_size_ = 0;
+}
+
+EgoConfig::~EgoConfig() {
+  // @@protoc_insertion_point(destructor:planning.umbp.EgoConfig)
+  SharedDtor();
+}
+
+void EgoConfig::SharedDtor() {
+  if (this != internal_default_instance()) {
+    delete car_;
+  }
+  if (this != internal_default_instance()) {
+    delete map_;
+  }
+}
+
+void EgoConfig::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* EgoConfig::descriptor() {
+  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[8].descriptor;
+}
+
+const EgoConfig& EgoConfig::default_instance() {
+  protobuf_umbp_5fconfig_2eproto::InitDefaults();
+  return *internal_default_instance();
+}
+
+EgoConfig* EgoConfig::New(::google::protobuf::Arena* arena) const {
+  EgoConfig* n = new EgoConfig;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void EgoConfig::Clear() {
+// @@protoc_insertion_point(message_clear_start:planning.umbp.EgoConfig)
+  if (GetArenaNoVirtual() == NULL && car_ != NULL) {
+    delete car_;
+  }
+  car_ = NULL;
+  if (GetArenaNoVirtual() == NULL && map_ != NULL) {
+    delete map_;
+  }
+  map_ = NULL;
+}
+
+bool EgoConfig::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:planning.umbp.EgoConfig)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // .planning.umbp.CarConfig car = 1;
+      case 1: {
+        if (tag == 10u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_car()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .planning.umbp.MapConfig map = 2;
+      case 2: {
+        if (tag == 18u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_map()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:planning.umbp.EgoConfig)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:planning.umbp.EgoConfig)
+  return false;
+#undef DO_
+}
+
+void EgoConfig::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:planning.umbp.EgoConfig)
+  // .planning.umbp.CarConfig car = 1;
+  if (this->has_car()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, *this->car_, output);
+  }
+
+  // .planning.umbp.MapConfig map = 2;
+  if (this->has_map()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, *this->map_, output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:planning.umbp.EgoConfig)
+}
+
+::google::protobuf::uint8* EgoConfig::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic;  // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.EgoConfig)
+  // .planning.umbp.CarConfig car = 1;
+  if (this->has_car()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        1, *this->car_, false, target);
+  }
+
+  // .planning.umbp.MapConfig map = 2;
+  if (this->has_map()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        2, *this->map_, false, target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.EgoConfig)
+  return target;
+}
+
+size_t EgoConfig::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:planning.umbp.EgoConfig)
+  size_t total_size = 0;
+
+  // .planning.umbp.CarConfig car = 1;
+  if (this->has_car()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->car_);
+  }
+
+  // .planning.umbp.MapConfig map = 2;
+  if (this->has_map()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->map_);
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void EgoConfig::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.EgoConfig)
+  GOOGLE_DCHECK_NE(&from, this);
+  const EgoConfig* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const EgoConfig>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.EgoConfig)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.EgoConfig)
+    MergeFrom(*source);
+  }
+}
+
+void EgoConfig::MergeFrom(const EgoConfig& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.EgoConfig)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.has_car()) {
+    mutable_car()->::planning::umbp::CarConfig::MergeFrom(from.car());
+  }
+  if (from.has_map()) {
+    mutable_map()->::planning::umbp::MapConfig::MergeFrom(from.map());
+  }
+}
+
+void EgoConfig::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.EgoConfig)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void EgoConfig::CopyFrom(const EgoConfig& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.EgoConfig)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool EgoConfig::IsInitialized() const {
+  return true;
+}
+
+void EgoConfig::Swap(EgoConfig* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void EgoConfig::InternalSwap(EgoConfig* other) {
+  std::swap(car_, other->car_);
+  std::swap(map_, other->map_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata EgoConfig::GetMetadata() const {
+  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[8];
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// EgoConfig
+
+// .planning.umbp.CarConfig car = 1;
+bool EgoConfig::has_car() const {
+  return this != internal_default_instance() && car_ != NULL;
+}
+void EgoConfig::clear_car() {
+  if (GetArenaNoVirtual() == NULL && car_ != NULL) delete car_;
+  car_ = NULL;
+}
+const ::planning::umbp::CarConfig& EgoConfig::car() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.EgoConfig.car)
+  return car_ != NULL ? *car_
+                         : *::planning::umbp::CarConfig::internal_default_instance();
+}
+::planning::umbp::CarConfig* EgoConfig::mutable_car() {
+  
+  if (car_ == NULL) {
+    car_ = new ::planning::umbp::CarConfig;
+  }
+  // @@protoc_insertion_point(field_mutable:planning.umbp.EgoConfig.car)
+  return car_;
+}
+::planning::umbp::CarConfig* EgoConfig::release_car() {
+  // @@protoc_insertion_point(field_release:planning.umbp.EgoConfig.car)
+  
+  ::planning::umbp::CarConfig* temp = car_;
+  car_ = NULL;
+  return temp;
+}
+void EgoConfig::set_allocated_car(::planning::umbp::CarConfig* car) {
+  delete car_;
+  car_ = car;
+  if (car) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:planning.umbp.EgoConfig.car)
+}
+
+// .planning.umbp.MapConfig map = 2;
+bool EgoConfig::has_map() const {
+  return this != internal_default_instance() && map_ != NULL;
+}
+void EgoConfig::clear_map() {
+  if (GetArenaNoVirtual() == NULL && map_ != NULL) delete map_;
+  map_ = NULL;
+}
+const ::planning::umbp::MapConfig& EgoConfig::map() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.EgoConfig.map)
+  return map_ != NULL ? *map_
+                         : *::planning::umbp::MapConfig::internal_default_instance();
+}
+::planning::umbp::MapConfig* EgoConfig::mutable_map() {
+  
+  if (map_ == NULL) {
+    map_ = new ::planning::umbp::MapConfig;
+  }
+  // @@protoc_insertion_point(field_mutable:planning.umbp.EgoConfig.map)
+  return map_;
+}
+::planning::umbp::MapConfig* EgoConfig::release_map() {
+  // @@protoc_insertion_point(field_release:planning.umbp.EgoConfig.map)
+  
+  ::planning::umbp::MapConfig* temp = map_;
+  map_ = NULL;
+  return temp;
+}
+void EgoConfig::set_allocated_map(::planning::umbp::MapConfig* map) {
+  delete map_;
+  map_ = map;
+  if (map) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:planning.umbp.EgoConfig.map)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int CarConfig::kCarWidthFieldNumber;
+const int CarConfig::kCarLengthFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+CarConfig::CarConfig()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    protobuf_umbp_5fconfig_2eproto::InitDefaults();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:planning.umbp.CarConfig)
+}
+CarConfig::CarConfig(const CarConfig& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&car_width_, &from.car_width_,
+    reinterpret_cast<char*>(&car_length_) -
+    reinterpret_cast<char*>(&car_width_) + sizeof(car_length_));
+  // @@protoc_insertion_point(copy_constructor:planning.umbp.CarConfig)
+}
+
+void CarConfig::SharedCtor() {
+  ::memset(&car_width_, 0, reinterpret_cast<char*>(&car_length_) -
+    reinterpret_cast<char*>(&car_width_) + sizeof(car_length_));
+  _cached_size_ = 0;
+}
+
+CarConfig::~CarConfig() {
+  // @@protoc_insertion_point(destructor:planning.umbp.CarConfig)
+  SharedDtor();
+}
+
+void CarConfig::SharedDtor() {
+}
+
+void CarConfig::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* CarConfig::descriptor() {
+  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[9].descriptor;
+}
+
+const CarConfig& CarConfig::default_instance() {
+  protobuf_umbp_5fconfig_2eproto::InitDefaults();
+  return *internal_default_instance();
+}
+
+CarConfig* CarConfig::New(::google::protobuf::Arena* arena) const {
+  CarConfig* n = new CarConfig;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void CarConfig::Clear() {
+// @@protoc_insertion_point(message_clear_start:planning.umbp.CarConfig)
+  ::memset(&car_width_, 0, reinterpret_cast<char*>(&car_length_) -
+    reinterpret_cast<char*>(&car_width_) + sizeof(car_length_));
+}
+
+bool CarConfig::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:planning.umbp.CarConfig)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // double car_width = 1;
+      case 1: {
+        if (tag == 9u) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &car_width_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // double car_length = 2;
+      case 2: {
+        if (tag == 17u) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &car_length_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:planning.umbp.CarConfig)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:planning.umbp.CarConfig)
+  return false;
+#undef DO_
+}
+
+void CarConfig::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:planning.umbp.CarConfig)
+  // double car_width = 1;
+  if (this->car_width() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->car_width(), output);
+  }
+
+  // double car_length = 2;
+  if (this->car_length() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->car_length(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:planning.umbp.CarConfig)
+}
+
+::google::protobuf::uint8* CarConfig::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic;  // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.CarConfig)
+  // double car_width = 1;
+  if (this->car_width() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->car_width(), target);
+  }
+
+  // double car_length = 2;
+  if (this->car_length() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->car_length(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.CarConfig)
+  return target;
+}
+
+size_t CarConfig::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:planning.umbp.CarConfig)
+  size_t total_size = 0;
+
+  // double car_width = 1;
+  if (this->car_width() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // double car_length = 2;
+  if (this->car_length() != 0) {
+    total_size += 1 + 8;
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void CarConfig::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.CarConfig)
+  GOOGLE_DCHECK_NE(&from, this);
+  const CarConfig* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const CarConfig>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.CarConfig)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.CarConfig)
+    MergeFrom(*source);
+  }
+}
+
+void CarConfig::MergeFrom(const CarConfig& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.CarConfig)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.car_width() != 0) {
+    set_car_width(from.car_width());
+  }
+  if (from.car_length() != 0) {
+    set_car_length(from.car_length());
+  }
+}
+
+void CarConfig::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.CarConfig)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void CarConfig::CopyFrom(const CarConfig& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.CarConfig)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CarConfig::IsInitialized() const {
+  return true;
+}
+
+void CarConfig::Swap(CarConfig* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void CarConfig::InternalSwap(CarConfig* other) {
+  std::swap(car_width_, other->car_width_);
+  std::swap(car_length_, other->car_length_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata CarConfig::GetMetadata() const {
+  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[9];
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// CarConfig
+
+// double car_width = 1;
+void CarConfig::clear_car_width() {
+  car_width_ = 0;
+}
+double CarConfig::car_width() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.CarConfig.car_width)
+  return car_width_;
+}
+void CarConfig::set_car_width(double value) {
+  
+  car_width_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.CarConfig.car_width)
+}
+
+// double car_length = 2;
+void CarConfig::clear_car_length() {
+  car_length_ = 0;
+}
+double CarConfig::car_length() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.CarConfig.car_length)
+  return car_length_;
+}
+void CarConfig::set_car_length(double value) {
+  
+  car_length_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.CarConfig.car_length)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int MapConfig::kReferenceSpeedFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+MapConfig::MapConfig()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    protobuf_umbp_5fconfig_2eproto::InitDefaults();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:planning.umbp.MapConfig)
+}
+MapConfig::MapConfig(const MapConfig& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  reference_speed_ = from.reference_speed_;
+  // @@protoc_insertion_point(copy_constructor:planning.umbp.MapConfig)
+}
+
+void MapConfig::SharedCtor() {
+  reference_speed_ = 0;
+  _cached_size_ = 0;
+}
+
+MapConfig::~MapConfig() {
+  // @@protoc_insertion_point(destructor:planning.umbp.MapConfig)
+  SharedDtor();
+}
+
+void MapConfig::SharedDtor() {
+}
+
+void MapConfig::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* MapConfig::descriptor() {
+  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[10].descriptor;
+}
+
+const MapConfig& MapConfig::default_instance() {
+  protobuf_umbp_5fconfig_2eproto::InitDefaults();
+  return *internal_default_instance();
+}
+
+MapConfig* MapConfig::New(::google::protobuf::Arena* arena) const {
+  MapConfig* n = new MapConfig;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void MapConfig::Clear() {
+// @@protoc_insertion_point(message_clear_start:planning.umbp.MapConfig)
+  reference_speed_ = 0;
+}
+
+bool MapConfig::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:planning.umbp.MapConfig)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // double reference_speed = 1;
+      case 1: {
+        if (tag == 9u) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &reference_speed_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:planning.umbp.MapConfig)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:planning.umbp.MapConfig)
+  return false;
+#undef DO_
+}
+
+void MapConfig::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:planning.umbp.MapConfig)
+  // double reference_speed = 1;
+  if (this->reference_speed() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->reference_speed(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:planning.umbp.MapConfig)
+}
+
+::google::protobuf::uint8* MapConfig::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic;  // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.MapConfig)
+  // double reference_speed = 1;
+  if (this->reference_speed() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->reference_speed(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.MapConfig)
+  return target;
+}
+
+size_t MapConfig::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:planning.umbp.MapConfig)
+  size_t total_size = 0;
+
+  // double reference_speed = 1;
+  if (this->reference_speed() != 0) {
+    total_size += 1 + 8;
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void MapConfig::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.MapConfig)
+  GOOGLE_DCHECK_NE(&from, this);
+  const MapConfig* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const MapConfig>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.MapConfig)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.MapConfig)
+    MergeFrom(*source);
+  }
+}
+
+void MapConfig::MergeFrom(const MapConfig& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.MapConfig)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from.reference_speed() != 0) {
+    set_reference_speed(from.reference_speed());
+  }
+}
+
+void MapConfig::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.MapConfig)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void MapConfig::CopyFrom(const MapConfig& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.MapConfig)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool MapConfig::IsInitialized() const {
+  return true;
+}
+
+void MapConfig::Swap(MapConfig* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void MapConfig::InternalSwap(MapConfig* other) {
+  std::swap(reference_speed_, other->reference_speed_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata MapConfig::GetMetadata() const {
+  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[10];
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// MapConfig
+
+// double reference_speed = 1;
+void MapConfig::clear_reference_speed() {
+  reference_speed_ = 0;
+}
+double MapConfig::reference_speed() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.MapConfig.reference_speed)
+  return reference_speed_;
+}
+void MapConfig::set_reference_speed(double value) {
+  
+  reference_speed_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.MapConfig.reference_speed)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Config::kNameFieldNumber;
 const int Config::kVersionFieldNumber;
 const int Config::kStatusFieldNumber;
 const int Config::kCostFieldNumber;
 const int Config::kPropogateFieldNumber;
+const int Config::kEgoFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Config::Config()
@@ -3504,6 +4402,11 @@ Config::Config(const Config& from)
   } else {
     propogate_ = NULL;
   }
+  if (from.has_ego()) {
+    ego_ = new ::planning::umbp::EgoConfig(*from.ego_);
+  } else {
+    ego_ = NULL;
+  }
   // @@protoc_insertion_point(copy_constructor:planning.umbp.Config)
 }
 
@@ -3511,8 +4414,8 @@ void Config::SharedCtor() {
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   version_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   status_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&cost_, 0, reinterpret_cast<char*>(&propogate_) -
-    reinterpret_cast<char*>(&cost_) + sizeof(propogate_));
+  ::memset(&cost_, 0, reinterpret_cast<char*>(&ego_) -
+    reinterpret_cast<char*>(&cost_) + sizeof(ego_));
   _cached_size_ = 0;
 }
 
@@ -3531,6 +4434,9 @@ void Config::SharedDtor() {
   if (this != internal_default_instance()) {
     delete propogate_;
   }
+  if (this != internal_default_instance()) {
+    delete ego_;
+  }
 }
 
 void Config::SetCachedSize(int size) const {
@@ -3540,7 +4446,7 @@ void Config::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* Config::descriptor() {
   protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[8].descriptor;
+  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[11].descriptor;
 }
 
 const Config& Config::default_instance() {
@@ -3569,6 +4475,10 @@ void Config::Clear() {
     delete propogate_;
   }
   propogate_ = NULL;
+  if (GetArenaNoVirtual() == NULL && ego_ != NULL) {
+    delete ego_;
+  }
+  ego_ = NULL;
 }
 
 bool Config::MergePartialFromCodedStream(
@@ -3648,6 +4558,17 @@ bool Config::MergePartialFromCodedStream(
         break;
       }
 
+      // .planning.umbp.EgoConfig ego = 6;
+      case 6: {
+        if (tag == 50u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_ego()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0 ||
@@ -3714,6 +4635,12 @@ void Config::SerializeWithCachedSizes(
       5, *this->propogate_, output);
   }
 
+  // .planning.umbp.EgoConfig ego = 6;
+  if (this->has_ego()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      6, *this->ego_, output);
+  }
+
   // @@protoc_insertion_point(serialize_end:planning.umbp.Config)
 }
 
@@ -3768,6 +4695,13 @@ void Config::SerializeWithCachedSizes(
         5, *this->propogate_, false, target);
   }
 
+  // .planning.umbp.EgoConfig ego = 6;
+  if (this->has_ego()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        6, *this->ego_, false, target);
+  }
+
   // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.Config)
   return target;
 }
@@ -3809,6 +4743,13 @@ size_t Config::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
         *this->propogate_);
+  }
+
+  // .planning.umbp.EgoConfig ego = 6;
+  if (this->has_ego()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->ego_);
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -3855,6 +4796,9 @@ void Config::MergeFrom(const Config& from) {
   if (from.has_propogate()) {
     mutable_propogate()->::planning::umbp::PropogateConfig::MergeFrom(from.propogate());
   }
+  if (from.has_ego()) {
+    mutable_ego()->::planning::umbp::EgoConfig::MergeFrom(from.ego());
+  }
 }
 
 void Config::CopyFrom(const ::google::protobuf::Message& from) {
@@ -3885,12 +4829,13 @@ void Config::InternalSwap(Config* other) {
   status_.Swap(&other->status_);
   std::swap(cost_, other->cost_);
   std::swap(propogate_, other->propogate_);
+  std::swap(ego_, other->ego_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata Config::GetMetadata() const {
   protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[8];
+  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[11];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -4128,6 +5073,45 @@ void Config::set_allocated_propogate(::planning::umbp::PropogateConfig* propogat
     
   }
   // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.propogate)
+}
+
+// .planning.umbp.EgoConfig ego = 6;
+bool Config::has_ego() const {
+  return this != internal_default_instance() && ego_ != NULL;
+}
+void Config::clear_ego() {
+  if (GetArenaNoVirtual() == NULL && ego_ != NULL) delete ego_;
+  ego_ = NULL;
+}
+const ::planning::umbp::EgoConfig& Config::ego() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.Config.ego)
+  return ego_ != NULL ? *ego_
+                         : *::planning::umbp::EgoConfig::internal_default_instance();
+}
+::planning::umbp::EgoConfig* Config::mutable_ego() {
+  
+  if (ego_ == NULL) {
+    ego_ = new ::planning::umbp::EgoConfig;
+  }
+  // @@protoc_insertion_point(field_mutable:planning.umbp.Config.ego)
+  return ego_;
+}
+::planning::umbp::EgoConfig* Config::release_ego() {
+  // @@protoc_insertion_point(field_release:planning.umbp.Config.ego)
+  
+  ::planning::umbp::EgoConfig* temp = ego_;
+  ego_ = NULL;
+  return temp;
+}
+void Config::set_allocated_ego(::planning::umbp::EgoConfig* ego) {
+  delete ego_;
+  ego_ = ego;
+  if (ego) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.ego)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
