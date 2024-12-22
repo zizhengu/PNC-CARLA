@@ -120,7 +120,30 @@ public:
 private:
     bool GenarateFpbTree();
 
-    int tree_height_ = 3;
+    // 检查一个行为序列是否合法
+    bool isValidCombination(const std::vector<FpbLatAction> &combination);
+
+    std::vector<std::vector<FpbLatAction>> GenerateValidCombinations(const int n);
+
+    // 填充行为序列
+    static std::vector<std::vector<FpbLatAction>> GenerateLatActionSequences()
+    {
+        return {
+            {FpbLatAction::Keeping, FpbLatAction::Keeping, FpbLatAction::Keeping, FpbLatAction::Keeping, FpbLatAction::Keeping},                    // KKKKK
+            {FpbLatAction::Keeping, FpbLatAction::Keeping, FpbLatAction::Keeping, FpbLatAction::Keeping, FpbLatAction::SwitchLeft},                 // KKKKL
+            {FpbLatAction::Keeping, FpbLatAction::Keeping, FpbLatAction::Keeping, FpbLatAction::Keeping, FpbLatAction::SwitchRight},                // KKKKR
+            {FpbLatAction::Keeping, FpbLatAction::Keeping, FpbLatAction::Keeping, FpbLatAction::SwitchLeft, FpbLatAction::SwitchLeft},              // KKKLL
+            {FpbLatAction::Keeping, FpbLatAction::Keeping, FpbLatAction::Keeping, FpbLatAction::SwitchRight, FpbLatAction::SwitchRight},            // KKKRR
+            {FpbLatAction::Keeping, FpbLatAction::Keeping, FpbLatAction::SwitchLeft, FpbLatAction::SwitchLeft, FpbLatAction::SwitchLeft},           // KKLLL
+            {FpbLatAction::Keeping, FpbLatAction::Keeping, FpbLatAction::SwitchRight, FpbLatAction::SwitchRight, FpbLatAction::SwitchRight},        // KKRRR
+            {FpbLatAction::Keeping, FpbLatAction::SwitchLeft, FpbLatAction::SwitchLeft, FpbLatAction::SwitchLeft, FpbLatAction::SwitchLeft},        // KLLLL
+            {FpbLatAction::Keeping, FpbLatAction::SwitchRight, FpbLatAction::SwitchRight, FpbLatAction::SwitchRight, FpbLatAction::SwitchRight},    // KRRRR
+            {FpbLatAction::SwitchLeft, FpbLatAction::SwitchLeft, FpbLatAction::SwitchLeft, FpbLatAction::SwitchLeft, FpbLatAction::SwitchLeft},     // LLLLL
+            {FpbLatAction::SwitchRight, FpbLatAction::SwitchRight, FpbLatAction::SwitchRight, FpbLatAction::SwitchRight, FpbLatAction::SwitchRight} // RRRRR
+        };
+    }
+
+    int tree_height_ = 5;
     double action_time_ = 1.0;
     FpbAction current_action_;
     std::vector<std::vector<FpbAction>> behaviour_tree_;

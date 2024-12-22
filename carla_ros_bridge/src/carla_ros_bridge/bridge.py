@@ -207,7 +207,7 @@ class CarlaRosBridge(CompatibleNode):
                 print("Failed to spawn vehicle.")
                 
 
-        timer1 = threading.Timer( 15, spawn_vehicle_noroute, args=(vehicle_bp, spawn_points1[0]))
+        timer1 = threading.Timer( 10, spawn_vehicle_noroute, args=(vehicle_bp, spawn_points1[0]))
         timer1.start()
         timer2 = threading.Timer( 280 , spawn_vehicle, args=(vehicle_bp, spawn_points2[0], route_2))
         timer2.start()

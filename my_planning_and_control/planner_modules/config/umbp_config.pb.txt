@@ -4,7 +4,7 @@ status: "editting"
 
 cost {
   efficiency {
-    ego_lack_speed_to_desired_unit_cost: 3.0
+    ego_lack_speed_to_desired_unit_cost: 4.0
     ego_over_speed_to_desired_unit_cost: 0.03
     ego_desired_speed_tolerate_gap: 1.0
     leading_distance_th: 120.0
@@ -13,7 +13,7 @@ cost {
     leading_speed_blocked_desired_vel_unit_cost: 0.1
   }
   safety {
-    ego_to_obs: 100.0
+    ego_to_obs: 80.0
   }
   user {
     late_operate_unit_cost: 0.25
@@ -22,14 +22,14 @@ cost {
   navigation {
     ref_line_change:0.1
   }
-  discount_factor: 0.8
+  discount_factor: 0.9
 }
 
 propogate {
   fpb {
     layer_time: 1.0
     step: 0.2
-    tree_height: 3
+    tree_height: 5
     l_ref_to_left_road_bound: 10
     l_ref_to_right_road_bound: 2
   }
@@ -39,7 +39,7 @@ propogate {
     l_sample_distance: 4.0
     l_sample_num: 2
     acc_ref : 3.0 
-    dec_ref : 3.0
+    dec_ref : 4.0
     lane_width: 4.0
     increased_sl_distance: 1.0
     increased_st_distance: 0.02
