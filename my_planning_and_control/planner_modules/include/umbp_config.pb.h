@@ -31,6 +31,9 @@
 // @@protoc_insertion_point(includes)
 namespace planning {
 namespace umbp {
+class BezierConfig;
+class BezierConfigDefaultTypeInternal;
+extern BezierConfigDefaultTypeInternal _BezierConfig_default_instance_;
 class CarConfig;
 class CarConfigDefaultTypeInternal;
 extern CarConfigDefaultTypeInternal _CarConfig_default_instance_;
@@ -67,6 +70,9 @@ extern SampleConfigDefaultTypeInternal _SampleConfig_default_instance_;
 class UserCost;
 class UserCostDefaultTypeInternal;
 extern UserCostDefaultTypeInternal _UserCost_default_instance_;
+class WeightConfig;
+class WeightConfigDefaultTypeInternal;
+extern WeightConfigDefaultTypeInternal _WeightConfig_default_instance_;
 }  // namespace umbp
 }  // namespace planning
 
@@ -1032,6 +1038,182 @@ class EgoConfig : public ::google::protobuf::Message /* @@protoc_insertion_point
 };
 // -------------------------------------------------------------------
 
+class BezierConfig : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:planning.umbp.BezierConfig) */ {
+ public:
+  BezierConfig();
+  virtual ~BezierConfig();
+
+  BezierConfig(const BezierConfig& from);
+
+  inline BezierConfig& operator=(const BezierConfig& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const BezierConfig& default_instance();
+
+  static inline const BezierConfig* internal_default_instance() {
+    return reinterpret_cast<const BezierConfig*>(
+               &_BezierConfig_default_instance_);
+  }
+
+  void Swap(BezierConfig* other);
+
+  // implements Message ----------------------------------------------
+
+  inline BezierConfig* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  BezierConfig* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const BezierConfig& from);
+  void MergeFrom(const BezierConfig& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(BezierConfig* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // .planning.umbp.WeightConfig weight = 1;
+  bool has_weight() const;
+  void clear_weight();
+  static const int kWeightFieldNumber = 1;
+  const ::planning::umbp::WeightConfig& weight() const;
+  ::planning::umbp::WeightConfig* mutable_weight();
+  ::planning::umbp::WeightConfig* release_weight();
+  void set_allocated_weight(::planning::umbp::WeightConfig* weight);
+
+  // @@protoc_insertion_point(class_scope:planning.umbp.BezierConfig)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::planning::umbp::WeightConfig* weight_;
+  mutable int _cached_size_;
+  friend struct  protobuf_umbp_5fconfig_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class WeightConfig : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:planning.umbp.WeightConfig) */ {
+ public:
+  WeightConfig();
+  virtual ~WeightConfig();
+
+  WeightConfig(const WeightConfig& from);
+
+  inline WeightConfig& operator=(const WeightConfig& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const WeightConfig& default_instance();
+
+  static inline const WeightConfig* internal_default_instance() {
+    return reinterpret_cast<const WeightConfig*>(
+               &_WeightConfig_default_instance_);
+  }
+
+  void Swap(WeightConfig* other);
+
+  // implements Message ----------------------------------------------
+
+  inline WeightConfig* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  WeightConfig* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const WeightConfig& from);
+  void MergeFrom(const WeightConfig& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(WeightConfig* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // double weight_P = 1;
+  void clear_weight_p();
+  static const int kWeightPFieldNumber = 1;
+  double weight_p() const;
+  void set_weight_p(double value);
+
+  // double weight_c = 2;
+  void clear_weight_c();
+  static const int kWeightCFieldNumber = 2;
+  double weight_c() const;
+  void set_weight_c(double value);
+
+  // @@protoc_insertion_point(class_scope:planning.umbp.WeightConfig)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  double weight_p_;
+  double weight_c_;
+  mutable int _cached_size_;
+  friend struct  protobuf_umbp_5fconfig_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
 class CarConfig : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:planning.umbp.CarConfig) */ {
  public:
   CarConfig();
@@ -1341,6 +1523,15 @@ class Config : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   ::planning::umbp::EgoConfig* release_ego();
   void set_allocated_ego(::planning::umbp::EgoConfig* ego);
 
+  // .planning.umbp.BezierConfig bezier = 7;
+  bool has_bezier() const;
+  void clear_bezier();
+  static const int kBezierFieldNumber = 7;
+  const ::planning::umbp::BezierConfig& bezier() const;
+  ::planning::umbp::BezierConfig* mutable_bezier();
+  ::planning::umbp::BezierConfig* release_bezier();
+  void set_allocated_bezier(::planning::umbp::BezierConfig* bezier);
+
   // @@protoc_insertion_point(class_scope:planning.umbp.Config)
  private:
 
@@ -1351,6 +1542,7 @@ class Config : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   ::planning::umbp::CostConfig* cost_;
   ::planning::umbp::PropogateConfig* propogate_;
   ::planning::umbp::EgoConfig* ego_;
+  ::planning::umbp::BezierConfig* bezier_;
   mutable int _cached_size_;
   friend struct  protobuf_umbp_5fconfig_2eproto::TableStruct;
 };
@@ -2072,6 +2264,81 @@ inline void EgoConfig::set_allocated_map(::planning::umbp::MapConfig* map) {
 
 // -------------------------------------------------------------------
 
+// BezierConfig
+
+// .planning.umbp.WeightConfig weight = 1;
+inline bool BezierConfig::has_weight() const {
+  return this != internal_default_instance() && weight_ != NULL;
+}
+inline void BezierConfig::clear_weight() {
+  if (GetArenaNoVirtual() == NULL && weight_ != NULL) delete weight_;
+  weight_ = NULL;
+}
+inline const ::planning::umbp::WeightConfig& BezierConfig::weight() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.BezierConfig.weight)
+  return weight_ != NULL ? *weight_
+                         : *::planning::umbp::WeightConfig::internal_default_instance();
+}
+inline ::planning::umbp::WeightConfig* BezierConfig::mutable_weight() {
+  
+  if (weight_ == NULL) {
+    weight_ = new ::planning::umbp::WeightConfig;
+  }
+  // @@protoc_insertion_point(field_mutable:planning.umbp.BezierConfig.weight)
+  return weight_;
+}
+inline ::planning::umbp::WeightConfig* BezierConfig::release_weight() {
+  // @@protoc_insertion_point(field_release:planning.umbp.BezierConfig.weight)
+  
+  ::planning::umbp::WeightConfig* temp = weight_;
+  weight_ = NULL;
+  return temp;
+}
+inline void BezierConfig::set_allocated_weight(::planning::umbp::WeightConfig* weight) {
+  delete weight_;
+  weight_ = weight;
+  if (weight) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:planning.umbp.BezierConfig.weight)
+}
+
+// -------------------------------------------------------------------
+
+// WeightConfig
+
+// double weight_P = 1;
+inline void WeightConfig::clear_weight_p() {
+  weight_p_ = 0;
+}
+inline double WeightConfig::weight_p() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.WeightConfig.weight_P)
+  return weight_p_;
+}
+inline void WeightConfig::set_weight_p(double value) {
+  
+  weight_p_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.WeightConfig.weight_P)
+}
+
+// double weight_c = 2;
+inline void WeightConfig::clear_weight_c() {
+  weight_c_ = 0;
+}
+inline double WeightConfig::weight_c() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.WeightConfig.weight_c)
+  return weight_c_;
+}
+inline void WeightConfig::set_weight_c(double value) {
+  
+  weight_c_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.WeightConfig.weight_c)
+}
+
+// -------------------------------------------------------------------
+
 // CarConfig
 
 // double car_width = 1;
@@ -2397,7 +2664,50 @@ inline void Config::set_allocated_ego(::planning::umbp::EgoConfig* ego) {
   // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.ego)
 }
 
+// .planning.umbp.BezierConfig bezier = 7;
+inline bool Config::has_bezier() const {
+  return this != internal_default_instance() && bezier_ != NULL;
+}
+inline void Config::clear_bezier() {
+  if (GetArenaNoVirtual() == NULL && bezier_ != NULL) delete bezier_;
+  bezier_ = NULL;
+}
+inline const ::planning::umbp::BezierConfig& Config::bezier() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.Config.bezier)
+  return bezier_ != NULL ? *bezier_
+                         : *::planning::umbp::BezierConfig::internal_default_instance();
+}
+inline ::planning::umbp::BezierConfig* Config::mutable_bezier() {
+  
+  if (bezier_ == NULL) {
+    bezier_ = new ::planning::umbp::BezierConfig;
+  }
+  // @@protoc_insertion_point(field_mutable:planning.umbp.Config.bezier)
+  return bezier_;
+}
+inline ::planning::umbp::BezierConfig* Config::release_bezier() {
+  // @@protoc_insertion_point(field_release:planning.umbp.Config.bezier)
+  
+  ::planning::umbp::BezierConfig* temp = bezier_;
+  bezier_ = NULL;
+  return temp;
+}
+inline void Config::set_allocated_bezier(::planning::umbp::BezierConfig* bezier) {
+  delete bezier_;
+  bezier_ = bezier;
+  if (bezier) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.bezier)
+}
+
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

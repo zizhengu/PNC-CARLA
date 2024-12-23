@@ -165,19 +165,19 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
         return true;
     }
 
-    //-------------------------------------5.路径规划----------------------------------------
-    // 5.1 对决策的SL曲线进行贝塞尔加密
+    //-------------------------------------5.时空联合规划----------------------------------------
+    // 5.1 对决策的SL曲线进行加密
     std::vector<FrenetPoint> fpb_path_increased;
-    int beszier_num_points = 50;
-    _increased_sl_sample_num = static_cast<int>(beszier_num_points / 5);
-    fpb_path_increased = GenerateBezierCurve(fpb_path, static_cast<double>((fpb_path.size() - 1) * _sim_param.layer_time), beszier_num_points);
+    // int beszier_num_points = 50;
+    // _increased_sl_sample_num = static_cast<int>(beszier_num_points / 5);
+    // fpb_path_increased = GenerateBezierCurve(fpb_path, static_cast<double>((fpb_path.size() - 1) * _sim_param.layer_time), beszier_num_points);
 
-    // if (!IncreaseFpbPath(fpb_path, _sim_param.increased_sl_distance, fpb_path_increased))
-    // {
-    //     LOG(INFO) << "[UMBP]****** IncreaseFpbPath FAILED  ******";
-    //     emergency_stop_signal = true;
-    //     return true;
-    // }
+    if (!IncreaseFpbPath(fpb_path, _sim_param.increased_sl_distance, fpb_path_increased))
+    {
+        LOG(INFO) << "[UMBP]****** IncreaseFpbPath FAILED  ******";
+        emergency_stop_signal = true;
+        return true;
+    }
 
     // for (const auto &points : fpb_path_increased)
     // {
@@ -190,6 +190,70 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     // 5.2 将决策SL曲线转换为轨迹
     auto reference_index2s = calculate_index_to_s(reference_line, ego_state);
     auto fpb_path_trajectory = frenet_to_cartesion(fpb_path_increased, reference_line, reference_index2s);
+
+    // 5.3 生成SSC CUBE
+    TicToc generate_cube_timer;
+    if (!GenerateSscCube(fpb_path, forward_prop_agent_set, fpb_path_trajectory, planning_start_point_frenet))
+    {
+        LOG(INFO) << "[UMBP]****** GenerateSscCube FAILED  ******";
+        emergency_stop_signal = true;
+        return false;
+    }
+    LOG(INFO) << std::fixed << std::setprecision(4)
+              << "[UMBP][Process] GenerateSscCube Time :"
+              << generate_cube_timer.toc() << "ms";
+
+    SplineGenerator<5, 2> spline_generator;
+    BezierSpline<5, 2> bezier_spline;
+
+    // get start and end constraints
+    vec_E<Vecf<2>> start_constraints;
+    vec_E<Vecf<2>> end_constraints;
+
+    start_constraints.push_back(Vecf<2>(fpb_path[0].s, fpb_path[0].l));
+    start_constraints.push_back(Vecf<2>(fpb_path[0].s_dot, fpb_path[0].l_dot));
+    start_constraints.push_back(Vecf<2>(fpb_path[0].s_dot_dot, fpb_path[0].l_dot_dot));
+
+    end_constraints.push_back(Vecf<2>(fpb_path.back().s, fpb_path.back().l));
+    end_constraints.push_back(Vecf<2>(fpb_path.back().s_dot, fpb_path.back().l_dot));
+    end_constraints.push_back(Vecf<2>(fpb_path.back().s_dot_dot, fpb_path.back().l_dot_dot));
+
+    // get ref points
+    std::vector<decimal_t> ref_stamps;
+    vec_E<Vecf<2>> ref_points;
+
+    for (size_t i = 0; i < fpb_path.size(); i++)
+    {
+        ref_points.push_back(Vecf<2>(fpb_path[i].s, fpb_path[i].l));
+        ref_stamps.push_back(static_cast<double>(i * _sim_param.layer_time));
+    }
+
+    std::vector<double> weight_proximity = {1.0, 1.0};
+
+    TicToc bezier_spline_timer;
+    if (spline_generator.GetBezierSplineUsingCorridor(
+            _cubes, start_constraints, end_constraints, ref_stamps,
+            ref_points, weight_proximity,
+            &bezier_spline) != kSuccess)
+    {
+        LOG(INFO) << "---------OOQP Failed -------";
+    }
+    else
+    {
+        LOG(INFO) << "[UMBP]****** GetBezierSplineUsingCorridor  Success ******";
+        for (size_t i = 0; i < bezier_spline.ctrl_pts().size(); ++i)
+        {
+            LOG(INFO) << "Segment " << i << ":";
+            for (int row = 0; row < bezier_spline.ctrl_pts()[i].rows(); ++row)
+            {
+                LOG(INFO) << std::fixed << std::setprecision(4)
+                          << "  Control Point " << row << ": " << bezier_spline.ctrl_pts()[i].row(row);
+            }
+        }
+    }
+    LOG(INFO) << std::fixed << std::setprecision(4)
+              << "[UMBP][Process] GetBezierSplineUsingCorridor Time :"
+              << bezier_spline_timer.toc() << "ms";
 
     //-------------------------------------6.速度规划----------------------------------------
     // 6.1  获取路径规划结果的index2s表
@@ -416,8 +480,6 @@ bool UMBPlanner::RunUmpb(const FrenetPoint ego_state, const ForwardPropAgentSet 
     {
         LOG(INFO) << std::fixed << std::setprecision(2) << "Fpb_win_points: (s: " << points.s << " l: " << points.l << ")";
     }
-    LOG(INFO) << "----------------------------------";
-
     return true;
 }
 
@@ -745,10 +807,10 @@ bool UMBPlanner::PropagateActionSequence(const FrenetPoint ego_state,
             continue;
         }
     }
-    if (index == -1)
+    if (index == static_cast<int>(-1))
     {
-        // LOG(ERROR) << std::fixed << std::setprecision(4)
-        //            << "[UMBP]****** Find min cost FAILED  ******";
+        LOG(ERROR) << std::fixed << std::setprecision(4)
+                   << "[UMBP]****** Find min cost FAILED  ******";
         _sim_res[seq_id] = static_cast<int>(0);
         return false;
     }
@@ -1174,7 +1236,7 @@ bool UMBPlanner::GenerateTrajectory(const std::vector<STPoint> &final_speed_prof
                 nearest_index = j;
             }
         }
-        if (nearest_index == -1)
+        if (nearest_index == static_cast<int>(-1))
         {
             return false;
         }
@@ -1229,4 +1291,109 @@ double UMBPlanner::GetMinDistanceFromEgoToObs(const FrenetPoint &forward_traj, c
         }
     }
     return min_distance;
+}
+
+bool UMBPlanner::GenerateSscCube(const std::vector<FrenetPoint> &fpb_path, const ForwardPropAgentSet &forward_prop_agent_set,
+                                 const std::vector<TrajectoryPoint> &path_trajectory, const FrenetPoint &planning_start_point_frenet)
+{
+    _cubes.clear();
+    std::unordered_map<int, std::vector<FrenetPoint>> cur_surround_trajs = _surround_trajs[_winner_id];
+    std::vector<FrenetPoint> dynamic_obstacles_frenet_coords;
+    if (!_dynamic_obstacles.empty())
+    {
+        cartesion_set_to_frenet_set(_dynamic_obstacles, path_trajectory, path_trajectory.front(), dynamic_obstacles_frenet_coords);
+    }
+
+    for (auto &&obs_frenet : dynamic_obstacles_frenet_coords)
+    {
+        LOG(INFO) << std::fixed << std::setprecision(4)
+                  << "dynamic_obstacles_frenet_coords(s: " << obs_frenet.s
+                  << ", l:" << obs_frenet.l << ", s_dot:" << obs_frenet.s_dot << ", l_dot:" << obs_frenet.l_dot
+                  << " )";
+    }
+    for (size_t i = 0; i < fpb_path.size() - 1; i++)
+    {
+        SpatioTemporalSemanticCubeNd<2> cube;
+
+        cube.t_lb = static_cast<double>(i * _sim_param.layer_time);
+        cube.t_ub = cube.t_lb + _sim_param.layer_time;
+
+        // * the SL bound of current cube
+        double pos_lb_s, pos_lb_l, pos_ub_s, pos_ub_l;
+        if (forward_prop_agent_set.forward_prop_agents.empty())
+        {
+            pos_lb_s = -5.0;
+            pos_ub_s = _sim_param.s_sample_distance * _sim_param.s_sample_num;
+            pos_lb_l = -1 * _sim_param.l_ref_to_right_road_bound;
+            pos_ub_l = _sim_param.l_ref_to_left_road_bound;
+            LOG(INFO) << "[GenerateSscCube] " << i << " cube.pos_lb_l " << pos_lb_l
+                      << " cube.pos_ub_l " << pos_ub_l;
+        }
+        else
+        {
+            double min_l = -1 * _sim_param.l_ref_to_right_road_bound;
+            double max_l = _sim_param.l_ref_to_left_road_bound;
+            for (const auto &fpa : forward_prop_agent_set.forward_prop_agents)
+            {
+                // * the L bound of current cube
+                double t_in_l = -1, t_out_l = -1;
+                bool find_t_in_l = false;
+                bool find_t_out_l = false;
+                for (size_t j = 0; j < fpb_path.size() - 1; j++)
+                {
+                    if (cur_surround_trajs.at(fpa.first)[i].s - fpa.second.length / 2 >= fpb_path[j].s && cur_surround_trajs.at(fpa.first)[i].s - fpa.second.length / 2 <= fpb_path[j + 1].s && !find_t_in_l)
+                    {
+                        t_in_l = static_cast<double>(j * _sim_param.layer_time);
+                        find_t_in_l = true;
+                    }
+
+                    if (cur_surround_trajs.at(fpa.first)[i].s + fpa.second.length / 2 >= fpb_path[j].s && cur_surround_trajs.at(fpa.first)[i].s + fpa.second.length / 2 <= fpb_path[j + 1].s && !find_t_out_l)
+                    {
+                        t_out_l = static_cast<double>((j + 1) * _sim_param.layer_time);
+                        find_t_out_l = true;
+                    }
+                }
+
+                LOG(INFO) << "[GenerateSscCube] obs[" << fpa.first << "] at[" << i << "]:" << " t_in_l: " << t_in_l
+                          << ", t_out_l: " << t_out_l;
+
+                LOG(INFO) << "[GenerateSscCube] cur_surround_trajs of obs[" << fpa.first << "] at[" << i << "]:" << " s: " << cur_surround_trajs.at(fpa.first)[i].s
+                          << ", l: " << cur_surround_trajs.at(fpa.first)[i].l;
+
+                if (static_cast<double>(i * _sim_param.layer_time) >= t_in_l && static_cast<double>(i * _sim_param.layer_time) <= t_out_l)
+                {
+                    if (fpb_path[i].l >= cur_surround_trajs.at(fpa.first)[i].l)
+                    {
+                        min_l = std::max(min_l, cur_surround_trajs.at(fpa.first)[i].l + fpa.second.width / 2 + _ego_param.car_width / 2);
+                    }
+                    else
+                    {
+                        max_l = std::min(max_l, cur_surround_trajs.at(fpa.first)[i].l - fpa.second.width / 2 - _ego_param.car_width / 2);
+                    }
+                }
+
+                // TODO:dynamic obs, change bound of S
+                // if (std::hypot(fpa.second.obs_frenet_point.l_dot, fpa.second.obs_frenet_point.s_dot) >= 0.1)
+                // {
+                //     pos_lb_s = -5.0;
+                //     pos_ub_s = _sim_param.s_sample_distance * _sim_param.s_sample_num;
+                // }
+            }
+            pos_lb_s = -5.0;
+            pos_ub_s = _sim_param.s_sample_distance * _sim_param.s_sample_num;
+            pos_lb_l = min_l;
+            pos_ub_l = max_l;
+            if (pos_ub_l <= pos_lb_l)
+            {
+                pos_ub_l = _sim_param.l_ref_to_left_road_bound;
+                pos_lb_l = -1.0 * _sim_param.l_ref_to_right_road_bound;
+            }
+            LOG(INFO) << "[GenerateSscCube] cube[" << i << "] cube.pos_lb_l: " << pos_lb_l
+                      << ", cube.pos_ub_l: " << pos_ub_l;
+        }
+        cube.p_lb = {pos_lb_s, pos_lb_l};
+        cube.p_ub = {pos_ub_s, pos_ub_l};
+        _cubes.emplace_back(cube);
+    }
+    return true;
 }

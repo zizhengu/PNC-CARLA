@@ -56,7 +56,8 @@ target_include_directories(main_function PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../controller_modules/include>
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../general_modules/include>
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../planner_modules/include>
-  $<INSTALL_INTERFACE:include>)
+  $<INSTALL_INTERFACE:include>
+  "/home/guzizhen/VariousLib/OOQP/include")
 
 link_directories(/usr/lib/x86_64-linux-gnu/libglog.so)
 link_directories(/usr/local/lib/libprotobuf.so)
@@ -80,6 +81,13 @@ target_link_libraries(
   main_function
   OsqpEigen::OsqpEigen
   Matplot++::matplot
+  ooqpgensparse
+  ooqpsparse
+  ooqpgondzio
+  ooqpbase 
+  blas 
+  ma27 
+  gfortran
 )
 target_link_libraries(main_function /usr/lib/x86_64-linux-gnu/libglog.so)
 target_link_libraries(main_function /usr/local/lib/libprotobuf.so)

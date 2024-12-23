@@ -59,4 +59,6 @@
 #include "fpb_tree.h"
 #include "umb_planner.h"
 #include "tic_toc.h"
+#include "ooqp_interface.h"
+#include "spline_generator.h"
 // done

@@ -305,6 +305,7 @@ public:
     LOG(INFO) << std::fixed << std::setprecision(4)
               << "[UMBP][Process] Umbp Runonce Time :"
               << umbp_runonce_timer.toc() << "ms";
+    LOG(INFO) << "----------------------------------";
 
     // Evaluate
     if (std::abs(_current_ego_state->v) > 0.01)

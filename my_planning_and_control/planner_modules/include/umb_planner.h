@@ -12,6 +12,8 @@
 #include "common.h"
 #include "fpb_tree.h"
 #include "tic_toc.h"
+#include "ooqp_interface.h"
+#include "spline_generator.h"
 #include "polynomial_curve.h"
 #include "derived_object_msgs/msg/object.hpp"
 #include "carla_waypoint_types/srv/get_waypoint.hpp"
@@ -192,6 +194,9 @@ private:
     double GetMinDistanceFromEgoToObs(const FrenetPoint &forward_traj, const FrenetPoint &surr_traj,
                                       const double obs_length, const double obs_width);
 
+    bool GenerateSscCube(const std::vector<FrenetPoint> &fpb_path, const ForwardPropAgentSet &forward_prop_agent_set,
+                         const std::vector<TrajectoryPoint> &path_trajectory, const FrenetPoint &planning_start_point_frenet);
+
     std::vector<derived_object_msgs::msg::Object> _static_obstacles;  // 静态障碍物
     std::vector<derived_object_msgs::msg::Object> _dynamic_obstacles; // 动态障碍物
     std::deque<TrajectoryPoint> _previous_trajectory;                 // 上一周期的轨迹
@@ -220,17 +225,20 @@ private:
     int _winner_id = 0;
     double _winner_score = 0.0;
     std::vector<FpbAction> _winner_action_seq;
-    std::vector<int> _sim_res = std::vector<int>(64);
-    std::vector<int> _risky_res = std::vector<int>(64);
-    std::vector<std::string> _sim_info = std::vector<std::string>(64);
-    std::vector<double> _final_cost = std::vector<double>(64);
-    std::vector<std::vector<CostStructure>> _progress_cost = std::vector<std::vector<CostStructure>>(64);
-    std::vector<CostStructure> _tail_cost = std::vector<CostStructure>(64);
-    std::vector<std::vector<FrenetPoint>> _forward_trajs = std::vector<std::vector<FrenetPoint>>(64);
-    std::vector<std::vector<FpbLatAction>> _forward_lat_behaviors = std::vector<std::vector<FpbLatAction>>(64);
-    std::vector<std::vector<FpbLonAction>> _forward_lon_behaviors = std::vector<std::vector<FpbLonAction>>(64);
-    std::vector<std::unordered_map<int, std::vector<FrenetPoint>>> _surround_trajs = std::vector<std::unordered_map<int, std::vector<FrenetPoint>>>(64);
+    std::vector<int> _sim_res = std::vector<int>(500);
+    std::vector<int> _risky_res = std::vector<int>(500);
+    std::vector<std::string> _sim_info = std::vector<std::string>(500);
+    std::vector<double> _final_cost = std::vector<double>(500);
+    std::vector<std::vector<CostStructure>> _progress_cost = std::vector<std::vector<CostStructure>>(500);
+    std::vector<CostStructure> _tail_cost = std::vector<CostStructure>(500);
+    std::vector<std::vector<FrenetPoint>> _forward_trajs = std::vector<std::vector<FrenetPoint>>(500);
+    std::vector<std::vector<FpbLatAction>> _forward_lat_behaviors = std::vector<std::vector<FpbLatAction>>(500);
+    std::vector<std::vector<FpbLonAction>> _forward_lon_behaviors = std::vector<std::vector<FpbLonAction>>(500);
+    std::vector<std::unordered_map<int, std::vector<FrenetPoint>>> _surround_trajs = std::vector<std::unordered_map<int, std::vector<FrenetPoint>>>(500);
     double _time_cost = 0.0;
+
+    // BezierSpline
+    vec_E<SpatioTemporalSemanticCubeNd<2>> _cubes;
 
     // plot
     matplot::figure_handle _path_plot_handle;

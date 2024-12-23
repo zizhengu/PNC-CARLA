@@ -63,6 +63,16 @@ message EgoConfig {
     MapConfig map = 2;
 }
 
+message BezierConfig {
+    WeightConfig weight = 1; 
+}
+
+message WeightConfig{
+    double weight_P = 1;
+    double weight_c = 2;
+}
+
+
 message CarConfig {
     double car_width = 1;
     double car_length = 2;
@@ -80,4 +90,5 @@ message Config {
   CostConfig cost = 4;
   PropogateConfig propogate = 5;
   EgoConfig ego = 6;
+  BezierConfig bezier = 7;
 }

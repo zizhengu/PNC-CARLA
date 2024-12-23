@@ -55,3 +55,10 @@ ego{
     reference_speed: 6.0
   }
 }
+
+bezier{
+  weight{
+    weight_P: 1.0
+    weight_c: 1.0
+  }
+}
