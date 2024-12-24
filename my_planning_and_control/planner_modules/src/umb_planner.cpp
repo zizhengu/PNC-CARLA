@@ -171,7 +171,7 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     // int beszier_num_points = 50;
     // _increased_sl_sample_num = static_cast<int>(beszier_num_points / 5);
     // fpb_path_increased = GenerateBezierCurve(fpb_path, static_cast<double>((fpb_path.size() - 1) * _sim_param.layer_time), beszier_num_points);
-
+    // RCLCPP_INFO(this->get_logger(), "Start IncreaseFpbPath !!!");
     if (!IncreaseFpbPath(fpb_path, _sim_param.increased_sl_distance, fpb_path_increased))
     {
         LOG(INFO) << "[UMBP]****** IncreaseFpbPath FAILED  ******";
@@ -192,6 +192,7 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     auto fpb_path_trajectory = frenet_to_cartesion(fpb_path_increased, reference_line, reference_index2s);
 
     // 5.3 生成SSC CUBE
+    // RCLCPP_INFO(this->get_logger(), "Start GenerateSscCube !!!");
     TicToc generate_cube_timer;
     if (!GenerateSscCube(fpb_path, forward_prop_agent_set, fpb_path_trajectory, planning_start_point_frenet))
     {
@@ -199,21 +200,20 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
         emergency_stop_signal = true;
         return false;
     }
-    LOG(INFO) << std::fixed << std::setprecision(4)
-              << "[UMBP][Process] GenerateSscCube Time :"
-              << generate_cube_timer.toc() << "ms";
+    // LOG(INFO) << std::fixed << std::setprecision(4)
+    //           << "[UMBP][Process] GenerateSscCube Time :"
+    //           << generate_cube_timer.toc() << "ms";
 
+    // 5.4 求解BezierSpline
     SplineGenerator<5, 2> spline_generator;
     BezierSpline<5, 2> bezier_spline;
 
     // get start and end constraints
     vec_E<Vecf<2>> start_constraints;
     vec_E<Vecf<2>> end_constraints;
-
     start_constraints.push_back(Vecf<2>(fpb_path[0].s, fpb_path[0].l));
     start_constraints.push_back(Vecf<2>(fpb_path[0].s_dot, fpb_path[0].l_dot));
     start_constraints.push_back(Vecf<2>(fpb_path[0].s_dot_dot, fpb_path[0].l_dot_dot));
-
     end_constraints.push_back(Vecf<2>(fpb_path.back().s, fpb_path.back().l));
     end_constraints.push_back(Vecf<2>(fpb_path.back().s_dot, fpb_path.back().l_dot));
     end_constraints.push_back(Vecf<2>(fpb_path.back().s_dot_dot, fpb_path.back().l_dot_dot));
@@ -221,7 +221,6 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     // get ref points
     std::vector<decimal_t> ref_stamps;
     vec_E<Vecf<2>> ref_points;
-
     for (size_t i = 0; i < fpb_path.size(); i++)
     {
         ref_points.push_back(Vecf<2>(fpb_path[i].s, fpb_path[i].l));
@@ -229,92 +228,161 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     }
 
     std::vector<double> weight_proximity = {1.0, 1.0};
-
+    // RCLCPP_INFO(this->get_logger(), "GetBezierSplineUsingCorridor !!!");
     TicToc bezier_spline_timer;
+    bool getbezierspline = false;
+    std::vector<FrenetPoint> bezier_control_points;
     if (spline_generator.GetBezierSplineUsingCorridor(
             _cubes, start_constraints, end_constraints, ref_stamps,
             ref_points, weight_proximity,
             &bezier_spline) != kSuccess)
     {
+        // 求解失败，转用备用的五次多项式连接
         LOG(INFO) << "---------OOQP Failed -------";
-    }
-    else
-    {
-        LOG(INFO) << "[UMBP]****** GetBezierSplineUsingCorridor  Success ******";
-        for (size_t i = 0; i < bezier_spline.ctrl_pts().size(); ++i)
+        // 获取路径规划结果的index2s表
+        std::vector<double> path_index2s;
+        path_index2s.emplace_back(0.0);
+        for (size_t i = 1; i < fpb_path_trajectory.size(); i++)
         {
-            LOG(INFO) << "Segment " << i << ":";
-            for (int row = 0; row < bezier_spline.ctrl_pts()[i].rows(); ++row)
+            path_index2s.emplace_back(path_index2s.back() +
+                                      std::hypot(fpb_path_trajectory[i].x - fpb_path_trajectory[i - 1].x, fpb_path_trajectory[i].y - fpb_path_trajectory[i - 1].y));
+        }
+        // 对决策的ST曲线进行加密
+        std::vector<STPoint> fpb_speed_profile_increased;
+        if (!IncreaseFpbSpeedProfile(fpb_path_increased, _sim_param.increased_st_distance, _sim_param.layer_time, fpb_speed_profile_increased))
+        {
+            LOG(ERROR) << "[UMBP]****** IncreaseFpbSpeedProfile FAILED  ******";
+            return false;
+        }
+
+        // 将路径规划结果和速度规划结果拼成轨迹
+        std::vector<TrajectoryPoint> init_trajectory;
+        // RCLCPP_INFO(this->get_logger(), "Start GenerateTrajectory !!!");
+        if (!GenerateTrajectory(fpb_speed_profile_increased, fpb_path_trajectory, path_index2s, planning_start_point.time_stamped, init_trajectory))
+        {
+            LOG(ERROR) << "[UMBP]****** GenerateTrajectory FAILED  ******";
+            return false;
+        }
+
+        // 轨迹拼接
+        final_trajectory.clear();
+        if (!_switch_trajectory.empty())
+        {
+            for (auto &&trajectory_point : _switch_trajectory)
             {
-                LOG(INFO) << std::fixed << std::setprecision(4)
-                          << "  Control Point " << row << ": " << bezier_spline.ctrl_pts()[i].row(row);
+                final_trajectory.emplace_back(trajectory_point);
             }
         }
-    }
-    LOG(INFO) << std::fixed << std::setprecision(4)
-              << "[UMBP][Process] GetBezierSplineUsingCorridor Time :"
-              << bezier_spline_timer.toc() << "ms";
 
-    //-------------------------------------6.速度规划----------------------------------------
-    // 6.1  获取路径规划结果的index2s表
-    std::vector<double> path_index2s;
-    path_index2s.emplace_back(0.0);
-    for (size_t i = 1; i < fpb_path_trajectory.size(); i++)
-    {
-        path_index2s.emplace_back(path_index2s.back() +
-                                  std::hypot(fpb_path_trajectory[i].x - fpb_path_trajectory[i - 1].x, fpb_path_trajectory[i].y - fpb_path_trajectory[i - 1].y));
-    }
-    // 6.2 对决策的ST曲线进行加密
-    // RCLCPP_INFO(this->get_logger(), "Start IncreaseFpbSpeedProfile !!!");
-    std::vector<STPoint> fpb_speed_profile_increased;
-    if (!IncreaseFpbSpeedProfile(fpb_path_increased, _sim_param.increased_st_distance, _sim_param.layer_time, fpb_speed_profile_increased))
-    {
-        LOG(ERROR) << "[UMBP]****** IncreaseFpbSpeedProfile FAILED  ******";
-        return false;
-    }
-    // for (const auto &points : fpb_speed_profile_increased)
-    // {
-    //     LOG(INFO) << std::fixed << std::setprecision(2)
-    //               << "fpb_speed_profile_increased: (t: " << points.t << " s: " << points.s
-    //               << " s_dot: " << points.s_dot << " s_dot_dot: " << points.s_dot_dot << ")";
-    // }
-    // LOG(INFO) << "----------------------------------";
-
-    //-------------------------------------7.生成最终规划----------------------------------------
-    // 7.1 将路径规划结果和速度规划结果拼成轨迹
-    std::vector<TrajectoryPoint> init_trajectory;
-    // RCLCPP_INFO(this->get_logger(), "Start GenerateTrajectory !!!");
-    if (!GenerateTrajectory(fpb_speed_profile_increased, fpb_path_trajectory, path_index2s, planning_start_point.time_stamped, init_trajectory))
-    {
-        LOG(ERROR) << "[UMBP]****** GenerateTrajectory FAILED  ******";
-        return false;
-    }
-
-    // 7.2轨迹拼接
-    // RCLCPP_INFO(this->get_logger(), "Start Trajectory Combine !!!");
-    final_trajectory.clear();
-    if (!_switch_trajectory.empty())
-    {
-        for (auto &&trajectory_point : _switch_trajectory)
+        for (auto &&trajectory_point : init_trajectory)
         {
             final_trajectory.emplace_back(trajectory_point);
         }
+
+        // 上一周期轨迹赋值
+        _previous_trajectory.clear();
+        for (auto &&trajectory_point : final_trajectory)
+        {
+            _previous_trajectory.emplace_back(trajectory_point);
+        }
     }
-    for (auto &&trajectory_point : init_trajectory)
+    else
     {
-        final_trajectory.emplace_back(trajectory_point);
+        // 求解成功 转换轨迹
+        LOG(INFO) << "[UMBP]****** GetBezierSplineUsingCorridor  Success ******";
+        // for (size_t i = 0; i < bezier_spline.ctrl_pts().size(); ++i)
+        // {
+        //     LOG(INFO) << "Segment " << i << ":";
+        //     for (int row = 0; row < bezier_spline.ctrl_pts()[i].rows(); ++row)
+        //     {
+        //         LOG(INFO) << std::fixed << std::setprecision(4)
+        //                   << "  Control Point " << row << ": " << bezier_spline.ctrl_pts()[i].row(row);
+        //     }
+        // }
+        getbezierspline = true;
+        for (size_t i = 0; i < bezier_spline.ctrl_pts().size(); ++i)
+        {
+            for (int row = 0; row < (bezier_spline.ctrl_pts()[i].rows() - 1) * 10; ++row)
+            {
+                FrenetPoint cur_point;
+                cur_point.t = i * 1.0 + row * _sim_param.layer_time / ((bezier_spline.ctrl_pts()[i].rows() - 1) * 10);
+                Vecf<2> result_derivate_0, result_derivate_1, result_derivate_2;
+                bezier_spline.evaluate(cur_point.t, 0, &result_derivate_0);
+                bezier_spline.evaluate(cur_point.t, 1, &result_derivate_1);
+                bezier_spline.evaluate(cur_point.t, 2, &result_derivate_2);
+
+                cur_point.s = result_derivate_0[0];
+                cur_point.l = result_derivate_0[1];
+                cur_point.s_dot = result_derivate_1[0];
+                cur_point.l_dot = result_derivate_1[1];
+                cur_point.s_dot_dot = result_derivate_2[0];
+                cur_point.l_dot_dot = result_derivate_2[1];
+                bezier_control_points.emplace_back(cur_point);
+            }
+        }
+        FrenetPoint cur_point;
+        cur_point.t = 5.0;
+        Vecf<2> result_derivate_0, result_derivate_1, result_derivate_2;
+        bezier_spline.evaluate(cur_point.t, 0, &result_derivate_0);
+        bezier_spline.evaluate(cur_point.t, 1, &result_derivate_1);
+        bezier_spline.evaluate(cur_point.t, 2, &result_derivate_2);
+
+        cur_point.s = result_derivate_0[0];
+        cur_point.l = result_derivate_0[1];
+        cur_point.s_dot = result_derivate_1[0];
+        cur_point.l_dot = result_derivate_1[1];
+        cur_point.s_dot_dot = result_derivate_2[0];
+        cur_point.l_dot_dot = result_derivate_2[1];
+        bezier_control_points.emplace_back(cur_point);
+
+        int print_count = 0;
+        for (auto point : bezier_control_points)
+        {
+            if (print_count % 25 == 0)
+            {
+                LOG(INFO) << std::fixed << std::setprecision(4)
+                          << "  Point (s: " << point.s << " l:  " << point.l << " t:  " << point.t << " s_dot:  " << point.s_dot
+                          << " l_dot:  " << point.l_dot << " s_dot_dot:  " << point.s_dot_dot << " l_dot_dot:  " << point.l_dot_dot;
+            }
+            print_count++;
+        }
+
+        auto bezier_trajectory_init = BezierPointToTrajectory(bezier_control_points, reference_line, reference_index2s, planning_start_point.time_stamped);
+
+        // 轨迹拼接
+        final_trajectory.clear();
+        if (!_switch_trajectory.empty())
+        {
+            for (auto &&trajectory_point : _switch_trajectory)
+            {
+                final_trajectory.emplace_back(trajectory_point);
+            }
+        }
+
+        for (auto &&trajectory_point : bezier_trajectory_init)
+        {
+            final_trajectory.emplace_back(trajectory_point);
+        }
+
+        // 上一周期轨迹赋值
+        _previous_trajectory.clear();
+        for (auto &&trajectory_point : final_trajectory)
+        {
+            _previous_trajectory.emplace_back(trajectory_point);
+        }
+        // int count = 0;
+        // for (auto trajectory : bezier_trajectory_init)
+        // {
+        //     if (count % 10 == 0)
+        //     {
+        //         LOG(INFO) << std::fixed << std::setprecision(4)
+        //                   << "  Point (x: " << trajectory.x << " y:  " << trajectory.y << " t:  " << trajectory.time_stamped << " v:  " << trajectory.v
+        //                   << " heading:  " << trajectory.heading << " kappa:  " << trajectory.kappa << " a_tau:  " << trajectory.a_tau;
+        //     }
+        // }
     }
 
-    // 7.3上一周期轨迹赋值
-    // RCLCPP_INFO(this->get_logger(), "Start Last Trajectory Combine !!!");
-    _previous_trajectory.clear();
-    for (auto &&trajectory_point : final_trajectory)
-    {
-        _previous_trajectory.emplace_back(trajectory_point);
-    }
-
-    //-------------------------------------8.绘制ST、SL图----------------------------------------
-    // 8.1绘制SL图
+    // 绘制SL图
     // RCLCPP_INFO(this->get_logger(), "Start Plot SL !!!");
     if (_plot_count % 5 == 0)
     {
@@ -325,14 +393,25 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
         }
 
         matplot::cla();
-        std::vector<double> fpb_path_increased_s, fpb_path_increased_l;
-        // 储存增密后的fpb_path
-        for (size_t i = 0; i < fpb_path_increased.size(); i++)
+        std::vector<double> s, l;
+        if (getbezierspline == false)
         {
-            fpb_path_increased_s.emplace_back(fpb_path_increased[i].s);
-            fpb_path_increased_l.emplace_back(fpb_path_increased[i].l);
+            for (size_t i = 0; i < fpb_path_increased.size(); i++)
+            {
+                s.emplace_back(fpb_path_increased[i].s);
+                l.emplace_back(fpb_path_increased[i].l);
+            }
         }
-        matplot::plot(fpb_path_increased_s, fpb_path_increased_l, "bo-")->line_width(4);
+        else
+        {
+            for (size_t i = 0; i < bezier_control_points.size(); i++)
+            {
+                s.emplace_back(bezier_control_points[i].s);
+                l.emplace_back(bezier_control_points[i].l);
+            }
+        }
+
+        matplot::plot(s, l, "bo-")->line_width(4);
 
         // 只需调用一次的原因是，它的作用是保持当前图形，使后续的绘图命令不会清除之前的内容。直到你需要开始一个新的图形时，可以调用 matplot::hold(false); 来重置。
         matplot::hold(true);
@@ -1220,7 +1299,7 @@ bool UMBPlanner::GenerateTrajectory(const std::vector<STPoint> &final_speed_prof
 
         // 从path_index2s中读取 x,y, heading, kappa
         double cur_s = final_speed_profile[i].s;
-        int nearest_index = -1;
+        int nearest_index = 0;
         if (cur_s >= path_index2s.back())
         {
             nearest_index = path_index2s.size() - 1;
@@ -1235,10 +1314,6 @@ bool UMBPlanner::GenerateTrajectory(const std::vector<STPoint> &final_speed_prof
             {
                 nearest_index = j;
             }
-        }
-        if (nearest_index == static_cast<int>(-1))
-        {
-            return false;
         }
         trajectory_point.x = path_trajectory[nearest_index].x +
                              ((path_trajectory[nearest_index + 1].x - path_trajectory[nearest_index].x) / (path_index2s[nearest_index + 1] - path_index2s[nearest_index])) * (cur_s - path_index2s[nearest_index]);
@@ -1381,6 +1456,8 @@ bool UMBPlanner::GenerateSscCube(const std::vector<FrenetPoint> &fpb_path, const
             }
             pos_lb_s = -5.0;
             pos_ub_s = _sim_param.s_sample_distance * _sim_param.s_sample_num;
+            min_l = -1 * _sim_param.l_ref_to_right_road_bound;
+            max_l = _sim_param.l_ref_to_left_road_bound;
             pos_lb_l = min_l;
             pos_ub_l = max_l;
             if (pos_ub_l <= pos_lb_l)
@@ -1390,10 +1467,87 @@ bool UMBPlanner::GenerateSscCube(const std::vector<FrenetPoint> &fpb_path, const
             }
             LOG(INFO) << "[GenerateSscCube] cube[" << i << "] cube.pos_lb_l: " << pos_lb_l
                       << ", cube.pos_ub_l: " << pos_ub_l;
+            LOG(INFO) << "------------------------------";
         }
         cube.p_lb = {pos_lb_s, pos_lb_l};
         cube.p_ub = {pos_ub_s, pos_ub_l};
         _cubes.emplace_back(cube);
     }
     return true;
+}
+
+std::vector<TrajectoryPoint> UMBPlanner::BezierPointToTrajectory(std::vector<FrenetPoint> &frenet_point_set, const std::shared_ptr<std::vector<PathPoint>> cartesian_path,
+                                                                 const std::vector<double> cartesian_path_index2s, const double &planning_start_point_time_stamped)
+{
+    for (auto &point : frenet_point_set)
+    {
+        point.l_prime = point.l_dot / (point.s_dot + 1e-3);
+        point.l_prime_prime = (point.l_dot_dot - point.l_prime * point.s_dot_dot) / (point.s_dot * point.s_dot + 1e-3);
+    }
+    double l_prime = frenet_point_set[0].l_prime;
+
+    std::vector<TrajectoryPoint> trajectory_point_set;
+
+    for (size_t i = 0; i < frenet_point_set.size(); i++)
+    {
+        FrenetPoint frenet_point_host = frenet_point_set[i];
+        // 1.寻找匹配点
+        // 处理边界情况
+        int match_point_index = -1;
+        if (frenet_point_host.s < cartesian_path_index2s.front())
+        {
+            match_point_index = 0;
+        }
+        else if (frenet_point_host.s > cartesian_path_index2s.back())
+        {
+            match_point_index = frenet_point_set.size() - 1;
+        }
+        else
+        {
+            for (size_t j = 0; j < cartesian_path_index2s.size(); j++)
+            {
+                if (frenet_point_host.s >= cartesian_path_index2s[j] && frenet_point_host.s < cartesian_path_index2s[j + 1])
+                {
+                    if (std::abs(frenet_point_host.s - cartesian_path_index2s[j]) > std::abs(frenet_point_host.s - cartesian_path_index2s[j + 1]))
+                    {
+                        match_point_index = j + 1;
+                        break;
+                    }
+                    else
+                    {
+                        match_point_index = j;
+                        break;
+                    }
+                }
+            }
+        }
+        PathPoint match_point = (*cartesian_path)[match_point_index];
+
+        // 2匹配点的位置向量、切向量
+        Eigen::Vector2d p_match_point(match_point.x, match_point.y);
+        Eigen::Vector2d tau_m(std::cos(match_point.heading), std::sin(match_point.heading));
+
+        // 3投影点
+        double delta_s = frenet_point_host.s - cartesian_path_index2s[match_point_index];
+        Eigen::Vector2d p_project_point = p_match_point + delta_s * tau_m;
+        double kappa_project_point = match_point.kappa;
+        double heading_project_point = match_point.heading + delta_s * kappa_project_point;
+        Eigen::Vector2d nor_project_point(-std::sin(heading_project_point), std::cos(heading_project_point));
+
+        // 4坐标转换，公式见讲义
+        TrajectoryPoint trajectory_point_host;
+        Eigen::Vector2d p_host = p_project_point + frenet_point_host.l * nor_project_point;
+        trajectory_point_host.x = p_host[0];
+        trajectory_point_host.y = p_host[1];
+        double c = 1.0 - kappa_project_point * frenet_point_host.l;
+        double dealta_heading = std::atan2(frenet_point_host.l_prime, c);
+        trajectory_point_host.heading = dealta_heading + heading_project_point;
+        trajectory_point_host.kappa = ((frenet_point_host.l_prime_prime + kappa_project_point * frenet_point_host.l_prime * std::tan(dealta_heading)) * std::pow(std::cos(dealta_heading), 2) / c + kappa_project_point) * std::cos(dealta_heading) / c;
+        trajectory_point_host.v = std::min(frenet_point_host.s_dot, _reference_speed * 1.2);
+        trajectory_point_host.a_tau = frenet_point_host.s_dot_dot;
+        trajectory_point_host.time_stamped = planning_start_point_time_stamped + frenet_point_host.t;
+
+        trajectory_point_set.emplace_back(trajectory_point_host);
+    }
+    return trajectory_point_set;
 }

@@ -197,6 +197,9 @@ private:
     bool GenerateSscCube(const std::vector<FrenetPoint> &fpb_path, const ForwardPropAgentSet &forward_prop_agent_set,
                          const std::vector<TrajectoryPoint> &path_trajectory, const FrenetPoint &planning_start_point_frenet);
 
+    std::vector<TrajectoryPoint> BezierPointToTrajectory(std::vector<FrenetPoint> &frenet_point_set, const std::shared_ptr<std::vector<PathPoint>> cartesian_path,
+                                                         const std::vector<double> cartesian_path_index2s, const double &planning_start_point_time_stamped);
+
     std::vector<derived_object_msgs::msg::Object> _static_obstacles;  // 静态障碍物
     std::vector<derived_object_msgs::msg::Object> _dynamic_obstacles; // 动态障碍物
     std::deque<TrajectoryPoint> _previous_trajectory;                 // 上一周期的轨迹

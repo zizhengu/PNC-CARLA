@@ -412,8 +412,8 @@ public:
     // 由轨迹搜索出目标点
     TrajectoryPoint target_point;
     double cur_time = this->now().seconds();
-    double predicted_time = cur_time + 0.4;
-    int target_point_index = -1;
+    double predicted_time = cur_time + 0.2;
+    int target_point_index = 0;
 
     for (int i = 0; i < (int)_trajectory.size() - 1; i++)
     {
