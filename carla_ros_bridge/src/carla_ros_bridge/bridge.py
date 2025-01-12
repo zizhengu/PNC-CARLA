@@ -156,10 +156,30 @@ class CarlaRosBridge(CompatibleNode):
                             carla.Rotation(pitch=0, yaw=90.0, roll=0.000000),
                     ))
         route_2 = []
-        for i in range(2,len(spawn_points2)):
+        for i in range(1,len(spawn_points2)):
             route_2.append(spawn_points2[i].location)
-        for route in route_2:
-            self.carla_world.debug.draw_string(route, 'route_2', life_time=600, color=carla.Color(255,0,0))
+
+        spawn_points3 = []
+        spawn_points3.append(carla.Transform(
+                            carla.Location(x=92.7, y=-183.9, z=0.3),
+                            carla.Rotation(pitch=0, yaw=00.0, roll=0.000000),
+                    ))
+        spawn_points3.append(carla.Transform(
+                            carla.Location(x=92.7, y=-173.9, z=0.3),
+                            carla.Rotation(pitch=0, yaw=00.0, roll=0.000000),
+                    ))
+        spawn_points3.append(carla.Transform(
+                            carla.Location(x=92.7, y=-163.9, z=0.3),
+                            carla.Rotation(pitch=0, yaw=00.0, roll=0.000000),
+                    ))
+        spawn_points3.append(carla.Transform(
+                            carla.Location(x=92.7, y=-153.9, z=0.3),
+                            carla.Rotation(pitch=0, yaw=00.0, roll=0.000000),
+                    ))
+
+        route_3 = []
+        for i in range(1,len(spawn_points3)):
+            route_3.append(spawn_points3[i].location)
 
         models = ['dodge', 'audi', 'model3', 'mini', 'mustang', 'lincoln', 'prius', 'nissan', 'crown', 'impala']
         blueprints = []
@@ -211,6 +231,8 @@ class CarlaRosBridge(CompatibleNode):
         timer1.start()
         timer2 = threading.Timer( 280 , spawn_vehicle, args=(vehicle_bp, spawn_points2[0], route_2))
         timer2.start()
+        timer3 = threading.Timer( 15 , spawn_vehicle, args=(vehicle_bp, spawn_points3[0], route_3))
+        timer3.start()
 
         # spectator_point1 = carla.Transform(
         #                     carla.Location(x=109.0, y=131.0, z=50),

@@ -4,7 +4,7 @@ status: "editting"
 
 cost {
   efficiency {
-    ego_lack_speed_to_desired_unit_cost: 4.0
+    ego_lack_speed_to_desired_unit_cost: 2.0
     ego_over_speed_to_desired_unit_cost: 0.03
     ego_desired_speed_tolerate_gap: 1.0
     leading_distance_th: 120.0
@@ -60,5 +60,15 @@ bezier{
   weight{
     weight_P: 1.0
     weight_c: 1.0
+  }
+  cube{
+    v_lb_s:-10.0
+    v_lb_l:-10.0
+    v_ub_s:20.0
+    v_ub_l:5.0
+    a_lb_s:-5.0
+    a_lb_l:-5.0
+    a_ub_s:5.5
+    a_ub_l:5.0
   }
 }

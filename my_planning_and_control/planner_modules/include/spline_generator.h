@@ -25,8 +25,8 @@ struct SpatioTemporalSemanticCubeNd
         const decimal_t default_pos_ub = 100;
         const decimal_t default_vel_lb = -20.0;
         const decimal_t default_vel_ub = 20.0;
-        const decimal_t default_acc_lb = -20.0;
-        const decimal_t default_acc_ub = 20.0;
+        const decimal_t default_acc_lb = -10.0;
+        const decimal_t default_acc_ub = 10.0;
 
         p_lb.fill(default_pos_lb);
         v_lb.fill(default_vel_lb);

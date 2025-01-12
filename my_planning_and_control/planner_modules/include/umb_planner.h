@@ -76,6 +76,20 @@ public:
         double reference_speed = 6.0;
     };
 
+    struct BezierParam
+    {
+        double weight_P = 1.0;
+        double weight_c = 1.0;
+        double v_lb_s = -10.0;
+        double v_lb_l = -10.0;
+        double v_ub_s = 20.0;
+        double v_ub_l = 5.0;
+        double a_lb_s = -5.0;
+        double a_lb_l = -5.0;
+        double a_ub_s = 5.5;
+        double a_ub_l = 5.0;
+    };
+
     struct EfficiencyCost
     {
         double ego_to_desired_vel = 0.0;
@@ -104,6 +118,15 @@ public:
         }
     };
 
+    struct HDICost
+    {
+        double path_diff = 0.0;
+        double ave() const
+        {
+            return path_diff;
+        }
+    };
+
     struct CostStructure
     {
         // * associate cost with micro action using this index
@@ -114,13 +137,17 @@ public:
         SafetyCost safety;
         // * navigation
         NavigationCost navigation;
+        // * hdi
+        HDICost hdi;
+
         double cur_behav_weight = 1.0;
         double efficiency_weight = 1.0;
         double safety_weight = 1.0;
         double navigation_weight = 1.0;
+        double hdi_weight = 1.0;
         double ave() const
         {
-            double SumCost = efficiency.ave() * efficiency_weight + safety.ave() * safety_weight + navigation.ave() * navigation_weight;
+            double SumCost = efficiency.ave() * efficiency_weight + safety.ave() * safety_weight + navigation.ave() * navigation_weight + hdi.ave() * hdi_weight;
 
             return SumCost * cur_behav_weight;
         }
@@ -153,6 +180,9 @@ private:
     bool GetEgoParam(const planning::umbp::Config &cfg,
                      EgoParam *ego_param);
 
+    bool GetBezierParam(const planning::umbp::Config &cfg,
+                        BezierParam *bezier_param);
+
     bool GetSurroundingForwardSimAgents(ForwardPropAgentSet &forward_prop_agents,
                                         const std::vector<FrenetPoint> static_obs_frent_coords,
                                         const std::vector<FrenetPoint> dynamic_obs_frent_coords);
@@ -179,6 +209,13 @@ private:
                        const std::unordered_map<int, std::vector<FrenetPoint>> &surround_trajs,
                        std::vector<CostStructure> *cost, bool *is_risky, std::set<size_t> *risky_ids);
 
+    bool CalculatePathDiffCost(const std::vector<FrenetPoint> *forward_trajs, double *path_diff_cost);
+
+    double GetFrechetDistance(const std::vector<FrenetPoint> *forward_trajs, const std::vector<FrenetPoint> &traj);
+
+    // 动态规划的递归函数，用来计算Frechet距离
+    double FrechetDfs(int i, int j, const std::vector<FrenetPoint> &curve1, const std::vector<FrenetPoint> &curve2, std::vector<std::vector<double>> &dp);
+
     bool EvaluateMultiThreadSimResults(int *winner_id, double *winner_cost);
 
     bool IncreaseFpbPath(const std::vector<FrenetPoint> &fpb_path_init, const double &increased_distance,
@@ -204,6 +241,7 @@ private:
     std::vector<derived_object_msgs::msg::Object> _dynamic_obstacles; // 动态障碍物
     std::deque<TrajectoryPoint> _previous_trajectory;                 // 上一周期的轨迹
     std::deque<TrajectoryPoint> _switch_trajectory;                   // 拼接轨迹
+    std::deque<std::vector<FrenetPoint>> _history_decision;           // 历史决策
 
     rclcpp::Client<carla_waypoint_types::srv::GetWaypoint>::SharedPtr _get_waypoint_client;
     rclcpp::Subscription<std_msgs::msg::Float64>::SharedPtr _reference_speed_subscriber;
@@ -220,6 +258,8 @@ private:
     SimParam _sim_param;
     CostParam _cost_param;
     EgoParam _ego_param;
+    BezierParam _bezier_param;
+
     // sample_points
     std::vector<std::vector<FrenetPoint>> _local_sample_points;
     int _increased_sl_sample_num;

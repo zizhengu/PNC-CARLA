@@ -65,11 +65,23 @@ message EgoConfig {
 
 message BezierConfig {
     WeightConfig weight = 1; 
+    CubeConfig cube = 2;
 }
 
 message WeightConfig{
     double weight_P = 1;
     double weight_c = 2;
+}
+
+message CubeConfig{
+    double v_lb_s = 1;
+    double v_lb_l = 2;
+    double v_ub_s = 3;
+    double v_ub_l = 4;
+    double a_lb_s = 5;
+    double a_lb_l = 6;
+    double a_ub_s = 7;
+    double a_ub_l = 8;
 }
 
 

@@ -23,6 +23,7 @@ UMBPlanner::UMBPlanner() : Node("UMBPlanner")
     GetSimParam(_cfg, &_sim_param);
     GetCostParam(_cfg, &_cost_param);
     GetEgoParam(_cfg, &_ego_param);
+    GetBezierParam(_cfg, &_bezier_param);
 
     _reference_speed = _ego_param.reference_speed;
     _fpb_tree_ptr = std::make_shared<FpbTree>(_sim_param.tree_height, _sim_param.layer_time);
@@ -84,6 +85,22 @@ bool UMBPlanner::GetEgoParam(const planning::umbp::Config &cfg,
     ego_param->car_length = cfg.ego().car().car_length();
     ego_param->car_width = cfg.ego().car().car_width();
     ego_param->reference_speed = cfg.ego().map().reference_speed();
+    return true;
+}
+
+bool UMBPlanner::GetBezierParam(const planning::umbp::Config &cfg,
+                                BezierParam *bezier_param)
+{
+    bezier_param->weight_P = cfg.bezier().weight().weight_p();
+    bezier_param->weight_c = cfg.bezier().weight().weight_c();
+    bezier_param->v_lb_s = cfg.bezier().cube().v_lb_s();
+    bezier_param->v_lb_l = cfg.bezier().cube().v_lb_l();
+    bezier_param->v_ub_s = cfg.bezier().cube().v_ub_s();
+    bezier_param->v_ub_l = cfg.bezier().cube().v_ub_l();
+    bezier_param->a_lb_s = cfg.bezier().cube().a_lb_s();
+    bezier_param->a_lb_l = cfg.bezier().cube().a_lb_l();
+    bezier_param->a_ub_s = cfg.bezier().cube().a_ub_s();
+    bezier_param->a_ub_l = cfg.bezier().cube().a_ub_l();
     return true;
 }
 
@@ -158,6 +175,13 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
               << umbp_timer.toc() << "ms";
 
     std::vector<FrenetPoint> fpb_path = _forward_trajs[_winner_id];
+
+    if (_history_decision.size() >= 10)
+    {
+        _history_decision.pop_front();
+    }
+    _history_decision.push_back(fpb_path);
+
     if (fpb_path[0].s == fpb_path[1].s)
     {
         emergency_stop_signal = true;
@@ -519,12 +543,13 @@ bool UMBPlanner::RunUmpb(const FrenetPoint ego_state, const ForwardPropAgentSet 
                       << "]";
             line_info << " " << _sim_info[i] << "\n";
 
-            line_info << "[UMBP][Result][e;s;n:";
+            line_info << "[UMBP][Result][e;s;n;hdi:";
 
             line_info << std::fixed << std::setprecision(2)
-                      << _tail_cost[i].efficiency.ego_to_desired_vel << ";"
-                      << _tail_cost[i].safety.ego_to_obs << ";"
-                      << _tail_cost[i].navigation.ref_line_change;
+                      << _tail_cost[i].efficiency.ego_to_desired_vel << "; "
+                      << _tail_cost[i].safety.ego_to_obs << "; "
+                      << _tail_cost[i].navigation.ref_line_change << "; "
+                      << _tail_cost[i].hdi.path_diff;
             line_info << "|";
 
             line_info << "]";
@@ -1086,11 +1111,18 @@ bool UMBPlanner::PropagateScenario(
     // calculate cost
     bool is_risky = false;
     std::set<size_t> risky_ids;
+    double path_diff_cost;
     // if (!CalculateCost(*sub_forward_trajs, *sub_surround_trajs, sub_progress_cost, &is_risky, &risky_ids))
     if (!CalculateCost(sub_forward_trajs_inter, sub_surround_trajs_iter, sub_progress_cost, &is_risky, &risky_ids))
     {
         // LOG(INFO) << std::fixed << std::setprecision(4)
         //           << "******Action Sequence " << seq_id << " Sub-Scenario " << sub_seq_id << " May Crash with Obs, Dangerous !! ******";
+        return false;
+    }
+    if (!CalculatePathDiffCost(sub_forward_trajs, &path_diff_cost))
+    {
+        LOG(INFO) << std::fixed << std::setprecision(4)
+                  << "******Action Sequence " << seq_id << " Sub-Scenario " << sub_seq_id << " CalculatePathDiffCost Failed !! ******";
         return false;
     }
 
@@ -1100,6 +1132,7 @@ bool UMBPlanner::PropagateScenario(
         sub_tail_cost->navigation.ref_line_change += sub_progress_cost->at(i).navigation.ref_line_change;
         sub_tail_cost->safety.ego_to_obs += sub_progress_cost->at(i).safety.ego_to_obs;
     }
+    sub_tail_cost->hdi.path_diff += path_diff_cost;
 
     if (is_risky)
     {
@@ -1119,7 +1152,8 @@ bool UMBPlanner::PropagateScenario(
 
 bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
                                const std::unordered_map<int, std::vector<FrenetPoint>> &surround_trajs,
-                               std::vector<CostStructure> *progress_cost, bool *is_risky, std::set<size_t> *risky_ids)
+                               std::vector<CostStructure> *progress_cost,
+                               bool *is_risky, std::set<size_t> *risky_ids)
 {
     for (size_t i = 0; i < forward_trajs.size(); i++)
     {
@@ -1175,6 +1209,70 @@ bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
         progress_cost->emplace_back(cost_tmp);
     }
     return true;
+}
+
+bool UMBPlanner::CalculatePathDiffCost(const std::vector<FrenetPoint> *forward_trajs, double *path_diff_cost)
+{
+    std::vector<double> frechet_distance;
+    for (size_t i = 0; i < _history_decision.size(); i++)
+    {
+        double cur_frechet_distance;
+        cur_frechet_distance = GetFrechetDistance(forward_trajs, _history_decision[i]);
+        frechet_distance.push_back(cur_frechet_distance);
+        *path_diff_cost += cur_frechet_distance * std::pow(0.9, static_cast<int>(_history_decision.size() - 1 - i));
+    }
+    return true;
+}
+
+double UMBPlanner::GetFrechetDistance(const std::vector<FrenetPoint> *forward_trajs, const std::vector<FrenetPoint> &traj)
+{
+    // 归一化所有点
+    std::vector<FrenetPoint> curve1;
+    double s0 = (*forward_trajs)[0].s;
+    double l0 = (*forward_trajs)[0].l;
+    for (auto &point : *forward_trajs)
+    {
+        FrenetPoint cur_point;
+        cur_point.s = point.s - s0;
+        cur_point.l = point.l - l0;
+        curve1.emplace_back(cur_point);
+    }
+
+    std::vector<FrenetPoint> curve2;
+    double s1 = traj[0].s;
+    double l1 = traj[0].l;
+    for (auto &point : traj)
+    {
+        FrenetPoint cur_point;
+        cur_point.s = point.s - s1;
+        cur_point.l = point.l - l1;
+        curve2.emplace_back(cur_point);
+    }
+
+    int n = forward_trajs->size();
+    std::vector<std::vector<double>> dp(n, std::vector<double>(n, -1));
+    return FrechetDfs(0, 0, curve1, curve2, dp);
+}
+
+double UMBPlanner::FrechetDfs(int i, int j, const std::vector<FrenetPoint> &curve1, const std::vector<FrenetPoint> &curve2, std::vector<std::vector<double>> &dp)
+{
+    int n = curve1.size();
+
+    if (i == n - 1 && j == n - 1)
+        return std::hypot(curve1[i].s - curve2[j].s, curve1[i].l - curve2[j].l); // 终点距离
+
+    if (i >= n || j >= n)
+        return 1e9; // 越界返回一个很大的值
+
+    if (dp[i][j] != -1)
+        return dp[i][j]; // 如果已经计算过，直接返回
+
+    // 递归计算
+    double dist = std::hypot(curve1[i].s - curve2[j].s, curve1[i].l - curve2[j].l);
+    double res = dist + std::min({FrechetDfs(i + 1, j, curve1, curve2, dp), FrechetDfs(i, j + 1, curve1, curve2, dp), FrechetDfs(i + 1, j + 1, curve1, curve2, dp)});
+
+    dp[i][j] = res;
+    return res;
 }
 
 bool UMBPlanner::EvaluateMultiThreadSimResults(int *winner_id, double *winner_cost)
@@ -1471,6 +1569,10 @@ bool UMBPlanner::GenerateSscCube(const std::vector<FrenetPoint> &fpb_path, const
         }
         cube.p_lb = {pos_lb_s, pos_lb_l};
         cube.p_ub = {pos_ub_s, pos_ub_l};
+        cube.v_lb = {_bezier_param.v_lb_s, _bezier_param.v_lb_l};
+        cube.v_ub = {_bezier_param.v_ub_s, _bezier_param.v_ub_l};
+        cube.a_lb = {_bezier_param.a_lb_s, _bezier_param.a_lb_l};
+        cube.a_ub = {_bezier_param.a_ub_s, _bezier_param.a_ub_l};
         _cubes.emplace_back(cube);
     }
     return true;
@@ -1484,7 +1586,6 @@ std::vector<TrajectoryPoint> UMBPlanner::BezierPointToTrajectory(std::vector<Fre
         point.l_prime = point.l_dot / (point.s_dot + 1e-3);
         point.l_prime_prime = (point.l_dot_dot - point.l_prime * point.s_dot_dot) / (point.s_dot * point.s_dot + 1e-3);
     }
-    double l_prime = frenet_point_set[0].l_prime;
 
     std::vector<TrajectoryPoint> trajectory_point_set;
 

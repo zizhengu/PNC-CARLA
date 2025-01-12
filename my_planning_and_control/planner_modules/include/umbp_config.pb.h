@@ -43,6 +43,9 @@ extern ConfigDefaultTypeInternal _Config_default_instance_;
 class CostConfig;
 class CostConfigDefaultTypeInternal;
 extern CostConfigDefaultTypeInternal _CostConfig_default_instance_;
+class CubeConfig;
+class CubeConfigDefaultTypeInternal;
+extern CubeConfigDefaultTypeInternal _CubeConfig_default_instance_;
 class EfficiencyCost;
 class EfficiencyCostDefaultTypeInternal;
 extern EfficiencyCostDefaultTypeInternal _EfficiencyCost_default_instance_;
@@ -1114,11 +1117,21 @@ class BezierConfig : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::planning::umbp::WeightConfig* release_weight();
   void set_allocated_weight(::planning::umbp::WeightConfig* weight);
 
+  // .planning.umbp.CubeConfig cube = 2;
+  bool has_cube() const;
+  void clear_cube();
+  static const int kCubeFieldNumber = 2;
+  const ::planning::umbp::CubeConfig& cube() const;
+  ::planning::umbp::CubeConfig* mutable_cube();
+  ::planning::umbp::CubeConfig* release_cube();
+  void set_allocated_cube(::planning::umbp::CubeConfig* cube);
+
   // @@protoc_insertion_point(class_scope:planning.umbp.BezierConfig)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::planning::umbp::WeightConfig* weight_;
+  ::planning::umbp::CubeConfig* cube_;
   mutable int _cached_size_;
   friend struct  protobuf_umbp_5fconfig_2eproto::TableStruct;
 };
@@ -1209,6 +1222,138 @@ class WeightConfig : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   double weight_p_;
   double weight_c_;
+  mutable int _cached_size_;
+  friend struct  protobuf_umbp_5fconfig_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class CubeConfig : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:planning.umbp.CubeConfig) */ {
+ public:
+  CubeConfig();
+  virtual ~CubeConfig();
+
+  CubeConfig(const CubeConfig& from);
+
+  inline CubeConfig& operator=(const CubeConfig& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CubeConfig& default_instance();
+
+  static inline const CubeConfig* internal_default_instance() {
+    return reinterpret_cast<const CubeConfig*>(
+               &_CubeConfig_default_instance_);
+  }
+
+  void Swap(CubeConfig* other);
+
+  // implements Message ----------------------------------------------
+
+  inline CubeConfig* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  CubeConfig* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const CubeConfig& from);
+  void MergeFrom(const CubeConfig& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(CubeConfig* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // double v_lb_s = 1;
+  void clear_v_lb_s();
+  static const int kVLbSFieldNumber = 1;
+  double v_lb_s() const;
+  void set_v_lb_s(double value);
+
+  // double v_lb_l = 2;
+  void clear_v_lb_l();
+  static const int kVLbLFieldNumber = 2;
+  double v_lb_l() const;
+  void set_v_lb_l(double value);
+
+  // double v_ub_s = 3;
+  void clear_v_ub_s();
+  static const int kVUbSFieldNumber = 3;
+  double v_ub_s() const;
+  void set_v_ub_s(double value);
+
+  // double v_ub_l = 4;
+  void clear_v_ub_l();
+  static const int kVUbLFieldNumber = 4;
+  double v_ub_l() const;
+  void set_v_ub_l(double value);
+
+  // double a_lb_s = 5;
+  void clear_a_lb_s();
+  static const int kALbSFieldNumber = 5;
+  double a_lb_s() const;
+  void set_a_lb_s(double value);
+
+  // double a_lb_l = 6;
+  void clear_a_lb_l();
+  static const int kALbLFieldNumber = 6;
+  double a_lb_l() const;
+  void set_a_lb_l(double value);
+
+  // double a_ub_s = 7;
+  void clear_a_ub_s();
+  static const int kAUbSFieldNumber = 7;
+  double a_ub_s() const;
+  void set_a_ub_s(double value);
+
+  // double a_ub_l = 8;
+  void clear_a_ub_l();
+  static const int kAUbLFieldNumber = 8;
+  double a_ub_l() const;
+  void set_a_ub_l(double value);
+
+  // @@protoc_insertion_point(class_scope:planning.umbp.CubeConfig)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  double v_lb_s_;
+  double v_lb_l_;
+  double v_ub_s_;
+  double v_ub_l_;
+  double a_lb_s_;
+  double a_lb_l_;
+  double a_ub_s_;
+  double a_ub_l_;
   mutable int _cached_size_;
   friend struct  protobuf_umbp_5fconfig_2eproto::TableStruct;
 };
@@ -2305,6 +2450,45 @@ inline void BezierConfig::set_allocated_weight(::planning::umbp::WeightConfig* w
   // @@protoc_insertion_point(field_set_allocated:planning.umbp.BezierConfig.weight)
 }
 
+// .planning.umbp.CubeConfig cube = 2;
+inline bool BezierConfig::has_cube() const {
+  return this != internal_default_instance() && cube_ != NULL;
+}
+inline void BezierConfig::clear_cube() {
+  if (GetArenaNoVirtual() == NULL && cube_ != NULL) delete cube_;
+  cube_ = NULL;
+}
+inline const ::planning::umbp::CubeConfig& BezierConfig::cube() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.BezierConfig.cube)
+  return cube_ != NULL ? *cube_
+                         : *::planning::umbp::CubeConfig::internal_default_instance();
+}
+inline ::planning::umbp::CubeConfig* BezierConfig::mutable_cube() {
+  
+  if (cube_ == NULL) {
+    cube_ = new ::planning::umbp::CubeConfig;
+  }
+  // @@protoc_insertion_point(field_mutable:planning.umbp.BezierConfig.cube)
+  return cube_;
+}
+inline ::planning::umbp::CubeConfig* BezierConfig::release_cube() {
+  // @@protoc_insertion_point(field_release:planning.umbp.BezierConfig.cube)
+  
+  ::planning::umbp::CubeConfig* temp = cube_;
+  cube_ = NULL;
+  return temp;
+}
+inline void BezierConfig::set_allocated_cube(::planning::umbp::CubeConfig* cube) {
+  delete cube_;
+  cube_ = cube;
+  if (cube) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:planning.umbp.BezierConfig.cube)
+}
+
 // -------------------------------------------------------------------
 
 // WeightConfig
@@ -2335,6 +2519,122 @@ inline void WeightConfig::set_weight_c(double value) {
   
   weight_c_ = value;
   // @@protoc_insertion_point(field_set:planning.umbp.WeightConfig.weight_c)
+}
+
+// -------------------------------------------------------------------
+
+// CubeConfig
+
+// double v_lb_s = 1;
+inline void CubeConfig::clear_v_lb_s() {
+  v_lb_s_ = 0;
+}
+inline double CubeConfig::v_lb_s() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.v_lb_s)
+  return v_lb_s_;
+}
+inline void CubeConfig::set_v_lb_s(double value) {
+  
+  v_lb_s_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.v_lb_s)
+}
+
+// double v_lb_l = 2;
+inline void CubeConfig::clear_v_lb_l() {
+  v_lb_l_ = 0;
+}
+inline double CubeConfig::v_lb_l() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.v_lb_l)
+  return v_lb_l_;
+}
+inline void CubeConfig::set_v_lb_l(double value) {
+  
+  v_lb_l_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.v_lb_l)
+}
+
+// double v_ub_s = 3;
+inline void CubeConfig::clear_v_ub_s() {
+  v_ub_s_ = 0;
+}
+inline double CubeConfig::v_ub_s() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.v_ub_s)
+  return v_ub_s_;
+}
+inline void CubeConfig::set_v_ub_s(double value) {
+  
+  v_ub_s_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.v_ub_s)
+}
+
+// double v_ub_l = 4;
+inline void CubeConfig::clear_v_ub_l() {
+  v_ub_l_ = 0;
+}
+inline double CubeConfig::v_ub_l() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.v_ub_l)
+  return v_ub_l_;
+}
+inline void CubeConfig::set_v_ub_l(double value) {
+  
+  v_ub_l_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.v_ub_l)
+}
+
+// double a_lb_s = 5;
+inline void CubeConfig::clear_a_lb_s() {
+  a_lb_s_ = 0;
+}
+inline double CubeConfig::a_lb_s() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.a_lb_s)
+  return a_lb_s_;
+}
+inline void CubeConfig::set_a_lb_s(double value) {
+  
+  a_lb_s_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.a_lb_s)
+}
+
+// double a_lb_l = 6;
+inline void CubeConfig::clear_a_lb_l() {
+  a_lb_l_ = 0;
+}
+inline double CubeConfig::a_lb_l() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.a_lb_l)
+  return a_lb_l_;
+}
+inline void CubeConfig::set_a_lb_l(double value) {
+  
+  a_lb_l_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.a_lb_l)
+}
+
+// double a_ub_s = 7;
+inline void CubeConfig::clear_a_ub_s() {
+  a_ub_s_ = 0;
+}
+inline double CubeConfig::a_ub_s() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.a_ub_s)
+  return a_ub_s_;
+}
+inline void CubeConfig::set_a_ub_s(double value) {
+  
+  a_ub_s_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.a_ub_s)
+}
+
+// double a_ub_l = 8;
+inline void CubeConfig::clear_a_ub_l() {
+  a_ub_l_ = 0;
+}
+inline double CubeConfig::a_ub_l() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.a_ub_l)
+  return a_ub_l_;
+}
+inline void CubeConfig::set_a_ub_l(double value) {
+  
+  a_ub_l_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.a_ub_l)
 }
 
 // -------------------------------------------------------------------
@@ -2704,6 +3004,8 @@ inline void Config::set_allocated_bezier(::planning::umbp::BezierConfig* bezier)
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
