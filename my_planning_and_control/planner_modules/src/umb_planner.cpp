@@ -408,7 +408,7 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
 
     // 绘制SL图
     // RCLCPP_INFO(this->get_logger(), "Start Plot SL !!!");
-    if (_plot_count % 5 == 0)
+    if (_plot_count % 20 == 0)
     {
         if (_plot_count == 0) // 初始化窗口，仅执行一次
         {
