@@ -67,6 +67,8 @@ public:
         double ref_line_change = 2.0;
         double discount_factor = 0.8;
         double ego_lack_speed_to_desired_unit_cost = 0.3;
+        double hdi_weight = 1.0;
+        int hdi_win_size = 5;
     };
 
     struct EgoParam
@@ -211,6 +213,12 @@ private:
 
     bool CalculatePathDiffCost(const std::vector<FrenetPoint> *forward_trajs, double *path_diff_cost);
 
+    double kde_estimate(const std::vector<FrenetPoint> &curve, double x, double bandwidth);
+
+    std::vector<double> calculate_kde(const std::vector<FrenetPoint> &curve, double bandwidth = 0.5, double step = 0.5);
+
+    double calculate_jensen_shannon_divergence(const std::vector<double> &p, const std::vector<double> &q);
+
     double GetFrechetDistance(const std::vector<FrenetPoint> *forward_trajs, const std::vector<FrenetPoint> &traj);
 
     // 动态规划的递归函数，用来计算Frechet距离
@@ -279,6 +287,10 @@ private:
     std::vector<std::vector<FpbLonAction>> _forward_lon_behaviors = std::vector<std::vector<FpbLonAction>>(500);
     std::vector<std::unordered_map<int, std::vector<FrenetPoint>>> _surround_trajs = std::vector<std::unordered_map<int, std::vector<FrenetPoint>>>(500);
     double _time_cost = 0.0;
+
+    // 坐标存储，为了甘文乾实现预测算法
+    int _frame_number = 0;
+    std::string _filename = "predict_data.csv";
 
     // BezierSpline
     vec_E<SpatioTemporalSemanticCubeNd<2>> _cubes;

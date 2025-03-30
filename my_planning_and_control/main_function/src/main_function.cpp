@@ -167,8 +167,8 @@ public:
   // 里程计订阅方回调函数，获取当前本车位姿与速度
   void odometry_cb(nav_msgs::msg::Odometry::SharedPtr msg)
   {
-    std::default_random_engine generator;
-    std::normal_distribution<double> distribution(0.0, 0.5);
+    std::default_random_engine generator(42);
+    std::normal_distribution<double> distribution(0.0, 1.0);
     switch (static_cast<int>(_add_localiation_noise_type))
     {
     case 0:

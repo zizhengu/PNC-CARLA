@@ -17,6434 +17,8253 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
-namespace planning {
-namespace umbp {
-class EfficiencyCostDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<EfficiencyCost> {
-} _EfficiencyCost_default_instance_;
-class SafetyCostDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<SafetyCost> {
-} _SafetyCost_default_instance_;
-class UserCostDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<UserCost> {
-} _UserCost_default_instance_;
-class NavigationCostDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<NavigationCost> {
-} _NavigationCost_default_instance_;
-class FpbConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<FpbConfig> {
-} _FpbConfig_default_instance_;
-class SampleConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<SampleConfig> {
-} _SampleConfig_default_instance_;
-class PropogateConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<PropogateConfig> {
-} _PropogateConfig_default_instance_;
-class CostConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<CostConfig> {
-} _CostConfig_default_instance_;
-class EgoConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<EgoConfig> {
-} _EgoConfig_default_instance_;
-class BezierConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<BezierConfig> {
-} _BezierConfig_default_instance_;
-class WeightConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<WeightConfig> {
-} _WeightConfig_default_instance_;
-class CubeConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<CubeConfig> {
-} _CubeConfig_default_instance_;
-class CarConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<CarConfig> {
-} _CarConfig_default_instance_;
-class MapConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<MapConfig> {
-} _MapConfig_default_instance_;
-class ConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<Config> {
-} _Config_default_instance_;
+namespace planning
+{
+  namespace umbp
+  {
+    class EfficiencyCostDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<EfficiencyCost>
+    {
+    } _EfficiencyCost_default_instance_;
+    class SafetyCostDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<SafetyCost>
+    {
+    } _SafetyCost_default_instance_;
+    class UserCostDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<UserCost>
+    {
+    } _UserCost_default_instance_;
+    class NavigationCostDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<NavigationCost>
+    {
+    } _NavigationCost_default_instance_;
+    class HdiCostDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<HdiCost>
+    {
+    } _HdiCost_default_instance_;
+    class FpbConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<FpbConfig>
+    {
+    } _FpbConfig_default_instance_;
+    class SampleConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<SampleConfig>
+    {
+    } _SampleConfig_default_instance_;
+    class PropogateConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<PropogateConfig>
+    {
+    } _PropogateConfig_default_instance_;
+    class CostConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<CostConfig>
+    {
+    } _CostConfig_default_instance_;
+    class EgoConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<EgoConfig>
+    {
+    } _EgoConfig_default_instance_;
+    class BezierConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<BezierConfig>
+    {
+    } _BezierConfig_default_instance_;
+    class WeightConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<WeightConfig>
+    {
+    } _WeightConfig_default_instance_;
+    class CubeConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<CubeConfig>
+    {
+    } _CubeConfig_default_instance_;
+    class CarConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<CarConfig>
+    {
+    } _CarConfig_default_instance_;
+    class MapConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<MapConfig>
+    {
+    } _MapConfig_default_instance_;
+    class ConfigDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<Config>
+    {
+    } _Config_default_instance_;
 
-namespace protobuf_umbp_5fconfig_2eproto {
+    namespace protobuf_umbp_5fconfig_2eproto
+    {
 
+      namespace
+      {
 
-namespace {
+        ::google::protobuf::Metadata file_level_metadata[16];
 
-::google::protobuf::Metadata file_level_metadata[15];
+      } // namespace
 
-}  // namespace
+      const ::google::protobuf::uint32 TableStruct::offsets[] = {
+          ~0u, // no _has_bits_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EfficiencyCost, _internal_metadata_),
+          ~0u, // no _extensions_
+          ~0u, // no _oneof_case_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EfficiencyCost, ego_lack_speed_to_desired_unit_cost_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EfficiencyCost, ego_over_speed_to_desired_unit_cost_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EfficiencyCost, ego_desired_speed_tolerate_gap_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EfficiencyCost, leading_distance_th_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EfficiencyCost, min_distance_ratio_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EfficiencyCost, ego_speed_blocked_by_leading_unit_cost_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EfficiencyCost, leading_speed_blocked_desired_vel_unit_cost_),
+          ~0u, // no _has_bits_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SafetyCost, _internal_metadata_),
+          ~0u, // no _extensions_
+          ~0u, // no _oneof_case_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SafetyCost, ego_to_obs_),
+          ~0u, // no _has_bits_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserCost, _internal_metadata_),
+          ~0u, // no _extensions_
+          ~0u, // no _oneof_case_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserCost, late_operate_unit_cost_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserCost, cancel_operation_unit_cost_),
+          ~0u, // no _has_bits_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NavigationCost, _internal_metadata_),
+          ~0u, // no _extensions_
+          ~0u, // no _oneof_case_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NavigationCost, ref_line_change_),
+          ~0u, // no _has_bits_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HdiCost, _internal_metadata_),
+          ~0u, // no _extensions_
+          ~0u, // no _oneof_case_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HdiCost, hdi_weight_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HdiCost, hdi_win_size_),
+          ~0u, // no _has_bits_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, _internal_metadata_),
+          ~0u, // no _extensions_
+          ~0u, // no _oneof_case_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, layer_time_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, step_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, tree_height_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, l_ref_to_left_road_bound_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, l_ref_to_right_road_bound_),
+          ~0u, // no _has_bits_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, _internal_metadata_),
+          ~0u, // no _extensions_
+          ~0u, // no _oneof_case_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, s_sample_distance_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, s_sample_num_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, l_sample_distance_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, l_sample_num_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, acc_ref_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, dec_ref_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, lane_width_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, increased_sl_distance_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, increased_st_distance_),
+          ~0u, // no _has_bits_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropogateConfig, _internal_metadata_),
+          ~0u, // no _extensions_
+          ~0u, // no _oneof_case_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropogateConfig, fpb_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropogateConfig, sample_),
+          ~0u, // no _has_bits_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CostConfig, _internal_metadata_),
+          ~0u, // no _extensions_
+          ~0u, // no _oneof_case_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CostConfig, efficiency_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CostConfig, safety_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CostConfig, user_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CostConfig, navigation_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CostConfig, discount_factor_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CostConfig, hdi_),
+          ~0u, // no _has_bits_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EgoConfig, _internal_metadata_),
+          ~0u, // no _extensions_
+          ~0u, // no _oneof_case_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EgoConfig, car_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EgoConfig, map_),
+          ~0u, // no _has_bits_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BezierConfig, _internal_metadata_),
+          ~0u, // no _extensions_
+          ~0u, // no _oneof_case_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BezierConfig, weight_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BezierConfig, cube_),
+          ~0u, // no _has_bits_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(WeightConfig, _internal_metadata_),
+          ~0u, // no _extensions_
+          ~0u, // no _oneof_case_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(WeightConfig, weight_p_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(WeightConfig, weight_c_),
+          ~0u, // no _has_bits_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, _internal_metadata_),
+          ~0u, // no _extensions_
+          ~0u, // no _oneof_case_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, v_lb_s_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, v_lb_l_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, v_ub_s_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, v_ub_l_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, a_lb_s_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, a_lb_l_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, a_ub_s_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, a_ub_l_),
+          ~0u, // no _has_bits_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CarConfig, _internal_metadata_),
+          ~0u, // no _extensions_
+          ~0u, // no _oneof_case_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CarConfig, car_width_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CarConfig, car_length_),
+          ~0u, // no _has_bits_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapConfig, _internal_metadata_),
+          ~0u, // no _extensions_
+          ~0u, // no _oneof_case_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapConfig, reference_speed_),
+          ~0u, // no _has_bits_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, _internal_metadata_),
+          ~0u, // no _extensions_
+          ~0u, // no _oneof_case_
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, name_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, version_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, status_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, cost_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, propogate_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, ego_),
+          GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, bezier_),
+      };
 
-const ::google::protobuf::uint32 TableStruct::offsets[] = {
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EfficiencyCost, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EfficiencyCost, ego_lack_speed_to_desired_unit_cost_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EfficiencyCost, ego_over_speed_to_desired_unit_cost_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EfficiencyCost, ego_desired_speed_tolerate_gap_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EfficiencyCost, leading_distance_th_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EfficiencyCost, min_distance_ratio_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EfficiencyCost, ego_speed_blocked_by_leading_unit_cost_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EfficiencyCost, leading_speed_blocked_desired_vel_unit_cost_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SafetyCost, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SafetyCost, ego_to_obs_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserCost, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserCost, late_operate_unit_cost_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UserCost, cancel_operation_unit_cost_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NavigationCost, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NavigationCost, ref_line_change_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, layer_time_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, step_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, tree_height_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, l_ref_to_left_road_bound_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FpbConfig, l_ref_to_right_road_bound_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, s_sample_distance_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, s_sample_num_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, l_sample_distance_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, l_sample_num_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, acc_ref_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, dec_ref_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, lane_width_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, increased_sl_distance_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SampleConfig, increased_st_distance_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropogateConfig, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropogateConfig, fpb_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PropogateConfig, sample_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CostConfig, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CostConfig, efficiency_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CostConfig, safety_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CostConfig, user_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CostConfig, navigation_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CostConfig, discount_factor_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EgoConfig, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EgoConfig, car_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EgoConfig, map_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BezierConfig, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BezierConfig, weight_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BezierConfig, cube_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(WeightConfig, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(WeightConfig, weight_p_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(WeightConfig, weight_c_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, v_lb_s_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, v_lb_l_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, v_ub_s_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, v_ub_l_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, a_lb_s_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, a_lb_l_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, a_ub_s_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CubeConfig, a_ub_l_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CarConfig, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CarConfig, car_width_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CarConfig, car_length_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapConfig, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MapConfig, reference_speed_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, name_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, version_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, status_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, cost_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, propogate_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, ego_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Config, bezier_),
-};
+      static const ::google::protobuf::internal::MigrationSchema schemas[] = {
+          {0, -1, sizeof(EfficiencyCost)},
+          {11, -1, sizeof(SafetyCost)},
+          {16, -1, sizeof(UserCost)},
+          {22, -1, sizeof(NavigationCost)},
+          {27, -1, sizeof(HdiCost)},
+          {33, -1, sizeof(FpbConfig)},
+          {42, -1, sizeof(SampleConfig)},
+          {55, -1, sizeof(PropogateConfig)},
+          {61, -1, sizeof(CostConfig)},
+          {71, -1, sizeof(EgoConfig)},
+          {77, -1, sizeof(BezierConfig)},
+          {83, -1, sizeof(WeightConfig)},
+          {89, -1, sizeof(CubeConfig)},
+          {101, -1, sizeof(CarConfig)},
+          {107, -1, sizeof(MapConfig)},
+          {112, -1, sizeof(Config)},
+      };
 
-static const ::google::protobuf::internal::MigrationSchema schemas[] = {
-  { 0, -1, sizeof(EfficiencyCost)},
-  { 11, -1, sizeof(SafetyCost)},
-  { 16, -1, sizeof(UserCost)},
-  { 22, -1, sizeof(NavigationCost)},
-  { 27, -1, sizeof(FpbConfig)},
-  { 36, -1, sizeof(SampleConfig)},
-  { 49, -1, sizeof(PropogateConfig)},
-  { 55, -1, sizeof(CostConfig)},
-  { 64, -1, sizeof(EgoConfig)},
-  { 70, -1, sizeof(BezierConfig)},
-  { 76, -1, sizeof(WeightConfig)},
-  { 82, -1, sizeof(CubeConfig)},
-  { 94, -1, sizeof(CarConfig)},
-  { 100, -1, sizeof(MapConfig)},
-  { 105, -1, sizeof(Config)},
-};
+      static ::google::protobuf::Message const *const file_default_instances[] = {
+          reinterpret_cast<const ::google::protobuf::Message *>(&_EfficiencyCost_default_instance_),
+          reinterpret_cast<const ::google::protobuf::Message *>(&_SafetyCost_default_instance_),
+          reinterpret_cast<const ::google::protobuf::Message *>(&_UserCost_default_instance_),
+          reinterpret_cast<const ::google::protobuf::Message *>(&_NavigationCost_default_instance_),
+          reinterpret_cast<const ::google::protobuf::Message *>(&_HdiCost_default_instance_),
+          reinterpret_cast<const ::google::protobuf::Message *>(&_FpbConfig_default_instance_),
+          reinterpret_cast<const ::google::protobuf::Message *>(&_SampleConfig_default_instance_),
+          reinterpret_cast<const ::google::protobuf::Message *>(&_PropogateConfig_default_instance_),
+          reinterpret_cast<const ::google::protobuf::Message *>(&_CostConfig_default_instance_),
+          reinterpret_cast<const ::google::protobuf::Message *>(&_EgoConfig_default_instance_),
+          reinterpret_cast<const ::google::protobuf::Message *>(&_BezierConfig_default_instance_),
+          reinterpret_cast<const ::google::protobuf::Message *>(&_WeightConfig_default_instance_),
+          reinterpret_cast<const ::google::protobuf::Message *>(&_CubeConfig_default_instance_),
+          reinterpret_cast<const ::google::protobuf::Message *>(&_CarConfig_default_instance_),
+          reinterpret_cast<const ::google::protobuf::Message *>(&_MapConfig_default_instance_),
+          reinterpret_cast<const ::google::protobuf::Message *>(&_Config_default_instance_),
+      };
 
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&_EfficiencyCost_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&_SafetyCost_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&_UserCost_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&_NavigationCost_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&_FpbConfig_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&_SampleConfig_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&_PropogateConfig_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&_CostConfig_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&_EgoConfig_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&_BezierConfig_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&_WeightConfig_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&_CubeConfig_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&_CarConfig_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&_MapConfig_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&_Config_default_instance_),
-};
+      namespace
+      {
 
-namespace {
+        void protobuf_AssignDescriptors()
+        {
+          AddDescriptors();
+          ::google::protobuf::MessageFactory *factory = NULL;
+          AssignDescriptors(
+              "umbp_config.proto", schemas, file_default_instances, TableStruct::offsets, factory,
+              file_level_metadata, NULL, NULL);
+        }
 
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
-  AssignDescriptors(
-      "umbp_config.proto", schemas, file_default_instances, TableStruct::offsets, factory,
-      file_level_metadata, NULL, NULL);
-}
+        void protobuf_AssignDescriptorsOnce()
+        {
+          static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
+          ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
+        }
 
-void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
-}
+        void protobuf_RegisterTypes(const ::std::string &) GOOGLE_ATTRIBUTE_COLD;
+        void protobuf_RegisterTypes(const ::std::string &)
+        {
+          protobuf_AssignDescriptorsOnce();
+          ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 16);
+        }
 
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 15);
-}
+      } // namespace
 
-}  // namespace
+      void TableStruct::Shutdown()
+      {
+        _EfficiencyCost_default_instance_.Shutdown();
+        delete file_level_metadata[0].reflection;
+        _SafetyCost_default_instance_.Shutdown();
+        delete file_level_metadata[1].reflection;
+        _UserCost_default_instance_.Shutdown();
+        delete file_level_metadata[2].reflection;
+        _NavigationCost_default_instance_.Shutdown();
+        delete file_level_metadata[3].reflection;
+        _HdiCost_default_instance_.Shutdown();
+        delete file_level_metadata[4].reflection;
+        _FpbConfig_default_instance_.Shutdown();
+        delete file_level_metadata[5].reflection;
+        _SampleConfig_default_instance_.Shutdown();
+        delete file_level_metadata[6].reflection;
+        _PropogateConfig_default_instance_.Shutdown();
+        delete file_level_metadata[7].reflection;
+        _CostConfig_default_instance_.Shutdown();
+        delete file_level_metadata[8].reflection;
+        _EgoConfig_default_instance_.Shutdown();
+        delete file_level_metadata[9].reflection;
+        _BezierConfig_default_instance_.Shutdown();
+        delete file_level_metadata[10].reflection;
+        _WeightConfig_default_instance_.Shutdown();
+        delete file_level_metadata[11].reflection;
+        _CubeConfig_default_instance_.Shutdown();
+        delete file_level_metadata[12].reflection;
+        _CarConfig_default_instance_.Shutdown();
+        delete file_level_metadata[13].reflection;
+        _MapConfig_default_instance_.Shutdown();
+        delete file_level_metadata[14].reflection;
+        _Config_default_instance_.Shutdown();
+        delete file_level_metadata[15].reflection;
+      }
 
-void TableStruct::Shutdown() {
-  _EfficiencyCost_default_instance_.Shutdown();
-  delete file_level_metadata[0].reflection;
-  _SafetyCost_default_instance_.Shutdown();
-  delete file_level_metadata[1].reflection;
-  _UserCost_default_instance_.Shutdown();
-  delete file_level_metadata[2].reflection;
-  _NavigationCost_default_instance_.Shutdown();
-  delete file_level_metadata[3].reflection;
-  _FpbConfig_default_instance_.Shutdown();
-  delete file_level_metadata[4].reflection;
-  _SampleConfig_default_instance_.Shutdown();
-  delete file_level_metadata[5].reflection;
-  _PropogateConfig_default_instance_.Shutdown();
-  delete file_level_metadata[6].reflection;
-  _CostConfig_default_instance_.Shutdown();
-  delete file_level_metadata[7].reflection;
-  _EgoConfig_default_instance_.Shutdown();
-  delete file_level_metadata[8].reflection;
-  _BezierConfig_default_instance_.Shutdown();
-  delete file_level_metadata[9].reflection;
-  _WeightConfig_default_instance_.Shutdown();
-  delete file_level_metadata[10].reflection;
-  _CubeConfig_default_instance_.Shutdown();
-  delete file_level_metadata[11].reflection;
-  _CarConfig_default_instance_.Shutdown();
-  delete file_level_metadata[12].reflection;
-  _MapConfig_default_instance_.Shutdown();
-  delete file_level_metadata[13].reflection;
-  _Config_default_instance_.Shutdown();
-  delete file_level_metadata[14].reflection;
-}
+      void TableStruct::InitDefaultsImpl()
+      {
+        GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-void TableStruct::InitDefaultsImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
+        ::google::protobuf::internal::InitProtobufDefaults();
+        _EfficiencyCost_default_instance_.DefaultConstruct();
+        _SafetyCost_default_instance_.DefaultConstruct();
+        _UserCost_default_instance_.DefaultConstruct();
+        _NavigationCost_default_instance_.DefaultConstruct();
+        _HdiCost_default_instance_.DefaultConstruct();
+        _FpbConfig_default_instance_.DefaultConstruct();
+        _SampleConfig_default_instance_.DefaultConstruct();
+        _PropogateConfig_default_instance_.DefaultConstruct();
+        _CostConfig_default_instance_.DefaultConstruct();
+        _EgoConfig_default_instance_.DefaultConstruct();
+        _BezierConfig_default_instance_.DefaultConstruct();
+        _WeightConfig_default_instance_.DefaultConstruct();
+        _CubeConfig_default_instance_.DefaultConstruct();
+        _CarConfig_default_instance_.DefaultConstruct();
+        _MapConfig_default_instance_.DefaultConstruct();
+        _Config_default_instance_.DefaultConstruct();
+        _PropogateConfig_default_instance_.get_mutable()->fpb_ = const_cast<::planning::umbp::FpbConfig *>(
+            ::planning::umbp::FpbConfig::internal_default_instance());
+        _PropogateConfig_default_instance_.get_mutable()->sample_ = const_cast<::planning::umbp::SampleConfig *>(
+            ::planning::umbp::SampleConfig::internal_default_instance());
+        _CostConfig_default_instance_.get_mutable()->efficiency_ = const_cast<::planning::umbp::EfficiencyCost *>(
+            ::planning::umbp::EfficiencyCost::internal_default_instance());
+        _CostConfig_default_instance_.get_mutable()->safety_ = const_cast<::planning::umbp::SafetyCost *>(
+            ::planning::umbp::SafetyCost::internal_default_instance());
+        _CostConfig_default_instance_.get_mutable()->user_ = const_cast<::planning::umbp::UserCost *>(
+            ::planning::umbp::UserCost::internal_default_instance());
+        _CostConfig_default_instance_.get_mutable()->navigation_ = const_cast<::planning::umbp::NavigationCost *>(
+            ::planning::umbp::NavigationCost::internal_default_instance());
+        _CostConfig_default_instance_.get_mutable()->hdi_ = const_cast<::planning::umbp::HdiCost *>(
+            ::planning::umbp::HdiCost::internal_default_instance());
+        _EgoConfig_default_instance_.get_mutable()->car_ = const_cast<::planning::umbp::CarConfig *>(
+            ::planning::umbp::CarConfig::internal_default_instance());
+        _EgoConfig_default_instance_.get_mutable()->map_ = const_cast<::planning::umbp::MapConfig *>(
+            ::planning::umbp::MapConfig::internal_default_instance());
+        _BezierConfig_default_instance_.get_mutable()->weight_ = const_cast<::planning::umbp::WeightConfig *>(
+            ::planning::umbp::WeightConfig::internal_default_instance());
+        _BezierConfig_default_instance_.get_mutable()->cube_ = const_cast<::planning::umbp::CubeConfig *>(
+            ::planning::umbp::CubeConfig::internal_default_instance());
+        _Config_default_instance_.get_mutable()->cost_ = const_cast<::planning::umbp::CostConfig *>(
+            ::planning::umbp::CostConfig::internal_default_instance());
+        _Config_default_instance_.get_mutable()->propogate_ = const_cast<::planning::umbp::PropogateConfig *>(
+            ::planning::umbp::PropogateConfig::internal_default_instance());
+        _Config_default_instance_.get_mutable()->ego_ = const_cast<::planning::umbp::EgoConfig *>(
+            ::planning::umbp::EgoConfig::internal_default_instance());
+        _Config_default_instance_.get_mutable()->bezier_ = const_cast<::planning::umbp::BezierConfig *>(
+            ::planning::umbp::BezierConfig::internal_default_instance());
+      }
 
-  ::google::protobuf::internal::InitProtobufDefaults();
-  _EfficiencyCost_default_instance_.DefaultConstruct();
-  _SafetyCost_default_instance_.DefaultConstruct();
-  _UserCost_default_instance_.DefaultConstruct();
-  _NavigationCost_default_instance_.DefaultConstruct();
-  _FpbConfig_default_instance_.DefaultConstruct();
-  _SampleConfig_default_instance_.DefaultConstruct();
-  _PropogateConfig_default_instance_.DefaultConstruct();
-  _CostConfig_default_instance_.DefaultConstruct();
-  _EgoConfig_default_instance_.DefaultConstruct();
-  _BezierConfig_default_instance_.DefaultConstruct();
-  _WeightConfig_default_instance_.DefaultConstruct();
-  _CubeConfig_default_instance_.DefaultConstruct();
-  _CarConfig_default_instance_.DefaultConstruct();
-  _MapConfig_default_instance_.DefaultConstruct();
-  _Config_default_instance_.DefaultConstruct();
-  _PropogateConfig_default_instance_.get_mutable()->fpb_ = const_cast< ::planning::umbp::FpbConfig*>(
-      ::planning::umbp::FpbConfig::internal_default_instance());
-  _PropogateConfig_default_instance_.get_mutable()->sample_ = const_cast< ::planning::umbp::SampleConfig*>(
-      ::planning::umbp::SampleConfig::internal_default_instance());
-  _CostConfig_default_instance_.get_mutable()->efficiency_ = const_cast< ::planning::umbp::EfficiencyCost*>(
-      ::planning::umbp::EfficiencyCost::internal_default_instance());
-  _CostConfig_default_instance_.get_mutable()->safety_ = const_cast< ::planning::umbp::SafetyCost*>(
-      ::planning::umbp::SafetyCost::internal_default_instance());
-  _CostConfig_default_instance_.get_mutable()->user_ = const_cast< ::planning::umbp::UserCost*>(
-      ::planning::umbp::UserCost::internal_default_instance());
-  _CostConfig_default_instance_.get_mutable()->navigation_ = const_cast< ::planning::umbp::NavigationCost*>(
-      ::planning::umbp::NavigationCost::internal_default_instance());
-  _EgoConfig_default_instance_.get_mutable()->car_ = const_cast< ::planning::umbp::CarConfig*>(
-      ::planning::umbp::CarConfig::internal_default_instance());
-  _EgoConfig_default_instance_.get_mutable()->map_ = const_cast< ::planning::umbp::MapConfig*>(
-      ::planning::umbp::MapConfig::internal_default_instance());
-  _BezierConfig_default_instance_.get_mutable()->weight_ = const_cast< ::planning::umbp::WeightConfig*>(
-      ::planning::umbp::WeightConfig::internal_default_instance());
-  _BezierConfig_default_instance_.get_mutable()->cube_ = const_cast< ::planning::umbp::CubeConfig*>(
-      ::planning::umbp::CubeConfig::internal_default_instance());
-  _Config_default_instance_.get_mutable()->cost_ = const_cast< ::planning::umbp::CostConfig*>(
-      ::planning::umbp::CostConfig::internal_default_instance());
-  _Config_default_instance_.get_mutable()->propogate_ = const_cast< ::planning::umbp::PropogateConfig*>(
-      ::planning::umbp::PropogateConfig::internal_default_instance());
-  _Config_default_instance_.get_mutable()->ego_ = const_cast< ::planning::umbp::EgoConfig*>(
-      ::planning::umbp::EgoConfig::internal_default_instance());
-  _Config_default_instance_.get_mutable()->bezier_ = const_cast< ::planning::umbp::BezierConfig*>(
-      ::planning::umbp::BezierConfig::internal_default_instance());
-}
+      void InitDefaults()
+      {
+        static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
+        ::google::protobuf::GoogleOnceInit(&once, &TableStruct::InitDefaultsImpl);
+      }
+      void AddDescriptorsImpl()
+      {
+        InitDefaults();
+        static const char descriptor[] = {
+            "\n\021umbp_config.proto\022\rplanning.umbp\"\260\002\n\016E"
+            "fficiencyCost\022+\n#ego_lack_speed_to_desir"
+            "ed_unit_cost\030\001 \001(\001\022+\n#ego_over_speed_to_"
+            "desired_unit_cost\030\002 \001(\001\022&\n\036ego_desired_s"
+            "peed_tolerate_gap\030\003 \001(\001\022\033\n\023leading_dista"
+            "nce_th\030\004 \001(\001\022\032\n\022min_distance_ratio\030\005 \001(\001"
+            "\022.\n&ego_speed_blocked_by_leading_unit_co"
+            "st\030\006 \001(\001\0223\n+leading_speed_blocked_desire"
+            "d_vel_unit_cost\030\007 \001(\001\" \n\nSafetyCost\022\022\n\ne"
+            "go_to_obs\030\001 \001(\001\"N\n\010UserCost\022\036\n\026late_oper"
+            "ate_unit_cost\030\001 \001(\001\022\"\n\032cancel_operation_"
+            "unit_cost\030\002 \001(\001\")\n\016NavigationCost\022\027\n\017ref"
+            "_line_change\030\001 \001(\001\"3\n\007HdiCost\022\022\n\nhdi_wei"
+            "ght\030\001 \001(\001\022\024\n\014hdi_win_size\030\002 \001(\005\"\207\001\n\tFpbC"
+            "onfig\022\022\n\nlayer_time\030\001 \001(\001\022\014\n\004step\030\002 \001(\001\022"
+            "\023\n\013tree_height\030\003 \001(\005\022 \n\030l_ref_to_left_ro"
+            "ad_bound\030\004 \001(\001\022!\n\031l_ref_to_right_road_bo"
+            "und\030\005 \001(\001\"\344\001\n\014SampleConfig\022\031\n\021s_sample_d"
+            "istance\030\001 \001(\001\022\024\n\014s_sample_num\030\002 \001(\005\022\031\n\021l"
+            "_sample_distance\030\003 \001(\001\022\024\n\014l_sample_num\030\004"
+            " \001(\005\022\017\n\007acc_ref\030\005 \001(\001\022\017\n\007dec_ref\030\006 \001(\001\022\022"
+            "\n\nlane_width\030\007 \001(\001\022\035\n\025increased_sl_dista"
+            "nce\030\010 \001(\001\022\035\n\025increased_st_distance\030\t \001(\001"
+            "\"e\n\017PropogateConfig\022%\n\003fpb\030\001 \001(\0132\030.plann"
+            "ing.umbp.FpbConfig\022+\n\006sample\030\002 \001(\0132\033.pla"
+            "nning.umbp.SampleConfig\"\202\002\n\nCostConfig\0221"
+            "\n\nefficiency\030\001 \001(\0132\035.planning.umbp.Effic"
+            "iencyCost\022)\n\006safety\030\002 \001(\0132\031.planning.umb"
+            "p.SafetyCost\022%\n\004user\030\003 \001(\0132\027.planning.um"
+            "bp.UserCost\0221\n\nnavigation\030\004 \001(\0132\035.planni"
+            "ng.umbp.NavigationCost\022\027\n\017discount_facto"
+            "r\030\005 \001(\001\022#\n\003hdi\030\006 \001(\0132\026.planning.umbp.Hdi"
+            "Cost\"Y\n\tEgoConfig\022%\n\003car\030\001 \001(\0132\030.plannin"
+            "g.umbp.CarConfig\022%\n\003map\030\002 \001(\0132\030.planning"
+            ".umbp.MapConfig\"d\n\014BezierConfig\022+\n\006weigh"
+            "t\030\001 \001(\0132\033.planning.umbp.WeightConfig\022\'\n\004"
+            "cube\030\002 \001(\0132\031.planning.umbp.CubeConfig\"2\n"
+            "\014WeightConfig\022\020\n\010weight_P\030\001 \001(\001\022\020\n\010weigh"
+            "t_c\030\002 \001(\001\"\214\001\n\nCubeConfig\022\016\n\006v_lb_s\030\001 \001(\001"
+            "\022\016\n\006v_lb_l\030\002 \001(\001\022\016\n\006v_ub_s\030\003 \001(\001\022\016\n\006v_ub"
+            "_l\030\004 \001(\001\022\016\n\006a_lb_s\030\005 \001(\001\022\016\n\006a_lb_l\030\006 \001(\001"
+            "\022\016\n\006a_ub_s\030\007 \001(\001\022\016\n\006a_ub_l\030\010 \001(\001\"2\n\tCarC"
+            "onfig\022\021\n\tcar_width\030\001 \001(\001\022\022\n\ncar_length\030\002"
+            " \001(\001\"$\n\tMapConfig\022\027\n\017reference_speed\030\001 \001"
+            "(\001\"\347\001\n\006Config\022\014\n\004name\030\001 \001(\t\022\017\n\007version\030\002"
+            " \001(\t\022\016\n\006status\030\003 \001(\t\022\'\n\004cost\030\004 \001(\0132\031.pla"
+            "nning.umbp.CostConfig\0221\n\tpropogate\030\005 \001(\013"
+            "2\036.planning.umbp.PropogateConfig\022%\n\003ego\030"
+            "\006 \001(\0132\030.planning.umbp.EgoConfig\022+\n\006bezie"
+            "r\030\007 \001(\0132\033.planning.umbp.BezierConfigb\006pr"
+            "oto3"};
+        ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
+            descriptor, 2004);
+        ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
+            "umbp_config.proto", &protobuf_RegisterTypes);
+        ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
+      }
 
-void InitDefaults() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &TableStruct::InitDefaultsImpl);
-}
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] = {
-      "\n\021umbp_config.proto\022\rplanning.umbp\"\260\002\n\016E"
-      "fficiencyCost\022+\n#ego_lack_speed_to_desir"
-      "ed_unit_cost\030\001 \001(\001\022+\n#ego_over_speed_to_"
-      "desired_unit_cost\030\002 \001(\001\022&\n\036ego_desired_s"
-      "peed_tolerate_gap\030\003 \001(\001\022\033\n\023leading_dista"
-      "nce_th\030\004 \001(\001\022\032\n\022min_distance_ratio\030\005 \001(\001"
-      "\022.\n&ego_speed_blocked_by_leading_unit_co"
-      "st\030\006 \001(\001\0223\n+leading_speed_blocked_desire"
-      "d_vel_unit_cost\030\007 \001(\001\" \n\nSafetyCost\022\022\n\ne"
-      "go_to_obs\030\001 \001(\001\"N\n\010UserCost\022\036\n\026late_oper"
-      "ate_unit_cost\030\001 \001(\001\022\"\n\032cancel_operation_"
-      "unit_cost\030\002 \001(\001\")\n\016NavigationCost\022\027\n\017ref"
-      "_line_change\030\001 \001(\001\"\207\001\n\tFpbConfig\022\022\n\nlaye"
-      "r_time\030\001 \001(\001\022\014\n\004step\030\002 \001(\001\022\023\n\013tree_heigh"
-      "t\030\003 \001(\005\022 \n\030l_ref_to_left_road_bound\030\004 \001("
-      "\001\022!\n\031l_ref_to_right_road_bound\030\005 \001(\001\"\344\001\n"
-      "\014SampleConfig\022\031\n\021s_sample_distance\030\001 \001(\001"
-      "\022\024\n\014s_sample_num\030\002 \001(\005\022\031\n\021l_sample_dista"
-      "nce\030\003 \001(\001\022\024\n\014l_sample_num\030\004 \001(\005\022\017\n\007acc_r"
-      "ef\030\005 \001(\001\022\017\n\007dec_ref\030\006 \001(\001\022\022\n\nlane_width\030"
-      "\007 \001(\001\022\035\n\025increased_sl_distance\030\010 \001(\001\022\035\n\025"
-      "increased_st_distance\030\t \001(\001\"e\n\017Propogate"
-      "Config\022%\n\003fpb\030\001 \001(\0132\030.planning.umbp.FpbC"
-      "onfig\022+\n\006sample\030\002 \001(\0132\033.planning.umbp.Sa"
-      "mpleConfig\"\335\001\n\nCostConfig\0221\n\nefficiency\030"
-      "\001 \001(\0132\035.planning.umbp.EfficiencyCost\022)\n\006"
-      "safety\030\002 \001(\0132\031.planning.umbp.SafetyCost\022"
-      "%\n\004user\030\003 \001(\0132\027.planning.umbp.UserCost\0221"
-      "\n\nnavigation\030\004 \001(\0132\035.planning.umbp.Navig"
-      "ationCost\022\027\n\017discount_factor\030\005 \001(\001\"Y\n\tEg"
-      "oConfig\022%\n\003car\030\001 \001(\0132\030.planning.umbp.Car"
-      "Config\022%\n\003map\030\002 \001(\0132\030.planning.umbp.MapC"
-      "onfig\"d\n\014BezierConfig\022+\n\006weight\030\001 \001(\0132\033."
-      "planning.umbp.WeightConfig\022\'\n\004cube\030\002 \001(\013"
-      "2\031.planning.umbp.CubeConfig\"2\n\014WeightCon"
-      "fig\022\020\n\010weight_P\030\001 \001(\001\022\020\n\010weight_c\030\002 \001(\001\""
-      "\214\001\n\nCubeConfig\022\016\n\006v_lb_s\030\001 \001(\001\022\016\n\006v_lb_l"
-      "\030\002 \001(\001\022\016\n\006v_ub_s\030\003 \001(\001\022\016\n\006v_ub_l\030\004 \001(\001\022\016"
-      "\n\006a_lb_s\030\005 \001(\001\022\016\n\006a_lb_l\030\006 \001(\001\022\016\n\006a_ub_s"
-      "\030\007 \001(\001\022\016\n\006a_ub_l\030\010 \001(\001\"2\n\tCarConfig\022\021\n\tc"
-      "ar_width\030\001 \001(\001\022\022\n\ncar_length\030\002 \001(\001\"$\n\tMa"
-      "pConfig\022\027\n\017reference_speed\030\001 \001(\001\"\347\001\n\006Con"
-      "fig\022\014\n\004name\030\001 \001(\t\022\017\n\007version\030\002 \001(\t\022\016\n\006st"
-      "atus\030\003 \001(\t\022\'\n\004cost\030\004 \001(\0132\031.planning.umbp"
-      ".CostConfig\0221\n\tpropogate\030\005 \001(\0132\036.plannin"
-      "g.umbp.PropogateConfig\022%\n\003ego\030\006 \001(\0132\030.pl"
-      "anning.umbp.EgoConfig\022+\n\006bezier\030\007 \001(\0132\033."
-      "planning.umbp.BezierConfigb\006proto3"
-  };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1914);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "umbp_config.proto", &protobuf_RegisterTypes);
-  ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
-}
+      void AddDescriptors()
+      {
+        static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
+        ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
+      }
+      // Force AddDescriptors() to be called at static initialization time.
+      struct StaticDescriptorInitializer
+      {
+        StaticDescriptorInitializer()
+        {
+          AddDescriptors();
+        }
+      } static_descriptor_initializer;
 
-void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at static initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
+    } // namespace protobuf_umbp_5fconfig_2eproto
 
-}  // namespace protobuf_umbp_5fconfig_2eproto
-
-
-// ===================================================================
+    // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int EfficiencyCost::kEgoLackSpeedToDesiredUnitCostFieldNumber;
-const int EfficiencyCost::kEgoOverSpeedToDesiredUnitCostFieldNumber;
-const int EfficiencyCost::kEgoDesiredSpeedTolerateGapFieldNumber;
-const int EfficiencyCost::kLeadingDistanceThFieldNumber;
-const int EfficiencyCost::kMinDistanceRatioFieldNumber;
-const int EfficiencyCost::kEgoSpeedBlockedByLeadingUnitCostFieldNumber;
-const int EfficiencyCost::kLeadingSpeedBlockedDesiredVelUnitCostFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+    const int EfficiencyCost::kEgoLackSpeedToDesiredUnitCostFieldNumber;
+    const int EfficiencyCost::kEgoOverSpeedToDesiredUnitCostFieldNumber;
+    const int EfficiencyCost::kEgoDesiredSpeedTolerateGapFieldNumber;
+    const int EfficiencyCost::kLeadingDistanceThFieldNumber;
+    const int EfficiencyCost::kMinDistanceRatioFieldNumber;
+    const int EfficiencyCost::kEgoSpeedBlockedByLeadingUnitCostFieldNumber;
+    const int EfficiencyCost::kLeadingSpeedBlockedDesiredVelUnitCostFieldNumber;
+#endif // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-EfficiencyCost::EfficiencyCost()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:planning.umbp.EfficiencyCost)
-}
-EfficiencyCost::EfficiencyCost(const EfficiencyCost& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&ego_lack_speed_to_desired_unit_cost_, &from.ego_lack_speed_to_desired_unit_cost_,
-    reinterpret_cast<char*>(&leading_speed_blocked_desired_vel_unit_cost_) -
-    reinterpret_cast<char*>(&ego_lack_speed_to_desired_unit_cost_) + sizeof(leading_speed_blocked_desired_vel_unit_cost_));
-  // @@protoc_insertion_point(copy_constructor:planning.umbp.EfficiencyCost)
-}
+    EfficiencyCost::EfficiencyCost()
+        : ::google::protobuf::Message(), _internal_metadata_(NULL)
+    {
+      if (GOOGLE_PREDICT_TRUE(this != internal_default_instance()))
+      {
+        protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      }
+      SharedCtor();
+      // @@protoc_insertion_point(constructor:planning.umbp.EfficiencyCost)
+    }
+    EfficiencyCost::EfficiencyCost(const EfficiencyCost &from)
+        : ::google::protobuf::Message(),
+          _internal_metadata_(NULL),
+          _cached_size_(0)
+    {
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      ::memcpy(&ego_lack_speed_to_desired_unit_cost_, &from.ego_lack_speed_to_desired_unit_cost_,
+               reinterpret_cast<char *>(&leading_speed_blocked_desired_vel_unit_cost_) -
+                   reinterpret_cast<char *>(&ego_lack_speed_to_desired_unit_cost_) + sizeof(leading_speed_blocked_desired_vel_unit_cost_));
+      // @@protoc_insertion_point(copy_constructor:planning.umbp.EfficiencyCost)
+    }
 
-void EfficiencyCost::SharedCtor() {
-  ::memset(&ego_lack_speed_to_desired_unit_cost_, 0, reinterpret_cast<char*>(&leading_speed_blocked_desired_vel_unit_cost_) -
-    reinterpret_cast<char*>(&ego_lack_speed_to_desired_unit_cost_) + sizeof(leading_speed_blocked_desired_vel_unit_cost_));
-  _cached_size_ = 0;
-}
+    void EfficiencyCost::SharedCtor()
+    {
+      ::memset(&ego_lack_speed_to_desired_unit_cost_, 0, reinterpret_cast<char *>(&leading_speed_blocked_desired_vel_unit_cost_) - reinterpret_cast<char *>(&ego_lack_speed_to_desired_unit_cost_) + sizeof(leading_speed_blocked_desired_vel_unit_cost_));
+      _cached_size_ = 0;
+    }
 
-EfficiencyCost::~EfficiencyCost() {
-  // @@protoc_insertion_point(destructor:planning.umbp.EfficiencyCost)
-  SharedDtor();
-}
+    EfficiencyCost::~EfficiencyCost()
+    {
+      // @@protoc_insertion_point(destructor:planning.umbp.EfficiencyCost)
+      SharedDtor();
+    }
 
-void EfficiencyCost::SharedDtor() {
-}
+    void EfficiencyCost::SharedDtor()
+    {
+    }
 
-void EfficiencyCost::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* EfficiencyCost::descriptor() {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[0].descriptor;
-}
+    void EfficiencyCost::SetCachedSize(int size) const
+    {
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    }
+    const ::google::protobuf::Descriptor *EfficiencyCost::descriptor()
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[0].descriptor;
+    }
 
-const EfficiencyCost& EfficiencyCost::default_instance() {
-  protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
+    const EfficiencyCost &EfficiencyCost::default_instance()
+    {
+      protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      return *internal_default_instance();
+    }
 
-EfficiencyCost* EfficiencyCost::New(::google::protobuf::Arena* arena) const {
-  EfficiencyCost* n = new EfficiencyCost;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
+    EfficiencyCost *EfficiencyCost::New(::google::protobuf::Arena *arena) const
+    {
+      EfficiencyCost *n = new EfficiencyCost;
+      if (arena != NULL)
+      {
+        arena->Own(n);
+      }
+      return n;
+    }
 
-void EfficiencyCost::Clear() {
-// @@protoc_insertion_point(message_clear_start:planning.umbp.EfficiencyCost)
-  ::memset(&ego_lack_speed_to_desired_unit_cost_, 0, reinterpret_cast<char*>(&leading_speed_blocked_desired_vel_unit_cost_) -
-    reinterpret_cast<char*>(&ego_lack_speed_to_desired_unit_cost_) + sizeof(leading_speed_blocked_desired_vel_unit_cost_));
-}
+    void EfficiencyCost::Clear()
+    {
+      // @@protoc_insertion_point(message_clear_start:planning.umbp.EfficiencyCost)
+      ::memset(&ego_lack_speed_to_desired_unit_cost_, 0, reinterpret_cast<char *>(&leading_speed_blocked_desired_vel_unit_cost_) - reinterpret_cast<char *>(&ego_lack_speed_to_desired_unit_cost_) + sizeof(leading_speed_blocked_desired_vel_unit_cost_));
+    }
 
-bool EfficiencyCost::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:planning.umbp.EfficiencyCost)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // double ego_lack_speed_to_desired_unit_cost = 1;
-      case 1: {
-        if (tag == 9u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &ego_lack_speed_to_desired_unit_cost_)));
-        } else {
+    bool EfficiencyCost::MergePartialFromCodedStream(
+        ::google::protobuf::io::CodedInputStream *input)
+    {
+#define DO_(EXPRESSION)                 \
+  if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) \
+  goto failure
+      ::google::protobuf::uint32 tag;
+      // @@protoc_insertion_point(parse_start:planning.umbp.EfficiencyCost)
+      for (;;)
+      {
+        ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+        tag = p.first;
+        if (!p.second)
           goto handle_unusual;
+        switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag))
+        {
+        // double ego_lack_speed_to_desired_unit_cost = 1;
+        case 1:
+        {
+          if (tag == 9u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &ego_lack_speed_to_desired_unit_cost_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
         }
-        break;
+
+        // double ego_over_speed_to_desired_unit_cost = 2;
+        case 2:
+        {
+          if (tag == 17u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &ego_over_speed_to_desired_unit_cost_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double ego_desired_speed_tolerate_gap = 3;
+        case 3:
+        {
+          if (tag == 25u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &ego_desired_speed_tolerate_gap_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double leading_distance_th = 4;
+        case 4:
+        {
+          if (tag == 33u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &leading_distance_th_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double min_distance_ratio = 5;
+        case 5:
+        {
+          if (tag == 41u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &min_distance_ratio_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double ego_speed_blocked_by_leading_unit_cost = 6;
+        case 6:
+        {
+          if (tag == 49u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &ego_speed_blocked_by_leading_unit_cost_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double leading_speed_blocked_desired_vel_unit_cost = 7;
+        case 7:
+        {
+          if (tag == 57u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &leading_speed_blocked_desired_vel_unit_cost_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        default:
+        {
+        handle_unusual:
+          if (tag == 0 ||
+              ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+                  ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP)
+          {
+            goto success;
+          }
+          DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+          break;
+        }
+        }
+      }
+    success:
+      // @@protoc_insertion_point(parse_success:planning.umbp.EfficiencyCost)
+      return true;
+    failure:
+      // @@protoc_insertion_point(parse_failure:planning.umbp.EfficiencyCost)
+      return false;
+#undef DO_
+    }
+
+    void EfficiencyCost::SerializeWithCachedSizes(
+        ::google::protobuf::io::CodedOutputStream *output) const
+    {
+      // @@protoc_insertion_point(serialize_start:planning.umbp.EfficiencyCost)
+      // double ego_lack_speed_to_desired_unit_cost = 1;
+      if (this->ego_lack_speed_to_desired_unit_cost() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->ego_lack_speed_to_desired_unit_cost(), output);
       }
 
       // double ego_over_speed_to_desired_unit_cost = 2;
-      case 2: {
-        if (tag == 17u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &ego_over_speed_to_desired_unit_cost_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->ego_over_speed_to_desired_unit_cost() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->ego_over_speed_to_desired_unit_cost(), output);
       }
 
       // double ego_desired_speed_tolerate_gap = 3;
-      case 3: {
-        if (tag == 25u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &ego_desired_speed_tolerate_gap_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->ego_desired_speed_tolerate_gap() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->ego_desired_speed_tolerate_gap(), output);
       }
 
       // double leading_distance_th = 4;
-      case 4: {
-        if (tag == 33u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &leading_distance_th_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->leading_distance_th() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->leading_distance_th(), output);
       }
 
       // double min_distance_ratio = 5;
-      case 5: {
-        if (tag == 41u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &min_distance_ratio_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->min_distance_ratio() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->min_distance_ratio(), output);
       }
 
       // double ego_speed_blocked_by_leading_unit_cost = 6;
-      case 6: {
-        if (tag == 49u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &ego_speed_blocked_by_leading_unit_cost_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->ego_speed_blocked_by_leading_unit_cost() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(6, this->ego_speed_blocked_by_leading_unit_cost(), output);
       }
 
       // double leading_speed_blocked_desired_vel_unit_cost = 7;
-      case 7: {
-        if (tag == 57u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &leading_speed_blocked_desired_vel_unit_cost_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->leading_speed_blocked_desired_vel_unit_cost() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(7, this->leading_speed_blocked_desired_vel_unit_cost(), output);
       }
 
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
+      // @@protoc_insertion_point(serialize_end:planning.umbp.EfficiencyCost)
+    }
+
+    ::google::protobuf::uint8 *EfficiencyCost::InternalSerializeWithCachedSizesToArray(
+        bool deterministic, ::google::protobuf::uint8 *target) const
+    {
+      (void)deterministic; // Unused
+      // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.EfficiencyCost)
+      // double ego_lack_speed_to_desired_unit_cost = 1;
+      if (this->ego_lack_speed_to_desired_unit_cost() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->ego_lack_speed_to_desired_unit_cost(), target);
+      }
+
+      // double ego_over_speed_to_desired_unit_cost = 2;
+      if (this->ego_over_speed_to_desired_unit_cost() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->ego_over_speed_to_desired_unit_cost(), target);
+      }
+
+      // double ego_desired_speed_tolerate_gap = 3;
+      if (this->ego_desired_speed_tolerate_gap() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->ego_desired_speed_tolerate_gap(), target);
+      }
+
+      // double leading_distance_th = 4;
+      if (this->leading_distance_th() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->leading_distance_th(), target);
+      }
+
+      // double min_distance_ratio = 5;
+      if (this->min_distance_ratio() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->min_distance_ratio(), target);
+      }
+
+      // double ego_speed_blocked_by_leading_unit_cost = 6;
+      if (this->ego_speed_blocked_by_leading_unit_cost() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(6, this->ego_speed_blocked_by_leading_unit_cost(), target);
+      }
+
+      // double leading_speed_blocked_desired_vel_unit_cost = 7;
+      if (this->leading_speed_blocked_desired_vel_unit_cost() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(7, this->leading_speed_blocked_desired_vel_unit_cost(), target);
+      }
+
+      // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.EfficiencyCost)
+      return target;
+    }
+
+    size_t EfficiencyCost::ByteSizeLong() const
+    {
+      // @@protoc_insertion_point(message_byte_size_start:planning.umbp.EfficiencyCost)
+      size_t total_size = 0;
+
+      // double ego_lack_speed_to_desired_unit_cost = 1;
+      if (this->ego_lack_speed_to_desired_unit_cost() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double ego_over_speed_to_desired_unit_cost = 2;
+      if (this->ego_over_speed_to_desired_unit_cost() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double ego_desired_speed_tolerate_gap = 3;
+      if (this->ego_desired_speed_tolerate_gap() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double leading_distance_th = 4;
+      if (this->leading_distance_th() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double min_distance_ratio = 5;
+      if (this->min_distance_ratio() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double ego_speed_blocked_by_leading_unit_cost = 6;
+      if (this->ego_speed_blocked_by_leading_unit_cost() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double leading_speed_blocked_desired_vel_unit_cost = 7;
+      if (this->leading_speed_blocked_desired_vel_unit_cost() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = cached_size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+      return total_size;
+    }
+
+    void EfficiencyCost::MergeFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.EfficiencyCost)
+      GOOGLE_DCHECK_NE(&from, this);
+      const EfficiencyCost *source =
+          ::google::protobuf::internal::DynamicCastToGenerated<const EfficiencyCost>(
+              &from);
+      if (source == NULL)
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.EfficiencyCost)
+        ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+      }
+      else
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.EfficiencyCost)
+        MergeFrom(*source);
       }
     }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:planning.umbp.EfficiencyCost)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:planning.umbp.EfficiencyCost)
-  return false;
-#undef DO_
-}
 
-void EfficiencyCost::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:planning.umbp.EfficiencyCost)
-  // double ego_lack_speed_to_desired_unit_cost = 1;
-  if (this->ego_lack_speed_to_desired_unit_cost() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->ego_lack_speed_to_desired_unit_cost(), output);
-  }
+    void EfficiencyCost::MergeFrom(const EfficiencyCost &from)
+    {
+      // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.EfficiencyCost)
+      GOOGLE_DCHECK_NE(&from, this);
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.ego_lack_speed_to_desired_unit_cost() != 0)
+      {
+        set_ego_lack_speed_to_desired_unit_cost(from.ego_lack_speed_to_desired_unit_cost());
+      }
+      if (from.ego_over_speed_to_desired_unit_cost() != 0)
+      {
+        set_ego_over_speed_to_desired_unit_cost(from.ego_over_speed_to_desired_unit_cost());
+      }
+      if (from.ego_desired_speed_tolerate_gap() != 0)
+      {
+        set_ego_desired_speed_tolerate_gap(from.ego_desired_speed_tolerate_gap());
+      }
+      if (from.leading_distance_th() != 0)
+      {
+        set_leading_distance_th(from.leading_distance_th());
+      }
+      if (from.min_distance_ratio() != 0)
+      {
+        set_min_distance_ratio(from.min_distance_ratio());
+      }
+      if (from.ego_speed_blocked_by_leading_unit_cost() != 0)
+      {
+        set_ego_speed_blocked_by_leading_unit_cost(from.ego_speed_blocked_by_leading_unit_cost());
+      }
+      if (from.leading_speed_blocked_desired_vel_unit_cost() != 0)
+      {
+        set_leading_speed_blocked_desired_vel_unit_cost(from.leading_speed_blocked_desired_vel_unit_cost());
+      }
+    }
 
-  // double ego_over_speed_to_desired_unit_cost = 2;
-  if (this->ego_over_speed_to_desired_unit_cost() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->ego_over_speed_to_desired_unit_cost(), output);
-  }
+    void EfficiencyCost::CopyFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.EfficiencyCost)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // double ego_desired_speed_tolerate_gap = 3;
-  if (this->ego_desired_speed_tolerate_gap() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->ego_desired_speed_tolerate_gap(), output);
-  }
+    void EfficiencyCost::CopyFrom(const EfficiencyCost &from)
+    {
+      // @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.EfficiencyCost)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // double leading_distance_th = 4;
-  if (this->leading_distance_th() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->leading_distance_th(), output);
-  }
+    bool EfficiencyCost::IsInitialized() const
+    {
+      return true;
+    }
 
-  // double min_distance_ratio = 5;
-  if (this->min_distance_ratio() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->min_distance_ratio(), output);
-  }
+    void EfficiencyCost::Swap(EfficiencyCost *other)
+    {
+      if (other == this)
+        return;
+      InternalSwap(other);
+    }
+    void EfficiencyCost::InternalSwap(EfficiencyCost *other)
+    {
+      std::swap(ego_lack_speed_to_desired_unit_cost_, other->ego_lack_speed_to_desired_unit_cost_);
+      std::swap(ego_over_speed_to_desired_unit_cost_, other->ego_over_speed_to_desired_unit_cost_);
+      std::swap(ego_desired_speed_tolerate_gap_, other->ego_desired_speed_tolerate_gap_);
+      std::swap(leading_distance_th_, other->leading_distance_th_);
+      std::swap(min_distance_ratio_, other->min_distance_ratio_);
+      std::swap(ego_speed_blocked_by_leading_unit_cost_, other->ego_speed_blocked_by_leading_unit_cost_);
+      std::swap(leading_speed_blocked_desired_vel_unit_cost_, other->leading_speed_blocked_desired_vel_unit_cost_);
+      std::swap(_cached_size_, other->_cached_size_);
+    }
 
-  // double ego_speed_blocked_by_leading_unit_cost = 6;
-  if (this->ego_speed_blocked_by_leading_unit_cost() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(6, this->ego_speed_blocked_by_leading_unit_cost(), output);
-  }
-
-  // double leading_speed_blocked_desired_vel_unit_cost = 7;
-  if (this->leading_speed_blocked_desired_vel_unit_cost() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(7, this->leading_speed_blocked_desired_vel_unit_cost(), output);
-  }
-
-  // @@protoc_insertion_point(serialize_end:planning.umbp.EfficiencyCost)
-}
-
-::google::protobuf::uint8* EfficiencyCost::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.EfficiencyCost)
-  // double ego_lack_speed_to_desired_unit_cost = 1;
-  if (this->ego_lack_speed_to_desired_unit_cost() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->ego_lack_speed_to_desired_unit_cost(), target);
-  }
-
-  // double ego_over_speed_to_desired_unit_cost = 2;
-  if (this->ego_over_speed_to_desired_unit_cost() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->ego_over_speed_to_desired_unit_cost(), target);
-  }
-
-  // double ego_desired_speed_tolerate_gap = 3;
-  if (this->ego_desired_speed_tolerate_gap() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->ego_desired_speed_tolerate_gap(), target);
-  }
-
-  // double leading_distance_th = 4;
-  if (this->leading_distance_th() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->leading_distance_th(), target);
-  }
-
-  // double min_distance_ratio = 5;
-  if (this->min_distance_ratio() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->min_distance_ratio(), target);
-  }
-
-  // double ego_speed_blocked_by_leading_unit_cost = 6;
-  if (this->ego_speed_blocked_by_leading_unit_cost() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(6, this->ego_speed_blocked_by_leading_unit_cost(), target);
-  }
-
-  // double leading_speed_blocked_desired_vel_unit_cost = 7;
-  if (this->leading_speed_blocked_desired_vel_unit_cost() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(7, this->leading_speed_blocked_desired_vel_unit_cost(), target);
-  }
-
-  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.EfficiencyCost)
-  return target;
-}
-
-size_t EfficiencyCost::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:planning.umbp.EfficiencyCost)
-  size_t total_size = 0;
-
-  // double ego_lack_speed_to_desired_unit_cost = 1;
-  if (this->ego_lack_speed_to_desired_unit_cost() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double ego_over_speed_to_desired_unit_cost = 2;
-  if (this->ego_over_speed_to_desired_unit_cost() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double ego_desired_speed_tolerate_gap = 3;
-  if (this->ego_desired_speed_tolerate_gap() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double leading_distance_th = 4;
-  if (this->leading_distance_th() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double min_distance_ratio = 5;
-  if (this->min_distance_ratio() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double ego_speed_blocked_by_leading_unit_cost = 6;
-  if (this->ego_speed_blocked_by_leading_unit_cost() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double leading_speed_blocked_desired_vel_unit_cost = 7;
-  if (this->leading_speed_blocked_desired_vel_unit_cost() != 0) {
-    total_size += 1 + 8;
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void EfficiencyCost::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.EfficiencyCost)
-  GOOGLE_DCHECK_NE(&from, this);
-  const EfficiencyCost* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const EfficiencyCost>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.EfficiencyCost)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.EfficiencyCost)
-    MergeFrom(*source);
-  }
-}
-
-void EfficiencyCost::MergeFrom(const EfficiencyCost& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.EfficiencyCost)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.ego_lack_speed_to_desired_unit_cost() != 0) {
-    set_ego_lack_speed_to_desired_unit_cost(from.ego_lack_speed_to_desired_unit_cost());
-  }
-  if (from.ego_over_speed_to_desired_unit_cost() != 0) {
-    set_ego_over_speed_to_desired_unit_cost(from.ego_over_speed_to_desired_unit_cost());
-  }
-  if (from.ego_desired_speed_tolerate_gap() != 0) {
-    set_ego_desired_speed_tolerate_gap(from.ego_desired_speed_tolerate_gap());
-  }
-  if (from.leading_distance_th() != 0) {
-    set_leading_distance_th(from.leading_distance_th());
-  }
-  if (from.min_distance_ratio() != 0) {
-    set_min_distance_ratio(from.min_distance_ratio());
-  }
-  if (from.ego_speed_blocked_by_leading_unit_cost() != 0) {
-    set_ego_speed_blocked_by_leading_unit_cost(from.ego_speed_blocked_by_leading_unit_cost());
-  }
-  if (from.leading_speed_blocked_desired_vel_unit_cost() != 0) {
-    set_leading_speed_blocked_desired_vel_unit_cost(from.leading_speed_blocked_desired_vel_unit_cost());
-  }
-}
-
-void EfficiencyCost::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.EfficiencyCost)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void EfficiencyCost::CopyFrom(const EfficiencyCost& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.EfficiencyCost)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool EfficiencyCost::IsInitialized() const {
-  return true;
-}
-
-void EfficiencyCost::Swap(EfficiencyCost* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void EfficiencyCost::InternalSwap(EfficiencyCost* other) {
-  std::swap(ego_lack_speed_to_desired_unit_cost_, other->ego_lack_speed_to_desired_unit_cost_);
-  std::swap(ego_over_speed_to_desired_unit_cost_, other->ego_over_speed_to_desired_unit_cost_);
-  std::swap(ego_desired_speed_tolerate_gap_, other->ego_desired_speed_tolerate_gap_);
-  std::swap(leading_distance_th_, other->leading_distance_th_);
-  std::swap(min_distance_ratio_, other->min_distance_ratio_);
-  std::swap(ego_speed_blocked_by_leading_unit_cost_, other->ego_speed_blocked_by_leading_unit_cost_);
-  std::swap(leading_speed_blocked_desired_vel_unit_cost_, other->leading_speed_blocked_desired_vel_unit_cost_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata EfficiencyCost::GetMetadata() const {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[0];
-}
+    ::google::protobuf::Metadata EfficiencyCost::GetMetadata() const
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[0];
+    }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// EfficiencyCost
+    // EfficiencyCost
 
-// double ego_lack_speed_to_desired_unit_cost = 1;
-void EfficiencyCost::clear_ego_lack_speed_to_desired_unit_cost() {
-  ego_lack_speed_to_desired_unit_cost_ = 0;
-}
-double EfficiencyCost::ego_lack_speed_to_desired_unit_cost() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.EfficiencyCost.ego_lack_speed_to_desired_unit_cost)
-  return ego_lack_speed_to_desired_unit_cost_;
-}
-void EfficiencyCost::set_ego_lack_speed_to_desired_unit_cost(double value) {
-  
-  ego_lack_speed_to_desired_unit_cost_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.EfficiencyCost.ego_lack_speed_to_desired_unit_cost)
-}
+    // double ego_lack_speed_to_desired_unit_cost = 1;
+    void EfficiencyCost::clear_ego_lack_speed_to_desired_unit_cost()
+    {
+      ego_lack_speed_to_desired_unit_cost_ = 0;
+    }
+    double EfficiencyCost::ego_lack_speed_to_desired_unit_cost() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.EfficiencyCost.ego_lack_speed_to_desired_unit_cost)
+      return ego_lack_speed_to_desired_unit_cost_;
+    }
+    void EfficiencyCost::set_ego_lack_speed_to_desired_unit_cost(double value)
+    {
 
-// double ego_over_speed_to_desired_unit_cost = 2;
-void EfficiencyCost::clear_ego_over_speed_to_desired_unit_cost() {
-  ego_over_speed_to_desired_unit_cost_ = 0;
-}
-double EfficiencyCost::ego_over_speed_to_desired_unit_cost() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.EfficiencyCost.ego_over_speed_to_desired_unit_cost)
-  return ego_over_speed_to_desired_unit_cost_;
-}
-void EfficiencyCost::set_ego_over_speed_to_desired_unit_cost(double value) {
-  
-  ego_over_speed_to_desired_unit_cost_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.EfficiencyCost.ego_over_speed_to_desired_unit_cost)
-}
+      ego_lack_speed_to_desired_unit_cost_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.EfficiencyCost.ego_lack_speed_to_desired_unit_cost)
+    }
 
-// double ego_desired_speed_tolerate_gap = 3;
-void EfficiencyCost::clear_ego_desired_speed_tolerate_gap() {
-  ego_desired_speed_tolerate_gap_ = 0;
-}
-double EfficiencyCost::ego_desired_speed_tolerate_gap() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.EfficiencyCost.ego_desired_speed_tolerate_gap)
-  return ego_desired_speed_tolerate_gap_;
-}
-void EfficiencyCost::set_ego_desired_speed_tolerate_gap(double value) {
-  
-  ego_desired_speed_tolerate_gap_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.EfficiencyCost.ego_desired_speed_tolerate_gap)
-}
+    // double ego_over_speed_to_desired_unit_cost = 2;
+    void EfficiencyCost::clear_ego_over_speed_to_desired_unit_cost()
+    {
+      ego_over_speed_to_desired_unit_cost_ = 0;
+    }
+    double EfficiencyCost::ego_over_speed_to_desired_unit_cost() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.EfficiencyCost.ego_over_speed_to_desired_unit_cost)
+      return ego_over_speed_to_desired_unit_cost_;
+    }
+    void EfficiencyCost::set_ego_over_speed_to_desired_unit_cost(double value)
+    {
 
-// double leading_distance_th = 4;
-void EfficiencyCost::clear_leading_distance_th() {
-  leading_distance_th_ = 0;
-}
-double EfficiencyCost::leading_distance_th() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.EfficiencyCost.leading_distance_th)
-  return leading_distance_th_;
-}
-void EfficiencyCost::set_leading_distance_th(double value) {
-  
-  leading_distance_th_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.EfficiencyCost.leading_distance_th)
-}
+      ego_over_speed_to_desired_unit_cost_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.EfficiencyCost.ego_over_speed_to_desired_unit_cost)
+    }
 
-// double min_distance_ratio = 5;
-void EfficiencyCost::clear_min_distance_ratio() {
-  min_distance_ratio_ = 0;
-}
-double EfficiencyCost::min_distance_ratio() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.EfficiencyCost.min_distance_ratio)
-  return min_distance_ratio_;
-}
-void EfficiencyCost::set_min_distance_ratio(double value) {
-  
-  min_distance_ratio_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.EfficiencyCost.min_distance_ratio)
-}
+    // double ego_desired_speed_tolerate_gap = 3;
+    void EfficiencyCost::clear_ego_desired_speed_tolerate_gap()
+    {
+      ego_desired_speed_tolerate_gap_ = 0;
+    }
+    double EfficiencyCost::ego_desired_speed_tolerate_gap() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.EfficiencyCost.ego_desired_speed_tolerate_gap)
+      return ego_desired_speed_tolerate_gap_;
+    }
+    void EfficiencyCost::set_ego_desired_speed_tolerate_gap(double value)
+    {
 
-// double ego_speed_blocked_by_leading_unit_cost = 6;
-void EfficiencyCost::clear_ego_speed_blocked_by_leading_unit_cost() {
-  ego_speed_blocked_by_leading_unit_cost_ = 0;
-}
-double EfficiencyCost::ego_speed_blocked_by_leading_unit_cost() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.EfficiencyCost.ego_speed_blocked_by_leading_unit_cost)
-  return ego_speed_blocked_by_leading_unit_cost_;
-}
-void EfficiencyCost::set_ego_speed_blocked_by_leading_unit_cost(double value) {
-  
-  ego_speed_blocked_by_leading_unit_cost_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.EfficiencyCost.ego_speed_blocked_by_leading_unit_cost)
-}
+      ego_desired_speed_tolerate_gap_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.EfficiencyCost.ego_desired_speed_tolerate_gap)
+    }
 
-// double leading_speed_blocked_desired_vel_unit_cost = 7;
-void EfficiencyCost::clear_leading_speed_blocked_desired_vel_unit_cost() {
-  leading_speed_blocked_desired_vel_unit_cost_ = 0;
-}
-double EfficiencyCost::leading_speed_blocked_desired_vel_unit_cost() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.EfficiencyCost.leading_speed_blocked_desired_vel_unit_cost)
-  return leading_speed_blocked_desired_vel_unit_cost_;
-}
-void EfficiencyCost::set_leading_speed_blocked_desired_vel_unit_cost(double value) {
-  
-  leading_speed_blocked_desired_vel_unit_cost_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.EfficiencyCost.leading_speed_blocked_desired_vel_unit_cost)
-}
+    // double leading_distance_th = 4;
+    void EfficiencyCost::clear_leading_distance_th()
+    {
+      leading_distance_th_ = 0;
+    }
+    double EfficiencyCost::leading_distance_th() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.EfficiencyCost.leading_distance_th)
+      return leading_distance_th_;
+    }
+    void EfficiencyCost::set_leading_distance_th(double value)
+    {
 
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+      leading_distance_th_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.EfficiencyCost.leading_distance_th)
+    }
 
-// ===================================================================
+    // double min_distance_ratio = 5;
+    void EfficiencyCost::clear_min_distance_ratio()
+    {
+      min_distance_ratio_ = 0;
+    }
+    double EfficiencyCost::min_distance_ratio() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.EfficiencyCost.min_distance_ratio)
+      return min_distance_ratio_;
+    }
+    void EfficiencyCost::set_min_distance_ratio(double value)
+    {
+
+      min_distance_ratio_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.EfficiencyCost.min_distance_ratio)
+    }
+
+    // double ego_speed_blocked_by_leading_unit_cost = 6;
+    void EfficiencyCost::clear_ego_speed_blocked_by_leading_unit_cost()
+    {
+      ego_speed_blocked_by_leading_unit_cost_ = 0;
+    }
+    double EfficiencyCost::ego_speed_blocked_by_leading_unit_cost() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.EfficiencyCost.ego_speed_blocked_by_leading_unit_cost)
+      return ego_speed_blocked_by_leading_unit_cost_;
+    }
+    void EfficiencyCost::set_ego_speed_blocked_by_leading_unit_cost(double value)
+    {
+
+      ego_speed_blocked_by_leading_unit_cost_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.EfficiencyCost.ego_speed_blocked_by_leading_unit_cost)
+    }
+
+    // double leading_speed_blocked_desired_vel_unit_cost = 7;
+    void EfficiencyCost::clear_leading_speed_blocked_desired_vel_unit_cost()
+    {
+      leading_speed_blocked_desired_vel_unit_cost_ = 0;
+    }
+    double EfficiencyCost::leading_speed_blocked_desired_vel_unit_cost() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.EfficiencyCost.leading_speed_blocked_desired_vel_unit_cost)
+      return leading_speed_blocked_desired_vel_unit_cost_;
+    }
+    void EfficiencyCost::set_leading_speed_blocked_desired_vel_unit_cost(double value)
+    {
+
+      leading_speed_blocked_desired_vel_unit_cost_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.EfficiencyCost.leading_speed_blocked_desired_vel_unit_cost)
+    }
+
+#endif // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+    // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int SafetyCost::kEgoToObsFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+    const int SafetyCost::kEgoToObsFieldNumber;
+#endif // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-SafetyCost::SafetyCost()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:planning.umbp.SafetyCost)
-}
-SafetyCost::SafetyCost(const SafetyCost& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ego_to_obs_ = from.ego_to_obs_;
-  // @@protoc_insertion_point(copy_constructor:planning.umbp.SafetyCost)
-}
+    SafetyCost::SafetyCost()
+        : ::google::protobuf::Message(), _internal_metadata_(NULL)
+    {
+      if (GOOGLE_PREDICT_TRUE(this != internal_default_instance()))
+      {
+        protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      }
+      SharedCtor();
+      // @@protoc_insertion_point(constructor:planning.umbp.SafetyCost)
+    }
+    SafetyCost::SafetyCost(const SafetyCost &from)
+        : ::google::protobuf::Message(),
+          _internal_metadata_(NULL),
+          _cached_size_(0)
+    {
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      ego_to_obs_ = from.ego_to_obs_;
+      // @@protoc_insertion_point(copy_constructor:planning.umbp.SafetyCost)
+    }
 
-void SafetyCost::SharedCtor() {
-  ego_to_obs_ = 0;
-  _cached_size_ = 0;
-}
+    void SafetyCost::SharedCtor()
+    {
+      ego_to_obs_ = 0;
+      _cached_size_ = 0;
+    }
 
-SafetyCost::~SafetyCost() {
-  // @@protoc_insertion_point(destructor:planning.umbp.SafetyCost)
-  SharedDtor();
-}
+    SafetyCost::~SafetyCost()
+    {
+      // @@protoc_insertion_point(destructor:planning.umbp.SafetyCost)
+      SharedDtor();
+    }
 
-void SafetyCost::SharedDtor() {
-}
+    void SafetyCost::SharedDtor()
+    {
+    }
 
-void SafetyCost::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* SafetyCost::descriptor() {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[1].descriptor;
-}
+    void SafetyCost::SetCachedSize(int size) const
+    {
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    }
+    const ::google::protobuf::Descriptor *SafetyCost::descriptor()
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[1].descriptor;
+    }
 
-const SafetyCost& SafetyCost::default_instance() {
-  protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
+    const SafetyCost &SafetyCost::default_instance()
+    {
+      protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      return *internal_default_instance();
+    }
 
-SafetyCost* SafetyCost::New(::google::protobuf::Arena* arena) const {
-  SafetyCost* n = new SafetyCost;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
+    SafetyCost *SafetyCost::New(::google::protobuf::Arena *arena) const
+    {
+      SafetyCost *n = new SafetyCost;
+      if (arena != NULL)
+      {
+        arena->Own(n);
+      }
+      return n;
+    }
 
-void SafetyCost::Clear() {
-// @@protoc_insertion_point(message_clear_start:planning.umbp.SafetyCost)
-  ego_to_obs_ = 0;
-}
+    void SafetyCost::Clear()
+    {
+      // @@protoc_insertion_point(message_clear_start:planning.umbp.SafetyCost)
+      ego_to_obs_ = 0;
+    }
 
-bool SafetyCost::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:planning.umbp.SafetyCost)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    bool SafetyCost::MergePartialFromCodedStream(
+        ::google::protobuf::io::CodedInputStream *input)
+    {
+#define DO_(EXPRESSION)                 \
+  if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) \
+  goto failure
+      ::google::protobuf::uint32 tag;
+      // @@protoc_insertion_point(parse_start:planning.umbp.SafetyCost)
+      for (;;)
+      {
+        ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+        tag = p.first;
+        if (!p.second)
+          goto handle_unusual;
+        switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag))
+        {
+        // double ego_to_obs = 1;
+        case 1:
+        {
+          if (tag == 9u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &ego_to_obs_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        default:
+        {
+        handle_unusual:
+          if (tag == 0 ||
+              ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+                  ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP)
+          {
+            goto success;
+          }
+          DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+          break;
+        }
+        }
+      }
+    success:
+      // @@protoc_insertion_point(parse_success:planning.umbp.SafetyCost)
+      return true;
+    failure:
+      // @@protoc_insertion_point(parse_failure:planning.umbp.SafetyCost)
+      return false;
+#undef DO_
+    }
+
+    void SafetyCost::SerializeWithCachedSizes(
+        ::google::protobuf::io::CodedOutputStream *output) const
+    {
+      // @@protoc_insertion_point(serialize_start:planning.umbp.SafetyCost)
       // double ego_to_obs = 1;
-      case 1: {
-        if (tag == 9u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &ego_to_obs_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->ego_to_obs() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->ego_to_obs(), output);
       }
 
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
+      // @@protoc_insertion_point(serialize_end:planning.umbp.SafetyCost)
+    }
+
+    ::google::protobuf::uint8 *SafetyCost::InternalSerializeWithCachedSizesToArray(
+        bool deterministic, ::google::protobuf::uint8 *target) const
+    {
+      (void)deterministic; // Unused
+      // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.SafetyCost)
+      // double ego_to_obs = 1;
+      if (this->ego_to_obs() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->ego_to_obs(), target);
+      }
+
+      // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.SafetyCost)
+      return target;
+    }
+
+    size_t SafetyCost::ByteSizeLong() const
+    {
+      // @@protoc_insertion_point(message_byte_size_start:planning.umbp.SafetyCost)
+      size_t total_size = 0;
+
+      // double ego_to_obs = 1;
+      if (this->ego_to_obs() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = cached_size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+      return total_size;
+    }
+
+    void SafetyCost::MergeFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.SafetyCost)
+      GOOGLE_DCHECK_NE(&from, this);
+      const SafetyCost *source =
+          ::google::protobuf::internal::DynamicCastToGenerated<const SafetyCost>(
+              &from);
+      if (source == NULL)
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.SafetyCost)
+        ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+      }
+      else
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.SafetyCost)
+        MergeFrom(*source);
       }
     }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:planning.umbp.SafetyCost)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:planning.umbp.SafetyCost)
-  return false;
-#undef DO_
-}
 
-void SafetyCost::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:planning.umbp.SafetyCost)
-  // double ego_to_obs = 1;
-  if (this->ego_to_obs() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->ego_to_obs(), output);
-  }
+    void SafetyCost::MergeFrom(const SafetyCost &from)
+    {
+      // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.SafetyCost)
+      GOOGLE_DCHECK_NE(&from, this);
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.ego_to_obs() != 0)
+      {
+        set_ego_to_obs(from.ego_to_obs());
+      }
+    }
 
-  // @@protoc_insertion_point(serialize_end:planning.umbp.SafetyCost)
-}
+    void SafetyCost::CopyFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.SafetyCost)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-::google::protobuf::uint8* SafetyCost::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.SafetyCost)
-  // double ego_to_obs = 1;
-  if (this->ego_to_obs() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->ego_to_obs(), target);
-  }
+    void SafetyCost::CopyFrom(const SafetyCost &from)
+    {
+      // @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.SafetyCost)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.SafetyCost)
-  return target;
-}
+    bool SafetyCost::IsInitialized() const
+    {
+      return true;
+    }
 
-size_t SafetyCost::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:planning.umbp.SafetyCost)
-  size_t total_size = 0;
+    void SafetyCost::Swap(SafetyCost *other)
+    {
+      if (other == this)
+        return;
+      InternalSwap(other);
+    }
+    void SafetyCost::InternalSwap(SafetyCost *other)
+    {
+      std::swap(ego_to_obs_, other->ego_to_obs_);
+      std::swap(_cached_size_, other->_cached_size_);
+    }
 
-  // double ego_to_obs = 1;
-  if (this->ego_to_obs() != 0) {
-    total_size += 1 + 8;
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void SafetyCost::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.SafetyCost)
-  GOOGLE_DCHECK_NE(&from, this);
-  const SafetyCost* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const SafetyCost>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.SafetyCost)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.SafetyCost)
-    MergeFrom(*source);
-  }
-}
-
-void SafetyCost::MergeFrom(const SafetyCost& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.SafetyCost)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.ego_to_obs() != 0) {
-    set_ego_to_obs(from.ego_to_obs());
-  }
-}
-
-void SafetyCost::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.SafetyCost)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void SafetyCost::CopyFrom(const SafetyCost& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.SafetyCost)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool SafetyCost::IsInitialized() const {
-  return true;
-}
-
-void SafetyCost::Swap(SafetyCost* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void SafetyCost::InternalSwap(SafetyCost* other) {
-  std::swap(ego_to_obs_, other->ego_to_obs_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata SafetyCost::GetMetadata() const {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[1];
-}
+    ::google::protobuf::Metadata SafetyCost::GetMetadata() const
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[1];
+    }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// SafetyCost
+    // SafetyCost
 
-// double ego_to_obs = 1;
-void SafetyCost::clear_ego_to_obs() {
-  ego_to_obs_ = 0;
-}
-double SafetyCost::ego_to_obs() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.SafetyCost.ego_to_obs)
-  return ego_to_obs_;
-}
-void SafetyCost::set_ego_to_obs(double value) {
-  
-  ego_to_obs_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.SafetyCost.ego_to_obs)
-}
+    // double ego_to_obs = 1;
+    void SafetyCost::clear_ego_to_obs()
+    {
+      ego_to_obs_ = 0;
+    }
+    double SafetyCost::ego_to_obs() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.SafetyCost.ego_to_obs)
+      return ego_to_obs_;
+    }
+    void SafetyCost::set_ego_to_obs(double value)
+    {
 
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+      ego_to_obs_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.SafetyCost.ego_to_obs)
+    }
 
-// ===================================================================
+#endif // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+    // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int UserCost::kLateOperateUnitCostFieldNumber;
-const int UserCost::kCancelOperationUnitCostFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+    const int UserCost::kLateOperateUnitCostFieldNumber;
+    const int UserCost::kCancelOperationUnitCostFieldNumber;
+#endif // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-UserCost::UserCost()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:planning.umbp.UserCost)
-}
-UserCost::UserCost(const UserCost& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&late_operate_unit_cost_, &from.late_operate_unit_cost_,
-    reinterpret_cast<char*>(&cancel_operation_unit_cost_) -
-    reinterpret_cast<char*>(&late_operate_unit_cost_) + sizeof(cancel_operation_unit_cost_));
-  // @@protoc_insertion_point(copy_constructor:planning.umbp.UserCost)
-}
+    UserCost::UserCost()
+        : ::google::protobuf::Message(), _internal_metadata_(NULL)
+    {
+      if (GOOGLE_PREDICT_TRUE(this != internal_default_instance()))
+      {
+        protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      }
+      SharedCtor();
+      // @@protoc_insertion_point(constructor:planning.umbp.UserCost)
+    }
+    UserCost::UserCost(const UserCost &from)
+        : ::google::protobuf::Message(),
+          _internal_metadata_(NULL),
+          _cached_size_(0)
+    {
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      ::memcpy(&late_operate_unit_cost_, &from.late_operate_unit_cost_,
+               reinterpret_cast<char *>(&cancel_operation_unit_cost_) -
+                   reinterpret_cast<char *>(&late_operate_unit_cost_) + sizeof(cancel_operation_unit_cost_));
+      // @@protoc_insertion_point(copy_constructor:planning.umbp.UserCost)
+    }
 
-void UserCost::SharedCtor() {
-  ::memset(&late_operate_unit_cost_, 0, reinterpret_cast<char*>(&cancel_operation_unit_cost_) -
-    reinterpret_cast<char*>(&late_operate_unit_cost_) + sizeof(cancel_operation_unit_cost_));
-  _cached_size_ = 0;
-}
+    void UserCost::SharedCtor()
+    {
+      ::memset(&late_operate_unit_cost_, 0, reinterpret_cast<char *>(&cancel_operation_unit_cost_) - reinterpret_cast<char *>(&late_operate_unit_cost_) + sizeof(cancel_operation_unit_cost_));
+      _cached_size_ = 0;
+    }
 
-UserCost::~UserCost() {
-  // @@protoc_insertion_point(destructor:planning.umbp.UserCost)
-  SharedDtor();
-}
+    UserCost::~UserCost()
+    {
+      // @@protoc_insertion_point(destructor:planning.umbp.UserCost)
+      SharedDtor();
+    }
 
-void UserCost::SharedDtor() {
-}
+    void UserCost::SharedDtor()
+    {
+    }
 
-void UserCost::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* UserCost::descriptor() {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[2].descriptor;
-}
+    void UserCost::SetCachedSize(int size) const
+    {
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    }
+    const ::google::protobuf::Descriptor *UserCost::descriptor()
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[2].descriptor;
+    }
 
-const UserCost& UserCost::default_instance() {
-  protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
+    const UserCost &UserCost::default_instance()
+    {
+      protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      return *internal_default_instance();
+    }
 
-UserCost* UserCost::New(::google::protobuf::Arena* arena) const {
-  UserCost* n = new UserCost;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
+    UserCost *UserCost::New(::google::protobuf::Arena *arena) const
+    {
+      UserCost *n = new UserCost;
+      if (arena != NULL)
+      {
+        arena->Own(n);
+      }
+      return n;
+    }
 
-void UserCost::Clear() {
-// @@protoc_insertion_point(message_clear_start:planning.umbp.UserCost)
-  ::memset(&late_operate_unit_cost_, 0, reinterpret_cast<char*>(&cancel_operation_unit_cost_) -
-    reinterpret_cast<char*>(&late_operate_unit_cost_) + sizeof(cancel_operation_unit_cost_));
-}
+    void UserCost::Clear()
+    {
+      // @@protoc_insertion_point(message_clear_start:planning.umbp.UserCost)
+      ::memset(&late_operate_unit_cost_, 0, reinterpret_cast<char *>(&cancel_operation_unit_cost_) - reinterpret_cast<char *>(&late_operate_unit_cost_) + sizeof(cancel_operation_unit_cost_));
+    }
 
-bool UserCost::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:planning.umbp.UserCost)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // double late_operate_unit_cost = 1;
-      case 1: {
-        if (tag == 9u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &late_operate_unit_cost_)));
-        } else {
+    bool UserCost::MergePartialFromCodedStream(
+        ::google::protobuf::io::CodedInputStream *input)
+    {
+#define DO_(EXPRESSION)                 \
+  if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) \
+  goto failure
+      ::google::protobuf::uint32 tag;
+      // @@protoc_insertion_point(parse_start:planning.umbp.UserCost)
+      for (;;)
+      {
+        ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+        tag = p.first;
+        if (!p.second)
           goto handle_unusual;
+        switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag))
+        {
+        // double late_operate_unit_cost = 1;
+        case 1:
+        {
+          if (tag == 9u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &late_operate_unit_cost_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
         }
-        break;
+
+        // double cancel_operation_unit_cost = 2;
+        case 2:
+        {
+          if (tag == 17u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &cancel_operation_unit_cost_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        default:
+        {
+        handle_unusual:
+          if (tag == 0 ||
+              ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+                  ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP)
+          {
+            goto success;
+          }
+          DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+          break;
+        }
+        }
+      }
+    success:
+      // @@protoc_insertion_point(parse_success:planning.umbp.UserCost)
+      return true;
+    failure:
+      // @@protoc_insertion_point(parse_failure:planning.umbp.UserCost)
+      return false;
+#undef DO_
+    }
+
+    void UserCost::SerializeWithCachedSizes(
+        ::google::protobuf::io::CodedOutputStream *output) const
+    {
+      // @@protoc_insertion_point(serialize_start:planning.umbp.UserCost)
+      // double late_operate_unit_cost = 1;
+      if (this->late_operate_unit_cost() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->late_operate_unit_cost(), output);
       }
 
       // double cancel_operation_unit_cost = 2;
-      case 2: {
-        if (tag == 17u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &cancel_operation_unit_cost_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->cancel_operation_unit_cost() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->cancel_operation_unit_cost(), output);
       }
 
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
+      // @@protoc_insertion_point(serialize_end:planning.umbp.UserCost)
+    }
+
+    ::google::protobuf::uint8 *UserCost::InternalSerializeWithCachedSizesToArray(
+        bool deterministic, ::google::protobuf::uint8 *target) const
+    {
+      (void)deterministic; // Unused
+      // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.UserCost)
+      // double late_operate_unit_cost = 1;
+      if (this->late_operate_unit_cost() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->late_operate_unit_cost(), target);
+      }
+
+      // double cancel_operation_unit_cost = 2;
+      if (this->cancel_operation_unit_cost() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->cancel_operation_unit_cost(), target);
+      }
+
+      // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.UserCost)
+      return target;
+    }
+
+    size_t UserCost::ByteSizeLong() const
+    {
+      // @@protoc_insertion_point(message_byte_size_start:planning.umbp.UserCost)
+      size_t total_size = 0;
+
+      // double late_operate_unit_cost = 1;
+      if (this->late_operate_unit_cost() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double cancel_operation_unit_cost = 2;
+      if (this->cancel_operation_unit_cost() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = cached_size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+      return total_size;
+    }
+
+    void UserCost::MergeFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.UserCost)
+      GOOGLE_DCHECK_NE(&from, this);
+      const UserCost *source =
+          ::google::protobuf::internal::DynamicCastToGenerated<const UserCost>(
+              &from);
+      if (source == NULL)
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.UserCost)
+        ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+      }
+      else
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.UserCost)
+        MergeFrom(*source);
       }
     }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:planning.umbp.UserCost)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:planning.umbp.UserCost)
-  return false;
-#undef DO_
-}
 
-void UserCost::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:planning.umbp.UserCost)
-  // double late_operate_unit_cost = 1;
-  if (this->late_operate_unit_cost() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->late_operate_unit_cost(), output);
-  }
+    void UserCost::MergeFrom(const UserCost &from)
+    {
+      // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.UserCost)
+      GOOGLE_DCHECK_NE(&from, this);
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.late_operate_unit_cost() != 0)
+      {
+        set_late_operate_unit_cost(from.late_operate_unit_cost());
+      }
+      if (from.cancel_operation_unit_cost() != 0)
+      {
+        set_cancel_operation_unit_cost(from.cancel_operation_unit_cost());
+      }
+    }
 
-  // double cancel_operation_unit_cost = 2;
-  if (this->cancel_operation_unit_cost() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->cancel_operation_unit_cost(), output);
-  }
+    void UserCost::CopyFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.UserCost)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // @@protoc_insertion_point(serialize_end:planning.umbp.UserCost)
-}
+    void UserCost::CopyFrom(const UserCost &from)
+    {
+      // @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.UserCost)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-::google::protobuf::uint8* UserCost::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.UserCost)
-  // double late_operate_unit_cost = 1;
-  if (this->late_operate_unit_cost() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->late_operate_unit_cost(), target);
-  }
+    bool UserCost::IsInitialized() const
+    {
+      return true;
+    }
 
-  // double cancel_operation_unit_cost = 2;
-  if (this->cancel_operation_unit_cost() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->cancel_operation_unit_cost(), target);
-  }
+    void UserCost::Swap(UserCost *other)
+    {
+      if (other == this)
+        return;
+      InternalSwap(other);
+    }
+    void UserCost::InternalSwap(UserCost *other)
+    {
+      std::swap(late_operate_unit_cost_, other->late_operate_unit_cost_);
+      std::swap(cancel_operation_unit_cost_, other->cancel_operation_unit_cost_);
+      std::swap(_cached_size_, other->_cached_size_);
+    }
 
-  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.UserCost)
-  return target;
-}
-
-size_t UserCost::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:planning.umbp.UserCost)
-  size_t total_size = 0;
-
-  // double late_operate_unit_cost = 1;
-  if (this->late_operate_unit_cost() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double cancel_operation_unit_cost = 2;
-  if (this->cancel_operation_unit_cost() != 0) {
-    total_size += 1 + 8;
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void UserCost::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.UserCost)
-  GOOGLE_DCHECK_NE(&from, this);
-  const UserCost* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const UserCost>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.UserCost)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.UserCost)
-    MergeFrom(*source);
-  }
-}
-
-void UserCost::MergeFrom(const UserCost& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.UserCost)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.late_operate_unit_cost() != 0) {
-    set_late_operate_unit_cost(from.late_operate_unit_cost());
-  }
-  if (from.cancel_operation_unit_cost() != 0) {
-    set_cancel_operation_unit_cost(from.cancel_operation_unit_cost());
-  }
-}
-
-void UserCost::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.UserCost)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void UserCost::CopyFrom(const UserCost& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.UserCost)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool UserCost::IsInitialized() const {
-  return true;
-}
-
-void UserCost::Swap(UserCost* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void UserCost::InternalSwap(UserCost* other) {
-  std::swap(late_operate_unit_cost_, other->late_operate_unit_cost_);
-  std::swap(cancel_operation_unit_cost_, other->cancel_operation_unit_cost_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata UserCost::GetMetadata() const {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[2];
-}
+    ::google::protobuf::Metadata UserCost::GetMetadata() const
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[2];
+    }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// UserCost
+    // UserCost
 
-// double late_operate_unit_cost = 1;
-void UserCost::clear_late_operate_unit_cost() {
-  late_operate_unit_cost_ = 0;
-}
-double UserCost::late_operate_unit_cost() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.UserCost.late_operate_unit_cost)
-  return late_operate_unit_cost_;
-}
-void UserCost::set_late_operate_unit_cost(double value) {
-  
-  late_operate_unit_cost_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.UserCost.late_operate_unit_cost)
-}
+    // double late_operate_unit_cost = 1;
+    void UserCost::clear_late_operate_unit_cost()
+    {
+      late_operate_unit_cost_ = 0;
+    }
+    double UserCost::late_operate_unit_cost() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.UserCost.late_operate_unit_cost)
+      return late_operate_unit_cost_;
+    }
+    void UserCost::set_late_operate_unit_cost(double value)
+    {
 
-// double cancel_operation_unit_cost = 2;
-void UserCost::clear_cancel_operation_unit_cost() {
-  cancel_operation_unit_cost_ = 0;
-}
-double UserCost::cancel_operation_unit_cost() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.UserCost.cancel_operation_unit_cost)
-  return cancel_operation_unit_cost_;
-}
-void UserCost::set_cancel_operation_unit_cost(double value) {
-  
-  cancel_operation_unit_cost_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.UserCost.cancel_operation_unit_cost)
-}
+      late_operate_unit_cost_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.UserCost.late_operate_unit_cost)
+    }
 
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+    // double cancel_operation_unit_cost = 2;
+    void UserCost::clear_cancel_operation_unit_cost()
+    {
+      cancel_operation_unit_cost_ = 0;
+    }
+    double UserCost::cancel_operation_unit_cost() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.UserCost.cancel_operation_unit_cost)
+      return cancel_operation_unit_cost_;
+    }
+    void UserCost::set_cancel_operation_unit_cost(double value)
+    {
 
-// ===================================================================
+      cancel_operation_unit_cost_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.UserCost.cancel_operation_unit_cost)
+    }
+
+#endif // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+    // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int NavigationCost::kRefLineChangeFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+    const int NavigationCost::kRefLineChangeFieldNumber;
+#endif // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-NavigationCost::NavigationCost()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:planning.umbp.NavigationCost)
-}
-NavigationCost::NavigationCost(const NavigationCost& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ref_line_change_ = from.ref_line_change_;
-  // @@protoc_insertion_point(copy_constructor:planning.umbp.NavigationCost)
-}
+    NavigationCost::NavigationCost()
+        : ::google::protobuf::Message(), _internal_metadata_(NULL)
+    {
+      if (GOOGLE_PREDICT_TRUE(this != internal_default_instance()))
+      {
+        protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      }
+      SharedCtor();
+      // @@protoc_insertion_point(constructor:planning.umbp.NavigationCost)
+    }
+    NavigationCost::NavigationCost(const NavigationCost &from)
+        : ::google::protobuf::Message(),
+          _internal_metadata_(NULL),
+          _cached_size_(0)
+    {
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      ref_line_change_ = from.ref_line_change_;
+      // @@protoc_insertion_point(copy_constructor:planning.umbp.NavigationCost)
+    }
 
-void NavigationCost::SharedCtor() {
-  ref_line_change_ = 0;
-  _cached_size_ = 0;
-}
+    void NavigationCost::SharedCtor()
+    {
+      ref_line_change_ = 0;
+      _cached_size_ = 0;
+    }
 
-NavigationCost::~NavigationCost() {
-  // @@protoc_insertion_point(destructor:planning.umbp.NavigationCost)
-  SharedDtor();
-}
+    NavigationCost::~NavigationCost()
+    {
+      // @@protoc_insertion_point(destructor:planning.umbp.NavigationCost)
+      SharedDtor();
+    }
 
-void NavigationCost::SharedDtor() {
-}
+    void NavigationCost::SharedDtor()
+    {
+    }
 
-void NavigationCost::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* NavigationCost::descriptor() {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[3].descriptor;
-}
+    void NavigationCost::SetCachedSize(int size) const
+    {
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    }
+    const ::google::protobuf::Descriptor *NavigationCost::descriptor()
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[3].descriptor;
+    }
 
-const NavigationCost& NavigationCost::default_instance() {
-  protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
+    const NavigationCost &NavigationCost::default_instance()
+    {
+      protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      return *internal_default_instance();
+    }
 
-NavigationCost* NavigationCost::New(::google::protobuf::Arena* arena) const {
-  NavigationCost* n = new NavigationCost;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
+    NavigationCost *NavigationCost::New(::google::protobuf::Arena *arena) const
+    {
+      NavigationCost *n = new NavigationCost;
+      if (arena != NULL)
+      {
+        arena->Own(n);
+      }
+      return n;
+    }
 
-void NavigationCost::Clear() {
-// @@protoc_insertion_point(message_clear_start:planning.umbp.NavigationCost)
-  ref_line_change_ = 0;
-}
+    void NavigationCost::Clear()
+    {
+      // @@protoc_insertion_point(message_clear_start:planning.umbp.NavigationCost)
+      ref_line_change_ = 0;
+    }
 
-bool NavigationCost::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:planning.umbp.NavigationCost)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    bool NavigationCost::MergePartialFromCodedStream(
+        ::google::protobuf::io::CodedInputStream *input)
+    {
+#define DO_(EXPRESSION)                 \
+  if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) \
+  goto failure
+      ::google::protobuf::uint32 tag;
+      // @@protoc_insertion_point(parse_start:planning.umbp.NavigationCost)
+      for (;;)
+      {
+        ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+        tag = p.first;
+        if (!p.second)
+          goto handle_unusual;
+        switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag))
+        {
+        // double ref_line_change = 1;
+        case 1:
+        {
+          if (tag == 9u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &ref_line_change_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        default:
+        {
+        handle_unusual:
+          if (tag == 0 ||
+              ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+                  ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP)
+          {
+            goto success;
+          }
+          DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+          break;
+        }
+        }
+      }
+    success:
+      // @@protoc_insertion_point(parse_success:planning.umbp.NavigationCost)
+      return true;
+    failure:
+      // @@protoc_insertion_point(parse_failure:planning.umbp.NavigationCost)
+      return false;
+#undef DO_
+    }
+
+    void NavigationCost::SerializeWithCachedSizes(
+        ::google::protobuf::io::CodedOutputStream *output) const
+    {
+      // @@protoc_insertion_point(serialize_start:planning.umbp.NavigationCost)
       // double ref_line_change = 1;
-      case 1: {
-        if (tag == 9u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &ref_line_change_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->ref_line_change() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->ref_line_change(), output);
       }
 
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
+      // @@protoc_insertion_point(serialize_end:planning.umbp.NavigationCost)
+    }
+
+    ::google::protobuf::uint8 *NavigationCost::InternalSerializeWithCachedSizesToArray(
+        bool deterministic, ::google::protobuf::uint8 *target) const
+    {
+      (void)deterministic; // Unused
+      // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.NavigationCost)
+      // double ref_line_change = 1;
+      if (this->ref_line_change() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->ref_line_change(), target);
+      }
+
+      // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.NavigationCost)
+      return target;
+    }
+
+    size_t NavigationCost::ByteSizeLong() const
+    {
+      // @@protoc_insertion_point(message_byte_size_start:planning.umbp.NavigationCost)
+      size_t total_size = 0;
+
+      // double ref_line_change = 1;
+      if (this->ref_line_change() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = cached_size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+      return total_size;
+    }
+
+    void NavigationCost::MergeFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.NavigationCost)
+      GOOGLE_DCHECK_NE(&from, this);
+      const NavigationCost *source =
+          ::google::protobuf::internal::DynamicCastToGenerated<const NavigationCost>(
+              &from);
+      if (source == NULL)
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.NavigationCost)
+        ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+      }
+      else
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.NavigationCost)
+        MergeFrom(*source);
       }
     }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:planning.umbp.NavigationCost)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:planning.umbp.NavigationCost)
-  return false;
-#undef DO_
-}
 
-void NavigationCost::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:planning.umbp.NavigationCost)
-  // double ref_line_change = 1;
-  if (this->ref_line_change() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->ref_line_change(), output);
-  }
+    void NavigationCost::MergeFrom(const NavigationCost &from)
+    {
+      // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.NavigationCost)
+      GOOGLE_DCHECK_NE(&from, this);
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.ref_line_change() != 0)
+      {
+        set_ref_line_change(from.ref_line_change());
+      }
+    }
 
-  // @@protoc_insertion_point(serialize_end:planning.umbp.NavigationCost)
-}
+    void NavigationCost::CopyFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.NavigationCost)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-::google::protobuf::uint8* NavigationCost::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.NavigationCost)
-  // double ref_line_change = 1;
-  if (this->ref_line_change() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->ref_line_change(), target);
-  }
+    void NavigationCost::CopyFrom(const NavigationCost &from)
+    {
+      // @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.NavigationCost)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.NavigationCost)
-  return target;
-}
+    bool NavigationCost::IsInitialized() const
+    {
+      return true;
+    }
 
-size_t NavigationCost::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:planning.umbp.NavigationCost)
-  size_t total_size = 0;
+    void NavigationCost::Swap(NavigationCost *other)
+    {
+      if (other == this)
+        return;
+      InternalSwap(other);
+    }
+    void NavigationCost::InternalSwap(NavigationCost *other)
+    {
+      std::swap(ref_line_change_, other->ref_line_change_);
+      std::swap(_cached_size_, other->_cached_size_);
+    }
 
-  // double ref_line_change = 1;
-  if (this->ref_line_change() != 0) {
-    total_size += 1 + 8;
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void NavigationCost::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.NavigationCost)
-  GOOGLE_DCHECK_NE(&from, this);
-  const NavigationCost* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const NavigationCost>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.NavigationCost)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.NavigationCost)
-    MergeFrom(*source);
-  }
-}
-
-void NavigationCost::MergeFrom(const NavigationCost& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.NavigationCost)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.ref_line_change() != 0) {
-    set_ref_line_change(from.ref_line_change());
-  }
-}
-
-void NavigationCost::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.NavigationCost)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void NavigationCost::CopyFrom(const NavigationCost& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.NavigationCost)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool NavigationCost::IsInitialized() const {
-  return true;
-}
-
-void NavigationCost::Swap(NavigationCost* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void NavigationCost::InternalSwap(NavigationCost* other) {
-  std::swap(ref_line_change_, other->ref_line_change_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata NavigationCost::GetMetadata() const {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[3];
-}
+    ::google::protobuf::Metadata NavigationCost::GetMetadata() const
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[3];
+    }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// NavigationCost
+    // NavigationCost
 
-// double ref_line_change = 1;
-void NavigationCost::clear_ref_line_change() {
-  ref_line_change_ = 0;
-}
-double NavigationCost::ref_line_change() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.NavigationCost.ref_line_change)
-  return ref_line_change_;
-}
-void NavigationCost::set_ref_line_change(double value) {
-  
-  ref_line_change_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.NavigationCost.ref_line_change)
-}
+    // double ref_line_change = 1;
+    void NavigationCost::clear_ref_line_change()
+    {
+      ref_line_change_ = 0;
+    }
+    double NavigationCost::ref_line_change() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.NavigationCost.ref_line_change)
+      return ref_line_change_;
+    }
+    void NavigationCost::set_ref_line_change(double value)
+    {
 
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+      ref_line_change_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.NavigationCost.ref_line_change)
+    }
 
-// ===================================================================
+#endif // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+    // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int FpbConfig::kLayerTimeFieldNumber;
-const int FpbConfig::kStepFieldNumber;
-const int FpbConfig::kTreeHeightFieldNumber;
-const int FpbConfig::kLRefToLeftRoadBoundFieldNumber;
-const int FpbConfig::kLRefToRightRoadBoundFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+    const int HdiCost::kHdiWeightFieldNumber;
+    const int HdiCost::kHdiWinSizeFieldNumber;
+#endif // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-FpbConfig::FpbConfig()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:planning.umbp.FpbConfig)
-}
-FpbConfig::FpbConfig(const FpbConfig& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&layer_time_, &from.layer_time_,
-    reinterpret_cast<char*>(&tree_height_) -
-    reinterpret_cast<char*>(&layer_time_) + sizeof(tree_height_));
-  // @@protoc_insertion_point(copy_constructor:planning.umbp.FpbConfig)
-}
+    HdiCost::HdiCost()
+        : ::google::protobuf::Message(), _internal_metadata_(NULL)
+    {
+      if (GOOGLE_PREDICT_TRUE(this != internal_default_instance()))
+      {
+        protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      }
+      SharedCtor();
+      // @@protoc_insertion_point(constructor:planning.umbp.HdiCost)
+    }
+    HdiCost::HdiCost(const HdiCost &from)
+        : ::google::protobuf::Message(),
+          _internal_metadata_(NULL),
+          _cached_size_(0)
+    {
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      ::memcpy(&hdi_weight_, &from.hdi_weight_,
+               reinterpret_cast<char *>(&hdi_win_size_) -
+                   reinterpret_cast<char *>(&hdi_weight_) + sizeof(hdi_win_size_));
+      // @@protoc_insertion_point(copy_constructor:planning.umbp.HdiCost)
+    }
 
-void FpbConfig::SharedCtor() {
-  ::memset(&layer_time_, 0, reinterpret_cast<char*>(&tree_height_) -
-    reinterpret_cast<char*>(&layer_time_) + sizeof(tree_height_));
-  _cached_size_ = 0;
-}
+    void HdiCost::SharedCtor()
+    {
+      ::memset(&hdi_weight_, 0, reinterpret_cast<char *>(&hdi_win_size_) - reinterpret_cast<char *>(&hdi_weight_) + sizeof(hdi_win_size_));
+      _cached_size_ = 0;
+    }
 
-FpbConfig::~FpbConfig() {
-  // @@protoc_insertion_point(destructor:planning.umbp.FpbConfig)
-  SharedDtor();
-}
+    HdiCost::~HdiCost()
+    {
+      // @@protoc_insertion_point(destructor:planning.umbp.HdiCost)
+      SharedDtor();
+    }
 
-void FpbConfig::SharedDtor() {
-}
+    void HdiCost::SharedDtor()
+    {
+    }
 
-void FpbConfig::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* FpbConfig::descriptor() {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[4].descriptor;
-}
+    void HdiCost::SetCachedSize(int size) const
+    {
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    }
+    const ::google::protobuf::Descriptor *HdiCost::descriptor()
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[4].descriptor;
+    }
 
-const FpbConfig& FpbConfig::default_instance() {
-  protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
+    const HdiCost &HdiCost::default_instance()
+    {
+      protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      return *internal_default_instance();
+    }
 
-FpbConfig* FpbConfig::New(::google::protobuf::Arena* arena) const {
-  FpbConfig* n = new FpbConfig;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
+    HdiCost *HdiCost::New(::google::protobuf::Arena *arena) const
+    {
+      HdiCost *n = new HdiCost;
+      if (arena != NULL)
+      {
+        arena->Own(n);
+      }
+      return n;
+    }
 
-void FpbConfig::Clear() {
-// @@protoc_insertion_point(message_clear_start:planning.umbp.FpbConfig)
-  ::memset(&layer_time_, 0, reinterpret_cast<char*>(&tree_height_) -
-    reinterpret_cast<char*>(&layer_time_) + sizeof(tree_height_));
-}
+    void HdiCost::Clear()
+    {
+      // @@protoc_insertion_point(message_clear_start:planning.umbp.HdiCost)
+      ::memset(&hdi_weight_, 0, reinterpret_cast<char *>(&hdi_win_size_) - reinterpret_cast<char *>(&hdi_weight_) + sizeof(hdi_win_size_));
+    }
 
-bool FpbConfig::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:planning.umbp.FpbConfig)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // double layer_time = 1;
-      case 1: {
-        if (tag == 9u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &layer_time_)));
-        } else {
+    bool HdiCost::MergePartialFromCodedStream(
+        ::google::protobuf::io::CodedInputStream *input)
+    {
+#define DO_(EXPRESSION)                 \
+  if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) \
+  goto failure
+      ::google::protobuf::uint32 tag;
+      // @@protoc_insertion_point(parse_start:planning.umbp.HdiCost)
+      for (;;)
+      {
+        ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+        tag = p.first;
+        if (!p.second)
           goto handle_unusual;
+        switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag))
+        {
+        // double hdi_weight = 1;
+        case 1:
+        {
+          if (tag == 9u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &hdi_weight_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
         }
-        break;
+
+        // int32 hdi_win_size = 2;
+        case 2:
+        {
+          if (tag == 16u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                input, &hdi_win_size_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        default:
+        {
+        handle_unusual:
+          if (tag == 0 ||
+              ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+                  ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP)
+          {
+            goto success;
+          }
+          DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+          break;
+        }
+        }
+      }
+    success:
+      // @@protoc_insertion_point(parse_success:planning.umbp.HdiCost)
+      return true;
+    failure:
+      // @@protoc_insertion_point(parse_failure:planning.umbp.HdiCost)
+      return false;
+#undef DO_
+    }
+
+    void HdiCost::SerializeWithCachedSizes(
+        ::google::protobuf::io::CodedOutputStream *output) const
+    {
+      // @@protoc_insertion_point(serialize_start:planning.umbp.HdiCost)
+      // double hdi_weight = 1;
+      if (this->hdi_weight() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->hdi_weight(), output);
+      }
+
+      // int32 hdi_win_size = 2;
+      if (this->hdi_win_size() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->hdi_win_size(), output);
+      }
+
+      // @@protoc_insertion_point(serialize_end:planning.umbp.HdiCost)
+    }
+
+    ::google::protobuf::uint8 *HdiCost::InternalSerializeWithCachedSizesToArray(
+        bool deterministic, ::google::protobuf::uint8 *target) const
+    {
+      (void)deterministic; // Unused
+      // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.HdiCost)
+      // double hdi_weight = 1;
+      if (this->hdi_weight() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->hdi_weight(), target);
+      }
+
+      // int32 hdi_win_size = 2;
+      if (this->hdi_win_size() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->hdi_win_size(), target);
+      }
+
+      // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.HdiCost)
+      return target;
+    }
+
+    size_t HdiCost::ByteSizeLong() const
+    {
+      // @@protoc_insertion_point(message_byte_size_start:planning.umbp.HdiCost)
+      size_t total_size = 0;
+
+      // double hdi_weight = 1;
+      if (this->hdi_weight() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // int32 hdi_win_size = 2;
+      if (this->hdi_win_size() != 0)
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::Int32Size(
+                          this->hdi_win_size());
+      }
+
+      int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = cached_size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+      return total_size;
+    }
+
+    void HdiCost::MergeFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.HdiCost)
+      GOOGLE_DCHECK_NE(&from, this);
+      const HdiCost *source =
+          ::google::protobuf::internal::DynamicCastToGenerated<const HdiCost>(
+              &from);
+      if (source == NULL)
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.HdiCost)
+        ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+      }
+      else
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.HdiCost)
+        MergeFrom(*source);
+      }
+    }
+
+    void HdiCost::MergeFrom(const HdiCost &from)
+    {
+      // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.HdiCost)
+      GOOGLE_DCHECK_NE(&from, this);
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.hdi_weight() != 0)
+      {
+        set_hdi_weight(from.hdi_weight());
+      }
+      if (from.hdi_win_size() != 0)
+      {
+        set_hdi_win_size(from.hdi_win_size());
+      }
+    }
+
+    void HdiCost::CopyFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.HdiCost)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
+
+    void HdiCost::CopyFrom(const HdiCost &from)
+    {
+      // @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.HdiCost)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
+
+    bool HdiCost::IsInitialized() const
+    {
+      return true;
+    }
+
+    void HdiCost::Swap(HdiCost *other)
+    {
+      if (other == this)
+        return;
+      InternalSwap(other);
+    }
+    void HdiCost::InternalSwap(HdiCost *other)
+    {
+      std::swap(hdi_weight_, other->hdi_weight_);
+      std::swap(hdi_win_size_, other->hdi_win_size_);
+      std::swap(_cached_size_, other->_cached_size_);
+    }
+
+    ::google::protobuf::Metadata HdiCost::GetMetadata() const
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[4];
+    }
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+    // HdiCost
+
+    // double hdi_weight = 1;
+    void HdiCost::clear_hdi_weight()
+    {
+      hdi_weight_ = 0;
+    }
+    double HdiCost::hdi_weight() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.HdiCost.hdi_weight)
+      return hdi_weight_;
+    }
+    void HdiCost::set_hdi_weight(double value)
+    {
+
+      hdi_weight_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.HdiCost.hdi_weight)
+    }
+
+    // int32 hdi_win_size = 2;
+    void HdiCost::clear_hdi_win_size()
+    {
+      hdi_win_size_ = 0;
+    }
+    ::google::protobuf::int32 HdiCost::hdi_win_size() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.HdiCost.hdi_win_size)
+      return hdi_win_size_;
+    }
+    void HdiCost::set_hdi_win_size(::google::protobuf::int32 value)
+    {
+
+      hdi_win_size_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.HdiCost.hdi_win_size)
+    }
+
+#endif // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+    // ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+    const int FpbConfig::kLayerTimeFieldNumber;
+    const int FpbConfig::kStepFieldNumber;
+    const int FpbConfig::kTreeHeightFieldNumber;
+    const int FpbConfig::kLRefToLeftRoadBoundFieldNumber;
+    const int FpbConfig::kLRefToRightRoadBoundFieldNumber;
+#endif // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+    FpbConfig::FpbConfig()
+        : ::google::protobuf::Message(), _internal_metadata_(NULL)
+    {
+      if (GOOGLE_PREDICT_TRUE(this != internal_default_instance()))
+      {
+        protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      }
+      SharedCtor();
+      // @@protoc_insertion_point(constructor:planning.umbp.FpbConfig)
+    }
+    FpbConfig::FpbConfig(const FpbConfig &from)
+        : ::google::protobuf::Message(),
+          _internal_metadata_(NULL),
+          _cached_size_(0)
+    {
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      ::memcpy(&layer_time_, &from.layer_time_,
+               reinterpret_cast<char *>(&tree_height_) -
+                   reinterpret_cast<char *>(&layer_time_) + sizeof(tree_height_));
+      // @@protoc_insertion_point(copy_constructor:planning.umbp.FpbConfig)
+    }
+
+    void FpbConfig::SharedCtor()
+    {
+      ::memset(&layer_time_, 0, reinterpret_cast<char *>(&tree_height_) - reinterpret_cast<char *>(&layer_time_) + sizeof(tree_height_));
+      _cached_size_ = 0;
+    }
+
+    FpbConfig::~FpbConfig()
+    {
+      // @@protoc_insertion_point(destructor:planning.umbp.FpbConfig)
+      SharedDtor();
+    }
+
+    void FpbConfig::SharedDtor()
+    {
+    }
+
+    void FpbConfig::SetCachedSize(int size) const
+    {
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    }
+    const ::google::protobuf::Descriptor *FpbConfig::descriptor()
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[5].descriptor;
+    }
+
+    const FpbConfig &FpbConfig::default_instance()
+    {
+      protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      return *internal_default_instance();
+    }
+
+    FpbConfig *FpbConfig::New(::google::protobuf::Arena *arena) const
+    {
+      FpbConfig *n = new FpbConfig;
+      if (arena != NULL)
+      {
+        arena->Own(n);
+      }
+      return n;
+    }
+
+    void FpbConfig::Clear()
+    {
+      // @@protoc_insertion_point(message_clear_start:planning.umbp.FpbConfig)
+      ::memset(&layer_time_, 0, reinterpret_cast<char *>(&tree_height_) - reinterpret_cast<char *>(&layer_time_) + sizeof(tree_height_));
+    }
+
+    bool FpbConfig::MergePartialFromCodedStream(
+        ::google::protobuf::io::CodedInputStream *input)
+    {
+#define DO_(EXPRESSION)                 \
+  if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) \
+  goto failure
+      ::google::protobuf::uint32 tag;
+      // @@protoc_insertion_point(parse_start:planning.umbp.FpbConfig)
+      for (;;)
+      {
+        ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+        tag = p.first;
+        if (!p.second)
+          goto handle_unusual;
+        switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag))
+        {
+        // double layer_time = 1;
+        case 1:
+        {
+          if (tag == 9u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &layer_time_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double step = 2;
+        case 2:
+        {
+          if (tag == 17u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &step_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // int32 tree_height = 3;
+        case 3:
+        {
+          if (tag == 24u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                input, &tree_height_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double l_ref_to_left_road_bound = 4;
+        case 4:
+        {
+          if (tag == 33u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &l_ref_to_left_road_bound_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double l_ref_to_right_road_bound = 5;
+        case 5:
+        {
+          if (tag == 41u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &l_ref_to_right_road_bound_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        default:
+        {
+        handle_unusual:
+          if (tag == 0 ||
+              ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+                  ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP)
+          {
+            goto success;
+          }
+          DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+          break;
+        }
+        }
+      }
+    success:
+      // @@protoc_insertion_point(parse_success:planning.umbp.FpbConfig)
+      return true;
+    failure:
+      // @@protoc_insertion_point(parse_failure:planning.umbp.FpbConfig)
+      return false;
+#undef DO_
+    }
+
+    void FpbConfig::SerializeWithCachedSizes(
+        ::google::protobuf::io::CodedOutputStream *output) const
+    {
+      // @@protoc_insertion_point(serialize_start:planning.umbp.FpbConfig)
+      // double layer_time = 1;
+      if (this->layer_time() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->layer_time(), output);
       }
 
       // double step = 2;
-      case 2: {
-        if (tag == 17u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &step_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->step() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->step(), output);
       }
 
       // int32 tree_height = 3;
-      case 3: {
-        if (tag == 24u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &tree_height_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->tree_height() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->tree_height(), output);
       }
 
       // double l_ref_to_left_road_bound = 4;
-      case 4: {
-        if (tag == 33u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &l_ref_to_left_road_bound_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->l_ref_to_left_road_bound() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->l_ref_to_left_road_bound(), output);
       }
 
       // double l_ref_to_right_road_bound = 5;
-      case 5: {
-        if (tag == 41u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &l_ref_to_right_road_bound_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->l_ref_to_right_road_bound() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->l_ref_to_right_road_bound(), output);
       }
 
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
+      // @@protoc_insertion_point(serialize_end:planning.umbp.FpbConfig)
+    }
+
+    ::google::protobuf::uint8 *FpbConfig::InternalSerializeWithCachedSizesToArray(
+        bool deterministic, ::google::protobuf::uint8 *target) const
+    {
+      (void)deterministic; // Unused
+      // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.FpbConfig)
+      // double layer_time = 1;
+      if (this->layer_time() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->layer_time(), target);
+      }
+
+      // double step = 2;
+      if (this->step() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->step(), target);
+      }
+
+      // int32 tree_height = 3;
+      if (this->tree_height() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->tree_height(), target);
+      }
+
+      // double l_ref_to_left_road_bound = 4;
+      if (this->l_ref_to_left_road_bound() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->l_ref_to_left_road_bound(), target);
+      }
+
+      // double l_ref_to_right_road_bound = 5;
+      if (this->l_ref_to_right_road_bound() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->l_ref_to_right_road_bound(), target);
+      }
+
+      // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.FpbConfig)
+      return target;
+    }
+
+    size_t FpbConfig::ByteSizeLong() const
+    {
+      // @@protoc_insertion_point(message_byte_size_start:planning.umbp.FpbConfig)
+      size_t total_size = 0;
+
+      // double layer_time = 1;
+      if (this->layer_time() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double step = 2;
+      if (this->step() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double l_ref_to_left_road_bound = 4;
+      if (this->l_ref_to_left_road_bound() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double l_ref_to_right_road_bound = 5;
+      if (this->l_ref_to_right_road_bound() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // int32 tree_height = 3;
+      if (this->tree_height() != 0)
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::Int32Size(
+                          this->tree_height());
+      }
+
+      int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = cached_size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+      return total_size;
+    }
+
+    void FpbConfig::MergeFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.FpbConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      const FpbConfig *source =
+          ::google::protobuf::internal::DynamicCastToGenerated<const FpbConfig>(
+              &from);
+      if (source == NULL)
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.FpbConfig)
+        ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+      }
+      else
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.FpbConfig)
+        MergeFrom(*source);
       }
     }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:planning.umbp.FpbConfig)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:planning.umbp.FpbConfig)
-  return false;
-#undef DO_
-}
 
-void FpbConfig::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:planning.umbp.FpbConfig)
-  // double layer_time = 1;
-  if (this->layer_time() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->layer_time(), output);
-  }
+    void FpbConfig::MergeFrom(const FpbConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.FpbConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.layer_time() != 0)
+      {
+        set_layer_time(from.layer_time());
+      }
+      if (from.step() != 0)
+      {
+        set_step(from.step());
+      }
+      if (from.l_ref_to_left_road_bound() != 0)
+      {
+        set_l_ref_to_left_road_bound(from.l_ref_to_left_road_bound());
+      }
+      if (from.l_ref_to_right_road_bound() != 0)
+      {
+        set_l_ref_to_right_road_bound(from.l_ref_to_right_road_bound());
+      }
+      if (from.tree_height() != 0)
+      {
+        set_tree_height(from.tree_height());
+      }
+    }
 
-  // double step = 2;
-  if (this->step() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->step(), output);
-  }
+    void FpbConfig::CopyFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.FpbConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // int32 tree_height = 3;
-  if (this->tree_height() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->tree_height(), output);
-  }
+    void FpbConfig::CopyFrom(const FpbConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.FpbConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // double l_ref_to_left_road_bound = 4;
-  if (this->l_ref_to_left_road_bound() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->l_ref_to_left_road_bound(), output);
-  }
+    bool FpbConfig::IsInitialized() const
+    {
+      return true;
+    }
 
-  // double l_ref_to_right_road_bound = 5;
-  if (this->l_ref_to_right_road_bound() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->l_ref_to_right_road_bound(), output);
-  }
+    void FpbConfig::Swap(FpbConfig *other)
+    {
+      if (other == this)
+        return;
+      InternalSwap(other);
+    }
+    void FpbConfig::InternalSwap(FpbConfig *other)
+    {
+      std::swap(layer_time_, other->layer_time_);
+      std::swap(step_, other->step_);
+      std::swap(l_ref_to_left_road_bound_, other->l_ref_to_left_road_bound_);
+      std::swap(l_ref_to_right_road_bound_, other->l_ref_to_right_road_bound_);
+      std::swap(tree_height_, other->tree_height_);
+      std::swap(_cached_size_, other->_cached_size_);
+    }
 
-  // @@protoc_insertion_point(serialize_end:planning.umbp.FpbConfig)
-}
-
-::google::protobuf::uint8* FpbConfig::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.FpbConfig)
-  // double layer_time = 1;
-  if (this->layer_time() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->layer_time(), target);
-  }
-
-  // double step = 2;
-  if (this->step() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->step(), target);
-  }
-
-  // int32 tree_height = 3;
-  if (this->tree_height() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->tree_height(), target);
-  }
-
-  // double l_ref_to_left_road_bound = 4;
-  if (this->l_ref_to_left_road_bound() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->l_ref_to_left_road_bound(), target);
-  }
-
-  // double l_ref_to_right_road_bound = 5;
-  if (this->l_ref_to_right_road_bound() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->l_ref_to_right_road_bound(), target);
-  }
-
-  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.FpbConfig)
-  return target;
-}
-
-size_t FpbConfig::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:planning.umbp.FpbConfig)
-  size_t total_size = 0;
-
-  // double layer_time = 1;
-  if (this->layer_time() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double step = 2;
-  if (this->step() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double l_ref_to_left_road_bound = 4;
-  if (this->l_ref_to_left_road_bound() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double l_ref_to_right_road_bound = 5;
-  if (this->l_ref_to_right_road_bound() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // int32 tree_height = 3;
-  if (this->tree_height() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->tree_height());
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void FpbConfig::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.FpbConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  const FpbConfig* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const FpbConfig>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.FpbConfig)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.FpbConfig)
-    MergeFrom(*source);
-  }
-}
-
-void FpbConfig::MergeFrom(const FpbConfig& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.FpbConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.layer_time() != 0) {
-    set_layer_time(from.layer_time());
-  }
-  if (from.step() != 0) {
-    set_step(from.step());
-  }
-  if (from.l_ref_to_left_road_bound() != 0) {
-    set_l_ref_to_left_road_bound(from.l_ref_to_left_road_bound());
-  }
-  if (from.l_ref_to_right_road_bound() != 0) {
-    set_l_ref_to_right_road_bound(from.l_ref_to_right_road_bound());
-  }
-  if (from.tree_height() != 0) {
-    set_tree_height(from.tree_height());
-  }
-}
-
-void FpbConfig::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.FpbConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void FpbConfig::CopyFrom(const FpbConfig& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.FpbConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool FpbConfig::IsInitialized() const {
-  return true;
-}
-
-void FpbConfig::Swap(FpbConfig* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void FpbConfig::InternalSwap(FpbConfig* other) {
-  std::swap(layer_time_, other->layer_time_);
-  std::swap(step_, other->step_);
-  std::swap(l_ref_to_left_road_bound_, other->l_ref_to_left_road_bound_);
-  std::swap(l_ref_to_right_road_bound_, other->l_ref_to_right_road_bound_);
-  std::swap(tree_height_, other->tree_height_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata FpbConfig::GetMetadata() const {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[4];
-}
+    ::google::protobuf::Metadata FpbConfig::GetMetadata() const
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[5];
+    }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// FpbConfig
+    // FpbConfig
 
-// double layer_time = 1;
-void FpbConfig::clear_layer_time() {
-  layer_time_ = 0;
-}
-double FpbConfig::layer_time() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.FpbConfig.layer_time)
-  return layer_time_;
-}
-void FpbConfig::set_layer_time(double value) {
-  
-  layer_time_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.FpbConfig.layer_time)
-}
+    // double layer_time = 1;
+    void FpbConfig::clear_layer_time()
+    {
+      layer_time_ = 0;
+    }
+    double FpbConfig::layer_time() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.FpbConfig.layer_time)
+      return layer_time_;
+    }
+    void FpbConfig::set_layer_time(double value)
+    {
 
-// double step = 2;
-void FpbConfig::clear_step() {
-  step_ = 0;
-}
-double FpbConfig::step() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.FpbConfig.step)
-  return step_;
-}
-void FpbConfig::set_step(double value) {
-  
-  step_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.FpbConfig.step)
-}
+      layer_time_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.FpbConfig.layer_time)
+    }
 
-// int32 tree_height = 3;
-void FpbConfig::clear_tree_height() {
-  tree_height_ = 0;
-}
-::google::protobuf::int32 FpbConfig::tree_height() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.FpbConfig.tree_height)
-  return tree_height_;
-}
-void FpbConfig::set_tree_height(::google::protobuf::int32 value) {
-  
-  tree_height_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.FpbConfig.tree_height)
-}
+    // double step = 2;
+    void FpbConfig::clear_step()
+    {
+      step_ = 0;
+    }
+    double FpbConfig::step() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.FpbConfig.step)
+      return step_;
+    }
+    void FpbConfig::set_step(double value)
+    {
 
-// double l_ref_to_left_road_bound = 4;
-void FpbConfig::clear_l_ref_to_left_road_bound() {
-  l_ref_to_left_road_bound_ = 0;
-}
-double FpbConfig::l_ref_to_left_road_bound() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.FpbConfig.l_ref_to_left_road_bound)
-  return l_ref_to_left_road_bound_;
-}
-void FpbConfig::set_l_ref_to_left_road_bound(double value) {
-  
-  l_ref_to_left_road_bound_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.FpbConfig.l_ref_to_left_road_bound)
-}
+      step_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.FpbConfig.step)
+    }
 
-// double l_ref_to_right_road_bound = 5;
-void FpbConfig::clear_l_ref_to_right_road_bound() {
-  l_ref_to_right_road_bound_ = 0;
-}
-double FpbConfig::l_ref_to_right_road_bound() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.FpbConfig.l_ref_to_right_road_bound)
-  return l_ref_to_right_road_bound_;
-}
-void FpbConfig::set_l_ref_to_right_road_bound(double value) {
-  
-  l_ref_to_right_road_bound_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.FpbConfig.l_ref_to_right_road_bound)
-}
+    // int32 tree_height = 3;
+    void FpbConfig::clear_tree_height()
+    {
+      tree_height_ = 0;
+    }
+    ::google::protobuf::int32 FpbConfig::tree_height() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.FpbConfig.tree_height)
+      return tree_height_;
+    }
+    void FpbConfig::set_tree_height(::google::protobuf::int32 value)
+    {
 
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+      tree_height_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.FpbConfig.tree_height)
+    }
 
-// ===================================================================
+    // double l_ref_to_left_road_bound = 4;
+    void FpbConfig::clear_l_ref_to_left_road_bound()
+    {
+      l_ref_to_left_road_bound_ = 0;
+    }
+    double FpbConfig::l_ref_to_left_road_bound() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.FpbConfig.l_ref_to_left_road_bound)
+      return l_ref_to_left_road_bound_;
+    }
+    void FpbConfig::set_l_ref_to_left_road_bound(double value)
+    {
+
+      l_ref_to_left_road_bound_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.FpbConfig.l_ref_to_left_road_bound)
+    }
+
+    // double l_ref_to_right_road_bound = 5;
+    void FpbConfig::clear_l_ref_to_right_road_bound()
+    {
+      l_ref_to_right_road_bound_ = 0;
+    }
+    double FpbConfig::l_ref_to_right_road_bound() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.FpbConfig.l_ref_to_right_road_bound)
+      return l_ref_to_right_road_bound_;
+    }
+    void FpbConfig::set_l_ref_to_right_road_bound(double value)
+    {
+
+      l_ref_to_right_road_bound_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.FpbConfig.l_ref_to_right_road_bound)
+    }
+
+#endif // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+    // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int SampleConfig::kSSampleDistanceFieldNumber;
-const int SampleConfig::kSSampleNumFieldNumber;
-const int SampleConfig::kLSampleDistanceFieldNumber;
-const int SampleConfig::kLSampleNumFieldNumber;
-const int SampleConfig::kAccRefFieldNumber;
-const int SampleConfig::kDecRefFieldNumber;
-const int SampleConfig::kLaneWidthFieldNumber;
-const int SampleConfig::kIncreasedSlDistanceFieldNumber;
-const int SampleConfig::kIncreasedStDistanceFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+    const int SampleConfig::kSSampleDistanceFieldNumber;
+    const int SampleConfig::kSSampleNumFieldNumber;
+    const int SampleConfig::kLSampleDistanceFieldNumber;
+    const int SampleConfig::kLSampleNumFieldNumber;
+    const int SampleConfig::kAccRefFieldNumber;
+    const int SampleConfig::kDecRefFieldNumber;
+    const int SampleConfig::kLaneWidthFieldNumber;
+    const int SampleConfig::kIncreasedSlDistanceFieldNumber;
+    const int SampleConfig::kIncreasedStDistanceFieldNumber;
+#endif // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-SampleConfig::SampleConfig()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:planning.umbp.SampleConfig)
-}
-SampleConfig::SampleConfig(const SampleConfig& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&s_sample_distance_, &from.s_sample_distance_,
-    reinterpret_cast<char*>(&increased_st_distance_) -
-    reinterpret_cast<char*>(&s_sample_distance_) + sizeof(increased_st_distance_));
-  // @@protoc_insertion_point(copy_constructor:planning.umbp.SampleConfig)
-}
+    SampleConfig::SampleConfig()
+        : ::google::protobuf::Message(), _internal_metadata_(NULL)
+    {
+      if (GOOGLE_PREDICT_TRUE(this != internal_default_instance()))
+      {
+        protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      }
+      SharedCtor();
+      // @@protoc_insertion_point(constructor:planning.umbp.SampleConfig)
+    }
+    SampleConfig::SampleConfig(const SampleConfig &from)
+        : ::google::protobuf::Message(),
+          _internal_metadata_(NULL),
+          _cached_size_(0)
+    {
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      ::memcpy(&s_sample_distance_, &from.s_sample_distance_,
+               reinterpret_cast<char *>(&increased_st_distance_) -
+                   reinterpret_cast<char *>(&s_sample_distance_) + sizeof(increased_st_distance_));
+      // @@protoc_insertion_point(copy_constructor:planning.umbp.SampleConfig)
+    }
 
-void SampleConfig::SharedCtor() {
-  ::memset(&s_sample_distance_, 0, reinterpret_cast<char*>(&increased_st_distance_) -
-    reinterpret_cast<char*>(&s_sample_distance_) + sizeof(increased_st_distance_));
-  _cached_size_ = 0;
-}
+    void SampleConfig::SharedCtor()
+    {
+      ::memset(&s_sample_distance_, 0, reinterpret_cast<char *>(&increased_st_distance_) - reinterpret_cast<char *>(&s_sample_distance_) + sizeof(increased_st_distance_));
+      _cached_size_ = 0;
+    }
 
-SampleConfig::~SampleConfig() {
-  // @@protoc_insertion_point(destructor:planning.umbp.SampleConfig)
-  SharedDtor();
-}
+    SampleConfig::~SampleConfig()
+    {
+      // @@protoc_insertion_point(destructor:planning.umbp.SampleConfig)
+      SharedDtor();
+    }
 
-void SampleConfig::SharedDtor() {
-}
+    void SampleConfig::SharedDtor()
+    {
+    }
 
-void SampleConfig::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* SampleConfig::descriptor() {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[5].descriptor;
-}
+    void SampleConfig::SetCachedSize(int size) const
+    {
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    }
+    const ::google::protobuf::Descriptor *SampleConfig::descriptor()
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[6].descriptor;
+    }
 
-const SampleConfig& SampleConfig::default_instance() {
-  protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
+    const SampleConfig &SampleConfig::default_instance()
+    {
+      protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      return *internal_default_instance();
+    }
 
-SampleConfig* SampleConfig::New(::google::protobuf::Arena* arena) const {
-  SampleConfig* n = new SampleConfig;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
+    SampleConfig *SampleConfig::New(::google::protobuf::Arena *arena) const
+    {
+      SampleConfig *n = new SampleConfig;
+      if (arena != NULL)
+      {
+        arena->Own(n);
+      }
+      return n;
+    }
 
-void SampleConfig::Clear() {
-// @@protoc_insertion_point(message_clear_start:planning.umbp.SampleConfig)
-  ::memset(&s_sample_distance_, 0, reinterpret_cast<char*>(&increased_st_distance_) -
-    reinterpret_cast<char*>(&s_sample_distance_) + sizeof(increased_st_distance_));
-}
+    void SampleConfig::Clear()
+    {
+      // @@protoc_insertion_point(message_clear_start:planning.umbp.SampleConfig)
+      ::memset(&s_sample_distance_, 0, reinterpret_cast<char *>(&increased_st_distance_) - reinterpret_cast<char *>(&s_sample_distance_) + sizeof(increased_st_distance_));
+    }
 
-bool SampleConfig::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:planning.umbp.SampleConfig)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // double s_sample_distance = 1;
-      case 1: {
-        if (tag == 9u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &s_sample_distance_)));
-        } else {
+    bool SampleConfig::MergePartialFromCodedStream(
+        ::google::protobuf::io::CodedInputStream *input)
+    {
+#define DO_(EXPRESSION)                 \
+  if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) \
+  goto failure
+      ::google::protobuf::uint32 tag;
+      // @@protoc_insertion_point(parse_start:planning.umbp.SampleConfig)
+      for (;;)
+      {
+        ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+        tag = p.first;
+        if (!p.second)
           goto handle_unusual;
+        switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag))
+        {
+        // double s_sample_distance = 1;
+        case 1:
+        {
+          if (tag == 9u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &s_sample_distance_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
         }
-        break;
+
+        // int32 s_sample_num = 2;
+        case 2:
+        {
+          if (tag == 16u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                input, &s_sample_num_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double l_sample_distance = 3;
+        case 3:
+        {
+          if (tag == 25u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &l_sample_distance_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // int32 l_sample_num = 4;
+        case 4:
+        {
+          if (tag == 32u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                input, &l_sample_num_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double acc_ref = 5;
+        case 5:
+        {
+          if (tag == 41u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &acc_ref_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double dec_ref = 6;
+        case 6:
+        {
+          if (tag == 49u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &dec_ref_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double lane_width = 7;
+        case 7:
+        {
+          if (tag == 57u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &lane_width_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double increased_sl_distance = 8;
+        case 8:
+        {
+          if (tag == 65u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &increased_sl_distance_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double increased_st_distance = 9;
+        case 9:
+        {
+          if (tag == 73u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &increased_st_distance_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        default:
+        {
+        handle_unusual:
+          if (tag == 0 ||
+              ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+                  ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP)
+          {
+            goto success;
+          }
+          DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+          break;
+        }
+        }
+      }
+    success:
+      // @@protoc_insertion_point(parse_success:planning.umbp.SampleConfig)
+      return true;
+    failure:
+      // @@protoc_insertion_point(parse_failure:planning.umbp.SampleConfig)
+      return false;
+#undef DO_
+    }
+
+    void SampleConfig::SerializeWithCachedSizes(
+        ::google::protobuf::io::CodedOutputStream *output) const
+    {
+      // @@protoc_insertion_point(serialize_start:planning.umbp.SampleConfig)
+      // double s_sample_distance = 1;
+      if (this->s_sample_distance() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->s_sample_distance(), output);
       }
 
       // int32 s_sample_num = 2;
-      case 2: {
-        if (tag == 16u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &s_sample_num_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->s_sample_num() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->s_sample_num(), output);
       }
 
       // double l_sample_distance = 3;
-      case 3: {
-        if (tag == 25u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &l_sample_distance_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->l_sample_distance() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->l_sample_distance(), output);
       }
 
       // int32 l_sample_num = 4;
-      case 4: {
-        if (tag == 32u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &l_sample_num_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->l_sample_num() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->l_sample_num(), output);
       }
 
       // double acc_ref = 5;
-      case 5: {
-        if (tag == 41u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &acc_ref_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->acc_ref() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->acc_ref(), output);
       }
 
       // double dec_ref = 6;
-      case 6: {
-        if (tag == 49u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &dec_ref_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->dec_ref() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(6, this->dec_ref(), output);
       }
 
       // double lane_width = 7;
-      case 7: {
-        if (tag == 57u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &lane_width_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->lane_width() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(7, this->lane_width(), output);
       }
 
       // double increased_sl_distance = 8;
-      case 8: {
-        if (tag == 65u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &increased_sl_distance_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->increased_sl_distance() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(8, this->increased_sl_distance(), output);
       }
 
       // double increased_st_distance = 9;
-      case 9: {
-        if (tag == 73u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &increased_st_distance_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->increased_st_distance() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(9, this->increased_st_distance(), output);
       }
 
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
+      // @@protoc_insertion_point(serialize_end:planning.umbp.SampleConfig)
+    }
+
+    ::google::protobuf::uint8 *SampleConfig::InternalSerializeWithCachedSizesToArray(
+        bool deterministic, ::google::protobuf::uint8 *target) const
+    {
+      (void)deterministic; // Unused
+      // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.SampleConfig)
+      // double s_sample_distance = 1;
+      if (this->s_sample_distance() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->s_sample_distance(), target);
+      }
+
+      // int32 s_sample_num = 2;
+      if (this->s_sample_num() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->s_sample_num(), target);
+      }
+
+      // double l_sample_distance = 3;
+      if (this->l_sample_distance() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->l_sample_distance(), target);
+      }
+
+      // int32 l_sample_num = 4;
+      if (this->l_sample_num() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->l_sample_num(), target);
+      }
+
+      // double acc_ref = 5;
+      if (this->acc_ref() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->acc_ref(), target);
+      }
+
+      // double dec_ref = 6;
+      if (this->dec_ref() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(6, this->dec_ref(), target);
+      }
+
+      // double lane_width = 7;
+      if (this->lane_width() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(7, this->lane_width(), target);
+      }
+
+      // double increased_sl_distance = 8;
+      if (this->increased_sl_distance() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(8, this->increased_sl_distance(), target);
+      }
+
+      // double increased_st_distance = 9;
+      if (this->increased_st_distance() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(9, this->increased_st_distance(), target);
+      }
+
+      // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.SampleConfig)
+      return target;
+    }
+
+    size_t SampleConfig::ByteSizeLong() const
+    {
+      // @@protoc_insertion_point(message_byte_size_start:planning.umbp.SampleConfig)
+      size_t total_size = 0;
+
+      // double s_sample_distance = 1;
+      if (this->s_sample_distance() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double l_sample_distance = 3;
+      if (this->l_sample_distance() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // int32 s_sample_num = 2;
+      if (this->s_sample_num() != 0)
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::Int32Size(
+                          this->s_sample_num());
+      }
+
+      // int32 l_sample_num = 4;
+      if (this->l_sample_num() != 0)
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::Int32Size(
+                          this->l_sample_num());
+      }
+
+      // double acc_ref = 5;
+      if (this->acc_ref() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double dec_ref = 6;
+      if (this->dec_ref() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double lane_width = 7;
+      if (this->lane_width() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double increased_sl_distance = 8;
+      if (this->increased_sl_distance() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double increased_st_distance = 9;
+      if (this->increased_st_distance() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = cached_size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+      return total_size;
+    }
+
+    void SampleConfig::MergeFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.SampleConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      const SampleConfig *source =
+          ::google::protobuf::internal::DynamicCastToGenerated<const SampleConfig>(
+              &from);
+      if (source == NULL)
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.SampleConfig)
+        ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+      }
+      else
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.SampleConfig)
+        MergeFrom(*source);
       }
     }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:planning.umbp.SampleConfig)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:planning.umbp.SampleConfig)
-  return false;
-#undef DO_
-}
 
-void SampleConfig::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:planning.umbp.SampleConfig)
-  // double s_sample_distance = 1;
-  if (this->s_sample_distance() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->s_sample_distance(), output);
-  }
+    void SampleConfig::MergeFrom(const SampleConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.SampleConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.s_sample_distance() != 0)
+      {
+        set_s_sample_distance(from.s_sample_distance());
+      }
+      if (from.l_sample_distance() != 0)
+      {
+        set_l_sample_distance(from.l_sample_distance());
+      }
+      if (from.s_sample_num() != 0)
+      {
+        set_s_sample_num(from.s_sample_num());
+      }
+      if (from.l_sample_num() != 0)
+      {
+        set_l_sample_num(from.l_sample_num());
+      }
+      if (from.acc_ref() != 0)
+      {
+        set_acc_ref(from.acc_ref());
+      }
+      if (from.dec_ref() != 0)
+      {
+        set_dec_ref(from.dec_ref());
+      }
+      if (from.lane_width() != 0)
+      {
+        set_lane_width(from.lane_width());
+      }
+      if (from.increased_sl_distance() != 0)
+      {
+        set_increased_sl_distance(from.increased_sl_distance());
+      }
+      if (from.increased_st_distance() != 0)
+      {
+        set_increased_st_distance(from.increased_st_distance());
+      }
+    }
 
-  // int32 s_sample_num = 2;
-  if (this->s_sample_num() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->s_sample_num(), output);
-  }
+    void SampleConfig::CopyFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.SampleConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // double l_sample_distance = 3;
-  if (this->l_sample_distance() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->l_sample_distance(), output);
-  }
+    void SampleConfig::CopyFrom(const SampleConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.SampleConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // int32 l_sample_num = 4;
-  if (this->l_sample_num() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->l_sample_num(), output);
-  }
+    bool SampleConfig::IsInitialized() const
+    {
+      return true;
+    }
 
-  // double acc_ref = 5;
-  if (this->acc_ref() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->acc_ref(), output);
-  }
+    void SampleConfig::Swap(SampleConfig *other)
+    {
+      if (other == this)
+        return;
+      InternalSwap(other);
+    }
+    void SampleConfig::InternalSwap(SampleConfig *other)
+    {
+      std::swap(s_sample_distance_, other->s_sample_distance_);
+      std::swap(l_sample_distance_, other->l_sample_distance_);
+      std::swap(s_sample_num_, other->s_sample_num_);
+      std::swap(l_sample_num_, other->l_sample_num_);
+      std::swap(acc_ref_, other->acc_ref_);
+      std::swap(dec_ref_, other->dec_ref_);
+      std::swap(lane_width_, other->lane_width_);
+      std::swap(increased_sl_distance_, other->increased_sl_distance_);
+      std::swap(increased_st_distance_, other->increased_st_distance_);
+      std::swap(_cached_size_, other->_cached_size_);
+    }
 
-  // double dec_ref = 6;
-  if (this->dec_ref() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(6, this->dec_ref(), output);
-  }
-
-  // double lane_width = 7;
-  if (this->lane_width() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(7, this->lane_width(), output);
-  }
-
-  // double increased_sl_distance = 8;
-  if (this->increased_sl_distance() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(8, this->increased_sl_distance(), output);
-  }
-
-  // double increased_st_distance = 9;
-  if (this->increased_st_distance() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(9, this->increased_st_distance(), output);
-  }
-
-  // @@protoc_insertion_point(serialize_end:planning.umbp.SampleConfig)
-}
-
-::google::protobuf::uint8* SampleConfig::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.SampleConfig)
-  // double s_sample_distance = 1;
-  if (this->s_sample_distance() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->s_sample_distance(), target);
-  }
-
-  // int32 s_sample_num = 2;
-  if (this->s_sample_num() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->s_sample_num(), target);
-  }
-
-  // double l_sample_distance = 3;
-  if (this->l_sample_distance() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->l_sample_distance(), target);
-  }
-
-  // int32 l_sample_num = 4;
-  if (this->l_sample_num() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->l_sample_num(), target);
-  }
-
-  // double acc_ref = 5;
-  if (this->acc_ref() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->acc_ref(), target);
-  }
-
-  // double dec_ref = 6;
-  if (this->dec_ref() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(6, this->dec_ref(), target);
-  }
-
-  // double lane_width = 7;
-  if (this->lane_width() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(7, this->lane_width(), target);
-  }
-
-  // double increased_sl_distance = 8;
-  if (this->increased_sl_distance() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(8, this->increased_sl_distance(), target);
-  }
-
-  // double increased_st_distance = 9;
-  if (this->increased_st_distance() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(9, this->increased_st_distance(), target);
-  }
-
-  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.SampleConfig)
-  return target;
-}
-
-size_t SampleConfig::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:planning.umbp.SampleConfig)
-  size_t total_size = 0;
-
-  // double s_sample_distance = 1;
-  if (this->s_sample_distance() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double l_sample_distance = 3;
-  if (this->l_sample_distance() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // int32 s_sample_num = 2;
-  if (this->s_sample_num() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->s_sample_num());
-  }
-
-  // int32 l_sample_num = 4;
-  if (this->l_sample_num() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->l_sample_num());
-  }
-
-  // double acc_ref = 5;
-  if (this->acc_ref() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double dec_ref = 6;
-  if (this->dec_ref() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double lane_width = 7;
-  if (this->lane_width() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double increased_sl_distance = 8;
-  if (this->increased_sl_distance() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double increased_st_distance = 9;
-  if (this->increased_st_distance() != 0) {
-    total_size += 1 + 8;
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void SampleConfig::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.SampleConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  const SampleConfig* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const SampleConfig>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.SampleConfig)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.SampleConfig)
-    MergeFrom(*source);
-  }
-}
-
-void SampleConfig::MergeFrom(const SampleConfig& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.SampleConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.s_sample_distance() != 0) {
-    set_s_sample_distance(from.s_sample_distance());
-  }
-  if (from.l_sample_distance() != 0) {
-    set_l_sample_distance(from.l_sample_distance());
-  }
-  if (from.s_sample_num() != 0) {
-    set_s_sample_num(from.s_sample_num());
-  }
-  if (from.l_sample_num() != 0) {
-    set_l_sample_num(from.l_sample_num());
-  }
-  if (from.acc_ref() != 0) {
-    set_acc_ref(from.acc_ref());
-  }
-  if (from.dec_ref() != 0) {
-    set_dec_ref(from.dec_ref());
-  }
-  if (from.lane_width() != 0) {
-    set_lane_width(from.lane_width());
-  }
-  if (from.increased_sl_distance() != 0) {
-    set_increased_sl_distance(from.increased_sl_distance());
-  }
-  if (from.increased_st_distance() != 0) {
-    set_increased_st_distance(from.increased_st_distance());
-  }
-}
-
-void SampleConfig::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.SampleConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void SampleConfig::CopyFrom(const SampleConfig& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.SampleConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool SampleConfig::IsInitialized() const {
-  return true;
-}
-
-void SampleConfig::Swap(SampleConfig* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void SampleConfig::InternalSwap(SampleConfig* other) {
-  std::swap(s_sample_distance_, other->s_sample_distance_);
-  std::swap(l_sample_distance_, other->l_sample_distance_);
-  std::swap(s_sample_num_, other->s_sample_num_);
-  std::swap(l_sample_num_, other->l_sample_num_);
-  std::swap(acc_ref_, other->acc_ref_);
-  std::swap(dec_ref_, other->dec_ref_);
-  std::swap(lane_width_, other->lane_width_);
-  std::swap(increased_sl_distance_, other->increased_sl_distance_);
-  std::swap(increased_st_distance_, other->increased_st_distance_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata SampleConfig::GetMetadata() const {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[5];
-}
+    ::google::protobuf::Metadata SampleConfig::GetMetadata() const
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[6];
+    }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// SampleConfig
+    // SampleConfig
 
-// double s_sample_distance = 1;
-void SampleConfig::clear_s_sample_distance() {
-  s_sample_distance_ = 0;
-}
-double SampleConfig::s_sample_distance() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.s_sample_distance)
-  return s_sample_distance_;
-}
-void SampleConfig::set_s_sample_distance(double value) {
-  
-  s_sample_distance_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.s_sample_distance)
-}
+    // double s_sample_distance = 1;
+    void SampleConfig::clear_s_sample_distance()
+    {
+      s_sample_distance_ = 0;
+    }
+    double SampleConfig::s_sample_distance() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.s_sample_distance)
+      return s_sample_distance_;
+    }
+    void SampleConfig::set_s_sample_distance(double value)
+    {
 
-// int32 s_sample_num = 2;
-void SampleConfig::clear_s_sample_num() {
-  s_sample_num_ = 0;
-}
-::google::protobuf::int32 SampleConfig::s_sample_num() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.s_sample_num)
-  return s_sample_num_;
-}
-void SampleConfig::set_s_sample_num(::google::protobuf::int32 value) {
-  
-  s_sample_num_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.s_sample_num)
-}
+      s_sample_distance_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.s_sample_distance)
+    }
 
-// double l_sample_distance = 3;
-void SampleConfig::clear_l_sample_distance() {
-  l_sample_distance_ = 0;
-}
-double SampleConfig::l_sample_distance() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.l_sample_distance)
-  return l_sample_distance_;
-}
-void SampleConfig::set_l_sample_distance(double value) {
-  
-  l_sample_distance_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.l_sample_distance)
-}
+    // int32 s_sample_num = 2;
+    void SampleConfig::clear_s_sample_num()
+    {
+      s_sample_num_ = 0;
+    }
+    ::google::protobuf::int32 SampleConfig::s_sample_num() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.s_sample_num)
+      return s_sample_num_;
+    }
+    void SampleConfig::set_s_sample_num(::google::protobuf::int32 value)
+    {
 
-// int32 l_sample_num = 4;
-void SampleConfig::clear_l_sample_num() {
-  l_sample_num_ = 0;
-}
-::google::protobuf::int32 SampleConfig::l_sample_num() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.l_sample_num)
-  return l_sample_num_;
-}
-void SampleConfig::set_l_sample_num(::google::protobuf::int32 value) {
-  
-  l_sample_num_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.l_sample_num)
-}
+      s_sample_num_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.s_sample_num)
+    }
 
-// double acc_ref = 5;
-void SampleConfig::clear_acc_ref() {
-  acc_ref_ = 0;
-}
-double SampleConfig::acc_ref() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.acc_ref)
-  return acc_ref_;
-}
-void SampleConfig::set_acc_ref(double value) {
-  
-  acc_ref_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.acc_ref)
-}
+    // double l_sample_distance = 3;
+    void SampleConfig::clear_l_sample_distance()
+    {
+      l_sample_distance_ = 0;
+    }
+    double SampleConfig::l_sample_distance() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.l_sample_distance)
+      return l_sample_distance_;
+    }
+    void SampleConfig::set_l_sample_distance(double value)
+    {
 
-// double dec_ref = 6;
-void SampleConfig::clear_dec_ref() {
-  dec_ref_ = 0;
-}
-double SampleConfig::dec_ref() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.dec_ref)
-  return dec_ref_;
-}
-void SampleConfig::set_dec_ref(double value) {
-  
-  dec_ref_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.dec_ref)
-}
+      l_sample_distance_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.l_sample_distance)
+    }
 
-// double lane_width = 7;
-void SampleConfig::clear_lane_width() {
-  lane_width_ = 0;
-}
-double SampleConfig::lane_width() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.lane_width)
-  return lane_width_;
-}
-void SampleConfig::set_lane_width(double value) {
-  
-  lane_width_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.lane_width)
-}
+    // int32 l_sample_num = 4;
+    void SampleConfig::clear_l_sample_num()
+    {
+      l_sample_num_ = 0;
+    }
+    ::google::protobuf::int32 SampleConfig::l_sample_num() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.l_sample_num)
+      return l_sample_num_;
+    }
+    void SampleConfig::set_l_sample_num(::google::protobuf::int32 value)
+    {
 
-// double increased_sl_distance = 8;
-void SampleConfig::clear_increased_sl_distance() {
-  increased_sl_distance_ = 0;
-}
-double SampleConfig::increased_sl_distance() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.increased_sl_distance)
-  return increased_sl_distance_;
-}
-void SampleConfig::set_increased_sl_distance(double value) {
-  
-  increased_sl_distance_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.increased_sl_distance)
-}
+      l_sample_num_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.l_sample_num)
+    }
 
-// double increased_st_distance = 9;
-void SampleConfig::clear_increased_st_distance() {
-  increased_st_distance_ = 0;
-}
-double SampleConfig::increased_st_distance() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.increased_st_distance)
-  return increased_st_distance_;
-}
-void SampleConfig::set_increased_st_distance(double value) {
-  
-  increased_st_distance_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.increased_st_distance)
-}
+    // double acc_ref = 5;
+    void SampleConfig::clear_acc_ref()
+    {
+      acc_ref_ = 0;
+    }
+    double SampleConfig::acc_ref() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.acc_ref)
+      return acc_ref_;
+    }
+    void SampleConfig::set_acc_ref(double value)
+    {
 
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+      acc_ref_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.acc_ref)
+    }
 
-// ===================================================================
+    // double dec_ref = 6;
+    void SampleConfig::clear_dec_ref()
+    {
+      dec_ref_ = 0;
+    }
+    double SampleConfig::dec_ref() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.dec_ref)
+      return dec_ref_;
+    }
+    void SampleConfig::set_dec_ref(double value)
+    {
+
+      dec_ref_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.dec_ref)
+    }
+
+    // double lane_width = 7;
+    void SampleConfig::clear_lane_width()
+    {
+      lane_width_ = 0;
+    }
+    double SampleConfig::lane_width() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.lane_width)
+      return lane_width_;
+    }
+    void SampleConfig::set_lane_width(double value)
+    {
+
+      lane_width_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.lane_width)
+    }
+
+    // double increased_sl_distance = 8;
+    void SampleConfig::clear_increased_sl_distance()
+    {
+      increased_sl_distance_ = 0;
+    }
+    double SampleConfig::increased_sl_distance() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.increased_sl_distance)
+      return increased_sl_distance_;
+    }
+    void SampleConfig::set_increased_sl_distance(double value)
+    {
+
+      increased_sl_distance_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.increased_sl_distance)
+    }
+
+    // double increased_st_distance = 9;
+    void SampleConfig::clear_increased_st_distance()
+    {
+      increased_st_distance_ = 0;
+    }
+    double SampleConfig::increased_st_distance() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.SampleConfig.increased_st_distance)
+      return increased_st_distance_;
+    }
+    void SampleConfig::set_increased_st_distance(double value)
+    {
+
+      increased_st_distance_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.SampleConfig.increased_st_distance)
+    }
+
+#endif // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+    // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int PropogateConfig::kFpbFieldNumber;
-const int PropogateConfig::kSampleFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+    const int PropogateConfig::kFpbFieldNumber;
+    const int PropogateConfig::kSampleFieldNumber;
+#endif // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-PropogateConfig::PropogateConfig()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:planning.umbp.PropogateConfig)
-}
-PropogateConfig::PropogateConfig(const PropogateConfig& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_fpb()) {
-    fpb_ = new ::planning::umbp::FpbConfig(*from.fpb_);
-  } else {
-    fpb_ = NULL;
-  }
-  if (from.has_sample()) {
-    sample_ = new ::planning::umbp::SampleConfig(*from.sample_);
-  } else {
-    sample_ = NULL;
-  }
-  // @@protoc_insertion_point(copy_constructor:planning.umbp.PropogateConfig)
-}
+    PropogateConfig::PropogateConfig()
+        : ::google::protobuf::Message(), _internal_metadata_(NULL)
+    {
+      if (GOOGLE_PREDICT_TRUE(this != internal_default_instance()))
+      {
+        protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      }
+      SharedCtor();
+      // @@protoc_insertion_point(constructor:planning.umbp.PropogateConfig)
+    }
+    PropogateConfig::PropogateConfig(const PropogateConfig &from)
+        : ::google::protobuf::Message(),
+          _internal_metadata_(NULL),
+          _cached_size_(0)
+    {
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.has_fpb())
+      {
+        fpb_ = new ::planning::umbp::FpbConfig(*from.fpb_);
+      }
+      else
+      {
+        fpb_ = NULL;
+      }
+      if (from.has_sample())
+      {
+        sample_ = new ::planning::umbp::SampleConfig(*from.sample_);
+      }
+      else
+      {
+        sample_ = NULL;
+      }
+      // @@protoc_insertion_point(copy_constructor:planning.umbp.PropogateConfig)
+    }
 
-void PropogateConfig::SharedCtor() {
-  ::memset(&fpb_, 0, reinterpret_cast<char*>(&sample_) -
-    reinterpret_cast<char*>(&fpb_) + sizeof(sample_));
-  _cached_size_ = 0;
-}
+    void PropogateConfig::SharedCtor()
+    {
+      ::memset(&fpb_, 0, reinterpret_cast<char *>(&sample_) - reinterpret_cast<char *>(&fpb_) + sizeof(sample_));
+      _cached_size_ = 0;
+    }
 
-PropogateConfig::~PropogateConfig() {
-  // @@protoc_insertion_point(destructor:planning.umbp.PropogateConfig)
-  SharedDtor();
-}
+    PropogateConfig::~PropogateConfig()
+    {
+      // @@protoc_insertion_point(destructor:planning.umbp.PropogateConfig)
+      SharedDtor();
+    }
 
-void PropogateConfig::SharedDtor() {
-  if (this != internal_default_instance()) {
-    delete fpb_;
-  }
-  if (this != internal_default_instance()) {
-    delete sample_;
-  }
-}
+    void PropogateConfig::SharedDtor()
+    {
+      if (this != internal_default_instance())
+      {
+        delete fpb_;
+      }
+      if (this != internal_default_instance())
+      {
+        delete sample_;
+      }
+    }
 
-void PropogateConfig::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* PropogateConfig::descriptor() {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[6].descriptor;
-}
+    void PropogateConfig::SetCachedSize(int size) const
+    {
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    }
+    const ::google::protobuf::Descriptor *PropogateConfig::descriptor()
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[7].descriptor;
+    }
 
-const PropogateConfig& PropogateConfig::default_instance() {
-  protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
+    const PropogateConfig &PropogateConfig::default_instance()
+    {
+      protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      return *internal_default_instance();
+    }
 
-PropogateConfig* PropogateConfig::New(::google::protobuf::Arena* arena) const {
-  PropogateConfig* n = new PropogateConfig;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
+    PropogateConfig *PropogateConfig::New(::google::protobuf::Arena *arena) const
+    {
+      PropogateConfig *n = new PropogateConfig;
+      if (arena != NULL)
+      {
+        arena->Own(n);
+      }
+      return n;
+    }
 
-void PropogateConfig::Clear() {
-// @@protoc_insertion_point(message_clear_start:planning.umbp.PropogateConfig)
-  if (GetArenaNoVirtual() == NULL && fpb_ != NULL) {
-    delete fpb_;
-  }
-  fpb_ = NULL;
-  if (GetArenaNoVirtual() == NULL && sample_ != NULL) {
-    delete sample_;
-  }
-  sample_ = NULL;
-}
+    void PropogateConfig::Clear()
+    {
+      // @@protoc_insertion_point(message_clear_start:planning.umbp.PropogateConfig)
+      if (GetArenaNoVirtual() == NULL && fpb_ != NULL)
+      {
+        delete fpb_;
+      }
+      fpb_ = NULL;
+      if (GetArenaNoVirtual() == NULL && sample_ != NULL)
+      {
+        delete sample_;
+      }
+      sample_ = NULL;
+    }
 
-bool PropogateConfig::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:planning.umbp.PropogateConfig)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .planning.umbp.FpbConfig fpb = 1;
-      case 1: {
-        if (tag == 10u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_fpb()));
-        } else {
+    bool PropogateConfig::MergePartialFromCodedStream(
+        ::google::protobuf::io::CodedInputStream *input)
+    {
+#define DO_(EXPRESSION)                 \
+  if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) \
+  goto failure
+      ::google::protobuf::uint32 tag;
+      // @@protoc_insertion_point(parse_start:planning.umbp.PropogateConfig)
+      for (;;)
+      {
+        ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+        tag = p.first;
+        if (!p.second)
           goto handle_unusual;
+        switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag))
+        {
+        // .planning.umbp.FpbConfig fpb = 1;
+        case 1:
+        {
+          if (tag == 10u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, mutable_fpb()));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
         }
-        break;
+
+        // .planning.umbp.SampleConfig sample = 2;
+        case 2:
+        {
+          if (tag == 18u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, mutable_sample()));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        default:
+        {
+        handle_unusual:
+          if (tag == 0 ||
+              ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+                  ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP)
+          {
+            goto success;
+          }
+          DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+          break;
+        }
+        }
+      }
+    success:
+      // @@protoc_insertion_point(parse_success:planning.umbp.PropogateConfig)
+      return true;
+    failure:
+      // @@protoc_insertion_point(parse_failure:planning.umbp.PropogateConfig)
+      return false;
+#undef DO_
+    }
+
+    void PropogateConfig::SerializeWithCachedSizes(
+        ::google::protobuf::io::CodedOutputStream *output) const
+    {
+      // @@protoc_insertion_point(serialize_start:planning.umbp.PropogateConfig)
+      // .planning.umbp.FpbConfig fpb = 1;
+      if (this->has_fpb())
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            1, *this->fpb_, output);
       }
 
       // .planning.umbp.SampleConfig sample = 2;
-      case 2: {
-        if (tag == 18u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_sample()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->has_sample())
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            2, *this->sample_, output);
       }
 
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
+      // @@protoc_insertion_point(serialize_end:planning.umbp.PropogateConfig)
+    }
+
+    ::google::protobuf::uint8 *PropogateConfig::InternalSerializeWithCachedSizesToArray(
+        bool deterministic, ::google::protobuf::uint8 *target) const
+    {
+      (void)deterministic; // Unused
+      // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.PropogateConfig)
+      // .planning.umbp.FpbConfig fpb = 1;
+      if (this->has_fpb())
+      {
+        target = ::google::protobuf::internal::WireFormatLite::
+            InternalWriteMessageNoVirtualToArray(
+                1, *this->fpb_, false, target);
+      }
+
+      // .planning.umbp.SampleConfig sample = 2;
+      if (this->has_sample())
+      {
+        target = ::google::protobuf::internal::WireFormatLite::
+            InternalWriteMessageNoVirtualToArray(
+                2, *this->sample_, false, target);
+      }
+
+      // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.PropogateConfig)
+      return target;
+    }
+
+    size_t PropogateConfig::ByteSizeLong() const
+    {
+      // @@protoc_insertion_point(message_byte_size_start:planning.umbp.PropogateConfig)
+      size_t total_size = 0;
+
+      // .planning.umbp.FpbConfig fpb = 1;
+      if (this->has_fpb())
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+                          *this->fpb_);
+      }
+
+      // .planning.umbp.SampleConfig sample = 2;
+      if (this->has_sample())
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+                          *this->sample_);
+      }
+
+      int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = cached_size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+      return total_size;
+    }
+
+    void PropogateConfig::MergeFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.PropogateConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      const PropogateConfig *source =
+          ::google::protobuf::internal::DynamicCastToGenerated<const PropogateConfig>(
+              &from);
+      if (source == NULL)
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.PropogateConfig)
+        ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+      }
+      else
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.PropogateConfig)
+        MergeFrom(*source);
       }
     }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:planning.umbp.PropogateConfig)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:planning.umbp.PropogateConfig)
-  return false;
-#undef DO_
-}
 
-void PropogateConfig::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:planning.umbp.PropogateConfig)
-  // .planning.umbp.FpbConfig fpb = 1;
-  if (this->has_fpb()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, *this->fpb_, output);
-  }
+    void PropogateConfig::MergeFrom(const PropogateConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.PropogateConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.has_fpb())
+      {
+        mutable_fpb()->::planning::umbp::FpbConfig::MergeFrom(from.fpb());
+      }
+      if (from.has_sample())
+      {
+        mutable_sample()->::planning::umbp::SampleConfig::MergeFrom(from.sample());
+      }
+    }
 
-  // .planning.umbp.SampleConfig sample = 2;
-  if (this->has_sample()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, *this->sample_, output);
-  }
+    void PropogateConfig::CopyFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.PropogateConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // @@protoc_insertion_point(serialize_end:planning.umbp.PropogateConfig)
-}
+    void PropogateConfig::CopyFrom(const PropogateConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.PropogateConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-::google::protobuf::uint8* PropogateConfig::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.PropogateConfig)
-  // .planning.umbp.FpbConfig fpb = 1;
-  if (this->has_fpb()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        1, *this->fpb_, false, target);
-  }
+    bool PropogateConfig::IsInitialized() const
+    {
+      return true;
+    }
 
-  // .planning.umbp.SampleConfig sample = 2;
-  if (this->has_sample()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        2, *this->sample_, false, target);
-  }
+    void PropogateConfig::Swap(PropogateConfig *other)
+    {
+      if (other == this)
+        return;
+      InternalSwap(other);
+    }
+    void PropogateConfig::InternalSwap(PropogateConfig *other)
+    {
+      std::swap(fpb_, other->fpb_);
+      std::swap(sample_, other->sample_);
+      std::swap(_cached_size_, other->_cached_size_);
+    }
 
-  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.PropogateConfig)
-  return target;
-}
-
-size_t PropogateConfig::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:planning.umbp.PropogateConfig)
-  size_t total_size = 0;
-
-  // .planning.umbp.FpbConfig fpb = 1;
-  if (this->has_fpb()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->fpb_);
-  }
-
-  // .planning.umbp.SampleConfig sample = 2;
-  if (this->has_sample()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->sample_);
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void PropogateConfig::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.PropogateConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  const PropogateConfig* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const PropogateConfig>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.PropogateConfig)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.PropogateConfig)
-    MergeFrom(*source);
-  }
-}
-
-void PropogateConfig::MergeFrom(const PropogateConfig& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.PropogateConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_fpb()) {
-    mutable_fpb()->::planning::umbp::FpbConfig::MergeFrom(from.fpb());
-  }
-  if (from.has_sample()) {
-    mutable_sample()->::planning::umbp::SampleConfig::MergeFrom(from.sample());
-  }
-}
-
-void PropogateConfig::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.PropogateConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void PropogateConfig::CopyFrom(const PropogateConfig& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.PropogateConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool PropogateConfig::IsInitialized() const {
-  return true;
-}
-
-void PropogateConfig::Swap(PropogateConfig* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void PropogateConfig::InternalSwap(PropogateConfig* other) {
-  std::swap(fpb_, other->fpb_);
-  std::swap(sample_, other->sample_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata PropogateConfig::GetMetadata() const {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[6];
-}
+    ::google::protobuf::Metadata PropogateConfig::GetMetadata() const
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[7];
+    }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// PropogateConfig
+    // PropogateConfig
 
-// .planning.umbp.FpbConfig fpb = 1;
-bool PropogateConfig::has_fpb() const {
-  return this != internal_default_instance() && fpb_ != NULL;
-}
-void PropogateConfig::clear_fpb() {
-  if (GetArenaNoVirtual() == NULL && fpb_ != NULL) delete fpb_;
-  fpb_ = NULL;
-}
-const ::planning::umbp::FpbConfig& PropogateConfig::fpb() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.PropogateConfig.fpb)
-  return fpb_ != NULL ? *fpb_
-                         : *::planning::umbp::FpbConfig::internal_default_instance();
-}
-::planning::umbp::FpbConfig* PropogateConfig::mutable_fpb() {
-  
-  if (fpb_ == NULL) {
-    fpb_ = new ::planning::umbp::FpbConfig;
-  }
-  // @@protoc_insertion_point(field_mutable:planning.umbp.PropogateConfig.fpb)
-  return fpb_;
-}
-::planning::umbp::FpbConfig* PropogateConfig::release_fpb() {
-  // @@protoc_insertion_point(field_release:planning.umbp.PropogateConfig.fpb)
-  
-  ::planning::umbp::FpbConfig* temp = fpb_;
-  fpb_ = NULL;
-  return temp;
-}
-void PropogateConfig::set_allocated_fpb(::planning::umbp::FpbConfig* fpb) {
-  delete fpb_;
-  fpb_ = fpb;
-  if (fpb) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:planning.umbp.PropogateConfig.fpb)
-}
+    // .planning.umbp.FpbConfig fpb = 1;
+    bool PropogateConfig::has_fpb() const
+    {
+      return this != internal_default_instance() && fpb_ != NULL;
+    }
+    void PropogateConfig::clear_fpb()
+    {
+      if (GetArenaNoVirtual() == NULL && fpb_ != NULL)
+        delete fpb_;
+      fpb_ = NULL;
+    }
+    const ::planning::umbp::FpbConfig &PropogateConfig::fpb() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.PropogateConfig.fpb)
+      return fpb_ != NULL ? *fpb_
+                          : *::planning::umbp::FpbConfig::internal_default_instance();
+    }
+    ::planning::umbp::FpbConfig *PropogateConfig::mutable_fpb()
+    {
 
-// .planning.umbp.SampleConfig sample = 2;
-bool PropogateConfig::has_sample() const {
-  return this != internal_default_instance() && sample_ != NULL;
-}
-void PropogateConfig::clear_sample() {
-  if (GetArenaNoVirtual() == NULL && sample_ != NULL) delete sample_;
-  sample_ = NULL;
-}
-const ::planning::umbp::SampleConfig& PropogateConfig::sample() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.PropogateConfig.sample)
-  return sample_ != NULL ? *sample_
-                         : *::planning::umbp::SampleConfig::internal_default_instance();
-}
-::planning::umbp::SampleConfig* PropogateConfig::mutable_sample() {
-  
-  if (sample_ == NULL) {
-    sample_ = new ::planning::umbp::SampleConfig;
-  }
-  // @@protoc_insertion_point(field_mutable:planning.umbp.PropogateConfig.sample)
-  return sample_;
-}
-::planning::umbp::SampleConfig* PropogateConfig::release_sample() {
-  // @@protoc_insertion_point(field_release:planning.umbp.PropogateConfig.sample)
-  
-  ::planning::umbp::SampleConfig* temp = sample_;
-  sample_ = NULL;
-  return temp;
-}
-void PropogateConfig::set_allocated_sample(::planning::umbp::SampleConfig* sample) {
-  delete sample_;
-  sample_ = sample;
-  if (sample) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:planning.umbp.PropogateConfig.sample)
-}
+      if (fpb_ == NULL)
+      {
+        fpb_ = new ::planning::umbp::FpbConfig;
+      }
+      // @@protoc_insertion_point(field_mutable:planning.umbp.PropogateConfig.fpb)
+      return fpb_;
+    }
+    ::planning::umbp::FpbConfig *PropogateConfig::release_fpb()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.PropogateConfig.fpb)
 
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+      ::planning::umbp::FpbConfig *temp = fpb_;
+      fpb_ = NULL;
+      return temp;
+    }
+    void PropogateConfig::set_allocated_fpb(::planning::umbp::FpbConfig *fpb)
+    {
+      delete fpb_;
+      fpb_ = fpb;
+      if (fpb)
+      {
+      }
+      else
+      {
+      }
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.PropogateConfig.fpb)
+    }
 
-// ===================================================================
+    // .planning.umbp.SampleConfig sample = 2;
+    bool PropogateConfig::has_sample() const
+    {
+      return this != internal_default_instance() && sample_ != NULL;
+    }
+    void PropogateConfig::clear_sample()
+    {
+      if (GetArenaNoVirtual() == NULL && sample_ != NULL)
+        delete sample_;
+      sample_ = NULL;
+    }
+    const ::planning::umbp::SampleConfig &PropogateConfig::sample() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.PropogateConfig.sample)
+      return sample_ != NULL ? *sample_
+                             : *::planning::umbp::SampleConfig::internal_default_instance();
+    }
+    ::planning::umbp::SampleConfig *PropogateConfig::mutable_sample()
+    {
+
+      if (sample_ == NULL)
+      {
+        sample_ = new ::planning::umbp::SampleConfig;
+      }
+      // @@protoc_insertion_point(field_mutable:planning.umbp.PropogateConfig.sample)
+      return sample_;
+    }
+    ::planning::umbp::SampleConfig *PropogateConfig::release_sample()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.PropogateConfig.sample)
+
+      ::planning::umbp::SampleConfig *temp = sample_;
+      sample_ = NULL;
+      return temp;
+    }
+    void PropogateConfig::set_allocated_sample(::planning::umbp::SampleConfig *sample)
+    {
+      delete sample_;
+      sample_ = sample;
+      if (sample)
+      {
+      }
+      else
+      {
+      }
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.PropogateConfig.sample)
+    }
+
+#endif // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+    // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int CostConfig::kEfficiencyFieldNumber;
-const int CostConfig::kSafetyFieldNumber;
-const int CostConfig::kUserFieldNumber;
-const int CostConfig::kNavigationFieldNumber;
-const int CostConfig::kDiscountFactorFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+    const int CostConfig::kEfficiencyFieldNumber;
+    const int CostConfig::kSafetyFieldNumber;
+    const int CostConfig::kUserFieldNumber;
+    const int CostConfig::kNavigationFieldNumber;
+    const int CostConfig::kDiscountFactorFieldNumber;
+    const int CostConfig::kHdiFieldNumber;
+#endif // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-CostConfig::CostConfig()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:planning.umbp.CostConfig)
-}
-CostConfig::CostConfig(const CostConfig& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_efficiency()) {
-    efficiency_ = new ::planning::umbp::EfficiencyCost(*from.efficiency_);
-  } else {
-    efficiency_ = NULL;
-  }
-  if (from.has_safety()) {
-    safety_ = new ::planning::umbp::SafetyCost(*from.safety_);
-  } else {
-    safety_ = NULL;
-  }
-  if (from.has_user()) {
-    user_ = new ::planning::umbp::UserCost(*from.user_);
-  } else {
-    user_ = NULL;
-  }
-  if (from.has_navigation()) {
-    navigation_ = new ::planning::umbp::NavigationCost(*from.navigation_);
-  } else {
-    navigation_ = NULL;
-  }
-  discount_factor_ = from.discount_factor_;
-  // @@protoc_insertion_point(copy_constructor:planning.umbp.CostConfig)
-}
+    CostConfig::CostConfig()
+        : ::google::protobuf::Message(), _internal_metadata_(NULL)
+    {
+      if (GOOGLE_PREDICT_TRUE(this != internal_default_instance()))
+      {
+        protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      }
+      SharedCtor();
+      // @@protoc_insertion_point(constructor:planning.umbp.CostConfig)
+    }
+    CostConfig::CostConfig(const CostConfig &from)
+        : ::google::protobuf::Message(),
+          _internal_metadata_(NULL),
+          _cached_size_(0)
+    {
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.has_efficiency())
+      {
+        efficiency_ = new ::planning::umbp::EfficiencyCost(*from.efficiency_);
+      }
+      else
+      {
+        efficiency_ = NULL;
+      }
+      if (from.has_safety())
+      {
+        safety_ = new ::planning::umbp::SafetyCost(*from.safety_);
+      }
+      else
+      {
+        safety_ = NULL;
+      }
+      if (from.has_user())
+      {
+        user_ = new ::planning::umbp::UserCost(*from.user_);
+      }
+      else
+      {
+        user_ = NULL;
+      }
+      if (from.has_navigation())
+      {
+        navigation_ = new ::planning::umbp::NavigationCost(*from.navigation_);
+      }
+      else
+      {
+        navigation_ = NULL;
+      }
+      if (from.has_hdi())
+      {
+        hdi_ = new ::planning::umbp::HdiCost(*from.hdi_);
+      }
+      else
+      {
+        hdi_ = NULL;
+      }
+      discount_factor_ = from.discount_factor_;
+      // @@protoc_insertion_point(copy_constructor:planning.umbp.CostConfig)
+    }
 
-void CostConfig::SharedCtor() {
-  ::memset(&efficiency_, 0, reinterpret_cast<char*>(&discount_factor_) -
-    reinterpret_cast<char*>(&efficiency_) + sizeof(discount_factor_));
-  _cached_size_ = 0;
-}
+    void CostConfig::SharedCtor()
+    {
+      ::memset(&efficiency_, 0, reinterpret_cast<char *>(&discount_factor_) - reinterpret_cast<char *>(&efficiency_) + sizeof(discount_factor_));
+      _cached_size_ = 0;
+    }
 
-CostConfig::~CostConfig() {
-  // @@protoc_insertion_point(destructor:planning.umbp.CostConfig)
-  SharedDtor();
-}
+    CostConfig::~CostConfig()
+    {
+      // @@protoc_insertion_point(destructor:planning.umbp.CostConfig)
+      SharedDtor();
+    }
 
-void CostConfig::SharedDtor() {
-  if (this != internal_default_instance()) {
-    delete efficiency_;
-  }
-  if (this != internal_default_instance()) {
-    delete safety_;
-  }
-  if (this != internal_default_instance()) {
-    delete user_;
-  }
-  if (this != internal_default_instance()) {
-    delete navigation_;
-  }
-}
+    void CostConfig::SharedDtor()
+    {
+      if (this != internal_default_instance())
+      {
+        delete efficiency_;
+      }
+      if (this != internal_default_instance())
+      {
+        delete safety_;
+      }
+      if (this != internal_default_instance())
+      {
+        delete user_;
+      }
+      if (this != internal_default_instance())
+      {
+        delete navigation_;
+      }
+      if (this != internal_default_instance())
+      {
+        delete hdi_;
+      }
+    }
 
-void CostConfig::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* CostConfig::descriptor() {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[7].descriptor;
-}
+    void CostConfig::SetCachedSize(int size) const
+    {
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    }
+    const ::google::protobuf::Descriptor *CostConfig::descriptor()
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[8].descriptor;
+    }
 
-const CostConfig& CostConfig::default_instance() {
-  protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
+    const CostConfig &CostConfig::default_instance()
+    {
+      protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      return *internal_default_instance();
+    }
 
-CostConfig* CostConfig::New(::google::protobuf::Arena* arena) const {
-  CostConfig* n = new CostConfig;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
+    CostConfig *CostConfig::New(::google::protobuf::Arena *arena) const
+    {
+      CostConfig *n = new CostConfig;
+      if (arena != NULL)
+      {
+        arena->Own(n);
+      }
+      return n;
+    }
 
-void CostConfig::Clear() {
-// @@protoc_insertion_point(message_clear_start:planning.umbp.CostConfig)
-  if (GetArenaNoVirtual() == NULL && efficiency_ != NULL) {
-    delete efficiency_;
-  }
-  efficiency_ = NULL;
-  if (GetArenaNoVirtual() == NULL && safety_ != NULL) {
-    delete safety_;
-  }
-  safety_ = NULL;
-  if (GetArenaNoVirtual() == NULL && user_ != NULL) {
-    delete user_;
-  }
-  user_ = NULL;
-  if (GetArenaNoVirtual() == NULL && navigation_ != NULL) {
-    delete navigation_;
-  }
-  navigation_ = NULL;
-  discount_factor_ = 0;
-}
+    void CostConfig::Clear()
+    {
+      // @@protoc_insertion_point(message_clear_start:planning.umbp.CostConfig)
+      if (GetArenaNoVirtual() == NULL && efficiency_ != NULL)
+      {
+        delete efficiency_;
+      }
+      efficiency_ = NULL;
+      if (GetArenaNoVirtual() == NULL && safety_ != NULL)
+      {
+        delete safety_;
+      }
+      safety_ = NULL;
+      if (GetArenaNoVirtual() == NULL && user_ != NULL)
+      {
+        delete user_;
+      }
+      user_ = NULL;
+      if (GetArenaNoVirtual() == NULL && navigation_ != NULL)
+      {
+        delete navigation_;
+      }
+      navigation_ = NULL;
+      if (GetArenaNoVirtual() == NULL && hdi_ != NULL)
+      {
+        delete hdi_;
+      }
+      hdi_ = NULL;
+      discount_factor_ = 0;
+    }
 
-bool CostConfig::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:planning.umbp.CostConfig)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .planning.umbp.EfficiencyCost efficiency = 1;
-      case 1: {
-        if (tag == 10u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_efficiency()));
-        } else {
+    bool CostConfig::MergePartialFromCodedStream(
+        ::google::protobuf::io::CodedInputStream *input)
+    {
+#define DO_(EXPRESSION)                 \
+  if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) \
+  goto failure
+      ::google::protobuf::uint32 tag;
+      // @@protoc_insertion_point(parse_start:planning.umbp.CostConfig)
+      for (;;)
+      {
+        ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+        tag = p.first;
+        if (!p.second)
           goto handle_unusual;
+        switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag))
+        {
+        // .planning.umbp.EfficiencyCost efficiency = 1;
+        case 1:
+        {
+          if (tag == 10u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, mutable_efficiency()));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
         }
-        break;
+
+        // .planning.umbp.SafetyCost safety = 2;
+        case 2:
+        {
+          if (tag == 18u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, mutable_safety()));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // .planning.umbp.UserCost user = 3;
+        case 3:
+        {
+          if (tag == 26u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, mutable_user()));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // .planning.umbp.NavigationCost navigation = 4;
+        case 4:
+        {
+          if (tag == 34u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, mutable_navigation()));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double discount_factor = 5;
+        case 5:
+        {
+          if (tag == 41u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &discount_factor_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // .planning.umbp.HdiCost hdi = 6;
+        case 6:
+        {
+          if (tag == 50u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, mutable_hdi()));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        default:
+        {
+        handle_unusual:
+          if (tag == 0 ||
+              ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+                  ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP)
+          {
+            goto success;
+          }
+          DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+          break;
+        }
+        }
+      }
+    success:
+      // @@protoc_insertion_point(parse_success:planning.umbp.CostConfig)
+      return true;
+    failure:
+      // @@protoc_insertion_point(parse_failure:planning.umbp.CostConfig)
+      return false;
+#undef DO_
+    }
+
+    void CostConfig::SerializeWithCachedSizes(
+        ::google::protobuf::io::CodedOutputStream *output) const
+    {
+      // @@protoc_insertion_point(serialize_start:planning.umbp.CostConfig)
+      // .planning.umbp.EfficiencyCost efficiency = 1;
+      if (this->has_efficiency())
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            1, *this->efficiency_, output);
       }
 
       // .planning.umbp.SafetyCost safety = 2;
-      case 2: {
-        if (tag == 18u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_safety()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->has_safety())
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            2, *this->safety_, output);
       }
 
       // .planning.umbp.UserCost user = 3;
-      case 3: {
-        if (tag == 26u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_user()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->has_user())
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            3, *this->user_, output);
       }
 
       // .planning.umbp.NavigationCost navigation = 4;
-      case 4: {
-        if (tag == 34u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_navigation()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->has_navigation())
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            4, *this->navigation_, output);
       }
 
       // double discount_factor = 5;
-      case 5: {
-        if (tag == 41u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &discount_factor_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->discount_factor() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->discount_factor(), output);
       }
 
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
+      // .planning.umbp.HdiCost hdi = 6;
+      if (this->has_hdi())
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            6, *this->hdi_, output);
+      }
+
+      // @@protoc_insertion_point(serialize_end:planning.umbp.CostConfig)
+    }
+
+    ::google::protobuf::uint8 *CostConfig::InternalSerializeWithCachedSizesToArray(
+        bool deterministic, ::google::protobuf::uint8 *target) const
+    {
+      (void)deterministic; // Unused
+      // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.CostConfig)
+      // .planning.umbp.EfficiencyCost efficiency = 1;
+      if (this->has_efficiency())
+      {
+        target = ::google::protobuf::internal::WireFormatLite::
+            InternalWriteMessageNoVirtualToArray(
+                1, *this->efficiency_, false, target);
+      }
+
+      // .planning.umbp.SafetyCost safety = 2;
+      if (this->has_safety())
+      {
+        target = ::google::protobuf::internal::WireFormatLite::
+            InternalWriteMessageNoVirtualToArray(
+                2, *this->safety_, false, target);
+      }
+
+      // .planning.umbp.UserCost user = 3;
+      if (this->has_user())
+      {
+        target = ::google::protobuf::internal::WireFormatLite::
+            InternalWriteMessageNoVirtualToArray(
+                3, *this->user_, false, target);
+      }
+
+      // .planning.umbp.NavigationCost navigation = 4;
+      if (this->has_navigation())
+      {
+        target = ::google::protobuf::internal::WireFormatLite::
+            InternalWriteMessageNoVirtualToArray(
+                4, *this->navigation_, false, target);
+      }
+
+      // double discount_factor = 5;
+      if (this->discount_factor() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->discount_factor(), target);
+      }
+
+      // .planning.umbp.HdiCost hdi = 6;
+      if (this->has_hdi())
+      {
+        target = ::google::protobuf::internal::WireFormatLite::
+            InternalWriteMessageNoVirtualToArray(
+                6, *this->hdi_, false, target);
+      }
+
+      // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.CostConfig)
+      return target;
+    }
+
+    size_t CostConfig::ByteSizeLong() const
+    {
+      // @@protoc_insertion_point(message_byte_size_start:planning.umbp.CostConfig)
+      size_t total_size = 0;
+
+      // .planning.umbp.EfficiencyCost efficiency = 1;
+      if (this->has_efficiency())
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+                          *this->efficiency_);
+      }
+
+      // .planning.umbp.SafetyCost safety = 2;
+      if (this->has_safety())
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+                          *this->safety_);
+      }
+
+      // .planning.umbp.UserCost user = 3;
+      if (this->has_user())
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+                          *this->user_);
+      }
+
+      // .planning.umbp.NavigationCost navigation = 4;
+      if (this->has_navigation())
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+                          *this->navigation_);
+      }
+
+      // .planning.umbp.HdiCost hdi = 6;
+      if (this->has_hdi())
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+                          *this->hdi_);
+      }
+
+      // double discount_factor = 5;
+      if (this->discount_factor() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = cached_size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+      return total_size;
+    }
+
+    void CostConfig::MergeFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.CostConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      const CostConfig *source =
+          ::google::protobuf::internal::DynamicCastToGenerated<const CostConfig>(
+              &from);
+      if (source == NULL)
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.CostConfig)
+        ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+      }
+      else
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.CostConfig)
+        MergeFrom(*source);
       }
     }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:planning.umbp.CostConfig)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:planning.umbp.CostConfig)
-  return false;
-#undef DO_
-}
 
-void CostConfig::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:planning.umbp.CostConfig)
-  // .planning.umbp.EfficiencyCost efficiency = 1;
-  if (this->has_efficiency()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, *this->efficiency_, output);
-  }
+    void CostConfig::MergeFrom(const CostConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.CostConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.has_efficiency())
+      {
+        mutable_efficiency()->::planning::umbp::EfficiencyCost::MergeFrom(from.efficiency());
+      }
+      if (from.has_safety())
+      {
+        mutable_safety()->::planning::umbp::SafetyCost::MergeFrom(from.safety());
+      }
+      if (from.has_user())
+      {
+        mutable_user()->::planning::umbp::UserCost::MergeFrom(from.user());
+      }
+      if (from.has_navigation())
+      {
+        mutable_navigation()->::planning::umbp::NavigationCost::MergeFrom(from.navigation());
+      }
+      if (from.has_hdi())
+      {
+        mutable_hdi()->::planning::umbp::HdiCost::MergeFrom(from.hdi());
+      }
+      if (from.discount_factor() != 0)
+      {
+        set_discount_factor(from.discount_factor());
+      }
+    }
 
-  // .planning.umbp.SafetyCost safety = 2;
-  if (this->has_safety()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, *this->safety_, output);
-  }
+    void CostConfig::CopyFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.CostConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // .planning.umbp.UserCost user = 3;
-  if (this->has_user()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, *this->user_, output);
-  }
+    void CostConfig::CopyFrom(const CostConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.CostConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // .planning.umbp.NavigationCost navigation = 4;
-  if (this->has_navigation()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, *this->navigation_, output);
-  }
+    bool CostConfig::IsInitialized() const
+    {
+      return true;
+    }
 
-  // double discount_factor = 5;
-  if (this->discount_factor() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->discount_factor(), output);
-  }
+    void CostConfig::Swap(CostConfig *other)
+    {
+      if (other == this)
+        return;
+      InternalSwap(other);
+    }
+    void CostConfig::InternalSwap(CostConfig *other)
+    {
+      std::swap(efficiency_, other->efficiency_);
+      std::swap(safety_, other->safety_);
+      std::swap(user_, other->user_);
+      std::swap(navigation_, other->navigation_);
+      std::swap(hdi_, other->hdi_);
+      std::swap(discount_factor_, other->discount_factor_);
+      std::swap(_cached_size_, other->_cached_size_);
+    }
 
-  // @@protoc_insertion_point(serialize_end:planning.umbp.CostConfig)
-}
-
-::google::protobuf::uint8* CostConfig::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.CostConfig)
-  // .planning.umbp.EfficiencyCost efficiency = 1;
-  if (this->has_efficiency()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        1, *this->efficiency_, false, target);
-  }
-
-  // .planning.umbp.SafetyCost safety = 2;
-  if (this->has_safety()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        2, *this->safety_, false, target);
-  }
-
-  // .planning.umbp.UserCost user = 3;
-  if (this->has_user()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        3, *this->user_, false, target);
-  }
-
-  // .planning.umbp.NavigationCost navigation = 4;
-  if (this->has_navigation()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        4, *this->navigation_, false, target);
-  }
-
-  // double discount_factor = 5;
-  if (this->discount_factor() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->discount_factor(), target);
-  }
-
-  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.CostConfig)
-  return target;
-}
-
-size_t CostConfig::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:planning.umbp.CostConfig)
-  size_t total_size = 0;
-
-  // .planning.umbp.EfficiencyCost efficiency = 1;
-  if (this->has_efficiency()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->efficiency_);
-  }
-
-  // .planning.umbp.SafetyCost safety = 2;
-  if (this->has_safety()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->safety_);
-  }
-
-  // .planning.umbp.UserCost user = 3;
-  if (this->has_user()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->user_);
-  }
-
-  // .planning.umbp.NavigationCost navigation = 4;
-  if (this->has_navigation()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->navigation_);
-  }
-
-  // double discount_factor = 5;
-  if (this->discount_factor() != 0) {
-    total_size += 1 + 8;
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void CostConfig::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.CostConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  const CostConfig* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const CostConfig>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.CostConfig)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.CostConfig)
-    MergeFrom(*source);
-  }
-}
-
-void CostConfig::MergeFrom(const CostConfig& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.CostConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_efficiency()) {
-    mutable_efficiency()->::planning::umbp::EfficiencyCost::MergeFrom(from.efficiency());
-  }
-  if (from.has_safety()) {
-    mutable_safety()->::planning::umbp::SafetyCost::MergeFrom(from.safety());
-  }
-  if (from.has_user()) {
-    mutable_user()->::planning::umbp::UserCost::MergeFrom(from.user());
-  }
-  if (from.has_navigation()) {
-    mutable_navigation()->::planning::umbp::NavigationCost::MergeFrom(from.navigation());
-  }
-  if (from.discount_factor() != 0) {
-    set_discount_factor(from.discount_factor());
-  }
-}
-
-void CostConfig::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.CostConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void CostConfig::CopyFrom(const CostConfig& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.CostConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool CostConfig::IsInitialized() const {
-  return true;
-}
-
-void CostConfig::Swap(CostConfig* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void CostConfig::InternalSwap(CostConfig* other) {
-  std::swap(efficiency_, other->efficiency_);
-  std::swap(safety_, other->safety_);
-  std::swap(user_, other->user_);
-  std::swap(navigation_, other->navigation_);
-  std::swap(discount_factor_, other->discount_factor_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata CostConfig::GetMetadata() const {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[7];
-}
+    ::google::protobuf::Metadata CostConfig::GetMetadata() const
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[8];
+    }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// CostConfig
+    // CostConfig
 
-// .planning.umbp.EfficiencyCost efficiency = 1;
-bool CostConfig::has_efficiency() const {
-  return this != internal_default_instance() && efficiency_ != NULL;
-}
-void CostConfig::clear_efficiency() {
-  if (GetArenaNoVirtual() == NULL && efficiency_ != NULL) delete efficiency_;
-  efficiency_ = NULL;
-}
-const ::planning::umbp::EfficiencyCost& CostConfig::efficiency() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.CostConfig.efficiency)
-  return efficiency_ != NULL ? *efficiency_
-                         : *::planning::umbp::EfficiencyCost::internal_default_instance();
-}
-::planning::umbp::EfficiencyCost* CostConfig::mutable_efficiency() {
-  
-  if (efficiency_ == NULL) {
-    efficiency_ = new ::planning::umbp::EfficiencyCost;
-  }
-  // @@protoc_insertion_point(field_mutable:planning.umbp.CostConfig.efficiency)
-  return efficiency_;
-}
-::planning::umbp::EfficiencyCost* CostConfig::release_efficiency() {
-  // @@protoc_insertion_point(field_release:planning.umbp.CostConfig.efficiency)
-  
-  ::planning::umbp::EfficiencyCost* temp = efficiency_;
-  efficiency_ = NULL;
-  return temp;
-}
-void CostConfig::set_allocated_efficiency(::planning::umbp::EfficiencyCost* efficiency) {
-  delete efficiency_;
-  efficiency_ = efficiency;
-  if (efficiency) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:planning.umbp.CostConfig.efficiency)
-}
+    // .planning.umbp.EfficiencyCost efficiency = 1;
+    bool CostConfig::has_efficiency() const
+    {
+      return this != internal_default_instance() && efficiency_ != NULL;
+    }
+    void CostConfig::clear_efficiency()
+    {
+      if (GetArenaNoVirtual() == NULL && efficiency_ != NULL)
+        delete efficiency_;
+      efficiency_ = NULL;
+    }
+    const ::planning::umbp::EfficiencyCost &CostConfig::efficiency() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.CostConfig.efficiency)
+      return efficiency_ != NULL ? *efficiency_
+                                 : *::planning::umbp::EfficiencyCost::internal_default_instance();
+    }
+    ::planning::umbp::EfficiencyCost *CostConfig::mutable_efficiency()
+    {
 
-// .planning.umbp.SafetyCost safety = 2;
-bool CostConfig::has_safety() const {
-  return this != internal_default_instance() && safety_ != NULL;
-}
-void CostConfig::clear_safety() {
-  if (GetArenaNoVirtual() == NULL && safety_ != NULL) delete safety_;
-  safety_ = NULL;
-}
-const ::planning::umbp::SafetyCost& CostConfig::safety() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.CostConfig.safety)
-  return safety_ != NULL ? *safety_
-                         : *::planning::umbp::SafetyCost::internal_default_instance();
-}
-::planning::umbp::SafetyCost* CostConfig::mutable_safety() {
-  
-  if (safety_ == NULL) {
-    safety_ = new ::planning::umbp::SafetyCost;
-  }
-  // @@protoc_insertion_point(field_mutable:planning.umbp.CostConfig.safety)
-  return safety_;
-}
-::planning::umbp::SafetyCost* CostConfig::release_safety() {
-  // @@protoc_insertion_point(field_release:planning.umbp.CostConfig.safety)
-  
-  ::planning::umbp::SafetyCost* temp = safety_;
-  safety_ = NULL;
-  return temp;
-}
-void CostConfig::set_allocated_safety(::planning::umbp::SafetyCost* safety) {
-  delete safety_;
-  safety_ = safety;
-  if (safety) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:planning.umbp.CostConfig.safety)
-}
+      if (efficiency_ == NULL)
+      {
+        efficiency_ = new ::planning::umbp::EfficiencyCost;
+      }
+      // @@protoc_insertion_point(field_mutable:planning.umbp.CostConfig.efficiency)
+      return efficiency_;
+    }
+    ::planning::umbp::EfficiencyCost *CostConfig::release_efficiency()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.CostConfig.efficiency)
 
-// .planning.umbp.UserCost user = 3;
-bool CostConfig::has_user() const {
-  return this != internal_default_instance() && user_ != NULL;
-}
-void CostConfig::clear_user() {
-  if (GetArenaNoVirtual() == NULL && user_ != NULL) delete user_;
-  user_ = NULL;
-}
-const ::planning::umbp::UserCost& CostConfig::user() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.CostConfig.user)
-  return user_ != NULL ? *user_
-                         : *::planning::umbp::UserCost::internal_default_instance();
-}
-::planning::umbp::UserCost* CostConfig::mutable_user() {
-  
-  if (user_ == NULL) {
-    user_ = new ::planning::umbp::UserCost;
-  }
-  // @@protoc_insertion_point(field_mutable:planning.umbp.CostConfig.user)
-  return user_;
-}
-::planning::umbp::UserCost* CostConfig::release_user() {
-  // @@protoc_insertion_point(field_release:planning.umbp.CostConfig.user)
-  
-  ::planning::umbp::UserCost* temp = user_;
-  user_ = NULL;
-  return temp;
-}
-void CostConfig::set_allocated_user(::planning::umbp::UserCost* user) {
-  delete user_;
-  user_ = user;
-  if (user) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:planning.umbp.CostConfig.user)
-}
+      ::planning::umbp::EfficiencyCost *temp = efficiency_;
+      efficiency_ = NULL;
+      return temp;
+    }
+    void CostConfig::set_allocated_efficiency(::planning::umbp::EfficiencyCost *efficiency)
+    {
+      delete efficiency_;
+      efficiency_ = efficiency;
+      if (efficiency)
+      {
+      }
+      else
+      {
+      }
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.CostConfig.efficiency)
+    }
 
-// .planning.umbp.NavigationCost navigation = 4;
-bool CostConfig::has_navigation() const {
-  return this != internal_default_instance() && navigation_ != NULL;
-}
-void CostConfig::clear_navigation() {
-  if (GetArenaNoVirtual() == NULL && navigation_ != NULL) delete navigation_;
-  navigation_ = NULL;
-}
-const ::planning::umbp::NavigationCost& CostConfig::navigation() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.CostConfig.navigation)
-  return navigation_ != NULL ? *navigation_
-                         : *::planning::umbp::NavigationCost::internal_default_instance();
-}
-::planning::umbp::NavigationCost* CostConfig::mutable_navigation() {
-  
-  if (navigation_ == NULL) {
-    navigation_ = new ::planning::umbp::NavigationCost;
-  }
-  // @@protoc_insertion_point(field_mutable:planning.umbp.CostConfig.navigation)
-  return navigation_;
-}
-::planning::umbp::NavigationCost* CostConfig::release_navigation() {
-  // @@protoc_insertion_point(field_release:planning.umbp.CostConfig.navigation)
-  
-  ::planning::umbp::NavigationCost* temp = navigation_;
-  navigation_ = NULL;
-  return temp;
-}
-void CostConfig::set_allocated_navigation(::planning::umbp::NavigationCost* navigation) {
-  delete navigation_;
-  navigation_ = navigation;
-  if (navigation) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:planning.umbp.CostConfig.navigation)
-}
+    // .planning.umbp.SafetyCost safety = 2;
+    bool CostConfig::has_safety() const
+    {
+      return this != internal_default_instance() && safety_ != NULL;
+    }
+    void CostConfig::clear_safety()
+    {
+      if (GetArenaNoVirtual() == NULL && safety_ != NULL)
+        delete safety_;
+      safety_ = NULL;
+    }
+    const ::planning::umbp::SafetyCost &CostConfig::safety() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.CostConfig.safety)
+      return safety_ != NULL ? *safety_
+                             : *::planning::umbp::SafetyCost::internal_default_instance();
+    }
+    ::planning::umbp::SafetyCost *CostConfig::mutable_safety()
+    {
 
-// double discount_factor = 5;
-void CostConfig::clear_discount_factor() {
-  discount_factor_ = 0;
-}
-double CostConfig::discount_factor() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.CostConfig.discount_factor)
-  return discount_factor_;
-}
-void CostConfig::set_discount_factor(double value) {
-  
-  discount_factor_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.CostConfig.discount_factor)
-}
+      if (safety_ == NULL)
+      {
+        safety_ = new ::planning::umbp::SafetyCost;
+      }
+      // @@protoc_insertion_point(field_mutable:planning.umbp.CostConfig.safety)
+      return safety_;
+    }
+    ::planning::umbp::SafetyCost *CostConfig::release_safety()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.CostConfig.safety)
 
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+      ::planning::umbp::SafetyCost *temp = safety_;
+      safety_ = NULL;
+      return temp;
+    }
+    void CostConfig::set_allocated_safety(::planning::umbp::SafetyCost *safety)
+    {
+      delete safety_;
+      safety_ = safety;
+      if (safety)
+      {
+      }
+      else
+      {
+      }
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.CostConfig.safety)
+    }
 
-// ===================================================================
+    // .planning.umbp.UserCost user = 3;
+    bool CostConfig::has_user() const
+    {
+      return this != internal_default_instance() && user_ != NULL;
+    }
+    void CostConfig::clear_user()
+    {
+      if (GetArenaNoVirtual() == NULL && user_ != NULL)
+        delete user_;
+      user_ = NULL;
+    }
+    const ::planning::umbp::UserCost &CostConfig::user() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.CostConfig.user)
+      return user_ != NULL ? *user_
+                           : *::planning::umbp::UserCost::internal_default_instance();
+    }
+    ::planning::umbp::UserCost *CostConfig::mutable_user()
+    {
+
+      if (user_ == NULL)
+      {
+        user_ = new ::planning::umbp::UserCost;
+      }
+      // @@protoc_insertion_point(field_mutable:planning.umbp.CostConfig.user)
+      return user_;
+    }
+    ::planning::umbp::UserCost *CostConfig::release_user()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.CostConfig.user)
+
+      ::planning::umbp::UserCost *temp = user_;
+      user_ = NULL;
+      return temp;
+    }
+    void CostConfig::set_allocated_user(::planning::umbp::UserCost *user)
+    {
+      delete user_;
+      user_ = user;
+      if (user)
+      {
+      }
+      else
+      {
+      }
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.CostConfig.user)
+    }
+
+    // .planning.umbp.NavigationCost navigation = 4;
+    bool CostConfig::has_navigation() const
+    {
+      return this != internal_default_instance() && navigation_ != NULL;
+    }
+    void CostConfig::clear_navigation()
+    {
+      if (GetArenaNoVirtual() == NULL && navigation_ != NULL)
+        delete navigation_;
+      navigation_ = NULL;
+    }
+    const ::planning::umbp::NavigationCost &CostConfig::navigation() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.CostConfig.navigation)
+      return navigation_ != NULL ? *navigation_
+                                 : *::planning::umbp::NavigationCost::internal_default_instance();
+    }
+    ::planning::umbp::NavigationCost *CostConfig::mutable_navigation()
+    {
+
+      if (navigation_ == NULL)
+      {
+        navigation_ = new ::planning::umbp::NavigationCost;
+      }
+      // @@protoc_insertion_point(field_mutable:planning.umbp.CostConfig.navigation)
+      return navigation_;
+    }
+    ::planning::umbp::NavigationCost *CostConfig::release_navigation()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.CostConfig.navigation)
+
+      ::planning::umbp::NavigationCost *temp = navigation_;
+      navigation_ = NULL;
+      return temp;
+    }
+    void CostConfig::set_allocated_navigation(::planning::umbp::NavigationCost *navigation)
+    {
+      delete navigation_;
+      navigation_ = navigation;
+      if (navigation)
+      {
+      }
+      else
+      {
+      }
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.CostConfig.navigation)
+    }
+
+    // double discount_factor = 5;
+    void CostConfig::clear_discount_factor()
+    {
+      discount_factor_ = 0;
+    }
+    double CostConfig::discount_factor() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.CostConfig.discount_factor)
+      return discount_factor_;
+    }
+    void CostConfig::set_discount_factor(double value)
+    {
+
+      discount_factor_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.CostConfig.discount_factor)
+    }
+
+    // .planning.umbp.HdiCost hdi = 6;
+    bool CostConfig::has_hdi() const
+    {
+      return this != internal_default_instance() && hdi_ != NULL;
+    }
+    void CostConfig::clear_hdi()
+    {
+      if (GetArenaNoVirtual() == NULL && hdi_ != NULL)
+        delete hdi_;
+      hdi_ = NULL;
+    }
+    const ::planning::umbp::HdiCost &CostConfig::hdi() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.CostConfig.hdi)
+      return hdi_ != NULL ? *hdi_
+                          : *::planning::umbp::HdiCost::internal_default_instance();
+    }
+    ::planning::umbp::HdiCost *CostConfig::mutable_hdi()
+    {
+
+      if (hdi_ == NULL)
+      {
+        hdi_ = new ::planning::umbp::HdiCost;
+      }
+      // @@protoc_insertion_point(field_mutable:planning.umbp.CostConfig.hdi)
+      return hdi_;
+    }
+    ::planning::umbp::HdiCost *CostConfig::release_hdi()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.CostConfig.hdi)
+
+      ::planning::umbp::HdiCost *temp = hdi_;
+      hdi_ = NULL;
+      return temp;
+    }
+    void CostConfig::set_allocated_hdi(::planning::umbp::HdiCost *hdi)
+    {
+      delete hdi_;
+      hdi_ = hdi;
+      if (hdi)
+      {
+      }
+      else
+      {
+      }
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.CostConfig.hdi)
+    }
+
+#endif // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+    // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int EgoConfig::kCarFieldNumber;
-const int EgoConfig::kMapFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+    const int EgoConfig::kCarFieldNumber;
+    const int EgoConfig::kMapFieldNumber;
+#endif // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-EgoConfig::EgoConfig()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:planning.umbp.EgoConfig)
-}
-EgoConfig::EgoConfig(const EgoConfig& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_car()) {
-    car_ = new ::planning::umbp::CarConfig(*from.car_);
-  } else {
-    car_ = NULL;
-  }
-  if (from.has_map()) {
-    map_ = new ::planning::umbp::MapConfig(*from.map_);
-  } else {
-    map_ = NULL;
-  }
-  // @@protoc_insertion_point(copy_constructor:planning.umbp.EgoConfig)
-}
+    EgoConfig::EgoConfig()
+        : ::google::protobuf::Message(), _internal_metadata_(NULL)
+    {
+      if (GOOGLE_PREDICT_TRUE(this != internal_default_instance()))
+      {
+        protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      }
+      SharedCtor();
+      // @@protoc_insertion_point(constructor:planning.umbp.EgoConfig)
+    }
+    EgoConfig::EgoConfig(const EgoConfig &from)
+        : ::google::protobuf::Message(),
+          _internal_metadata_(NULL),
+          _cached_size_(0)
+    {
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.has_car())
+      {
+        car_ = new ::planning::umbp::CarConfig(*from.car_);
+      }
+      else
+      {
+        car_ = NULL;
+      }
+      if (from.has_map())
+      {
+        map_ = new ::planning::umbp::MapConfig(*from.map_);
+      }
+      else
+      {
+        map_ = NULL;
+      }
+      // @@protoc_insertion_point(copy_constructor:planning.umbp.EgoConfig)
+    }
 
-void EgoConfig::SharedCtor() {
-  ::memset(&car_, 0, reinterpret_cast<char*>(&map_) -
-    reinterpret_cast<char*>(&car_) + sizeof(map_));
-  _cached_size_ = 0;
-}
+    void EgoConfig::SharedCtor()
+    {
+      ::memset(&car_, 0, reinterpret_cast<char *>(&map_) - reinterpret_cast<char *>(&car_) + sizeof(map_));
+      _cached_size_ = 0;
+    }
 
-EgoConfig::~EgoConfig() {
-  // @@protoc_insertion_point(destructor:planning.umbp.EgoConfig)
-  SharedDtor();
-}
+    EgoConfig::~EgoConfig()
+    {
+      // @@protoc_insertion_point(destructor:planning.umbp.EgoConfig)
+      SharedDtor();
+    }
 
-void EgoConfig::SharedDtor() {
-  if (this != internal_default_instance()) {
-    delete car_;
-  }
-  if (this != internal_default_instance()) {
-    delete map_;
-  }
-}
+    void EgoConfig::SharedDtor()
+    {
+      if (this != internal_default_instance())
+      {
+        delete car_;
+      }
+      if (this != internal_default_instance())
+      {
+        delete map_;
+      }
+    }
 
-void EgoConfig::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* EgoConfig::descriptor() {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[8].descriptor;
-}
+    void EgoConfig::SetCachedSize(int size) const
+    {
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    }
+    const ::google::protobuf::Descriptor *EgoConfig::descriptor()
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[9].descriptor;
+    }
 
-const EgoConfig& EgoConfig::default_instance() {
-  protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
+    const EgoConfig &EgoConfig::default_instance()
+    {
+      protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      return *internal_default_instance();
+    }
 
-EgoConfig* EgoConfig::New(::google::protobuf::Arena* arena) const {
-  EgoConfig* n = new EgoConfig;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
+    EgoConfig *EgoConfig::New(::google::protobuf::Arena *arena) const
+    {
+      EgoConfig *n = new EgoConfig;
+      if (arena != NULL)
+      {
+        arena->Own(n);
+      }
+      return n;
+    }
 
-void EgoConfig::Clear() {
-// @@protoc_insertion_point(message_clear_start:planning.umbp.EgoConfig)
-  if (GetArenaNoVirtual() == NULL && car_ != NULL) {
-    delete car_;
-  }
-  car_ = NULL;
-  if (GetArenaNoVirtual() == NULL && map_ != NULL) {
-    delete map_;
-  }
-  map_ = NULL;
-}
+    void EgoConfig::Clear()
+    {
+      // @@protoc_insertion_point(message_clear_start:planning.umbp.EgoConfig)
+      if (GetArenaNoVirtual() == NULL && car_ != NULL)
+      {
+        delete car_;
+      }
+      car_ = NULL;
+      if (GetArenaNoVirtual() == NULL && map_ != NULL)
+      {
+        delete map_;
+      }
+      map_ = NULL;
+    }
 
-bool EgoConfig::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:planning.umbp.EgoConfig)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .planning.umbp.CarConfig car = 1;
-      case 1: {
-        if (tag == 10u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_car()));
-        } else {
+    bool EgoConfig::MergePartialFromCodedStream(
+        ::google::protobuf::io::CodedInputStream *input)
+    {
+#define DO_(EXPRESSION)                 \
+  if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) \
+  goto failure
+      ::google::protobuf::uint32 tag;
+      // @@protoc_insertion_point(parse_start:planning.umbp.EgoConfig)
+      for (;;)
+      {
+        ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+        tag = p.first;
+        if (!p.second)
           goto handle_unusual;
+        switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag))
+        {
+        // .planning.umbp.CarConfig car = 1;
+        case 1:
+        {
+          if (tag == 10u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, mutable_car()));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
         }
-        break;
+
+        // .planning.umbp.MapConfig map = 2;
+        case 2:
+        {
+          if (tag == 18u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, mutable_map()));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        default:
+        {
+        handle_unusual:
+          if (tag == 0 ||
+              ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+                  ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP)
+          {
+            goto success;
+          }
+          DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+          break;
+        }
+        }
+      }
+    success:
+      // @@protoc_insertion_point(parse_success:planning.umbp.EgoConfig)
+      return true;
+    failure:
+      // @@protoc_insertion_point(parse_failure:planning.umbp.EgoConfig)
+      return false;
+#undef DO_
+    }
+
+    void EgoConfig::SerializeWithCachedSizes(
+        ::google::protobuf::io::CodedOutputStream *output) const
+    {
+      // @@protoc_insertion_point(serialize_start:planning.umbp.EgoConfig)
+      // .planning.umbp.CarConfig car = 1;
+      if (this->has_car())
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            1, *this->car_, output);
       }
 
       // .planning.umbp.MapConfig map = 2;
-      case 2: {
-        if (tag == 18u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_map()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->has_map())
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            2, *this->map_, output);
       }
 
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
+      // @@protoc_insertion_point(serialize_end:planning.umbp.EgoConfig)
+    }
+
+    ::google::protobuf::uint8 *EgoConfig::InternalSerializeWithCachedSizesToArray(
+        bool deterministic, ::google::protobuf::uint8 *target) const
+    {
+      (void)deterministic; // Unused
+      // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.EgoConfig)
+      // .planning.umbp.CarConfig car = 1;
+      if (this->has_car())
+      {
+        target = ::google::protobuf::internal::WireFormatLite::
+            InternalWriteMessageNoVirtualToArray(
+                1, *this->car_, false, target);
+      }
+
+      // .planning.umbp.MapConfig map = 2;
+      if (this->has_map())
+      {
+        target = ::google::protobuf::internal::WireFormatLite::
+            InternalWriteMessageNoVirtualToArray(
+                2, *this->map_, false, target);
+      }
+
+      // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.EgoConfig)
+      return target;
+    }
+
+    size_t EgoConfig::ByteSizeLong() const
+    {
+      // @@protoc_insertion_point(message_byte_size_start:planning.umbp.EgoConfig)
+      size_t total_size = 0;
+
+      // .planning.umbp.CarConfig car = 1;
+      if (this->has_car())
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+                          *this->car_);
+      }
+
+      // .planning.umbp.MapConfig map = 2;
+      if (this->has_map())
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+                          *this->map_);
+      }
+
+      int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = cached_size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+      return total_size;
+    }
+
+    void EgoConfig::MergeFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.EgoConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      const EgoConfig *source =
+          ::google::protobuf::internal::DynamicCastToGenerated<const EgoConfig>(
+              &from);
+      if (source == NULL)
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.EgoConfig)
+        ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+      }
+      else
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.EgoConfig)
+        MergeFrom(*source);
       }
     }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:planning.umbp.EgoConfig)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:planning.umbp.EgoConfig)
-  return false;
-#undef DO_
-}
 
-void EgoConfig::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:planning.umbp.EgoConfig)
-  // .planning.umbp.CarConfig car = 1;
-  if (this->has_car()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, *this->car_, output);
-  }
+    void EgoConfig::MergeFrom(const EgoConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.EgoConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.has_car())
+      {
+        mutable_car()->::planning::umbp::CarConfig::MergeFrom(from.car());
+      }
+      if (from.has_map())
+      {
+        mutable_map()->::planning::umbp::MapConfig::MergeFrom(from.map());
+      }
+    }
 
-  // .planning.umbp.MapConfig map = 2;
-  if (this->has_map()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, *this->map_, output);
-  }
+    void EgoConfig::CopyFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.EgoConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // @@protoc_insertion_point(serialize_end:planning.umbp.EgoConfig)
-}
+    void EgoConfig::CopyFrom(const EgoConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.EgoConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-::google::protobuf::uint8* EgoConfig::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.EgoConfig)
-  // .planning.umbp.CarConfig car = 1;
-  if (this->has_car()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        1, *this->car_, false, target);
-  }
+    bool EgoConfig::IsInitialized() const
+    {
+      return true;
+    }
 
-  // .planning.umbp.MapConfig map = 2;
-  if (this->has_map()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        2, *this->map_, false, target);
-  }
+    void EgoConfig::Swap(EgoConfig *other)
+    {
+      if (other == this)
+        return;
+      InternalSwap(other);
+    }
+    void EgoConfig::InternalSwap(EgoConfig *other)
+    {
+      std::swap(car_, other->car_);
+      std::swap(map_, other->map_);
+      std::swap(_cached_size_, other->_cached_size_);
+    }
 
-  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.EgoConfig)
-  return target;
-}
-
-size_t EgoConfig::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:planning.umbp.EgoConfig)
-  size_t total_size = 0;
-
-  // .planning.umbp.CarConfig car = 1;
-  if (this->has_car()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->car_);
-  }
-
-  // .planning.umbp.MapConfig map = 2;
-  if (this->has_map()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->map_);
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void EgoConfig::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.EgoConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  const EgoConfig* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const EgoConfig>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.EgoConfig)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.EgoConfig)
-    MergeFrom(*source);
-  }
-}
-
-void EgoConfig::MergeFrom(const EgoConfig& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.EgoConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_car()) {
-    mutable_car()->::planning::umbp::CarConfig::MergeFrom(from.car());
-  }
-  if (from.has_map()) {
-    mutable_map()->::planning::umbp::MapConfig::MergeFrom(from.map());
-  }
-}
-
-void EgoConfig::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.EgoConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void EgoConfig::CopyFrom(const EgoConfig& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.EgoConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool EgoConfig::IsInitialized() const {
-  return true;
-}
-
-void EgoConfig::Swap(EgoConfig* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void EgoConfig::InternalSwap(EgoConfig* other) {
-  std::swap(car_, other->car_);
-  std::swap(map_, other->map_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata EgoConfig::GetMetadata() const {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[8];
-}
+    ::google::protobuf::Metadata EgoConfig::GetMetadata() const
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[9];
+    }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// EgoConfig
+    // EgoConfig
 
-// .planning.umbp.CarConfig car = 1;
-bool EgoConfig::has_car() const {
-  return this != internal_default_instance() && car_ != NULL;
-}
-void EgoConfig::clear_car() {
-  if (GetArenaNoVirtual() == NULL && car_ != NULL) delete car_;
-  car_ = NULL;
-}
-const ::planning::umbp::CarConfig& EgoConfig::car() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.EgoConfig.car)
-  return car_ != NULL ? *car_
-                         : *::planning::umbp::CarConfig::internal_default_instance();
-}
-::planning::umbp::CarConfig* EgoConfig::mutable_car() {
-  
-  if (car_ == NULL) {
-    car_ = new ::planning::umbp::CarConfig;
-  }
-  // @@protoc_insertion_point(field_mutable:planning.umbp.EgoConfig.car)
-  return car_;
-}
-::planning::umbp::CarConfig* EgoConfig::release_car() {
-  // @@protoc_insertion_point(field_release:planning.umbp.EgoConfig.car)
-  
-  ::planning::umbp::CarConfig* temp = car_;
-  car_ = NULL;
-  return temp;
-}
-void EgoConfig::set_allocated_car(::planning::umbp::CarConfig* car) {
-  delete car_;
-  car_ = car;
-  if (car) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:planning.umbp.EgoConfig.car)
-}
+    // .planning.umbp.CarConfig car = 1;
+    bool EgoConfig::has_car() const
+    {
+      return this != internal_default_instance() && car_ != NULL;
+    }
+    void EgoConfig::clear_car()
+    {
+      if (GetArenaNoVirtual() == NULL && car_ != NULL)
+        delete car_;
+      car_ = NULL;
+    }
+    const ::planning::umbp::CarConfig &EgoConfig::car() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.EgoConfig.car)
+      return car_ != NULL ? *car_
+                          : *::planning::umbp::CarConfig::internal_default_instance();
+    }
+    ::planning::umbp::CarConfig *EgoConfig::mutable_car()
+    {
 
-// .planning.umbp.MapConfig map = 2;
-bool EgoConfig::has_map() const {
-  return this != internal_default_instance() && map_ != NULL;
-}
-void EgoConfig::clear_map() {
-  if (GetArenaNoVirtual() == NULL && map_ != NULL) delete map_;
-  map_ = NULL;
-}
-const ::planning::umbp::MapConfig& EgoConfig::map() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.EgoConfig.map)
-  return map_ != NULL ? *map_
-                         : *::planning::umbp::MapConfig::internal_default_instance();
-}
-::planning::umbp::MapConfig* EgoConfig::mutable_map() {
-  
-  if (map_ == NULL) {
-    map_ = new ::planning::umbp::MapConfig;
-  }
-  // @@protoc_insertion_point(field_mutable:planning.umbp.EgoConfig.map)
-  return map_;
-}
-::planning::umbp::MapConfig* EgoConfig::release_map() {
-  // @@protoc_insertion_point(field_release:planning.umbp.EgoConfig.map)
-  
-  ::planning::umbp::MapConfig* temp = map_;
-  map_ = NULL;
-  return temp;
-}
-void EgoConfig::set_allocated_map(::planning::umbp::MapConfig* map) {
-  delete map_;
-  map_ = map;
-  if (map) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:planning.umbp.EgoConfig.map)
-}
+      if (car_ == NULL)
+      {
+        car_ = new ::planning::umbp::CarConfig;
+      }
+      // @@protoc_insertion_point(field_mutable:planning.umbp.EgoConfig.car)
+      return car_;
+    }
+    ::planning::umbp::CarConfig *EgoConfig::release_car()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.EgoConfig.car)
 
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+      ::planning::umbp::CarConfig *temp = car_;
+      car_ = NULL;
+      return temp;
+    }
+    void EgoConfig::set_allocated_car(::planning::umbp::CarConfig *car)
+    {
+      delete car_;
+      car_ = car;
+      if (car)
+      {
+      }
+      else
+      {
+      }
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.EgoConfig.car)
+    }
 
-// ===================================================================
+    // .planning.umbp.MapConfig map = 2;
+    bool EgoConfig::has_map() const
+    {
+      return this != internal_default_instance() && map_ != NULL;
+    }
+    void EgoConfig::clear_map()
+    {
+      if (GetArenaNoVirtual() == NULL && map_ != NULL)
+        delete map_;
+      map_ = NULL;
+    }
+    const ::planning::umbp::MapConfig &EgoConfig::map() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.EgoConfig.map)
+      return map_ != NULL ? *map_
+                          : *::planning::umbp::MapConfig::internal_default_instance();
+    }
+    ::planning::umbp::MapConfig *EgoConfig::mutable_map()
+    {
+
+      if (map_ == NULL)
+      {
+        map_ = new ::planning::umbp::MapConfig;
+      }
+      // @@protoc_insertion_point(field_mutable:planning.umbp.EgoConfig.map)
+      return map_;
+    }
+    ::planning::umbp::MapConfig *EgoConfig::release_map()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.EgoConfig.map)
+
+      ::planning::umbp::MapConfig *temp = map_;
+      map_ = NULL;
+      return temp;
+    }
+    void EgoConfig::set_allocated_map(::planning::umbp::MapConfig *map)
+    {
+      delete map_;
+      map_ = map;
+      if (map)
+      {
+      }
+      else
+      {
+      }
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.EgoConfig.map)
+    }
+
+#endif // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+    // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int BezierConfig::kWeightFieldNumber;
-const int BezierConfig::kCubeFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+    const int BezierConfig::kWeightFieldNumber;
+    const int BezierConfig::kCubeFieldNumber;
+#endif // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-BezierConfig::BezierConfig()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:planning.umbp.BezierConfig)
-}
-BezierConfig::BezierConfig(const BezierConfig& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_weight()) {
-    weight_ = new ::planning::umbp::WeightConfig(*from.weight_);
-  } else {
-    weight_ = NULL;
-  }
-  if (from.has_cube()) {
-    cube_ = new ::planning::umbp::CubeConfig(*from.cube_);
-  } else {
-    cube_ = NULL;
-  }
-  // @@protoc_insertion_point(copy_constructor:planning.umbp.BezierConfig)
-}
+    BezierConfig::BezierConfig()
+        : ::google::protobuf::Message(), _internal_metadata_(NULL)
+    {
+      if (GOOGLE_PREDICT_TRUE(this != internal_default_instance()))
+      {
+        protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      }
+      SharedCtor();
+      // @@protoc_insertion_point(constructor:planning.umbp.BezierConfig)
+    }
+    BezierConfig::BezierConfig(const BezierConfig &from)
+        : ::google::protobuf::Message(),
+          _internal_metadata_(NULL),
+          _cached_size_(0)
+    {
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.has_weight())
+      {
+        weight_ = new ::planning::umbp::WeightConfig(*from.weight_);
+      }
+      else
+      {
+        weight_ = NULL;
+      }
+      if (from.has_cube())
+      {
+        cube_ = new ::planning::umbp::CubeConfig(*from.cube_);
+      }
+      else
+      {
+        cube_ = NULL;
+      }
+      // @@protoc_insertion_point(copy_constructor:planning.umbp.BezierConfig)
+    }
 
-void BezierConfig::SharedCtor() {
-  ::memset(&weight_, 0, reinterpret_cast<char*>(&cube_) -
-    reinterpret_cast<char*>(&weight_) + sizeof(cube_));
-  _cached_size_ = 0;
-}
+    void BezierConfig::SharedCtor()
+    {
+      ::memset(&weight_, 0, reinterpret_cast<char *>(&cube_) - reinterpret_cast<char *>(&weight_) + sizeof(cube_));
+      _cached_size_ = 0;
+    }
 
-BezierConfig::~BezierConfig() {
-  // @@protoc_insertion_point(destructor:planning.umbp.BezierConfig)
-  SharedDtor();
-}
+    BezierConfig::~BezierConfig()
+    {
+      // @@protoc_insertion_point(destructor:planning.umbp.BezierConfig)
+      SharedDtor();
+    }
 
-void BezierConfig::SharedDtor() {
-  if (this != internal_default_instance()) {
-    delete weight_;
-  }
-  if (this != internal_default_instance()) {
-    delete cube_;
-  }
-}
+    void BezierConfig::SharedDtor()
+    {
+      if (this != internal_default_instance())
+      {
+        delete weight_;
+      }
+      if (this != internal_default_instance())
+      {
+        delete cube_;
+      }
+    }
 
-void BezierConfig::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* BezierConfig::descriptor() {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[9].descriptor;
-}
+    void BezierConfig::SetCachedSize(int size) const
+    {
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    }
+    const ::google::protobuf::Descriptor *BezierConfig::descriptor()
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[10].descriptor;
+    }
 
-const BezierConfig& BezierConfig::default_instance() {
-  protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
+    const BezierConfig &BezierConfig::default_instance()
+    {
+      protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      return *internal_default_instance();
+    }
 
-BezierConfig* BezierConfig::New(::google::protobuf::Arena* arena) const {
-  BezierConfig* n = new BezierConfig;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
+    BezierConfig *BezierConfig::New(::google::protobuf::Arena *arena) const
+    {
+      BezierConfig *n = new BezierConfig;
+      if (arena != NULL)
+      {
+        arena->Own(n);
+      }
+      return n;
+    }
 
-void BezierConfig::Clear() {
-// @@protoc_insertion_point(message_clear_start:planning.umbp.BezierConfig)
-  if (GetArenaNoVirtual() == NULL && weight_ != NULL) {
-    delete weight_;
-  }
-  weight_ = NULL;
-  if (GetArenaNoVirtual() == NULL && cube_ != NULL) {
-    delete cube_;
-  }
-  cube_ = NULL;
-}
+    void BezierConfig::Clear()
+    {
+      // @@protoc_insertion_point(message_clear_start:planning.umbp.BezierConfig)
+      if (GetArenaNoVirtual() == NULL && weight_ != NULL)
+      {
+        delete weight_;
+      }
+      weight_ = NULL;
+      if (GetArenaNoVirtual() == NULL && cube_ != NULL)
+      {
+        delete cube_;
+      }
+      cube_ = NULL;
+    }
 
-bool BezierConfig::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:planning.umbp.BezierConfig)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .planning.umbp.WeightConfig weight = 1;
-      case 1: {
-        if (tag == 10u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_weight()));
-        } else {
+    bool BezierConfig::MergePartialFromCodedStream(
+        ::google::protobuf::io::CodedInputStream *input)
+    {
+#define DO_(EXPRESSION)                 \
+  if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) \
+  goto failure
+      ::google::protobuf::uint32 tag;
+      // @@protoc_insertion_point(parse_start:planning.umbp.BezierConfig)
+      for (;;)
+      {
+        ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+        tag = p.first;
+        if (!p.second)
           goto handle_unusual;
+        switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag))
+        {
+        // .planning.umbp.WeightConfig weight = 1;
+        case 1:
+        {
+          if (tag == 10u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, mutable_weight()));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
         }
-        break;
+
+        // .planning.umbp.CubeConfig cube = 2;
+        case 2:
+        {
+          if (tag == 18u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, mutable_cube()));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        default:
+        {
+        handle_unusual:
+          if (tag == 0 ||
+              ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+                  ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP)
+          {
+            goto success;
+          }
+          DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+          break;
+        }
+        }
+      }
+    success:
+      // @@protoc_insertion_point(parse_success:planning.umbp.BezierConfig)
+      return true;
+    failure:
+      // @@protoc_insertion_point(parse_failure:planning.umbp.BezierConfig)
+      return false;
+#undef DO_
+    }
+
+    void BezierConfig::SerializeWithCachedSizes(
+        ::google::protobuf::io::CodedOutputStream *output) const
+    {
+      // @@protoc_insertion_point(serialize_start:planning.umbp.BezierConfig)
+      // .planning.umbp.WeightConfig weight = 1;
+      if (this->has_weight())
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            1, *this->weight_, output);
       }
 
       // .planning.umbp.CubeConfig cube = 2;
-      case 2: {
-        if (tag == 18u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_cube()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->has_cube())
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            2, *this->cube_, output);
       }
 
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
+      // @@protoc_insertion_point(serialize_end:planning.umbp.BezierConfig)
+    }
+
+    ::google::protobuf::uint8 *BezierConfig::InternalSerializeWithCachedSizesToArray(
+        bool deterministic, ::google::protobuf::uint8 *target) const
+    {
+      (void)deterministic; // Unused
+      // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.BezierConfig)
+      // .planning.umbp.WeightConfig weight = 1;
+      if (this->has_weight())
+      {
+        target = ::google::protobuf::internal::WireFormatLite::
+            InternalWriteMessageNoVirtualToArray(
+                1, *this->weight_, false, target);
+      }
+
+      // .planning.umbp.CubeConfig cube = 2;
+      if (this->has_cube())
+      {
+        target = ::google::protobuf::internal::WireFormatLite::
+            InternalWriteMessageNoVirtualToArray(
+                2, *this->cube_, false, target);
+      }
+
+      // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.BezierConfig)
+      return target;
+    }
+
+    size_t BezierConfig::ByteSizeLong() const
+    {
+      // @@protoc_insertion_point(message_byte_size_start:planning.umbp.BezierConfig)
+      size_t total_size = 0;
+
+      // .planning.umbp.WeightConfig weight = 1;
+      if (this->has_weight())
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+                          *this->weight_);
+      }
+
+      // .planning.umbp.CubeConfig cube = 2;
+      if (this->has_cube())
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+                          *this->cube_);
+      }
+
+      int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = cached_size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+      return total_size;
+    }
+
+    void BezierConfig::MergeFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.BezierConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      const BezierConfig *source =
+          ::google::protobuf::internal::DynamicCastToGenerated<const BezierConfig>(
+              &from);
+      if (source == NULL)
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.BezierConfig)
+        ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+      }
+      else
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.BezierConfig)
+        MergeFrom(*source);
       }
     }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:planning.umbp.BezierConfig)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:planning.umbp.BezierConfig)
-  return false;
-#undef DO_
-}
 
-void BezierConfig::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:planning.umbp.BezierConfig)
-  // .planning.umbp.WeightConfig weight = 1;
-  if (this->has_weight()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, *this->weight_, output);
-  }
+    void BezierConfig::MergeFrom(const BezierConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.BezierConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.has_weight())
+      {
+        mutable_weight()->::planning::umbp::WeightConfig::MergeFrom(from.weight());
+      }
+      if (from.has_cube())
+      {
+        mutable_cube()->::planning::umbp::CubeConfig::MergeFrom(from.cube());
+      }
+    }
 
-  // .planning.umbp.CubeConfig cube = 2;
-  if (this->has_cube()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, *this->cube_, output);
-  }
+    void BezierConfig::CopyFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.BezierConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // @@protoc_insertion_point(serialize_end:planning.umbp.BezierConfig)
-}
+    void BezierConfig::CopyFrom(const BezierConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.BezierConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-::google::protobuf::uint8* BezierConfig::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.BezierConfig)
-  // .planning.umbp.WeightConfig weight = 1;
-  if (this->has_weight()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        1, *this->weight_, false, target);
-  }
+    bool BezierConfig::IsInitialized() const
+    {
+      return true;
+    }
 
-  // .planning.umbp.CubeConfig cube = 2;
-  if (this->has_cube()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        2, *this->cube_, false, target);
-  }
+    void BezierConfig::Swap(BezierConfig *other)
+    {
+      if (other == this)
+        return;
+      InternalSwap(other);
+    }
+    void BezierConfig::InternalSwap(BezierConfig *other)
+    {
+      std::swap(weight_, other->weight_);
+      std::swap(cube_, other->cube_);
+      std::swap(_cached_size_, other->_cached_size_);
+    }
 
-  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.BezierConfig)
-  return target;
-}
-
-size_t BezierConfig::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:planning.umbp.BezierConfig)
-  size_t total_size = 0;
-
-  // .planning.umbp.WeightConfig weight = 1;
-  if (this->has_weight()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->weight_);
-  }
-
-  // .planning.umbp.CubeConfig cube = 2;
-  if (this->has_cube()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->cube_);
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void BezierConfig::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.BezierConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  const BezierConfig* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const BezierConfig>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.BezierConfig)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.BezierConfig)
-    MergeFrom(*source);
-  }
-}
-
-void BezierConfig::MergeFrom(const BezierConfig& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.BezierConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_weight()) {
-    mutable_weight()->::planning::umbp::WeightConfig::MergeFrom(from.weight());
-  }
-  if (from.has_cube()) {
-    mutable_cube()->::planning::umbp::CubeConfig::MergeFrom(from.cube());
-  }
-}
-
-void BezierConfig::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.BezierConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void BezierConfig::CopyFrom(const BezierConfig& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.BezierConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool BezierConfig::IsInitialized() const {
-  return true;
-}
-
-void BezierConfig::Swap(BezierConfig* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void BezierConfig::InternalSwap(BezierConfig* other) {
-  std::swap(weight_, other->weight_);
-  std::swap(cube_, other->cube_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata BezierConfig::GetMetadata() const {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[9];
-}
+    ::google::protobuf::Metadata BezierConfig::GetMetadata() const
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[10];
+    }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// BezierConfig
+    // BezierConfig
 
-// .planning.umbp.WeightConfig weight = 1;
-bool BezierConfig::has_weight() const {
-  return this != internal_default_instance() && weight_ != NULL;
-}
-void BezierConfig::clear_weight() {
-  if (GetArenaNoVirtual() == NULL && weight_ != NULL) delete weight_;
-  weight_ = NULL;
-}
-const ::planning::umbp::WeightConfig& BezierConfig::weight() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.BezierConfig.weight)
-  return weight_ != NULL ? *weight_
-                         : *::planning::umbp::WeightConfig::internal_default_instance();
-}
-::planning::umbp::WeightConfig* BezierConfig::mutable_weight() {
-  
-  if (weight_ == NULL) {
-    weight_ = new ::planning::umbp::WeightConfig;
-  }
-  // @@protoc_insertion_point(field_mutable:planning.umbp.BezierConfig.weight)
-  return weight_;
-}
-::planning::umbp::WeightConfig* BezierConfig::release_weight() {
-  // @@protoc_insertion_point(field_release:planning.umbp.BezierConfig.weight)
-  
-  ::planning::umbp::WeightConfig* temp = weight_;
-  weight_ = NULL;
-  return temp;
-}
-void BezierConfig::set_allocated_weight(::planning::umbp::WeightConfig* weight) {
-  delete weight_;
-  weight_ = weight;
-  if (weight) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:planning.umbp.BezierConfig.weight)
-}
+    // .planning.umbp.WeightConfig weight = 1;
+    bool BezierConfig::has_weight() const
+    {
+      return this != internal_default_instance() && weight_ != NULL;
+    }
+    void BezierConfig::clear_weight()
+    {
+      if (GetArenaNoVirtual() == NULL && weight_ != NULL)
+        delete weight_;
+      weight_ = NULL;
+    }
+    const ::planning::umbp::WeightConfig &BezierConfig::weight() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.BezierConfig.weight)
+      return weight_ != NULL ? *weight_
+                             : *::planning::umbp::WeightConfig::internal_default_instance();
+    }
+    ::planning::umbp::WeightConfig *BezierConfig::mutable_weight()
+    {
 
-// .planning.umbp.CubeConfig cube = 2;
-bool BezierConfig::has_cube() const {
-  return this != internal_default_instance() && cube_ != NULL;
-}
-void BezierConfig::clear_cube() {
-  if (GetArenaNoVirtual() == NULL && cube_ != NULL) delete cube_;
-  cube_ = NULL;
-}
-const ::planning::umbp::CubeConfig& BezierConfig::cube() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.BezierConfig.cube)
-  return cube_ != NULL ? *cube_
-                         : *::planning::umbp::CubeConfig::internal_default_instance();
-}
-::planning::umbp::CubeConfig* BezierConfig::mutable_cube() {
-  
-  if (cube_ == NULL) {
-    cube_ = new ::planning::umbp::CubeConfig;
-  }
-  // @@protoc_insertion_point(field_mutable:planning.umbp.BezierConfig.cube)
-  return cube_;
-}
-::planning::umbp::CubeConfig* BezierConfig::release_cube() {
-  // @@protoc_insertion_point(field_release:planning.umbp.BezierConfig.cube)
-  
-  ::planning::umbp::CubeConfig* temp = cube_;
-  cube_ = NULL;
-  return temp;
-}
-void BezierConfig::set_allocated_cube(::planning::umbp::CubeConfig* cube) {
-  delete cube_;
-  cube_ = cube;
-  if (cube) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:planning.umbp.BezierConfig.cube)
-}
+      if (weight_ == NULL)
+      {
+        weight_ = new ::planning::umbp::WeightConfig;
+      }
+      // @@protoc_insertion_point(field_mutable:planning.umbp.BezierConfig.weight)
+      return weight_;
+    }
+    ::planning::umbp::WeightConfig *BezierConfig::release_weight()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.BezierConfig.weight)
 
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+      ::planning::umbp::WeightConfig *temp = weight_;
+      weight_ = NULL;
+      return temp;
+    }
+    void BezierConfig::set_allocated_weight(::planning::umbp::WeightConfig *weight)
+    {
+      delete weight_;
+      weight_ = weight;
+      if (weight)
+      {
+      }
+      else
+      {
+      }
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.BezierConfig.weight)
+    }
 
-// ===================================================================
+    // .planning.umbp.CubeConfig cube = 2;
+    bool BezierConfig::has_cube() const
+    {
+      return this != internal_default_instance() && cube_ != NULL;
+    }
+    void BezierConfig::clear_cube()
+    {
+      if (GetArenaNoVirtual() == NULL && cube_ != NULL)
+        delete cube_;
+      cube_ = NULL;
+    }
+    const ::planning::umbp::CubeConfig &BezierConfig::cube() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.BezierConfig.cube)
+      return cube_ != NULL ? *cube_
+                           : *::planning::umbp::CubeConfig::internal_default_instance();
+    }
+    ::planning::umbp::CubeConfig *BezierConfig::mutable_cube()
+    {
+
+      if (cube_ == NULL)
+      {
+        cube_ = new ::planning::umbp::CubeConfig;
+      }
+      // @@protoc_insertion_point(field_mutable:planning.umbp.BezierConfig.cube)
+      return cube_;
+    }
+    ::planning::umbp::CubeConfig *BezierConfig::release_cube()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.BezierConfig.cube)
+
+      ::planning::umbp::CubeConfig *temp = cube_;
+      cube_ = NULL;
+      return temp;
+    }
+    void BezierConfig::set_allocated_cube(::planning::umbp::CubeConfig *cube)
+    {
+      delete cube_;
+      cube_ = cube;
+      if (cube)
+      {
+      }
+      else
+      {
+      }
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.BezierConfig.cube)
+    }
+
+#endif // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+    // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int WeightConfig::kWeightPFieldNumber;
-const int WeightConfig::kWeightCFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+    const int WeightConfig::kWeightPFieldNumber;
+    const int WeightConfig::kWeightCFieldNumber;
+#endif // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-WeightConfig::WeightConfig()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:planning.umbp.WeightConfig)
-}
-WeightConfig::WeightConfig(const WeightConfig& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&weight_p_, &from.weight_p_,
-    reinterpret_cast<char*>(&weight_c_) -
-    reinterpret_cast<char*>(&weight_p_) + sizeof(weight_c_));
-  // @@protoc_insertion_point(copy_constructor:planning.umbp.WeightConfig)
-}
+    WeightConfig::WeightConfig()
+        : ::google::protobuf::Message(), _internal_metadata_(NULL)
+    {
+      if (GOOGLE_PREDICT_TRUE(this != internal_default_instance()))
+      {
+        protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      }
+      SharedCtor();
+      // @@protoc_insertion_point(constructor:planning.umbp.WeightConfig)
+    }
+    WeightConfig::WeightConfig(const WeightConfig &from)
+        : ::google::protobuf::Message(),
+          _internal_metadata_(NULL),
+          _cached_size_(0)
+    {
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      ::memcpy(&weight_p_, &from.weight_p_,
+               reinterpret_cast<char *>(&weight_c_) -
+                   reinterpret_cast<char *>(&weight_p_) + sizeof(weight_c_));
+      // @@protoc_insertion_point(copy_constructor:planning.umbp.WeightConfig)
+    }
 
-void WeightConfig::SharedCtor() {
-  ::memset(&weight_p_, 0, reinterpret_cast<char*>(&weight_c_) -
-    reinterpret_cast<char*>(&weight_p_) + sizeof(weight_c_));
-  _cached_size_ = 0;
-}
+    void WeightConfig::SharedCtor()
+    {
+      ::memset(&weight_p_, 0, reinterpret_cast<char *>(&weight_c_) - reinterpret_cast<char *>(&weight_p_) + sizeof(weight_c_));
+      _cached_size_ = 0;
+    }
 
-WeightConfig::~WeightConfig() {
-  // @@protoc_insertion_point(destructor:planning.umbp.WeightConfig)
-  SharedDtor();
-}
+    WeightConfig::~WeightConfig()
+    {
+      // @@protoc_insertion_point(destructor:planning.umbp.WeightConfig)
+      SharedDtor();
+    }
 
-void WeightConfig::SharedDtor() {
-}
+    void WeightConfig::SharedDtor()
+    {
+    }
 
-void WeightConfig::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* WeightConfig::descriptor() {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[10].descriptor;
-}
+    void WeightConfig::SetCachedSize(int size) const
+    {
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    }
+    const ::google::protobuf::Descriptor *WeightConfig::descriptor()
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[11].descriptor;
+    }
 
-const WeightConfig& WeightConfig::default_instance() {
-  protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
+    const WeightConfig &WeightConfig::default_instance()
+    {
+      protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      return *internal_default_instance();
+    }
 
-WeightConfig* WeightConfig::New(::google::protobuf::Arena* arena) const {
-  WeightConfig* n = new WeightConfig;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
+    WeightConfig *WeightConfig::New(::google::protobuf::Arena *arena) const
+    {
+      WeightConfig *n = new WeightConfig;
+      if (arena != NULL)
+      {
+        arena->Own(n);
+      }
+      return n;
+    }
 
-void WeightConfig::Clear() {
-// @@protoc_insertion_point(message_clear_start:planning.umbp.WeightConfig)
-  ::memset(&weight_p_, 0, reinterpret_cast<char*>(&weight_c_) -
-    reinterpret_cast<char*>(&weight_p_) + sizeof(weight_c_));
-}
+    void WeightConfig::Clear()
+    {
+      // @@protoc_insertion_point(message_clear_start:planning.umbp.WeightConfig)
+      ::memset(&weight_p_, 0, reinterpret_cast<char *>(&weight_c_) - reinterpret_cast<char *>(&weight_p_) + sizeof(weight_c_));
+    }
 
-bool WeightConfig::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:planning.umbp.WeightConfig)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // double weight_P = 1;
-      case 1: {
-        if (tag == 9u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &weight_p_)));
-        } else {
+    bool WeightConfig::MergePartialFromCodedStream(
+        ::google::protobuf::io::CodedInputStream *input)
+    {
+#define DO_(EXPRESSION)                 \
+  if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) \
+  goto failure
+      ::google::protobuf::uint32 tag;
+      // @@protoc_insertion_point(parse_start:planning.umbp.WeightConfig)
+      for (;;)
+      {
+        ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+        tag = p.first;
+        if (!p.second)
           goto handle_unusual;
+        switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag))
+        {
+        // double weight_P = 1;
+        case 1:
+        {
+          if (tag == 9u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &weight_p_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
         }
-        break;
+
+        // double weight_c = 2;
+        case 2:
+        {
+          if (tag == 17u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &weight_c_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        default:
+        {
+        handle_unusual:
+          if (tag == 0 ||
+              ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+                  ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP)
+          {
+            goto success;
+          }
+          DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+          break;
+        }
+        }
+      }
+    success:
+      // @@protoc_insertion_point(parse_success:planning.umbp.WeightConfig)
+      return true;
+    failure:
+      // @@protoc_insertion_point(parse_failure:planning.umbp.WeightConfig)
+      return false;
+#undef DO_
+    }
+
+    void WeightConfig::SerializeWithCachedSizes(
+        ::google::protobuf::io::CodedOutputStream *output) const
+    {
+      // @@protoc_insertion_point(serialize_start:planning.umbp.WeightConfig)
+      // double weight_P = 1;
+      if (this->weight_p() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->weight_p(), output);
       }
 
       // double weight_c = 2;
-      case 2: {
-        if (tag == 17u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &weight_c_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->weight_c() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->weight_c(), output);
       }
 
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
+      // @@protoc_insertion_point(serialize_end:planning.umbp.WeightConfig)
+    }
+
+    ::google::protobuf::uint8 *WeightConfig::InternalSerializeWithCachedSizesToArray(
+        bool deterministic, ::google::protobuf::uint8 *target) const
+    {
+      (void)deterministic; // Unused
+      // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.WeightConfig)
+      // double weight_P = 1;
+      if (this->weight_p() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->weight_p(), target);
+      }
+
+      // double weight_c = 2;
+      if (this->weight_c() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->weight_c(), target);
+      }
+
+      // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.WeightConfig)
+      return target;
+    }
+
+    size_t WeightConfig::ByteSizeLong() const
+    {
+      // @@protoc_insertion_point(message_byte_size_start:planning.umbp.WeightConfig)
+      size_t total_size = 0;
+
+      // double weight_P = 1;
+      if (this->weight_p() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double weight_c = 2;
+      if (this->weight_c() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = cached_size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+      return total_size;
+    }
+
+    void WeightConfig::MergeFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.WeightConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      const WeightConfig *source =
+          ::google::protobuf::internal::DynamicCastToGenerated<const WeightConfig>(
+              &from);
+      if (source == NULL)
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.WeightConfig)
+        ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+      }
+      else
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.WeightConfig)
+        MergeFrom(*source);
       }
     }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:planning.umbp.WeightConfig)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:planning.umbp.WeightConfig)
-  return false;
-#undef DO_
-}
 
-void WeightConfig::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:planning.umbp.WeightConfig)
-  // double weight_P = 1;
-  if (this->weight_p() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->weight_p(), output);
-  }
+    void WeightConfig::MergeFrom(const WeightConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.WeightConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.weight_p() != 0)
+      {
+        set_weight_p(from.weight_p());
+      }
+      if (from.weight_c() != 0)
+      {
+        set_weight_c(from.weight_c());
+      }
+    }
 
-  // double weight_c = 2;
-  if (this->weight_c() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->weight_c(), output);
-  }
+    void WeightConfig::CopyFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.WeightConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // @@protoc_insertion_point(serialize_end:planning.umbp.WeightConfig)
-}
+    void WeightConfig::CopyFrom(const WeightConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.WeightConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-::google::protobuf::uint8* WeightConfig::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.WeightConfig)
-  // double weight_P = 1;
-  if (this->weight_p() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->weight_p(), target);
-  }
+    bool WeightConfig::IsInitialized() const
+    {
+      return true;
+    }
 
-  // double weight_c = 2;
-  if (this->weight_c() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->weight_c(), target);
-  }
+    void WeightConfig::Swap(WeightConfig *other)
+    {
+      if (other == this)
+        return;
+      InternalSwap(other);
+    }
+    void WeightConfig::InternalSwap(WeightConfig *other)
+    {
+      std::swap(weight_p_, other->weight_p_);
+      std::swap(weight_c_, other->weight_c_);
+      std::swap(_cached_size_, other->_cached_size_);
+    }
 
-  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.WeightConfig)
-  return target;
-}
-
-size_t WeightConfig::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:planning.umbp.WeightConfig)
-  size_t total_size = 0;
-
-  // double weight_P = 1;
-  if (this->weight_p() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double weight_c = 2;
-  if (this->weight_c() != 0) {
-    total_size += 1 + 8;
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void WeightConfig::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.WeightConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  const WeightConfig* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const WeightConfig>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.WeightConfig)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.WeightConfig)
-    MergeFrom(*source);
-  }
-}
-
-void WeightConfig::MergeFrom(const WeightConfig& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.WeightConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.weight_p() != 0) {
-    set_weight_p(from.weight_p());
-  }
-  if (from.weight_c() != 0) {
-    set_weight_c(from.weight_c());
-  }
-}
-
-void WeightConfig::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.WeightConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void WeightConfig::CopyFrom(const WeightConfig& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.WeightConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool WeightConfig::IsInitialized() const {
-  return true;
-}
-
-void WeightConfig::Swap(WeightConfig* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void WeightConfig::InternalSwap(WeightConfig* other) {
-  std::swap(weight_p_, other->weight_p_);
-  std::swap(weight_c_, other->weight_c_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata WeightConfig::GetMetadata() const {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[10];
-}
+    ::google::protobuf::Metadata WeightConfig::GetMetadata() const
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[11];
+    }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// WeightConfig
+    // WeightConfig
 
-// double weight_P = 1;
-void WeightConfig::clear_weight_p() {
-  weight_p_ = 0;
-}
-double WeightConfig::weight_p() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.WeightConfig.weight_P)
-  return weight_p_;
-}
-void WeightConfig::set_weight_p(double value) {
-  
-  weight_p_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.WeightConfig.weight_P)
-}
+    // double weight_P = 1;
+    void WeightConfig::clear_weight_p()
+    {
+      weight_p_ = 0;
+    }
+    double WeightConfig::weight_p() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.WeightConfig.weight_P)
+      return weight_p_;
+    }
+    void WeightConfig::set_weight_p(double value)
+    {
 
-// double weight_c = 2;
-void WeightConfig::clear_weight_c() {
-  weight_c_ = 0;
-}
-double WeightConfig::weight_c() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.WeightConfig.weight_c)
-  return weight_c_;
-}
-void WeightConfig::set_weight_c(double value) {
-  
-  weight_c_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.WeightConfig.weight_c)
-}
+      weight_p_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.WeightConfig.weight_P)
+    }
 
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+    // double weight_c = 2;
+    void WeightConfig::clear_weight_c()
+    {
+      weight_c_ = 0;
+    }
+    double WeightConfig::weight_c() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.WeightConfig.weight_c)
+      return weight_c_;
+    }
+    void WeightConfig::set_weight_c(double value)
+    {
 
-// ===================================================================
+      weight_c_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.WeightConfig.weight_c)
+    }
+
+#endif // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+    // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int CubeConfig::kVLbSFieldNumber;
-const int CubeConfig::kVLbLFieldNumber;
-const int CubeConfig::kVUbSFieldNumber;
-const int CubeConfig::kVUbLFieldNumber;
-const int CubeConfig::kALbSFieldNumber;
-const int CubeConfig::kALbLFieldNumber;
-const int CubeConfig::kAUbSFieldNumber;
-const int CubeConfig::kAUbLFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+    const int CubeConfig::kVLbSFieldNumber;
+    const int CubeConfig::kVLbLFieldNumber;
+    const int CubeConfig::kVUbSFieldNumber;
+    const int CubeConfig::kVUbLFieldNumber;
+    const int CubeConfig::kALbSFieldNumber;
+    const int CubeConfig::kALbLFieldNumber;
+    const int CubeConfig::kAUbSFieldNumber;
+    const int CubeConfig::kAUbLFieldNumber;
+#endif // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-CubeConfig::CubeConfig()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:planning.umbp.CubeConfig)
-}
-CubeConfig::CubeConfig(const CubeConfig& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&v_lb_s_, &from.v_lb_s_,
-    reinterpret_cast<char*>(&a_ub_l_) -
-    reinterpret_cast<char*>(&v_lb_s_) + sizeof(a_ub_l_));
-  // @@protoc_insertion_point(copy_constructor:planning.umbp.CubeConfig)
-}
+    CubeConfig::CubeConfig()
+        : ::google::protobuf::Message(), _internal_metadata_(NULL)
+    {
+      if (GOOGLE_PREDICT_TRUE(this != internal_default_instance()))
+      {
+        protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      }
+      SharedCtor();
+      // @@protoc_insertion_point(constructor:planning.umbp.CubeConfig)
+    }
+    CubeConfig::CubeConfig(const CubeConfig &from)
+        : ::google::protobuf::Message(),
+          _internal_metadata_(NULL),
+          _cached_size_(0)
+    {
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      ::memcpy(&v_lb_s_, &from.v_lb_s_,
+               reinterpret_cast<char *>(&a_ub_l_) -
+                   reinterpret_cast<char *>(&v_lb_s_) + sizeof(a_ub_l_));
+      // @@protoc_insertion_point(copy_constructor:planning.umbp.CubeConfig)
+    }
 
-void CubeConfig::SharedCtor() {
-  ::memset(&v_lb_s_, 0, reinterpret_cast<char*>(&a_ub_l_) -
-    reinterpret_cast<char*>(&v_lb_s_) + sizeof(a_ub_l_));
-  _cached_size_ = 0;
-}
+    void CubeConfig::SharedCtor()
+    {
+      ::memset(&v_lb_s_, 0, reinterpret_cast<char *>(&a_ub_l_) - reinterpret_cast<char *>(&v_lb_s_) + sizeof(a_ub_l_));
+      _cached_size_ = 0;
+    }
 
-CubeConfig::~CubeConfig() {
-  // @@protoc_insertion_point(destructor:planning.umbp.CubeConfig)
-  SharedDtor();
-}
+    CubeConfig::~CubeConfig()
+    {
+      // @@protoc_insertion_point(destructor:planning.umbp.CubeConfig)
+      SharedDtor();
+    }
 
-void CubeConfig::SharedDtor() {
-}
+    void CubeConfig::SharedDtor()
+    {
+    }
 
-void CubeConfig::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* CubeConfig::descriptor() {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[11].descriptor;
-}
+    void CubeConfig::SetCachedSize(int size) const
+    {
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    }
+    const ::google::protobuf::Descriptor *CubeConfig::descriptor()
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[12].descriptor;
+    }
 
-const CubeConfig& CubeConfig::default_instance() {
-  protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
+    const CubeConfig &CubeConfig::default_instance()
+    {
+      protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      return *internal_default_instance();
+    }
 
-CubeConfig* CubeConfig::New(::google::protobuf::Arena* arena) const {
-  CubeConfig* n = new CubeConfig;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
+    CubeConfig *CubeConfig::New(::google::protobuf::Arena *arena) const
+    {
+      CubeConfig *n = new CubeConfig;
+      if (arena != NULL)
+      {
+        arena->Own(n);
+      }
+      return n;
+    }
 
-void CubeConfig::Clear() {
-// @@protoc_insertion_point(message_clear_start:planning.umbp.CubeConfig)
-  ::memset(&v_lb_s_, 0, reinterpret_cast<char*>(&a_ub_l_) -
-    reinterpret_cast<char*>(&v_lb_s_) + sizeof(a_ub_l_));
-}
+    void CubeConfig::Clear()
+    {
+      // @@protoc_insertion_point(message_clear_start:planning.umbp.CubeConfig)
+      ::memset(&v_lb_s_, 0, reinterpret_cast<char *>(&a_ub_l_) - reinterpret_cast<char *>(&v_lb_s_) + sizeof(a_ub_l_));
+    }
 
-bool CubeConfig::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:planning.umbp.CubeConfig)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // double v_lb_s = 1;
-      case 1: {
-        if (tag == 9u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &v_lb_s_)));
-        } else {
+    bool CubeConfig::MergePartialFromCodedStream(
+        ::google::protobuf::io::CodedInputStream *input)
+    {
+#define DO_(EXPRESSION)                 \
+  if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) \
+  goto failure
+      ::google::protobuf::uint32 tag;
+      // @@protoc_insertion_point(parse_start:planning.umbp.CubeConfig)
+      for (;;)
+      {
+        ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+        tag = p.first;
+        if (!p.second)
           goto handle_unusual;
+        switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag))
+        {
+        // double v_lb_s = 1;
+        case 1:
+        {
+          if (tag == 9u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &v_lb_s_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
         }
-        break;
+
+        // double v_lb_l = 2;
+        case 2:
+        {
+          if (tag == 17u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &v_lb_l_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double v_ub_s = 3;
+        case 3:
+        {
+          if (tag == 25u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &v_ub_s_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double v_ub_l = 4;
+        case 4:
+        {
+          if (tag == 33u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &v_ub_l_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double a_lb_s = 5;
+        case 5:
+        {
+          if (tag == 41u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &a_lb_s_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double a_lb_l = 6;
+        case 6:
+        {
+          if (tag == 49u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &a_lb_l_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double a_ub_s = 7;
+        case 7:
+        {
+          if (tag == 57u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &a_ub_s_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // double a_ub_l = 8;
+        case 8:
+        {
+          if (tag == 65u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &a_ub_l_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        default:
+        {
+        handle_unusual:
+          if (tag == 0 ||
+              ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+                  ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP)
+          {
+            goto success;
+          }
+          DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+          break;
+        }
+        }
+      }
+    success:
+      // @@protoc_insertion_point(parse_success:planning.umbp.CubeConfig)
+      return true;
+    failure:
+      // @@protoc_insertion_point(parse_failure:planning.umbp.CubeConfig)
+      return false;
+#undef DO_
+    }
+
+    void CubeConfig::SerializeWithCachedSizes(
+        ::google::protobuf::io::CodedOutputStream *output) const
+    {
+      // @@protoc_insertion_point(serialize_start:planning.umbp.CubeConfig)
+      // double v_lb_s = 1;
+      if (this->v_lb_s() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->v_lb_s(), output);
       }
 
       // double v_lb_l = 2;
-      case 2: {
-        if (tag == 17u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &v_lb_l_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->v_lb_l() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->v_lb_l(), output);
       }
 
       // double v_ub_s = 3;
-      case 3: {
-        if (tag == 25u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &v_ub_s_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->v_ub_s() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->v_ub_s(), output);
       }
 
       // double v_ub_l = 4;
-      case 4: {
-        if (tag == 33u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &v_ub_l_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->v_ub_l() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->v_ub_l(), output);
       }
 
       // double a_lb_s = 5;
-      case 5: {
-        if (tag == 41u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &a_lb_s_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->a_lb_s() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->a_lb_s(), output);
       }
 
       // double a_lb_l = 6;
-      case 6: {
-        if (tag == 49u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &a_lb_l_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->a_lb_l() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(6, this->a_lb_l(), output);
       }
 
       // double a_ub_s = 7;
-      case 7: {
-        if (tag == 57u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &a_ub_s_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->a_ub_s() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(7, this->a_ub_s(), output);
       }
 
       // double a_ub_l = 8;
-      case 8: {
-        if (tag == 65u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &a_ub_l_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->a_ub_l() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(8, this->a_ub_l(), output);
       }
 
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
+      // @@protoc_insertion_point(serialize_end:planning.umbp.CubeConfig)
+    }
+
+    ::google::protobuf::uint8 *CubeConfig::InternalSerializeWithCachedSizesToArray(
+        bool deterministic, ::google::protobuf::uint8 *target) const
+    {
+      (void)deterministic; // Unused
+      // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.CubeConfig)
+      // double v_lb_s = 1;
+      if (this->v_lb_s() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->v_lb_s(), target);
+      }
+
+      // double v_lb_l = 2;
+      if (this->v_lb_l() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->v_lb_l(), target);
+      }
+
+      // double v_ub_s = 3;
+      if (this->v_ub_s() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->v_ub_s(), target);
+      }
+
+      // double v_ub_l = 4;
+      if (this->v_ub_l() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->v_ub_l(), target);
+      }
+
+      // double a_lb_s = 5;
+      if (this->a_lb_s() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->a_lb_s(), target);
+      }
+
+      // double a_lb_l = 6;
+      if (this->a_lb_l() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(6, this->a_lb_l(), target);
+      }
+
+      // double a_ub_s = 7;
+      if (this->a_ub_s() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(7, this->a_ub_s(), target);
+      }
+
+      // double a_ub_l = 8;
+      if (this->a_ub_l() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(8, this->a_ub_l(), target);
+      }
+
+      // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.CubeConfig)
+      return target;
+    }
+
+    size_t CubeConfig::ByteSizeLong() const
+    {
+      // @@protoc_insertion_point(message_byte_size_start:planning.umbp.CubeConfig)
+      size_t total_size = 0;
+
+      // double v_lb_s = 1;
+      if (this->v_lb_s() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double v_lb_l = 2;
+      if (this->v_lb_l() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double v_ub_s = 3;
+      if (this->v_ub_s() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double v_ub_l = 4;
+      if (this->v_ub_l() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double a_lb_s = 5;
+      if (this->a_lb_s() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double a_lb_l = 6;
+      if (this->a_lb_l() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double a_ub_s = 7;
+      if (this->a_ub_s() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double a_ub_l = 8;
+      if (this->a_ub_l() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = cached_size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+      return total_size;
+    }
+
+    void CubeConfig::MergeFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.CubeConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      const CubeConfig *source =
+          ::google::protobuf::internal::DynamicCastToGenerated<const CubeConfig>(
+              &from);
+      if (source == NULL)
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.CubeConfig)
+        ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+      }
+      else
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.CubeConfig)
+        MergeFrom(*source);
       }
     }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:planning.umbp.CubeConfig)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:planning.umbp.CubeConfig)
-  return false;
-#undef DO_
-}
 
-void CubeConfig::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:planning.umbp.CubeConfig)
-  // double v_lb_s = 1;
-  if (this->v_lb_s() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->v_lb_s(), output);
-  }
+    void CubeConfig::MergeFrom(const CubeConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.CubeConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.v_lb_s() != 0)
+      {
+        set_v_lb_s(from.v_lb_s());
+      }
+      if (from.v_lb_l() != 0)
+      {
+        set_v_lb_l(from.v_lb_l());
+      }
+      if (from.v_ub_s() != 0)
+      {
+        set_v_ub_s(from.v_ub_s());
+      }
+      if (from.v_ub_l() != 0)
+      {
+        set_v_ub_l(from.v_ub_l());
+      }
+      if (from.a_lb_s() != 0)
+      {
+        set_a_lb_s(from.a_lb_s());
+      }
+      if (from.a_lb_l() != 0)
+      {
+        set_a_lb_l(from.a_lb_l());
+      }
+      if (from.a_ub_s() != 0)
+      {
+        set_a_ub_s(from.a_ub_s());
+      }
+      if (from.a_ub_l() != 0)
+      {
+        set_a_ub_l(from.a_ub_l());
+      }
+    }
 
-  // double v_lb_l = 2;
-  if (this->v_lb_l() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->v_lb_l(), output);
-  }
+    void CubeConfig::CopyFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.CubeConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // double v_ub_s = 3;
-  if (this->v_ub_s() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->v_ub_s(), output);
-  }
+    void CubeConfig::CopyFrom(const CubeConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.CubeConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // double v_ub_l = 4;
-  if (this->v_ub_l() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->v_ub_l(), output);
-  }
+    bool CubeConfig::IsInitialized() const
+    {
+      return true;
+    }
 
-  // double a_lb_s = 5;
-  if (this->a_lb_s() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->a_lb_s(), output);
-  }
+    void CubeConfig::Swap(CubeConfig *other)
+    {
+      if (other == this)
+        return;
+      InternalSwap(other);
+    }
+    void CubeConfig::InternalSwap(CubeConfig *other)
+    {
+      std::swap(v_lb_s_, other->v_lb_s_);
+      std::swap(v_lb_l_, other->v_lb_l_);
+      std::swap(v_ub_s_, other->v_ub_s_);
+      std::swap(v_ub_l_, other->v_ub_l_);
+      std::swap(a_lb_s_, other->a_lb_s_);
+      std::swap(a_lb_l_, other->a_lb_l_);
+      std::swap(a_ub_s_, other->a_ub_s_);
+      std::swap(a_ub_l_, other->a_ub_l_);
+      std::swap(_cached_size_, other->_cached_size_);
+    }
 
-  // double a_lb_l = 6;
-  if (this->a_lb_l() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(6, this->a_lb_l(), output);
-  }
-
-  // double a_ub_s = 7;
-  if (this->a_ub_s() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(7, this->a_ub_s(), output);
-  }
-
-  // double a_ub_l = 8;
-  if (this->a_ub_l() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(8, this->a_ub_l(), output);
-  }
-
-  // @@protoc_insertion_point(serialize_end:planning.umbp.CubeConfig)
-}
-
-::google::protobuf::uint8* CubeConfig::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.CubeConfig)
-  // double v_lb_s = 1;
-  if (this->v_lb_s() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->v_lb_s(), target);
-  }
-
-  // double v_lb_l = 2;
-  if (this->v_lb_l() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->v_lb_l(), target);
-  }
-
-  // double v_ub_s = 3;
-  if (this->v_ub_s() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->v_ub_s(), target);
-  }
-
-  // double v_ub_l = 4;
-  if (this->v_ub_l() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->v_ub_l(), target);
-  }
-
-  // double a_lb_s = 5;
-  if (this->a_lb_s() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->a_lb_s(), target);
-  }
-
-  // double a_lb_l = 6;
-  if (this->a_lb_l() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(6, this->a_lb_l(), target);
-  }
-
-  // double a_ub_s = 7;
-  if (this->a_ub_s() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(7, this->a_ub_s(), target);
-  }
-
-  // double a_ub_l = 8;
-  if (this->a_ub_l() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(8, this->a_ub_l(), target);
-  }
-
-  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.CubeConfig)
-  return target;
-}
-
-size_t CubeConfig::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:planning.umbp.CubeConfig)
-  size_t total_size = 0;
-
-  // double v_lb_s = 1;
-  if (this->v_lb_s() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double v_lb_l = 2;
-  if (this->v_lb_l() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double v_ub_s = 3;
-  if (this->v_ub_s() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double v_ub_l = 4;
-  if (this->v_ub_l() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double a_lb_s = 5;
-  if (this->a_lb_s() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double a_lb_l = 6;
-  if (this->a_lb_l() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double a_ub_s = 7;
-  if (this->a_ub_s() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double a_ub_l = 8;
-  if (this->a_ub_l() != 0) {
-    total_size += 1 + 8;
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void CubeConfig::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.CubeConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  const CubeConfig* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const CubeConfig>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.CubeConfig)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.CubeConfig)
-    MergeFrom(*source);
-  }
-}
-
-void CubeConfig::MergeFrom(const CubeConfig& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.CubeConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.v_lb_s() != 0) {
-    set_v_lb_s(from.v_lb_s());
-  }
-  if (from.v_lb_l() != 0) {
-    set_v_lb_l(from.v_lb_l());
-  }
-  if (from.v_ub_s() != 0) {
-    set_v_ub_s(from.v_ub_s());
-  }
-  if (from.v_ub_l() != 0) {
-    set_v_ub_l(from.v_ub_l());
-  }
-  if (from.a_lb_s() != 0) {
-    set_a_lb_s(from.a_lb_s());
-  }
-  if (from.a_lb_l() != 0) {
-    set_a_lb_l(from.a_lb_l());
-  }
-  if (from.a_ub_s() != 0) {
-    set_a_ub_s(from.a_ub_s());
-  }
-  if (from.a_ub_l() != 0) {
-    set_a_ub_l(from.a_ub_l());
-  }
-}
-
-void CubeConfig::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.CubeConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void CubeConfig::CopyFrom(const CubeConfig& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.CubeConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool CubeConfig::IsInitialized() const {
-  return true;
-}
-
-void CubeConfig::Swap(CubeConfig* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void CubeConfig::InternalSwap(CubeConfig* other) {
-  std::swap(v_lb_s_, other->v_lb_s_);
-  std::swap(v_lb_l_, other->v_lb_l_);
-  std::swap(v_ub_s_, other->v_ub_s_);
-  std::swap(v_ub_l_, other->v_ub_l_);
-  std::swap(a_lb_s_, other->a_lb_s_);
-  std::swap(a_lb_l_, other->a_lb_l_);
-  std::swap(a_ub_s_, other->a_ub_s_);
-  std::swap(a_ub_l_, other->a_ub_l_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata CubeConfig::GetMetadata() const {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[11];
-}
+    ::google::protobuf::Metadata CubeConfig::GetMetadata() const
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[12];
+    }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// CubeConfig
+    // CubeConfig
 
-// double v_lb_s = 1;
-void CubeConfig::clear_v_lb_s() {
-  v_lb_s_ = 0;
-}
-double CubeConfig::v_lb_s() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.v_lb_s)
-  return v_lb_s_;
-}
-void CubeConfig::set_v_lb_s(double value) {
-  
-  v_lb_s_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.v_lb_s)
-}
+    // double v_lb_s = 1;
+    void CubeConfig::clear_v_lb_s()
+    {
+      v_lb_s_ = 0;
+    }
+    double CubeConfig::v_lb_s() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.v_lb_s)
+      return v_lb_s_;
+    }
+    void CubeConfig::set_v_lb_s(double value)
+    {
 
-// double v_lb_l = 2;
-void CubeConfig::clear_v_lb_l() {
-  v_lb_l_ = 0;
-}
-double CubeConfig::v_lb_l() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.v_lb_l)
-  return v_lb_l_;
-}
-void CubeConfig::set_v_lb_l(double value) {
-  
-  v_lb_l_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.v_lb_l)
-}
+      v_lb_s_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.v_lb_s)
+    }
 
-// double v_ub_s = 3;
-void CubeConfig::clear_v_ub_s() {
-  v_ub_s_ = 0;
-}
-double CubeConfig::v_ub_s() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.v_ub_s)
-  return v_ub_s_;
-}
-void CubeConfig::set_v_ub_s(double value) {
-  
-  v_ub_s_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.v_ub_s)
-}
+    // double v_lb_l = 2;
+    void CubeConfig::clear_v_lb_l()
+    {
+      v_lb_l_ = 0;
+    }
+    double CubeConfig::v_lb_l() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.v_lb_l)
+      return v_lb_l_;
+    }
+    void CubeConfig::set_v_lb_l(double value)
+    {
 
-// double v_ub_l = 4;
-void CubeConfig::clear_v_ub_l() {
-  v_ub_l_ = 0;
-}
-double CubeConfig::v_ub_l() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.v_ub_l)
-  return v_ub_l_;
-}
-void CubeConfig::set_v_ub_l(double value) {
-  
-  v_ub_l_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.v_ub_l)
-}
+      v_lb_l_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.v_lb_l)
+    }
 
-// double a_lb_s = 5;
-void CubeConfig::clear_a_lb_s() {
-  a_lb_s_ = 0;
-}
-double CubeConfig::a_lb_s() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.a_lb_s)
-  return a_lb_s_;
-}
-void CubeConfig::set_a_lb_s(double value) {
-  
-  a_lb_s_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.a_lb_s)
-}
+    // double v_ub_s = 3;
+    void CubeConfig::clear_v_ub_s()
+    {
+      v_ub_s_ = 0;
+    }
+    double CubeConfig::v_ub_s() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.v_ub_s)
+      return v_ub_s_;
+    }
+    void CubeConfig::set_v_ub_s(double value)
+    {
 
-// double a_lb_l = 6;
-void CubeConfig::clear_a_lb_l() {
-  a_lb_l_ = 0;
-}
-double CubeConfig::a_lb_l() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.a_lb_l)
-  return a_lb_l_;
-}
-void CubeConfig::set_a_lb_l(double value) {
-  
-  a_lb_l_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.a_lb_l)
-}
+      v_ub_s_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.v_ub_s)
+    }
 
-// double a_ub_s = 7;
-void CubeConfig::clear_a_ub_s() {
-  a_ub_s_ = 0;
-}
-double CubeConfig::a_ub_s() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.a_ub_s)
-  return a_ub_s_;
-}
-void CubeConfig::set_a_ub_s(double value) {
-  
-  a_ub_s_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.a_ub_s)
-}
+    // double v_ub_l = 4;
+    void CubeConfig::clear_v_ub_l()
+    {
+      v_ub_l_ = 0;
+    }
+    double CubeConfig::v_ub_l() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.v_ub_l)
+      return v_ub_l_;
+    }
+    void CubeConfig::set_v_ub_l(double value)
+    {
 
-// double a_ub_l = 8;
-void CubeConfig::clear_a_ub_l() {
-  a_ub_l_ = 0;
-}
-double CubeConfig::a_ub_l() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.a_ub_l)
-  return a_ub_l_;
-}
-void CubeConfig::set_a_ub_l(double value) {
-  
-  a_ub_l_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.a_ub_l)
-}
+      v_ub_l_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.v_ub_l)
+    }
 
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+    // double a_lb_s = 5;
+    void CubeConfig::clear_a_lb_s()
+    {
+      a_lb_s_ = 0;
+    }
+    double CubeConfig::a_lb_s() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.a_lb_s)
+      return a_lb_s_;
+    }
+    void CubeConfig::set_a_lb_s(double value)
+    {
 
-// ===================================================================
+      a_lb_s_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.a_lb_s)
+    }
+
+    // double a_lb_l = 6;
+    void CubeConfig::clear_a_lb_l()
+    {
+      a_lb_l_ = 0;
+    }
+    double CubeConfig::a_lb_l() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.a_lb_l)
+      return a_lb_l_;
+    }
+    void CubeConfig::set_a_lb_l(double value)
+    {
+
+      a_lb_l_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.a_lb_l)
+    }
+
+    // double a_ub_s = 7;
+    void CubeConfig::clear_a_ub_s()
+    {
+      a_ub_s_ = 0;
+    }
+    double CubeConfig::a_ub_s() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.a_ub_s)
+      return a_ub_s_;
+    }
+    void CubeConfig::set_a_ub_s(double value)
+    {
+
+      a_ub_s_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.a_ub_s)
+    }
+
+    // double a_ub_l = 8;
+    void CubeConfig::clear_a_ub_l()
+    {
+      a_ub_l_ = 0;
+    }
+    double CubeConfig::a_ub_l() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.CubeConfig.a_ub_l)
+      return a_ub_l_;
+    }
+    void CubeConfig::set_a_ub_l(double value)
+    {
+
+      a_ub_l_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.CubeConfig.a_ub_l)
+    }
+
+#endif // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+    // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int CarConfig::kCarWidthFieldNumber;
-const int CarConfig::kCarLengthFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+    const int CarConfig::kCarWidthFieldNumber;
+    const int CarConfig::kCarLengthFieldNumber;
+#endif // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-CarConfig::CarConfig()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:planning.umbp.CarConfig)
-}
-CarConfig::CarConfig(const CarConfig& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&car_width_, &from.car_width_,
-    reinterpret_cast<char*>(&car_length_) -
-    reinterpret_cast<char*>(&car_width_) + sizeof(car_length_));
-  // @@protoc_insertion_point(copy_constructor:planning.umbp.CarConfig)
-}
+    CarConfig::CarConfig()
+        : ::google::protobuf::Message(), _internal_metadata_(NULL)
+    {
+      if (GOOGLE_PREDICT_TRUE(this != internal_default_instance()))
+      {
+        protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      }
+      SharedCtor();
+      // @@protoc_insertion_point(constructor:planning.umbp.CarConfig)
+    }
+    CarConfig::CarConfig(const CarConfig &from)
+        : ::google::protobuf::Message(),
+          _internal_metadata_(NULL),
+          _cached_size_(0)
+    {
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      ::memcpy(&car_width_, &from.car_width_,
+               reinterpret_cast<char *>(&car_length_) -
+                   reinterpret_cast<char *>(&car_width_) + sizeof(car_length_));
+      // @@protoc_insertion_point(copy_constructor:planning.umbp.CarConfig)
+    }
 
-void CarConfig::SharedCtor() {
-  ::memset(&car_width_, 0, reinterpret_cast<char*>(&car_length_) -
-    reinterpret_cast<char*>(&car_width_) + sizeof(car_length_));
-  _cached_size_ = 0;
-}
+    void CarConfig::SharedCtor()
+    {
+      ::memset(&car_width_, 0, reinterpret_cast<char *>(&car_length_) - reinterpret_cast<char *>(&car_width_) + sizeof(car_length_));
+      _cached_size_ = 0;
+    }
 
-CarConfig::~CarConfig() {
-  // @@protoc_insertion_point(destructor:planning.umbp.CarConfig)
-  SharedDtor();
-}
+    CarConfig::~CarConfig()
+    {
+      // @@protoc_insertion_point(destructor:planning.umbp.CarConfig)
+      SharedDtor();
+    }
 
-void CarConfig::SharedDtor() {
-}
+    void CarConfig::SharedDtor()
+    {
+    }
 
-void CarConfig::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* CarConfig::descriptor() {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[12].descriptor;
-}
+    void CarConfig::SetCachedSize(int size) const
+    {
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    }
+    const ::google::protobuf::Descriptor *CarConfig::descriptor()
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[13].descriptor;
+    }
 
-const CarConfig& CarConfig::default_instance() {
-  protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
+    const CarConfig &CarConfig::default_instance()
+    {
+      protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      return *internal_default_instance();
+    }
 
-CarConfig* CarConfig::New(::google::protobuf::Arena* arena) const {
-  CarConfig* n = new CarConfig;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
+    CarConfig *CarConfig::New(::google::protobuf::Arena *arena) const
+    {
+      CarConfig *n = new CarConfig;
+      if (arena != NULL)
+      {
+        arena->Own(n);
+      }
+      return n;
+    }
 
-void CarConfig::Clear() {
-// @@protoc_insertion_point(message_clear_start:planning.umbp.CarConfig)
-  ::memset(&car_width_, 0, reinterpret_cast<char*>(&car_length_) -
-    reinterpret_cast<char*>(&car_width_) + sizeof(car_length_));
-}
+    void CarConfig::Clear()
+    {
+      // @@protoc_insertion_point(message_clear_start:planning.umbp.CarConfig)
+      ::memset(&car_width_, 0, reinterpret_cast<char *>(&car_length_) - reinterpret_cast<char *>(&car_width_) + sizeof(car_length_));
+    }
 
-bool CarConfig::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:planning.umbp.CarConfig)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // double car_width = 1;
-      case 1: {
-        if (tag == 9u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &car_width_)));
-        } else {
+    bool CarConfig::MergePartialFromCodedStream(
+        ::google::protobuf::io::CodedInputStream *input)
+    {
+#define DO_(EXPRESSION)                 \
+  if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) \
+  goto failure
+      ::google::protobuf::uint32 tag;
+      // @@protoc_insertion_point(parse_start:planning.umbp.CarConfig)
+      for (;;)
+      {
+        ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+        tag = p.first;
+        if (!p.second)
           goto handle_unusual;
+        switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag))
+        {
+        // double car_width = 1;
+        case 1:
+        {
+          if (tag == 9u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &car_width_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
         }
-        break;
+
+        // double car_length = 2;
+        case 2:
+        {
+          if (tag == 17u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &car_length_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        default:
+        {
+        handle_unusual:
+          if (tag == 0 ||
+              ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+                  ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP)
+          {
+            goto success;
+          }
+          DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+          break;
+        }
+        }
+      }
+    success:
+      // @@protoc_insertion_point(parse_success:planning.umbp.CarConfig)
+      return true;
+    failure:
+      // @@protoc_insertion_point(parse_failure:planning.umbp.CarConfig)
+      return false;
+#undef DO_
+    }
+
+    void CarConfig::SerializeWithCachedSizes(
+        ::google::protobuf::io::CodedOutputStream *output) const
+    {
+      // @@protoc_insertion_point(serialize_start:planning.umbp.CarConfig)
+      // double car_width = 1;
+      if (this->car_width() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->car_width(), output);
       }
 
       // double car_length = 2;
-      case 2: {
-        if (tag == 17u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &car_length_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->car_length() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->car_length(), output);
       }
 
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
+      // @@protoc_insertion_point(serialize_end:planning.umbp.CarConfig)
+    }
+
+    ::google::protobuf::uint8 *CarConfig::InternalSerializeWithCachedSizesToArray(
+        bool deterministic, ::google::protobuf::uint8 *target) const
+    {
+      (void)deterministic; // Unused
+      // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.CarConfig)
+      // double car_width = 1;
+      if (this->car_width() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->car_width(), target);
+      }
+
+      // double car_length = 2;
+      if (this->car_length() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->car_length(), target);
+      }
+
+      // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.CarConfig)
+      return target;
+    }
+
+    size_t CarConfig::ByteSizeLong() const
+    {
+      // @@protoc_insertion_point(message_byte_size_start:planning.umbp.CarConfig)
+      size_t total_size = 0;
+
+      // double car_width = 1;
+      if (this->car_width() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      // double car_length = 2;
+      if (this->car_length() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = cached_size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+      return total_size;
+    }
+
+    void CarConfig::MergeFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.CarConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      const CarConfig *source =
+          ::google::protobuf::internal::DynamicCastToGenerated<const CarConfig>(
+              &from);
+      if (source == NULL)
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.CarConfig)
+        ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+      }
+      else
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.CarConfig)
+        MergeFrom(*source);
       }
     }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:planning.umbp.CarConfig)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:planning.umbp.CarConfig)
-  return false;
-#undef DO_
-}
 
-void CarConfig::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:planning.umbp.CarConfig)
-  // double car_width = 1;
-  if (this->car_width() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->car_width(), output);
-  }
+    void CarConfig::MergeFrom(const CarConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.CarConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.car_width() != 0)
+      {
+        set_car_width(from.car_width());
+      }
+      if (from.car_length() != 0)
+      {
+        set_car_length(from.car_length());
+      }
+    }
 
-  // double car_length = 2;
-  if (this->car_length() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->car_length(), output);
-  }
+    void CarConfig::CopyFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.CarConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // @@protoc_insertion_point(serialize_end:planning.umbp.CarConfig)
-}
+    void CarConfig::CopyFrom(const CarConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.CarConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-::google::protobuf::uint8* CarConfig::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.CarConfig)
-  // double car_width = 1;
-  if (this->car_width() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->car_width(), target);
-  }
+    bool CarConfig::IsInitialized() const
+    {
+      return true;
+    }
 
-  // double car_length = 2;
-  if (this->car_length() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->car_length(), target);
-  }
+    void CarConfig::Swap(CarConfig *other)
+    {
+      if (other == this)
+        return;
+      InternalSwap(other);
+    }
+    void CarConfig::InternalSwap(CarConfig *other)
+    {
+      std::swap(car_width_, other->car_width_);
+      std::swap(car_length_, other->car_length_);
+      std::swap(_cached_size_, other->_cached_size_);
+    }
 
-  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.CarConfig)
-  return target;
-}
-
-size_t CarConfig::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:planning.umbp.CarConfig)
-  size_t total_size = 0;
-
-  // double car_width = 1;
-  if (this->car_width() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // double car_length = 2;
-  if (this->car_length() != 0) {
-    total_size += 1 + 8;
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void CarConfig::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.CarConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  const CarConfig* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const CarConfig>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.CarConfig)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.CarConfig)
-    MergeFrom(*source);
-  }
-}
-
-void CarConfig::MergeFrom(const CarConfig& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.CarConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.car_width() != 0) {
-    set_car_width(from.car_width());
-  }
-  if (from.car_length() != 0) {
-    set_car_length(from.car_length());
-  }
-}
-
-void CarConfig::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.CarConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void CarConfig::CopyFrom(const CarConfig& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.CarConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool CarConfig::IsInitialized() const {
-  return true;
-}
-
-void CarConfig::Swap(CarConfig* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void CarConfig::InternalSwap(CarConfig* other) {
-  std::swap(car_width_, other->car_width_);
-  std::swap(car_length_, other->car_length_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata CarConfig::GetMetadata() const {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[12];
-}
+    ::google::protobuf::Metadata CarConfig::GetMetadata() const
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[13];
+    }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// CarConfig
+    // CarConfig
 
-// double car_width = 1;
-void CarConfig::clear_car_width() {
-  car_width_ = 0;
-}
-double CarConfig::car_width() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.CarConfig.car_width)
-  return car_width_;
-}
-void CarConfig::set_car_width(double value) {
-  
-  car_width_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.CarConfig.car_width)
-}
+    // double car_width = 1;
+    void CarConfig::clear_car_width()
+    {
+      car_width_ = 0;
+    }
+    double CarConfig::car_width() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.CarConfig.car_width)
+      return car_width_;
+    }
+    void CarConfig::set_car_width(double value)
+    {
 
-// double car_length = 2;
-void CarConfig::clear_car_length() {
-  car_length_ = 0;
-}
-double CarConfig::car_length() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.CarConfig.car_length)
-  return car_length_;
-}
-void CarConfig::set_car_length(double value) {
-  
-  car_length_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.CarConfig.car_length)
-}
+      car_width_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.CarConfig.car_width)
+    }
 
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+    // double car_length = 2;
+    void CarConfig::clear_car_length()
+    {
+      car_length_ = 0;
+    }
+    double CarConfig::car_length() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.CarConfig.car_length)
+      return car_length_;
+    }
+    void CarConfig::set_car_length(double value)
+    {
 
-// ===================================================================
+      car_length_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.CarConfig.car_length)
+    }
+
+#endif // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+    // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int MapConfig::kReferenceSpeedFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+    const int MapConfig::kReferenceSpeedFieldNumber;
+#endif // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-MapConfig::MapConfig()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:planning.umbp.MapConfig)
-}
-MapConfig::MapConfig(const MapConfig& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  reference_speed_ = from.reference_speed_;
-  // @@protoc_insertion_point(copy_constructor:planning.umbp.MapConfig)
-}
+    MapConfig::MapConfig()
+        : ::google::protobuf::Message(), _internal_metadata_(NULL)
+    {
+      if (GOOGLE_PREDICT_TRUE(this != internal_default_instance()))
+      {
+        protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      }
+      SharedCtor();
+      // @@protoc_insertion_point(constructor:planning.umbp.MapConfig)
+    }
+    MapConfig::MapConfig(const MapConfig &from)
+        : ::google::protobuf::Message(),
+          _internal_metadata_(NULL),
+          _cached_size_(0)
+    {
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      reference_speed_ = from.reference_speed_;
+      // @@protoc_insertion_point(copy_constructor:planning.umbp.MapConfig)
+    }
 
-void MapConfig::SharedCtor() {
-  reference_speed_ = 0;
-  _cached_size_ = 0;
-}
+    void MapConfig::SharedCtor()
+    {
+      reference_speed_ = 0;
+      _cached_size_ = 0;
+    }
 
-MapConfig::~MapConfig() {
-  // @@protoc_insertion_point(destructor:planning.umbp.MapConfig)
-  SharedDtor();
-}
+    MapConfig::~MapConfig()
+    {
+      // @@protoc_insertion_point(destructor:planning.umbp.MapConfig)
+      SharedDtor();
+    }
 
-void MapConfig::SharedDtor() {
-}
+    void MapConfig::SharedDtor()
+    {
+    }
 
-void MapConfig::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* MapConfig::descriptor() {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[13].descriptor;
-}
+    void MapConfig::SetCachedSize(int size) const
+    {
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    }
+    const ::google::protobuf::Descriptor *MapConfig::descriptor()
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[14].descriptor;
+    }
 
-const MapConfig& MapConfig::default_instance() {
-  protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
+    const MapConfig &MapConfig::default_instance()
+    {
+      protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      return *internal_default_instance();
+    }
 
-MapConfig* MapConfig::New(::google::protobuf::Arena* arena) const {
-  MapConfig* n = new MapConfig;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
+    MapConfig *MapConfig::New(::google::protobuf::Arena *arena) const
+    {
+      MapConfig *n = new MapConfig;
+      if (arena != NULL)
+      {
+        arena->Own(n);
+      }
+      return n;
+    }
 
-void MapConfig::Clear() {
-// @@protoc_insertion_point(message_clear_start:planning.umbp.MapConfig)
-  reference_speed_ = 0;
-}
+    void MapConfig::Clear()
+    {
+      // @@protoc_insertion_point(message_clear_start:planning.umbp.MapConfig)
+      reference_speed_ = 0;
+    }
 
-bool MapConfig::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:planning.umbp.MapConfig)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    bool MapConfig::MergePartialFromCodedStream(
+        ::google::protobuf::io::CodedInputStream *input)
+    {
+#define DO_(EXPRESSION)                 \
+  if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) \
+  goto failure
+      ::google::protobuf::uint32 tag;
+      // @@protoc_insertion_point(parse_start:planning.umbp.MapConfig)
+      for (;;)
+      {
+        ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+        tag = p.first;
+        if (!p.second)
+          goto handle_unusual;
+        switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag))
+        {
+        // double reference_speed = 1;
+        case 1:
+        {
+          if (tag == 9u)
+          {
+
+            DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                 double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                input, &reference_speed_)));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        default:
+        {
+        handle_unusual:
+          if (tag == 0 ||
+              ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+                  ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP)
+          {
+            goto success;
+          }
+          DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+          break;
+        }
+        }
+      }
+    success:
+      // @@protoc_insertion_point(parse_success:planning.umbp.MapConfig)
+      return true;
+    failure:
+      // @@protoc_insertion_point(parse_failure:planning.umbp.MapConfig)
+      return false;
+#undef DO_
+    }
+
+    void MapConfig::SerializeWithCachedSizes(
+        ::google::protobuf::io::CodedOutputStream *output) const
+    {
+      // @@protoc_insertion_point(serialize_start:planning.umbp.MapConfig)
       // double reference_speed = 1;
-      case 1: {
-        if (tag == 9u) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &reference_speed_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->reference_speed() != 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->reference_speed(), output);
       }
 
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
+      // @@protoc_insertion_point(serialize_end:planning.umbp.MapConfig)
+    }
+
+    ::google::protobuf::uint8 *MapConfig::InternalSerializeWithCachedSizesToArray(
+        bool deterministic, ::google::protobuf::uint8 *target) const
+    {
+      (void)deterministic; // Unused
+      // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.MapConfig)
+      // double reference_speed = 1;
+      if (this->reference_speed() != 0)
+      {
+        target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->reference_speed(), target);
+      }
+
+      // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.MapConfig)
+      return target;
+    }
+
+    size_t MapConfig::ByteSizeLong() const
+    {
+      // @@protoc_insertion_point(message_byte_size_start:planning.umbp.MapConfig)
+      size_t total_size = 0;
+
+      // double reference_speed = 1;
+      if (this->reference_speed() != 0)
+      {
+        total_size += 1 + 8;
+      }
+
+      int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = cached_size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+      return total_size;
+    }
+
+    void MapConfig::MergeFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.MapConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      const MapConfig *source =
+          ::google::protobuf::internal::DynamicCastToGenerated<const MapConfig>(
+              &from);
+      if (source == NULL)
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.MapConfig)
+        ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+      }
+      else
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.MapConfig)
+        MergeFrom(*source);
       }
     }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:planning.umbp.MapConfig)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:planning.umbp.MapConfig)
-  return false;
-#undef DO_
-}
 
-void MapConfig::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:planning.umbp.MapConfig)
-  // double reference_speed = 1;
-  if (this->reference_speed() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->reference_speed(), output);
-  }
+    void MapConfig::MergeFrom(const MapConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.MapConfig)
+      GOOGLE_DCHECK_NE(&from, this);
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.reference_speed() != 0)
+      {
+        set_reference_speed(from.reference_speed());
+      }
+    }
 
-  // @@protoc_insertion_point(serialize_end:planning.umbp.MapConfig)
-}
+    void MapConfig::CopyFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.MapConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-::google::protobuf::uint8* MapConfig::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.MapConfig)
-  // double reference_speed = 1;
-  if (this->reference_speed() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->reference_speed(), target);
-  }
+    void MapConfig::CopyFrom(const MapConfig &from)
+    {
+      // @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.MapConfig)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.MapConfig)
-  return target;
-}
+    bool MapConfig::IsInitialized() const
+    {
+      return true;
+    }
 
-size_t MapConfig::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:planning.umbp.MapConfig)
-  size_t total_size = 0;
+    void MapConfig::Swap(MapConfig *other)
+    {
+      if (other == this)
+        return;
+      InternalSwap(other);
+    }
+    void MapConfig::InternalSwap(MapConfig *other)
+    {
+      std::swap(reference_speed_, other->reference_speed_);
+      std::swap(_cached_size_, other->_cached_size_);
+    }
 
-  // double reference_speed = 1;
-  if (this->reference_speed() != 0) {
-    total_size += 1 + 8;
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void MapConfig::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.MapConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  const MapConfig* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const MapConfig>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.MapConfig)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.MapConfig)
-    MergeFrom(*source);
-  }
-}
-
-void MapConfig::MergeFrom(const MapConfig& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.MapConfig)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.reference_speed() != 0) {
-    set_reference_speed(from.reference_speed());
-  }
-}
-
-void MapConfig::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.MapConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void MapConfig::CopyFrom(const MapConfig& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.MapConfig)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool MapConfig::IsInitialized() const {
-  return true;
-}
-
-void MapConfig::Swap(MapConfig* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void MapConfig::InternalSwap(MapConfig* other) {
-  std::swap(reference_speed_, other->reference_speed_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata MapConfig::GetMetadata() const {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[13];
-}
+    ::google::protobuf::Metadata MapConfig::GetMetadata() const
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[14];
+    }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// MapConfig
+    // MapConfig
 
-// double reference_speed = 1;
-void MapConfig::clear_reference_speed() {
-  reference_speed_ = 0;
-}
-double MapConfig::reference_speed() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.MapConfig.reference_speed)
-  return reference_speed_;
-}
-void MapConfig::set_reference_speed(double value) {
-  
-  reference_speed_ = value;
-  // @@protoc_insertion_point(field_set:planning.umbp.MapConfig.reference_speed)
-}
+    // double reference_speed = 1;
+    void MapConfig::clear_reference_speed()
+    {
+      reference_speed_ = 0;
+    }
+    double MapConfig::reference_speed() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.MapConfig.reference_speed)
+      return reference_speed_;
+    }
+    void MapConfig::set_reference_speed(double value)
+    {
 
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+      reference_speed_ = value;
+      // @@protoc_insertion_point(field_set:planning.umbp.MapConfig.reference_speed)
+    }
 
-// ===================================================================
+#endif // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+    // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int Config::kNameFieldNumber;
-const int Config::kVersionFieldNumber;
-const int Config::kStatusFieldNumber;
-const int Config::kCostFieldNumber;
-const int Config::kPropogateFieldNumber;
-const int Config::kEgoFieldNumber;
-const int Config::kBezierFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+    const int Config::kNameFieldNumber;
+    const int Config::kVersionFieldNumber;
+    const int Config::kStatusFieldNumber;
+    const int Config::kCostFieldNumber;
+    const int Config::kPropogateFieldNumber;
+    const int Config::kEgoFieldNumber;
+    const int Config::kBezierFieldNumber;
+#endif // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-Config::Config()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:planning.umbp.Config)
-}
-Config::Config(const Config& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.name().size() > 0) {
-    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
-  }
-  version_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.version().size() > 0) {
-    version_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.version_);
-  }
-  status_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.status().size() > 0) {
-    status_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.status_);
-  }
-  if (from.has_cost()) {
-    cost_ = new ::planning::umbp::CostConfig(*from.cost_);
-  } else {
-    cost_ = NULL;
-  }
-  if (from.has_propogate()) {
-    propogate_ = new ::planning::umbp::PropogateConfig(*from.propogate_);
-  } else {
-    propogate_ = NULL;
-  }
-  if (from.has_ego()) {
-    ego_ = new ::planning::umbp::EgoConfig(*from.ego_);
-  } else {
-    ego_ = NULL;
-  }
-  if (from.has_bezier()) {
-    bezier_ = new ::planning::umbp::BezierConfig(*from.bezier_);
-  } else {
-    bezier_ = NULL;
-  }
-  // @@protoc_insertion_point(copy_constructor:planning.umbp.Config)
-}
+    Config::Config()
+        : ::google::protobuf::Message(), _internal_metadata_(NULL)
+    {
+      if (GOOGLE_PREDICT_TRUE(this != internal_default_instance()))
+      {
+        protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      }
+      SharedCtor();
+      // @@protoc_insertion_point(constructor:planning.umbp.Config)
+    }
+    Config::Config(const Config &from)
+        : ::google::protobuf::Message(),
+          _internal_metadata_(NULL),
+          _cached_size_(0)
+    {
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+      if (from.name().size() > 0)
+      {
+        name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+      }
+      version_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+      if (from.version().size() > 0)
+      {
+        version_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.version_);
+      }
+      status_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+      if (from.status().size() > 0)
+      {
+        status_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.status_);
+      }
+      if (from.has_cost())
+      {
+        cost_ = new ::planning::umbp::CostConfig(*from.cost_);
+      }
+      else
+      {
+        cost_ = NULL;
+      }
+      if (from.has_propogate())
+      {
+        propogate_ = new ::planning::umbp::PropogateConfig(*from.propogate_);
+      }
+      else
+      {
+        propogate_ = NULL;
+      }
+      if (from.has_ego())
+      {
+        ego_ = new ::planning::umbp::EgoConfig(*from.ego_);
+      }
+      else
+      {
+        ego_ = NULL;
+      }
+      if (from.has_bezier())
+      {
+        bezier_ = new ::planning::umbp::BezierConfig(*from.bezier_);
+      }
+      else
+      {
+        bezier_ = NULL;
+      }
+      // @@protoc_insertion_point(copy_constructor:planning.umbp.Config)
+    }
 
-void Config::SharedCtor() {
-  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  version_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  status_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&cost_, 0, reinterpret_cast<char*>(&bezier_) -
-    reinterpret_cast<char*>(&cost_) + sizeof(bezier_));
-  _cached_size_ = 0;
-}
+    void Config::SharedCtor()
+    {
+      name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+      version_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+      status_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+      ::memset(&cost_, 0, reinterpret_cast<char *>(&bezier_) - reinterpret_cast<char *>(&cost_) + sizeof(bezier_));
+      _cached_size_ = 0;
+    }
 
-Config::~Config() {
-  // @@protoc_insertion_point(destructor:planning.umbp.Config)
-  SharedDtor();
-}
+    Config::~Config()
+    {
+      // @@protoc_insertion_point(destructor:planning.umbp.Config)
+      SharedDtor();
+    }
 
-void Config::SharedDtor() {
-  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  version_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  status_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) {
-    delete cost_;
-  }
-  if (this != internal_default_instance()) {
-    delete propogate_;
-  }
-  if (this != internal_default_instance()) {
-    delete ego_;
-  }
-  if (this != internal_default_instance()) {
-    delete bezier_;
-  }
-}
+    void Config::SharedDtor()
+    {
+      name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+      version_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+      status_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+      if (this != internal_default_instance())
+      {
+        delete cost_;
+      }
+      if (this != internal_default_instance())
+      {
+        delete propogate_;
+      }
+      if (this != internal_default_instance())
+      {
+        delete ego_;
+      }
+      if (this != internal_default_instance())
+      {
+        delete bezier_;
+      }
+    }
 
-void Config::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* Config::descriptor() {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[14].descriptor;
-}
+    void Config::SetCachedSize(int size) const
+    {
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    }
+    const ::google::protobuf::Descriptor *Config::descriptor()
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[15].descriptor;
+    }
 
-const Config& Config::default_instance() {
-  protobuf_umbp_5fconfig_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
+    const Config &Config::default_instance()
+    {
+      protobuf_umbp_5fconfig_2eproto::InitDefaults();
+      return *internal_default_instance();
+    }
 
-Config* Config::New(::google::protobuf::Arena* arena) const {
-  Config* n = new Config;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
+    Config *Config::New(::google::protobuf::Arena *arena) const
+    {
+      Config *n = new Config;
+      if (arena != NULL)
+      {
+        arena->Own(n);
+      }
+      return n;
+    }
 
-void Config::Clear() {
-// @@protoc_insertion_point(message_clear_start:planning.umbp.Config)
-  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  version_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  status_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && cost_ != NULL) {
-    delete cost_;
-  }
-  cost_ = NULL;
-  if (GetArenaNoVirtual() == NULL && propogate_ != NULL) {
-    delete propogate_;
-  }
-  propogate_ = NULL;
-  if (GetArenaNoVirtual() == NULL && ego_ != NULL) {
-    delete ego_;
-  }
-  ego_ = NULL;
-  if (GetArenaNoVirtual() == NULL && bezier_ != NULL) {
-    delete bezier_;
-  }
-  bezier_ = NULL;
-}
+    void Config::Clear()
+    {
+      // @@protoc_insertion_point(message_clear_start:planning.umbp.Config)
+      name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+      version_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+      status_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+      if (GetArenaNoVirtual() == NULL && cost_ != NULL)
+      {
+        delete cost_;
+      }
+      cost_ = NULL;
+      if (GetArenaNoVirtual() == NULL && propogate_ != NULL)
+      {
+        delete propogate_;
+      }
+      propogate_ = NULL;
+      if (GetArenaNoVirtual() == NULL && ego_ != NULL)
+      {
+        delete ego_;
+      }
+      ego_ = NULL;
+      if (GetArenaNoVirtual() == NULL && bezier_ != NULL)
+      {
+        delete bezier_;
+      }
+      bezier_ = NULL;
+    }
 
-bool Config::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:planning.umbp.Config)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string name = 1;
-      case 1: {
-        if (tag == 10u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_name()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->name().data(), this->name().length(),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "planning.umbp.Config.name"));
-        } else {
+    bool Config::MergePartialFromCodedStream(
+        ::google::protobuf::io::CodedInputStream *input)
+    {
+#define DO_(EXPRESSION)                 \
+  if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) \
+  goto failure
+      ::google::protobuf::uint32 tag;
+      // @@protoc_insertion_point(parse_start:planning.umbp.Config)
+      for (;;)
+      {
+        ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+        tag = p.first;
+        if (!p.second)
           goto handle_unusual;
+        switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag))
+        {
+        // string name = 1;
+        case 1:
+        {
+          if (tag == 10u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_name()));
+            DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                this->name().data(), this->name().length(),
+                ::google::protobuf::internal::WireFormatLite::PARSE,
+                "planning.umbp.Config.name"));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
         }
-        break;
+
+        // string version = 2;
+        case 2:
+        {
+          if (tag == 18u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_version()));
+            DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                this->version().data(), this->version().length(),
+                ::google::protobuf::internal::WireFormatLite::PARSE,
+                "planning.umbp.Config.version"));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // string status = 3;
+        case 3:
+        {
+          if (tag == 26u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_status()));
+            DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                this->status().data(), this->status().length(),
+                ::google::protobuf::internal::WireFormatLite::PARSE,
+                "planning.umbp.Config.status"));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // .planning.umbp.CostConfig cost = 4;
+        case 4:
+        {
+          if (tag == 34u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, mutable_cost()));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // .planning.umbp.PropogateConfig propogate = 5;
+        case 5:
+        {
+          if (tag == 42u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, mutable_propogate()));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // .planning.umbp.EgoConfig ego = 6;
+        case 6:
+        {
+          if (tag == 50u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, mutable_ego()));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        // .planning.umbp.BezierConfig bezier = 7;
+        case 7:
+        {
+          if (tag == 58u)
+          {
+            DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, mutable_bezier()));
+          }
+          else
+          {
+            goto handle_unusual;
+          }
+          break;
+        }
+
+        default:
+        {
+        handle_unusual:
+          if (tag == 0 ||
+              ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+                  ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP)
+          {
+            goto success;
+          }
+          DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+          break;
+        }
+        }
+      }
+    success:
+      // @@protoc_insertion_point(parse_success:planning.umbp.Config)
+      return true;
+    failure:
+      // @@protoc_insertion_point(parse_failure:planning.umbp.Config)
+      return false;
+#undef DO_
+    }
+
+    void Config::SerializeWithCachedSizes(
+        ::google::protobuf::io::CodedOutputStream *output) const
+    {
+      // @@protoc_insertion_point(serialize_start:planning.umbp.Config)
+      // string name = 1;
+      if (this->name().size() > 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->name().data(), this->name().length(),
+            ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+            "planning.umbp.Config.name");
+        ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+            1, this->name(), output);
       }
 
       // string version = 2;
-      case 2: {
-        if (tag == 18u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_version()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      if (this->version().size() > 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->version().data(), this->version().length(),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "planning.umbp.Config.version"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+            ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+            "planning.umbp.Config.version");
+        ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+            2, this->version(), output);
       }
 
       // string status = 3;
-      case 3: {
-        if (tag == 26u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_status()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      if (this->status().size() > 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->status().data(), this->status().length(),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "planning.umbp.Config.status"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+            ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+            "planning.umbp.Config.status");
+        ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+            3, this->status(), output);
       }
 
       // .planning.umbp.CostConfig cost = 4;
-      case 4: {
-        if (tag == 34u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_cost()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->has_cost())
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            4, *this->cost_, output);
       }
 
       // .planning.umbp.PropogateConfig propogate = 5;
-      case 5: {
-        if (tag == 42u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_propogate()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->has_propogate())
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            5, *this->propogate_, output);
       }
 
       // .planning.umbp.EgoConfig ego = 6;
-      case 6: {
-        if (tag == 50u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_ego()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->has_ego())
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            6, *this->ego_, output);
       }
 
       // .planning.umbp.BezierConfig bezier = 7;
-      case 7: {
-        if (tag == 58u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_bezier()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
+      if (this->has_bezier())
+      {
+        ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+            7, *this->bezier_, output);
       }
 
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
+      // @@protoc_insertion_point(serialize_end:planning.umbp.Config)
+    }
+
+    ::google::protobuf::uint8 *Config::InternalSerializeWithCachedSizesToArray(
+        bool deterministic, ::google::protobuf::uint8 *target) const
+    {
+      (void)deterministic; // Unused
+      // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.Config)
+      // string name = 1;
+      if (this->name().size() > 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->name().data(), this->name().length(),
+            ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+            "planning.umbp.Config.name");
+        target =
+            ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+                1, this->name(), target);
+      }
+
+      // string version = 2;
+      if (this->version().size() > 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->version().data(), this->version().length(),
+            ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+            "planning.umbp.Config.version");
+        target =
+            ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+                2, this->version(), target);
+      }
+
+      // string status = 3;
+      if (this->status().size() > 0)
+      {
+        ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->status().data(), this->status().length(),
+            ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+            "planning.umbp.Config.status");
+        target =
+            ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+                3, this->status(), target);
+      }
+
+      // .planning.umbp.CostConfig cost = 4;
+      if (this->has_cost())
+      {
+        target = ::google::protobuf::internal::WireFormatLite::
+            InternalWriteMessageNoVirtualToArray(
+                4, *this->cost_, false, target);
+      }
+
+      // .planning.umbp.PropogateConfig propogate = 5;
+      if (this->has_propogate())
+      {
+        target = ::google::protobuf::internal::WireFormatLite::
+            InternalWriteMessageNoVirtualToArray(
+                5, *this->propogate_, false, target);
+      }
+
+      // .planning.umbp.EgoConfig ego = 6;
+      if (this->has_ego())
+      {
+        target = ::google::protobuf::internal::WireFormatLite::
+            InternalWriteMessageNoVirtualToArray(
+                6, *this->ego_, false, target);
+      }
+
+      // .planning.umbp.BezierConfig bezier = 7;
+      if (this->has_bezier())
+      {
+        target = ::google::protobuf::internal::WireFormatLite::
+            InternalWriteMessageNoVirtualToArray(
+                7, *this->bezier_, false, target);
+      }
+
+      // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.Config)
+      return target;
+    }
+
+    size_t Config::ByteSizeLong() const
+    {
+      // @@protoc_insertion_point(message_byte_size_start:planning.umbp.Config)
+      size_t total_size = 0;
+
+      // string name = 1;
+      if (this->name().size() > 0)
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::StringSize(
+                          this->name());
+      }
+
+      // string version = 2;
+      if (this->version().size() > 0)
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::StringSize(
+                          this->version());
+      }
+
+      // string status = 3;
+      if (this->status().size() > 0)
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::StringSize(
+                          this->status());
+      }
+
+      // .planning.umbp.CostConfig cost = 4;
+      if (this->has_cost())
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+                          *this->cost_);
+      }
+
+      // .planning.umbp.PropogateConfig propogate = 5;
+      if (this->has_propogate())
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+                          *this->propogate_);
+      }
+
+      // .planning.umbp.EgoConfig ego = 6;
+      if (this->has_ego())
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+                          *this->ego_);
+      }
+
+      // .planning.umbp.BezierConfig bezier = 7;
+      if (this->has_bezier())
+      {
+        total_size += 1 +
+                      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+                          *this->bezier_);
+      }
+
+      int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+      GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+      _cached_size_ = cached_size;
+      GOOGLE_SAFE_CONCURRENT_WRITES_END();
+      return total_size;
+    }
+
+    void Config::MergeFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.Config)
+      GOOGLE_DCHECK_NE(&from, this);
+      const Config *source =
+          ::google::protobuf::internal::DynamicCastToGenerated<const Config>(
+              &from);
+      if (source == NULL)
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.Config)
+        ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+      }
+      else
+      {
+        // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.Config)
+        MergeFrom(*source);
       }
     }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:planning.umbp.Config)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:planning.umbp.Config)
-  return false;
-#undef DO_
-}
 
-void Config::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:planning.umbp.Config)
-  // string name = 1;
-  if (this->name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->name().data(), this->name().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "planning.umbp.Config.name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->name(), output);
-  }
+    void Config::MergeFrom(const Config &from)
+    {
+      // @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.Config)
+      GOOGLE_DCHECK_NE(&from, this);
+      _internal_metadata_.MergeFrom(from._internal_metadata_);
+      if (from.name().size() > 0)
+      {
 
-  // string version = 2;
-  if (this->version().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->version().data(), this->version().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "planning.umbp.Config.version");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->version(), output);
-  }
+        name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+      }
+      if (from.version().size() > 0)
+      {
 
-  // string status = 3;
-  if (this->status().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->status().data(), this->status().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "planning.umbp.Config.status");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->status(), output);
-  }
+        version_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.version_);
+      }
+      if (from.status().size() > 0)
+      {
 
-  // .planning.umbp.CostConfig cost = 4;
-  if (this->has_cost()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, *this->cost_, output);
-  }
+        status_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.status_);
+      }
+      if (from.has_cost())
+      {
+        mutable_cost()->::planning::umbp::CostConfig::MergeFrom(from.cost());
+      }
+      if (from.has_propogate())
+      {
+        mutable_propogate()->::planning::umbp::PropogateConfig::MergeFrom(from.propogate());
+      }
+      if (from.has_ego())
+      {
+        mutable_ego()->::planning::umbp::EgoConfig::MergeFrom(from.ego());
+      }
+      if (from.has_bezier())
+      {
+        mutable_bezier()->::planning::umbp::BezierConfig::MergeFrom(from.bezier());
+      }
+    }
 
-  // .planning.umbp.PropogateConfig propogate = 5;
-  if (this->has_propogate()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      5, *this->propogate_, output);
-  }
+    void Config::CopyFrom(const ::google::protobuf::Message &from)
+    {
+      // @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.Config)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // .planning.umbp.EgoConfig ego = 6;
-  if (this->has_ego()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      6, *this->ego_, output);
-  }
+    void Config::CopyFrom(const Config &from)
+    {
+      // @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.Config)
+      if (&from == this)
+        return;
+      Clear();
+      MergeFrom(from);
+    }
 
-  // .planning.umbp.BezierConfig bezier = 7;
-  if (this->has_bezier()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      7, *this->bezier_, output);
-  }
+    bool Config::IsInitialized() const
+    {
+      return true;
+    }
 
-  // @@protoc_insertion_point(serialize_end:planning.umbp.Config)
-}
+    void Config::Swap(Config *other)
+    {
+      if (other == this)
+        return;
+      InternalSwap(other);
+    }
+    void Config::InternalSwap(Config *other)
+    {
+      name_.Swap(&other->name_);
+      version_.Swap(&other->version_);
+      status_.Swap(&other->status_);
+      std::swap(cost_, other->cost_);
+      std::swap(propogate_, other->propogate_);
+      std::swap(ego_, other->ego_);
+      std::swap(bezier_, other->bezier_);
+      std::swap(_cached_size_, other->_cached_size_);
+    }
 
-::google::protobuf::uint8* Config::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:planning.umbp.Config)
-  // string name = 1;
-  if (this->name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->name().data(), this->name().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "planning.umbp.Config.name");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->name(), target);
-  }
-
-  // string version = 2;
-  if (this->version().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->version().data(), this->version().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "planning.umbp.Config.version");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->version(), target);
-  }
-
-  // string status = 3;
-  if (this->status().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->status().data(), this->status().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "planning.umbp.Config.status");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->status(), target);
-  }
-
-  // .planning.umbp.CostConfig cost = 4;
-  if (this->has_cost()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        4, *this->cost_, false, target);
-  }
-
-  // .planning.umbp.PropogateConfig propogate = 5;
-  if (this->has_propogate()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        5, *this->propogate_, false, target);
-  }
-
-  // .planning.umbp.EgoConfig ego = 6;
-  if (this->has_ego()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        6, *this->ego_, false, target);
-  }
-
-  // .planning.umbp.BezierConfig bezier = 7;
-  if (this->has_bezier()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        7, *this->bezier_, false, target);
-  }
-
-  // @@protoc_insertion_point(serialize_to_array_end:planning.umbp.Config)
-  return target;
-}
-
-size_t Config::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:planning.umbp.Config)
-  size_t total_size = 0;
-
-  // string name = 1;
-  if (this->name().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->name());
-  }
-
-  // string version = 2;
-  if (this->version().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->version());
-  }
-
-  // string status = 3;
-  if (this->status().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->status());
-  }
-
-  // .planning.umbp.CostConfig cost = 4;
-  if (this->has_cost()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->cost_);
-  }
-
-  // .planning.umbp.PropogateConfig propogate = 5;
-  if (this->has_propogate()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->propogate_);
-  }
-
-  // .planning.umbp.EgoConfig ego = 6;
-  if (this->has_ego()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->ego_);
-  }
-
-  // .planning.umbp.BezierConfig bezier = 7;
-  if (this->has_bezier()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->bezier_);
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void Config::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:planning.umbp.Config)
-  GOOGLE_DCHECK_NE(&from, this);
-  const Config* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const Config>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:planning.umbp.Config)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:planning.umbp.Config)
-    MergeFrom(*source);
-  }
-}
-
-void Config::MergeFrom(const Config& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:planning.umbp.Config)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.name().size() > 0) {
-
-    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
-  }
-  if (from.version().size() > 0) {
-
-    version_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.version_);
-  }
-  if (from.status().size() > 0) {
-
-    status_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.status_);
-  }
-  if (from.has_cost()) {
-    mutable_cost()->::planning::umbp::CostConfig::MergeFrom(from.cost());
-  }
-  if (from.has_propogate()) {
-    mutable_propogate()->::planning::umbp::PropogateConfig::MergeFrom(from.propogate());
-  }
-  if (from.has_ego()) {
-    mutable_ego()->::planning::umbp::EgoConfig::MergeFrom(from.ego());
-  }
-  if (from.has_bezier()) {
-    mutable_bezier()->::planning::umbp::BezierConfig::MergeFrom(from.bezier());
-  }
-}
-
-void Config::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:planning.umbp.Config)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void Config::CopyFrom(const Config& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:planning.umbp.Config)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool Config::IsInitialized() const {
-  return true;
-}
-
-void Config::Swap(Config* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void Config::InternalSwap(Config* other) {
-  name_.Swap(&other->name_);
-  version_.Swap(&other->version_);
-  status_.Swap(&other->status_);
-  std::swap(cost_, other->cost_);
-  std::swap(propogate_, other->propogate_);
-  std::swap(ego_, other->ego_);
-  std::swap(bezier_, other->bezier_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata Config::GetMetadata() const {
-  protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_umbp_5fconfig_2eproto::file_level_metadata[14];
-}
+    ::google::protobuf::Metadata Config::GetMetadata() const
+    {
+      protobuf_umbp_5fconfig_2eproto::protobuf_AssignDescriptorsOnce();
+      return protobuf_umbp_5fconfig_2eproto::file_level_metadata[15];
+    }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// Config
+    // Config
 
-// string name = 1;
-void Config::clear_name() {
-  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-const ::std::string& Config::name() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.Config.name)
-  return name_.GetNoArena();
-}
-void Config::set_name(const ::std::string& value) {
-  
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:planning.umbp.Config.name)
-}
+    // string name = 1;
+    void Config::clear_name()
+    {
+      name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+    const ::std::string &Config::name() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.Config.name)
+      return name_.GetNoArena();
+    }
+    void Config::set_name(const ::std::string &value)
+    {
+
+      name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+      // @@protoc_insertion_point(field_set:planning.umbp.Config.name)
+    }
 #if LANG_CXX11
-void Config::set_name(::std::string&& value) {
-  
-  name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:planning.umbp.Config.name)
-}
-#endif
-void Config::set_name(const char* value) {
-  
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:planning.umbp.Config.name)
-}
-void Config::set_name(const char* value, size_t size) {
-  
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:planning.umbp.Config.name)
-}
-::std::string* Config::mutable_name() {
-  
-  // @@protoc_insertion_point(field_mutable:planning.umbp.Config.name)
-  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* Config::release_name() {
-  // @@protoc_insertion_point(field_release:planning.umbp.Config.name)
-  
-  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void Config::set_allocated_name(::std::string* name) {
-  if (name != NULL) {
-    
-  } else {
-    
-  }
-  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
-  // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.name)
-}
+    void Config::set_name(::std::string &&value)
+    {
 
-// string version = 2;
-void Config::clear_version() {
-  version_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-const ::std::string& Config::version() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.Config.version)
-  return version_.GetNoArena();
-}
-void Config::set_version(const ::std::string& value) {
-  
-  version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:planning.umbp.Config.version)
-}
+      name_.SetNoArena(
+          &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+      // @@protoc_insertion_point(field_set_rvalue:planning.umbp.Config.name)
+    }
+#endif
+    void Config::set_name(const char *value)
+    {
+
+      name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+      // @@protoc_insertion_point(field_set_char:planning.umbp.Config.name)
+    }
+    void Config::set_name(const char *value, size_t size)
+    {
+
+      name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                       ::std::string(reinterpret_cast<const char *>(value), size));
+      // @@protoc_insertion_point(field_set_pointer:planning.umbp.Config.name)
+    }
+    ::std::string *Config::mutable_name()
+    {
+
+      // @@protoc_insertion_point(field_mutable:planning.umbp.Config.name)
+      return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+    ::std::string *Config::release_name()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.Config.name)
+
+      return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+    void Config::set_allocated_name(::std::string *name)
+    {
+      if (name != NULL)
+      {
+      }
+      else
+      {
+      }
+      name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.name)
+    }
+
+    // string version = 2;
+    void Config::clear_version()
+    {
+      version_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+    const ::std::string &Config::version() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.Config.version)
+      return version_.GetNoArena();
+    }
+    void Config::set_version(const ::std::string &value)
+    {
+
+      version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+      // @@protoc_insertion_point(field_set:planning.umbp.Config.version)
+    }
 #if LANG_CXX11
-void Config::set_version(::std::string&& value) {
-  
-  version_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:planning.umbp.Config.version)
-}
-#endif
-void Config::set_version(const char* value) {
-  
-  version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:planning.umbp.Config.version)
-}
-void Config::set_version(const char* value, size_t size) {
-  
-  version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:planning.umbp.Config.version)
-}
-::std::string* Config::mutable_version() {
-  
-  // @@protoc_insertion_point(field_mutable:planning.umbp.Config.version)
-  return version_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* Config::release_version() {
-  // @@protoc_insertion_point(field_release:planning.umbp.Config.version)
-  
-  return version_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void Config::set_allocated_version(::std::string* version) {
-  if (version != NULL) {
-    
-  } else {
-    
-  }
-  version_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), version);
-  // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.version)
-}
+    void Config::set_version(::std::string &&value)
+    {
 
-// string status = 3;
-void Config::clear_status() {
-  status_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-const ::std::string& Config::status() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.Config.status)
-  return status_.GetNoArena();
-}
-void Config::set_status(const ::std::string& value) {
-  
-  status_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:planning.umbp.Config.status)
-}
+      version_.SetNoArena(
+          &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+      // @@protoc_insertion_point(field_set_rvalue:planning.umbp.Config.version)
+    }
+#endif
+    void Config::set_version(const char *value)
+    {
+
+      version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+      // @@protoc_insertion_point(field_set_char:planning.umbp.Config.version)
+    }
+    void Config::set_version(const char *value, size_t size)
+    {
+
+      version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                          ::std::string(reinterpret_cast<const char *>(value), size));
+      // @@protoc_insertion_point(field_set_pointer:planning.umbp.Config.version)
+    }
+    ::std::string *Config::mutable_version()
+    {
+
+      // @@protoc_insertion_point(field_mutable:planning.umbp.Config.version)
+      return version_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+    ::std::string *Config::release_version()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.Config.version)
+
+      return version_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+    void Config::set_allocated_version(::std::string *version)
+    {
+      if (version != NULL)
+      {
+      }
+      else
+      {
+      }
+      version_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), version);
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.version)
+    }
+
+    // string status = 3;
+    void Config::clear_status()
+    {
+      status_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+    const ::std::string &Config::status() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.Config.status)
+      return status_.GetNoArena();
+    }
+    void Config::set_status(const ::std::string &value)
+    {
+
+      status_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+      // @@protoc_insertion_point(field_set:planning.umbp.Config.status)
+    }
 #if LANG_CXX11
-void Config::set_status(::std::string&& value) {
-  
-  status_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:planning.umbp.Config.status)
-}
+    void Config::set_status(::std::string &&value)
+    {
+
+      status_.SetNoArena(
+          &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+      // @@protoc_insertion_point(field_set_rvalue:planning.umbp.Config.status)
+    }
 #endif
-void Config::set_status(const char* value) {
-  
-  status_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:planning.umbp.Config.status)
-}
-void Config::set_status(const char* value, size_t size) {
-  
-  status_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:planning.umbp.Config.status)
-}
-::std::string* Config::mutable_status() {
-  
-  // @@protoc_insertion_point(field_mutable:planning.umbp.Config.status)
-  return status_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* Config::release_status() {
-  // @@protoc_insertion_point(field_release:planning.umbp.Config.status)
-  
-  return status_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void Config::set_allocated_status(::std::string* status) {
-  if (status != NULL) {
-    
-  } else {
-    
-  }
-  status_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), status);
-  // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.status)
-}
+    void Config::set_status(const char *value)
+    {
 
-// .planning.umbp.CostConfig cost = 4;
-bool Config::has_cost() const {
-  return this != internal_default_instance() && cost_ != NULL;
-}
-void Config::clear_cost() {
-  if (GetArenaNoVirtual() == NULL && cost_ != NULL) delete cost_;
-  cost_ = NULL;
-}
-const ::planning::umbp::CostConfig& Config::cost() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.Config.cost)
-  return cost_ != NULL ? *cost_
-                         : *::planning::umbp::CostConfig::internal_default_instance();
-}
-::planning::umbp::CostConfig* Config::mutable_cost() {
-  
-  if (cost_ == NULL) {
-    cost_ = new ::planning::umbp::CostConfig;
-  }
-  // @@protoc_insertion_point(field_mutable:planning.umbp.Config.cost)
-  return cost_;
-}
-::planning::umbp::CostConfig* Config::release_cost() {
-  // @@protoc_insertion_point(field_release:planning.umbp.Config.cost)
-  
-  ::planning::umbp::CostConfig* temp = cost_;
-  cost_ = NULL;
-  return temp;
-}
-void Config::set_allocated_cost(::planning::umbp::CostConfig* cost) {
-  delete cost_;
-  cost_ = cost;
-  if (cost) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.cost)
-}
+      status_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+      // @@protoc_insertion_point(field_set_char:planning.umbp.Config.status)
+    }
+    void Config::set_status(const char *value, size_t size)
+    {
 
-// .planning.umbp.PropogateConfig propogate = 5;
-bool Config::has_propogate() const {
-  return this != internal_default_instance() && propogate_ != NULL;
-}
-void Config::clear_propogate() {
-  if (GetArenaNoVirtual() == NULL && propogate_ != NULL) delete propogate_;
-  propogate_ = NULL;
-}
-const ::planning::umbp::PropogateConfig& Config::propogate() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.Config.propogate)
-  return propogate_ != NULL ? *propogate_
-                         : *::planning::umbp::PropogateConfig::internal_default_instance();
-}
-::planning::umbp::PropogateConfig* Config::mutable_propogate() {
-  
-  if (propogate_ == NULL) {
-    propogate_ = new ::planning::umbp::PropogateConfig;
-  }
-  // @@protoc_insertion_point(field_mutable:planning.umbp.Config.propogate)
-  return propogate_;
-}
-::planning::umbp::PropogateConfig* Config::release_propogate() {
-  // @@protoc_insertion_point(field_release:planning.umbp.Config.propogate)
-  
-  ::planning::umbp::PropogateConfig* temp = propogate_;
-  propogate_ = NULL;
-  return temp;
-}
-void Config::set_allocated_propogate(::planning::umbp::PropogateConfig* propogate) {
-  delete propogate_;
-  propogate_ = propogate;
-  if (propogate) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.propogate)
-}
+      status_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+                         ::std::string(reinterpret_cast<const char *>(value), size));
+      // @@protoc_insertion_point(field_set_pointer:planning.umbp.Config.status)
+    }
+    ::std::string *Config::mutable_status()
+    {
 
-// .planning.umbp.EgoConfig ego = 6;
-bool Config::has_ego() const {
-  return this != internal_default_instance() && ego_ != NULL;
-}
-void Config::clear_ego() {
-  if (GetArenaNoVirtual() == NULL && ego_ != NULL) delete ego_;
-  ego_ = NULL;
-}
-const ::planning::umbp::EgoConfig& Config::ego() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.Config.ego)
-  return ego_ != NULL ? *ego_
-                         : *::planning::umbp::EgoConfig::internal_default_instance();
-}
-::planning::umbp::EgoConfig* Config::mutable_ego() {
-  
-  if (ego_ == NULL) {
-    ego_ = new ::planning::umbp::EgoConfig;
-  }
-  // @@protoc_insertion_point(field_mutable:planning.umbp.Config.ego)
-  return ego_;
-}
-::planning::umbp::EgoConfig* Config::release_ego() {
-  // @@protoc_insertion_point(field_release:planning.umbp.Config.ego)
-  
-  ::planning::umbp::EgoConfig* temp = ego_;
-  ego_ = NULL;
-  return temp;
-}
-void Config::set_allocated_ego(::planning::umbp::EgoConfig* ego) {
-  delete ego_;
-  ego_ = ego;
-  if (ego) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.ego)
-}
+      // @@protoc_insertion_point(field_mutable:planning.umbp.Config.status)
+      return status_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+    ::std::string *Config::release_status()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.Config.status)
 
-// .planning.umbp.BezierConfig bezier = 7;
-bool Config::has_bezier() const {
-  return this != internal_default_instance() && bezier_ != NULL;
-}
-void Config::clear_bezier() {
-  if (GetArenaNoVirtual() == NULL && bezier_ != NULL) delete bezier_;
-  bezier_ = NULL;
-}
-const ::planning::umbp::BezierConfig& Config::bezier() const {
-  // @@protoc_insertion_point(field_get:planning.umbp.Config.bezier)
-  return bezier_ != NULL ? *bezier_
-                         : *::planning::umbp::BezierConfig::internal_default_instance();
-}
-::planning::umbp::BezierConfig* Config::mutable_bezier() {
-  
-  if (bezier_ == NULL) {
-    bezier_ = new ::planning::umbp::BezierConfig;
-  }
-  // @@protoc_insertion_point(field_mutable:planning.umbp.Config.bezier)
-  return bezier_;
-}
-::planning::umbp::BezierConfig* Config::release_bezier() {
-  // @@protoc_insertion_point(field_release:planning.umbp.Config.bezier)
-  
-  ::planning::umbp::BezierConfig* temp = bezier_;
-  bezier_ = NULL;
-  return temp;
-}
-void Config::set_allocated_bezier(::planning::umbp::BezierConfig* bezier) {
-  delete bezier_;
-  bezier_ = bezier;
-  if (bezier) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.bezier)
-}
+      return status_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+    void Config::set_allocated_status(::std::string *status)
+    {
+      if (status != NULL)
+      {
+      }
+      else
+      {
+      }
+      status_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), status);
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.status)
+    }
 
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+    // .planning.umbp.CostConfig cost = 4;
+    bool Config::has_cost() const
+    {
+      return this != internal_default_instance() && cost_ != NULL;
+    }
+    void Config::clear_cost()
+    {
+      if (GetArenaNoVirtual() == NULL && cost_ != NULL)
+        delete cost_;
+      cost_ = NULL;
+    }
+    const ::planning::umbp::CostConfig &Config::cost() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.Config.cost)
+      return cost_ != NULL ? *cost_
+                           : *::planning::umbp::CostConfig::internal_default_instance();
+    }
+    ::planning::umbp::CostConfig *Config::mutable_cost()
+    {
 
-// @@protoc_insertion_point(namespace_scope)
+      if (cost_ == NULL)
+      {
+        cost_ = new ::planning::umbp::CostConfig;
+      }
+      // @@protoc_insertion_point(field_mutable:planning.umbp.Config.cost)
+      return cost_;
+    }
+    ::planning::umbp::CostConfig *Config::release_cost()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.Config.cost)
 
-}  // namespace umbp
-}  // namespace planning
+      ::planning::umbp::CostConfig *temp = cost_;
+      cost_ = NULL;
+      return temp;
+    }
+    void Config::set_allocated_cost(::planning::umbp::CostConfig *cost)
+    {
+      delete cost_;
+      cost_ = cost;
+      if (cost)
+      {
+      }
+      else
+      {
+      }
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.cost)
+    }
+
+    // .planning.umbp.PropogateConfig propogate = 5;
+    bool Config::has_propogate() const
+    {
+      return this != internal_default_instance() && propogate_ != NULL;
+    }
+    void Config::clear_propogate()
+    {
+      if (GetArenaNoVirtual() == NULL && propogate_ != NULL)
+        delete propogate_;
+      propogate_ = NULL;
+    }
+    const ::planning::umbp::PropogateConfig &Config::propogate() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.Config.propogate)
+      return propogate_ != NULL ? *propogate_
+                                : *::planning::umbp::PropogateConfig::internal_default_instance();
+    }
+    ::planning::umbp::PropogateConfig *Config::mutable_propogate()
+    {
+
+      if (propogate_ == NULL)
+      {
+        propogate_ = new ::planning::umbp::PropogateConfig;
+      }
+      // @@protoc_insertion_point(field_mutable:planning.umbp.Config.propogate)
+      return propogate_;
+    }
+    ::planning::umbp::PropogateConfig *Config::release_propogate()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.Config.propogate)
+
+      ::planning::umbp::PropogateConfig *temp = propogate_;
+      propogate_ = NULL;
+      return temp;
+    }
+    void Config::set_allocated_propogate(::planning::umbp::PropogateConfig *propogate)
+    {
+      delete propogate_;
+      propogate_ = propogate;
+      if (propogate)
+      {
+      }
+      else
+      {
+      }
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.propogate)
+    }
+
+    // .planning.umbp.EgoConfig ego = 6;
+    bool Config::has_ego() const
+    {
+      return this != internal_default_instance() && ego_ != NULL;
+    }
+    void Config::clear_ego()
+    {
+      if (GetArenaNoVirtual() == NULL && ego_ != NULL)
+        delete ego_;
+      ego_ = NULL;
+    }
+    const ::planning::umbp::EgoConfig &Config::ego() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.Config.ego)
+      return ego_ != NULL ? *ego_
+                          : *::planning::umbp::EgoConfig::internal_default_instance();
+    }
+    ::planning::umbp::EgoConfig *Config::mutable_ego()
+    {
+
+      if (ego_ == NULL)
+      {
+        ego_ = new ::planning::umbp::EgoConfig;
+      }
+      // @@protoc_insertion_point(field_mutable:planning.umbp.Config.ego)
+      return ego_;
+    }
+    ::planning::umbp::EgoConfig *Config::release_ego()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.Config.ego)
+
+      ::planning::umbp::EgoConfig *temp = ego_;
+      ego_ = NULL;
+      return temp;
+    }
+    void Config::set_allocated_ego(::planning::umbp::EgoConfig *ego)
+    {
+      delete ego_;
+      ego_ = ego;
+      if (ego)
+      {
+      }
+      else
+      {
+      }
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.ego)
+    }
+
+    // .planning.umbp.BezierConfig bezier = 7;
+    bool Config::has_bezier() const
+    {
+      return this != internal_default_instance() && bezier_ != NULL;
+    }
+    void Config::clear_bezier()
+    {
+      if (GetArenaNoVirtual() == NULL && bezier_ != NULL)
+        delete bezier_;
+      bezier_ = NULL;
+    }
+    const ::planning::umbp::BezierConfig &Config::bezier() const
+    {
+      // @@protoc_insertion_point(field_get:planning.umbp.Config.bezier)
+      return bezier_ != NULL ? *bezier_
+                             : *::planning::umbp::BezierConfig::internal_default_instance();
+    }
+    ::planning::umbp::BezierConfig *Config::mutable_bezier()
+    {
+
+      if (bezier_ == NULL)
+      {
+        bezier_ = new ::planning::umbp::BezierConfig;
+      }
+      // @@protoc_insertion_point(field_mutable:planning.umbp.Config.bezier)
+      return bezier_;
+    }
+    ::planning::umbp::BezierConfig *Config::release_bezier()
+    {
+      // @@protoc_insertion_point(field_release:planning.umbp.Config.bezier)
+
+      ::planning::umbp::BezierConfig *temp = bezier_;
+      bezier_ = NULL;
+      return temp;
+    }
+    void Config::set_allocated_bezier(::planning::umbp::BezierConfig *bezier)
+    {
+      delete bezier_;
+      bezier_ = bezier;
+      if (bezier)
+      {
+      }
+      else
+      {
+      }
+      // @@protoc_insertion_point(field_set_allocated:planning.umbp.Config.bezier)
+    }
+
+#endif // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+    // @@protoc_insertion_point(namespace_scope)
+
+  } // namespace umbp
+} // namespace planning
 
 // @@protoc_insertion_point(global_scope)

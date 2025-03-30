@@ -242,7 +242,7 @@
     timer2.start()
 
     #----------------------0.5------------------------------#
-        std::normal_distribution<double> distribution(0.0, 0.5);
+    std::normal_distribution<double> distribution(0.0, 0.5);
     timer1 = threading.Timer(40, spawn_vehicle_noroute, args=(vehicle_bp, spawn_points1[0]))
     timer1.start()
     timer2 = threading.Timer( 373 , spawn_vehicle, args=(vehicle_bp, spawn_points2[0], route_2))
@@ -250,3 +250,21 @@
     test1：计算指标完成! Efficiency: 3.96214 Safety: 0.06176 UD: 0.10337 LCC: 0.01380 total_frame: 4566.00000
     test2：计算指标完成! Efficiency: 4.12707 Safety: 0.06142 UD: 0.10274 LCC: 0.01621 total_frame: 4380.00000
     计算指标完成! Efficiency: 4.044605 Safety: 0.06159 UD: 0.103055 LCC: 0.015005
+
+    #------------------------------------------------------------------#
+    2025.03.04.10.39
+    [my_planning_and_control]: 计算指标完成! Efficiency: 6.97661 Safety: 0.01845 UD: 0.30053 LCC: 0.03159 total_frame: 3577.00000
+
+    #------------------------------------------------------------------#
+    ref_speed = 10.0
+    2025.03.29.15:20(不加KDE稳定)
+    [my_planning_and_control]: 计算指标完成! Efficiency: 11.56237 Safety: 0.01529 UD: 0.49263 LCC: 0.14145 total_frame: 1831.00000
+    2025.03.29.15:46(加KDE稳定, win_size = 10, hdi_weight = 1.0 )  
+    [my_planning_and_control]: 计算指标完成! Efficiency: 11.57919 Safety: 0.01549 UD: 0.52854 LCC: 0.10966 total_frame: 2155.00000
+    2025.03.29.15:46(加KDE稳定, win_size = 5, hdi_weight = 1.0 )  
+    [my_planning_and_control]: 计算指标完成! Efficiency: 11.55691 Safety: 0.01215 UD: 0.49468 LCC: 0.12709 total_frame: 1975.00000
+    2025.03.29 16:46(距离稳定, win_size = 10, hdi_weight = 1.0 )  
+    [my_planning_and_control]: 计算指标完成! Efficiency: 11.55903 Safety: 0.01776 UD: 0.53936 LCC: 0.07872 total_frame: 2477.00000
+
+
+

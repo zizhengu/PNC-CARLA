@@ -6,6 +6,10 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <limits>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <cmath>
 auto UMBP_LOG = rclcpp::get_logger("UMBPlanner");
 
 UMBPlanner::UMBPlanner() : Node("UMBPlanner")
@@ -76,6 +80,8 @@ bool UMBPlanner::GetCostParam(const planning::umbp::Config &cfg,
     cost_param->ego_lack_speed_to_desired_unit_cost = cfg.cost().efficiency().ego_lack_speed_to_desired_unit_cost();
     cost_param->ego_to_obs = cfg.cost().safety().ego_to_obs();
     cost_param->ref_line_change = cfg.cost().navigation().ref_line_change();
+    cost_param->hdi_weight = cfg.cost().hdi().hdi_weight();
+    cost_param->hdi_win_size = cfg.cost().hdi().hdi_win_size();
     return true;
 }
 
@@ -176,11 +182,16 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
 
     std::vector<FrenetPoint> fpb_path = _forward_trajs[_winner_id];
 
-    if (_history_decision.size() >= 10)
+    if ((int)_history_decision.size() >= (int)_cost_param.hdi_win_size)
     {
         _history_decision.pop_front();
     }
-    _history_decision.push_back(fpb_path);
+    int record_history = 0;
+    if (record_history % 2 == 0)
+    {
+        _history_decision.push_back(fpb_path);
+        record_history++;
+    }
 
     if (fpb_path[0].s == fpb_path[1].s)
     {
@@ -362,7 +373,7 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
         int print_count = 0;
         for (auto point : bezier_control_points)
         {
-            if (print_count % 25 == 0)
+            if (print_count % 50 == 0)
             {
                 LOG(INFO) << std::fixed << std::setprecision(4)
                           << "  Point (s: " << point.s << " l:  " << point.l << " t:  " << point.t << " s_dot:  " << point.s_dot
@@ -501,13 +512,13 @@ bool UMBPlanner::RunUmpb(const FrenetPoint ego_state, const ForwardPropAgentSet 
     // * threading
     TicToc multi_thread_timer;
     multi_thread_timer.tic();
-
+    // RCLCPP_INFO(this->get_logger(), "Start PropagateActionSequence !!!");
     for (size_t i = 0; i < static_cast<size_t>(num_sequence); i++)
     {
         thread_set[i] = std::thread(&UMBPlanner::PropagateActionSequence, this, ego_state,
                                     forward_prop_agent_set, behaviour_tree[i], i);
     }
-
+    // RCLCPP_INFO(this->get_logger(), "PropagateActionSequence  Done!!!");
     for (size_t i = 0; i < static_cast<size_t>(num_sequence); i++)
     {
         thread_set[i].join();
@@ -741,9 +752,35 @@ void UMBPlanner::ObstacleFileter(const std::shared_ptr<VehicleState> ego_state, 
         }
         else // 动态障碍物
         {
-            if (longitudinal_d <= 60 && longitudinal_d > -10 && lateral_d <= 25 && lateral_d >= -25)
+            if (longitudinal_d <= 80 && longitudinal_d > -10 && lateral_d <= 25 && lateral_d >= -25)
             {
                 _dynamic_obstacles.push_back(obs);
+                // 坐标存储，为了甘文乾实现预测算法
+                std::ifstream infile(_filename);
+                bool file_exists = infile.good();
+                infile.close();
+                if (!file_exists)
+                {
+                    std::ofstream file(_filename);
+                    file << "Vehicle_ID,Frame_ID,Local_X,Local_Y,v_Vel\n";
+                    file.close();
+                }
+                std::ofstream file;
+                file.open(_filename, std::ios::app); // 以追加模式打开文件
+                if (!file.is_open())
+                {
+                    LOG(ERROR) << "无法打开文件";
+                }
+                for (const auto obs : _dynamic_obstacles)
+                {
+                    int id = obs.id;
+                    double local_x = lateral_d;
+                    double local_y = longitudinal_d;
+                    double v_obs = std::sqrt(std::pow(obs.twist.linear.x, 2.0) + std::pow(obs.twist.linear.y, 2.0));
+                    double frame_number = _frame_number;
+                    file << id << "," << frame_number << "," << local_x << "," << local_y << "," << v_obs << "\n";
+                }
+                file.close();
             }
             else
             {
@@ -751,6 +788,7 @@ void UMBPlanner::ObstacleFileter(const std::shared_ptr<VehicleState> ego_state, 
             }
         }
     }
+    _frame_number++;
 }
 
 bool UMBPlanner::GetSurroundingForwardSimAgents(ForwardPropAgentSet &forward_prop_agent_set,
@@ -1111,7 +1149,7 @@ bool UMBPlanner::PropagateScenario(
     // calculate cost
     bool is_risky = false;
     std::set<size_t> risky_ids;
-    double path_diff_cost;
+    double path_diff_cost = 0.0;
     // if (!CalculateCost(*sub_forward_trajs, *sub_surround_trajs, sub_progress_cost, &is_risky, &risky_ids))
     if (!CalculateCost(sub_forward_trajs_inter, sub_surround_trajs_iter, sub_progress_cost, &is_risky, &risky_ids))
     {
@@ -1119,11 +1157,15 @@ bool UMBPlanner::PropagateScenario(
         //           << "******Action Sequence " << seq_id << " Sub-Scenario " << sub_seq_id << " May Crash with Obs, Dangerous !! ******";
         return false;
     }
-    if (!CalculatePathDiffCost(sub_forward_trajs, &path_diff_cost))
+
+    if (_history_decision.size() >= 5)
     {
-        LOG(INFO) << std::fixed << std::setprecision(4)
-                  << "******Action Sequence " << seq_id << " Sub-Scenario " << sub_seq_id << " CalculatePathDiffCost Failed !! ******";
-        return false;
+        if (!CalculatePathDiffCost(sub_forward_trajs, &path_diff_cost))
+        {
+            LOG(INFO) << std::fixed << std::setprecision(4)
+                      << "******Action Sequence " << seq_id << " Sub-Scenario " << sub_seq_id << " CalculatePathDiffCost Failed !! ******";
+            return false;
+        }
     }
 
     for (size_t i = 0; i < sub_progress_cost->size(); i++)
@@ -1132,7 +1174,7 @@ bool UMBPlanner::PropagateScenario(
         sub_tail_cost->navigation.ref_line_change += sub_progress_cost->at(i).navigation.ref_line_change;
         sub_tail_cost->safety.ego_to_obs += sub_progress_cost->at(i).safety.ego_to_obs;
     }
-    sub_tail_cost->hdi.path_diff += path_diff_cost;
+    sub_tail_cost->hdi.path_diff += path_diff_cost * _cost_param.hdi_weight;
 
     if (is_risky)
     {
@@ -1211,17 +1253,114 @@ bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
     return true;
 }
 
+// bool UMBPlanner::CalculatePathDiffCost(const std::vector<FrenetPoint> *forward_trajs, double *path_diff_cost)
+// {
+//     std::vector<double> frechet_distance;
+//     for (size_t i = 0; i < _history_decision.size(); i++)
+//     {
+//         double cur_frechet_distance;
+//         cur_frechet_distance = GetFrechetDistance(forward_trajs, _history_decision[i]);
+//         frechet_distance.push_back(cur_frechet_distance);
+//         *path_diff_cost += cur_frechet_distance * std::pow(0.9, static_cast<int>(_history_decision.size() - 1 - i));
+//     }
+//     return true;
+// }
+
 bool UMBPlanner::CalculatePathDiffCost(const std::vector<FrenetPoint> *forward_trajs, double *path_diff_cost)
 {
-    std::vector<double> frechet_distance;
+    // RCLCPP_INFO(this->get_logger(), "Start CalculatePathDiffCost !!!");
+    // 归一化_history_decision并合并
+    std::vector<FrenetPoint> history_decision_norm;
     for (size_t i = 0; i < _history_decision.size(); i++)
     {
-        double cur_frechet_distance;
-        cur_frechet_distance = GetFrechetDistance(forward_trajs, _history_decision[i]);
-        frechet_distance.push_back(cur_frechet_distance);
-        *path_diff_cost += cur_frechet_distance * std::pow(0.9, static_cast<int>(_history_decision.size() - 1 - i));
+        for (size_t i = 0; i < _history_decision.size(); i++)
+            for (auto &point : _history_decision[i])
+            {
+                {
+                    FrenetPoint cur_point;
+                    cur_point.s = point.s - _history_decision[i][0].s;
+                    cur_point.l = point.l - _history_decision[i][0].l;
+                    history_decision_norm.emplace_back(cur_point);
+                }
+            }
     }
+
+    // 归一化forward_trajs
+    std::vector<FrenetPoint> forward_trajs_norm;
+    double s0 = (*forward_trajs)[0].s;
+    double l0 = (*forward_trajs)[0].l;
+    for (auto &point : *forward_trajs)
+    {
+        FrenetPoint cur_point;
+        cur_point.s = point.s - s0;
+        cur_point.l = point.l - l0;
+        forward_trajs_norm.emplace_back(cur_point);
+    }
+
+    // 计算 history_decision_norm 的 KDE
+    std::vector<double> kde_history = calculate_kde(history_decision_norm);
+
+    // 计算当前 forward_trajs_norm 的 KDE
+    std::vector<double> kde_forward = calculate_kde(forward_trajs_norm);
+
+    // 计算两者的 Jensen - Shannon 散度
+    *path_diff_cost = calculate_jensen_shannon_divergence(kde_history, kde_forward);
+
     return true;
+}
+
+double UMBPlanner::kde_estimate(const std::vector<FrenetPoint> &curve, double x, double bandwidth)
+{
+    // RCLCPP_INFO(this->get_logger(), "Start kde_estimate !!!");
+    double density = 0.0;
+    int n = curve.size();
+    for (const auto &point : curve)
+    {
+        double diff = x - point.s;
+        density += std::exp(-(diff * diff) / (2 * bandwidth * bandwidth));
+    }
+    density /= (n * bandwidth * std::sqrt(2 * M_PI));
+    return density;
+}
+
+// 计算 Jensen - Shannon 散度
+double UMBPlanner::calculate_jensen_shannon_divergence(const std::vector<double> &p, const std::vector<double> &q)
+{
+    // RCLCPP_INFO(this->get_logger(), "Start calculate_js !!!");
+    int n = p.size();
+    std::vector<double> m(n);
+    double jsd = 0.0;
+
+    for (int i = 0; i < n; ++i)
+    {
+        double p_value = p[i] > 1e-8 ? p[i] : 1e-8;
+        double q_value = q[i] > 1e-8 ? q[i] : 1e-8;
+        double m_value = 0.5 * (p_value + q_value);
+
+        if (p_value > 0)
+            jsd += 0.5 * p_value * std::log2(p_value / m_value);
+        if (q_value > 0)
+            jsd += 0.5 * q_value * std::log2(q_value / m_value);
+    }
+    return jsd;
+}
+
+// 计算核密度估计值
+std::vector<double> UMBPlanner::calculate_kde(const std::vector<FrenetPoint> &curve, double bandwidth, double step)
+{
+    // RCLCPP_INFO(this->get_logger(), "Start calculate_kde !!!");
+    // x轴上范围
+    double min_x = curve[0].s;
+    double max_x = curve.back().s;
+    std::vector<double> kde_values;
+
+    // 核密度估计
+    for (double x = min_x; x <= max_x; x += step)
+    { // 步长可以调整
+        double density = kde_estimate(curve, x, bandwidth);
+        kde_values.push_back(density);
+    }
+    return kde_values;
 }
 
 double UMBPlanner::GetFrechetDistance(const std::vector<FrenetPoint> *forward_trajs, const std::vector<FrenetPoint> &traj)
@@ -1499,8 +1638,8 @@ bool UMBPlanner::GenerateSscCube(const std::vector<FrenetPoint> &fpb_path, const
             pos_ub_s = _sim_param.s_sample_distance * _sim_param.s_sample_num;
             pos_lb_l = -1 * _sim_param.l_ref_to_right_road_bound;
             pos_ub_l = _sim_param.l_ref_to_left_road_bound;
-            LOG(INFO) << "[GenerateSscCube] " << i << " cube.pos_lb_l " << pos_lb_l
-                      << " cube.pos_ub_l " << pos_ub_l;
+            // LOG(INFO) << "[GenerateSscCube] " << i << " cube.pos_lb_l " << pos_lb_l
+            //           << " cube.pos_ub_l " << pos_ub_l;
         }
         else
         {
@@ -1527,8 +1666,8 @@ bool UMBPlanner::GenerateSscCube(const std::vector<FrenetPoint> &fpb_path, const
                     }
                 }
 
-                LOG(INFO) << "[GenerateSscCube] obs[" << fpa.first << "] at[" << i << "]:" << " t_in_l: " << t_in_l
-                          << ", t_out_l: " << t_out_l;
+                // LOG(INFO) << "[GenerateSscCube] obs[" << fpa.first << "] at[" << i << "]:" << " t_in_l: " << t_in_l
+                //           << ", t_out_l: " << t_out_l;
 
                 LOG(INFO) << "[GenerateSscCube] cur_surround_trajs of obs[" << fpa.first << "] at[" << i << "]:" << " s: " << cur_surround_trajs.at(fpa.first)[i].s
                           << ", l: " << cur_surround_trajs.at(fpa.first)[i].l;
@@ -1563,9 +1702,9 @@ bool UMBPlanner::GenerateSscCube(const std::vector<FrenetPoint> &fpb_path, const
                 pos_ub_l = _sim_param.l_ref_to_left_road_bound;
                 pos_lb_l = -1.0 * _sim_param.l_ref_to_right_road_bound;
             }
-            LOG(INFO) << "[GenerateSscCube] cube[" << i << "] cube.pos_lb_l: " << pos_lb_l
-                      << ", cube.pos_ub_l: " << pos_ub_l;
-            LOG(INFO) << "------------------------------";
+            // LOG(INFO) << "[GenerateSscCube] cube[" << i << "] cube.pos_lb_l: " << pos_lb_l
+            //           << ", cube.pos_ub_l: " << pos_ub_l;
+            // LOG(INFO) << "------------------------------";
         }
         cube.p_lb = {pos_lb_s, pos_lb_l};
         cube.p_ub = {pos_ub_s, pos_ub_l};

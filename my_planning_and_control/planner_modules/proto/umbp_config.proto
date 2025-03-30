@@ -25,6 +25,11 @@ message NavigationCost {
     double ref_line_change = 1;
 }
 
+message HdiCost {
+    double hdi_weight = 1;
+    int32 hdi_win_size = 2;
+}
+
 message FpbConfig {
     double layer_time = 1;
     double step = 2;
@@ -56,6 +61,7 @@ message CostConfig {
     UserCost user = 3;
     NavigationCost navigation = 4;
     double discount_factor = 5;
+    HdiCost hdi = 6;
 }
 
 message EgoConfig {

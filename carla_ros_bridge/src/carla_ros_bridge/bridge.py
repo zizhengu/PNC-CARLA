@@ -229,10 +229,10 @@ class CarlaRosBridge(CompatibleNode):
 
         timer1 = threading.Timer( 10, spawn_vehicle_noroute, args=(vehicle_bp, spawn_points1[0]))
         timer1.start()
-        timer2 = threading.Timer( 280 , spawn_vehicle, args=(vehicle_bp, spawn_points2[0], route_2))
+        timer2 = threading.Timer( 260 , spawn_vehicle, args=(vehicle_bp, spawn_points2[0], route_2))
         timer2.start()
-        timer3 = threading.Timer( 15 , spawn_vehicle, args=(vehicle_bp, spawn_points3[0], route_3))
-        timer3.start()
+        # timer3 = threading.Timer( 15 , spawn_vehicle, args=(vehicle_bp, spawn_points3[0], route_3))
+        # timer3.start()
 
         # spectator_point1 = carla.Transform(
         #                     carla.Location(x=109.0, y=131.0, z=50),

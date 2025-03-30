@@ -23,6 +23,10 @@ cost {
     ref_line_change:0.1
   }
   discount_factor: 0.9
+  hdi {
+    hdi_weight: 1.0
+    hdi_win_size: 5
+  }
 }
 
 propogate {
@@ -52,7 +56,7 @@ ego{
     car_length: 5.0
   }
   map{
-    reference_speed: 6.0
+    reference_speed: 10.0
   }
 }
 

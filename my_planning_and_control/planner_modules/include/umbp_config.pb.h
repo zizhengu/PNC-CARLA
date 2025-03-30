@@ -55,6 +55,9 @@ extern EgoConfigDefaultTypeInternal _EgoConfig_default_instance_;
 class FpbConfig;
 class FpbConfigDefaultTypeInternal;
 extern FpbConfigDefaultTypeInternal _FpbConfig_default_instance_;
+class HdiCost;
+class HdiCostDefaultTypeInternal;
+extern HdiCostDefaultTypeInternal _HdiCost_default_instance_;
 class MapConfig;
 class MapConfigDefaultTypeInternal;
 extern MapConfigDefaultTypeInternal _MapConfig_default_instance_;
@@ -471,6 +474,96 @@ class NavigationCost : public ::google::protobuf::Message /* @@protoc_insertion_
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   double ref_line_change_;
+  mutable int _cached_size_;
+  friend struct  protobuf_umbp_5fconfig_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class HdiCost : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:planning.umbp.HdiCost) */ {
+ public:
+  HdiCost();
+  virtual ~HdiCost();
+
+  HdiCost(const HdiCost& from);
+
+  inline HdiCost& operator=(const HdiCost& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const HdiCost& default_instance();
+
+  static inline const HdiCost* internal_default_instance() {
+    return reinterpret_cast<const HdiCost*>(
+               &_HdiCost_default_instance_);
+  }
+
+  void Swap(HdiCost* other);
+
+  // implements Message ----------------------------------------------
+
+  inline HdiCost* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  HdiCost* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const HdiCost& from);
+  void MergeFrom(const HdiCost& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(HdiCost* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // double hdi_weight = 1;
+  void clear_hdi_weight();
+  static const int kHdiWeightFieldNumber = 1;
+  double hdi_weight() const;
+  void set_hdi_weight(double value);
+
+  // int32 hdi_win_size = 2;
+  void clear_hdi_win_size();
+  static const int kHdiWinSizeFieldNumber = 2;
+  ::google::protobuf::int32 hdi_win_size() const;
+  void set_hdi_win_size(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:planning.umbp.HdiCost)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  double hdi_weight_;
+  ::google::protobuf::int32 hdi_win_size_;
   mutable int _cached_size_;
   friend struct  protobuf_umbp_5fconfig_2eproto::TableStruct;
 };
@@ -925,6 +1018,15 @@ class CostConfig : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::planning::umbp::NavigationCost* release_navigation();
   void set_allocated_navigation(::planning::umbp::NavigationCost* navigation);
 
+  // .planning.umbp.HdiCost hdi = 6;
+  bool has_hdi() const;
+  void clear_hdi();
+  static const int kHdiFieldNumber = 6;
+  const ::planning::umbp::HdiCost& hdi() const;
+  ::planning::umbp::HdiCost* mutable_hdi();
+  ::planning::umbp::HdiCost* release_hdi();
+  void set_allocated_hdi(::planning::umbp::HdiCost* hdi);
+
   // double discount_factor = 5;
   void clear_discount_factor();
   static const int kDiscountFactorFieldNumber = 5;
@@ -939,6 +1041,7 @@ class CostConfig : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::planning::umbp::SafetyCost* safety_;
   ::planning::umbp::UserCost* user_;
   ::planning::umbp::NavigationCost* navigation_;
+  ::planning::umbp::HdiCost* hdi_;
   double discount_factor_;
   mutable int _cached_size_;
   friend struct  protobuf_umbp_5fconfig_2eproto::TableStruct;
@@ -1867,6 +1970,38 @@ inline void NavigationCost::set_ref_line_change(double value) {
 
 // -------------------------------------------------------------------
 
+// HdiCost
+
+// double hdi_weight = 1;
+inline void HdiCost::clear_hdi_weight() {
+  hdi_weight_ = 0;
+}
+inline double HdiCost::hdi_weight() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.HdiCost.hdi_weight)
+  return hdi_weight_;
+}
+inline void HdiCost::set_hdi_weight(double value) {
+  
+  hdi_weight_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.HdiCost.hdi_weight)
+}
+
+// int32 hdi_win_size = 2;
+inline void HdiCost::clear_hdi_win_size() {
+  hdi_win_size_ = 0;
+}
+inline ::google::protobuf::int32 HdiCost::hdi_win_size() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.HdiCost.hdi_win_size)
+  return hdi_win_size_;
+}
+inline void HdiCost::set_hdi_win_size(::google::protobuf::int32 value) {
+  
+  hdi_win_size_ = value;
+  // @@protoc_insertion_point(field_set:planning.umbp.HdiCost.hdi_win_size)
+}
+
+// -------------------------------------------------------------------
+
 // FpbConfig
 
 // double layer_time = 1;
@@ -2323,6 +2458,45 @@ inline void CostConfig::set_discount_factor(double value) {
   
   discount_factor_ = value;
   // @@protoc_insertion_point(field_set:planning.umbp.CostConfig.discount_factor)
+}
+
+// .planning.umbp.HdiCost hdi = 6;
+inline bool CostConfig::has_hdi() const {
+  return this != internal_default_instance() && hdi_ != NULL;
+}
+inline void CostConfig::clear_hdi() {
+  if (GetArenaNoVirtual() == NULL && hdi_ != NULL) delete hdi_;
+  hdi_ = NULL;
+}
+inline const ::planning::umbp::HdiCost& CostConfig::hdi() const {
+  // @@protoc_insertion_point(field_get:planning.umbp.CostConfig.hdi)
+  return hdi_ != NULL ? *hdi_
+                         : *::planning::umbp::HdiCost::internal_default_instance();
+}
+inline ::planning::umbp::HdiCost* CostConfig::mutable_hdi() {
+  
+  if (hdi_ == NULL) {
+    hdi_ = new ::planning::umbp::HdiCost;
+  }
+  // @@protoc_insertion_point(field_mutable:planning.umbp.CostConfig.hdi)
+  return hdi_;
+}
+inline ::planning::umbp::HdiCost* CostConfig::release_hdi() {
+  // @@protoc_insertion_point(field_release:planning.umbp.CostConfig.hdi)
+  
+  ::planning::umbp::HdiCost* temp = hdi_;
+  hdi_ = NULL;
+  return temp;
+}
+inline void CostConfig::set_allocated_hdi(::planning::umbp::HdiCost* hdi) {
+  delete hdi_;
+  hdi_ = hdi;
+  if (hdi) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:planning.umbp.CostConfig.hdi)
 }
 
 // -------------------------------------------------------------------
@@ -3004,6 +3178,8 @@ inline void Config::set_allocated_bezier(::planning::umbp::BezierConfig* bezier)
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

@@ -1,5 +1,5 @@
 #include "emplanner.h"
-
+#include <Eigen/StdVector>
 auto LOG = rclcpp::get_logger("emplanner");
 
 EMPlanner::EMPlanner() : Node("emplanner")
