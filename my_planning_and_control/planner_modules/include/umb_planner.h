@@ -186,9 +186,9 @@ private:
     bool GetBezierParam(const planning::umbp::Config &cfg,
                         BezierParam *bezier_param);
 
-    bool GetSurroundingForwardSimAgents(ForwardPropAgentSet &forward_prop_agents,
-                                        const std::vector<FrenetPoint> static_obs_frent_coords,
-                                        const std::vector<FrenetPoint> dynamic_obs_frent_coords);
+    bool GetSurroundingForwardSimAgents(ForwardPropAgentSet &forward_prop_agent_set,
+                                        const std::shared_ptr<std::vector<PathPoint>> reference_line,
+                                        const std::shared_ptr<VehicleState> ego_state);
 
     bool PredictTrajectoryDynamicObs(const std::shared_ptr<std::vector<PathPoint>> reference_line, const std::shared_ptr<VehicleState> ego_state);
 

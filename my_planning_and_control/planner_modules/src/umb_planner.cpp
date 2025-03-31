@@ -119,21 +119,10 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     //-----------------------------------1.障碍物处理--------------------------------------
     // 1.1区别动态与静态障碍物，将其储存在成员变量 std::vector<derived_object_msgs::msg::Object> _static_/dynamic_obstacles中
     UMBPlanner::ObstacleFileter(ego_state, obstacles);
-    std::vector<FrenetPoint> static_obs_frent_coords;
-    std::vector<FrenetPoint> dynamic_obs_frent_coords;
-    // 1.2障碍物坐标转换
-    if (!_static_obstacles.empty())
-    {
-        cartesion_set_to_frenet_set(_static_obstacles, *reference_line, ego_state, static_obs_frent_coords);
-    }
-    if (!_dynamic_obstacles.empty())
-    {
-        cartesion_set_to_frenet_set(_dynamic_obstacles, *reference_line, ego_state, dynamic_obs_frent_coords);
-    }
 
     // 1.3 障碍物转换为前向传播智能体
     ForwardPropAgentSet forward_prop_agent_set;
-    if (!GetSurroundingForwardSimAgents(forward_prop_agent_set, static_obs_frent_coords, dynamic_obs_frent_coords))
+    if (!GetSurroundingForwardSimAgents(forward_prop_agent_set, reference_line, ego_state))
     {
         LOG(ERROR) << "GetSurroundingForwardSimAgents False! ";
         return false;
@@ -152,7 +141,7 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     // 1.4 预测障碍物轨迹
     if (!PredictTrajectoryDynamicObs(reference_line, ego_state))
     {
-        LOG(ERROR) << "GetSurroundingForwardSimAgents False! ";
+        LOG(ERROR) << "PredictTrajectoryDynamicObs False! ";
         return false;
     }
 
@@ -827,25 +816,37 @@ void UMBPlanner::ObstacleFileter(const std::shared_ptr<VehicleState> ego_state, 
 }
 
 bool UMBPlanner::GetSurroundingForwardSimAgents(ForwardPropAgentSet &forward_prop_agent_set,
-                                                const std::vector<FrenetPoint> static_obs_frent_coords,
-                                                const std::vector<FrenetPoint> dynamic_obs_frent_coords)
+                                                const std::shared_ptr<std::vector<PathPoint>> reference_line,
+                                                const std::shared_ptr<VehicleState> ego_state)
 {
-    int obs_id = 1;
+    std::vector<FrenetPoint> static_obs_frent_coords;
+    std::vector<FrenetPoint> dynamic_obs_frent_coords;
+    if (!_static_obstacles.empty())
+    {
+        cartesion_set_to_frenet_set(_static_obstacles, *reference_line, ego_state, static_obs_frent_coords);
+    }
+    if (!_dynamic_obstacles.empty())
+    {
+        cartesion_set_to_frenet_set(_dynamic_obstacles, *reference_line, ego_state, dynamic_obs_frent_coords);
+    }
+    int static_num = 0;
     for (auto &&obs : static_obs_frent_coords)
     {
         ForwardPropAgent cur_agent;
-        cur_agent.id = obs_id;
+        cur_agent.id = _static_obstacles[static_num].id;
         cur_agent.obs_frenet_point.s = obs.s;
         cur_agent.obs_frenet_point.l = obs.l;
         cur_agent.obs_frenet_point.s_dot = obs.s_dot;
         cur_agent.obs_frenet_point.l_dot = obs.l_dot;
         cur_agent.obs_frenet_point.s_dot_dot = obs.s_dot_dot;
         cur_agent.obs_frenet_point.l_dot_dot = obs.l_dot_dot;
-        forward_prop_agent_set.forward_prop_agents.emplace(obs_id, cur_agent);
-        obs_id++;
+        forward_prop_agent_set.forward_prop_agents.emplace(_static_obstacles[static_num].id, cur_agent);
+        static_num++;
     }
+    int dynamic_num = 0;
     for (auto &&obs : dynamic_obs_frent_coords)
     {
+        int obs_id = _dynamic_obstacles[dynamic_num].id;
         ForwardPropAgent cur_agent;
         cur_agent.id = obs_id;
         cur_agent.obs_frenet_point.s = obs.s;
@@ -855,7 +856,7 @@ bool UMBPlanner::GetSurroundingForwardSimAgents(ForwardPropAgentSet &forward_pro
         cur_agent.obs_frenet_point.s_dot_dot = obs.s_dot_dot;
         cur_agent.obs_frenet_point.l_dot_dot = obs.l_dot_dot;
         forward_prop_agent_set.forward_prop_agents.emplace(obs_id, cur_agent);
-        obs_id++;
+        dynamic_num++;
     }
     return true;
 }
@@ -906,7 +907,7 @@ bool UMBPlanner::PredictTrajectoryDynamicObs(const std::shared_ptr<std::vector<P
             // Step4: Predict
             int future_steps = 50;
             auto predictions = ukf.predictFuturePositions(future_steps, dt);
-
+            sample_trajectory.emplace_back(cur_history_trajectory.back());
             // Step5: Get Predict Trajectory
             for (int i = 1; i <= 5; i++)
             {
@@ -926,7 +927,7 @@ bool UMBPlanner::PredictTrajectoryDynamicObs(const std::shared_ptr<std::vector<P
         {
             // Predict through motion equation
             auto latest_trajectory = cur_history_trajectory.back();
-
+            sample_trajectory.emplace_back(latest_trajectory);
             double dt = 1.0;
             auto temp = latest_trajectory;
             for (int i = 1; i <= 5; i++)
@@ -1232,6 +1233,10 @@ bool UMBPlanner::PropagateScenario(
     std::unordered_map<int, std::vector<FrenetPoint>> sub_surround_trajs_iter;
     for (const auto &fpa : surrounding_fsagents.forward_prop_agents)
     {
+        // if (std::hypot(fpa.second.obs_frenet_point.s_dot, fpa.second.obs_frenet_point.l_dot) > 0.01)
+        // {
+        //     continue;
+        // }
         sub_surround_trajs_iter.emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
         sub_surround_trajs->emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
         for (size_t i = 0; i < action_seq.size(); i++)
@@ -1273,15 +1278,41 @@ bool UMBPlanner::PropagateScenario(
             }
         }
         sub_surround_trajs_iter.at(fpa.first).emplace_back(sub_surround_trajs->at(fpa.first).back());
-
-        // int count = 0;
-        // for (auto &point : sub_surround_trajs_iter.at(fpa.first))
-        // {
-        //     LOG(INFO) << std::fixed << std::setprecision(3) << "sub_surround_traj_inter " << count
-        //               << " (s , l)" << point.s << point.l;
-        //     count++;
-        // }
     }
+
+    // for (int id : _cur_detected_obs_id)
+    // {
+    //     auto trajectory = _predict_trajectory_dynamic_obstacles.at(id);
+    //     sub_surround_trajs->emplace(id, std::vector<FrenetPoint>{});
+    //     for (size_t i = 0; i < action_seq.size() + 1; i++)
+    //     {
+    //         sub_surround_trajs->at(id).emplace_back(trajectory[i]);
+    //     }
+
+    //     int sample_num = 10;
+    //     for (size_t i = 0; i < action_seq.size(); i++)
+    //     {
+    //         auto start_point = sub_surround_trajs->at(id)[i];
+    //         auto end_point = sub_surround_trajs->at(id)[i + 1];
+    //         double sample_distance = static_cast<double>((end_point.s - start_point.s) / sample_num);
+    //         PolynomialCurve curve;
+    //         curve.curve_fitting(start_point.s, start_point.l, start_point.l_prime, start_point.l_prime_prime,
+    //                             end_point.s, end_point.l, end_point.l_prime, end_point.l_prime_prime);
+    //         for (int j = 0; j < sample_num; j++)
+    //         {
+    //             if ((i == 0) & (j == 0))
+    //             {
+    //                 continue;
+    //             }
+    //             FrenetPoint cur_point;
+    //             double cur_s = start_point.s + j * sample_distance;
+    //             cur_point.s = cur_s;
+    //             cur_point.l = curve.value_evaluation(cur_s, 0);
+    //             sub_surround_trajs_iter.at(id).emplace_back(cur_point);
+    //         }
+    //     }
+    //     sub_surround_trajs_iter.at(id).emplace_back(sub_surround_trajs->at(id).back());
+    // }
 
     // calculate cost
     bool is_risky = false;
