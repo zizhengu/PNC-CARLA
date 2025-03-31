@@ -15,6 +15,7 @@
 #include "ooqp_interface.h"
 #include "spline_generator.h"
 #include "polynomial_curve.h"
+#include "UKF.h"
 #include "derived_object_msgs/msg/object.hpp"
 #include "carla_waypoint_types/srv/get_waypoint.hpp"
 #include "std_msgs/msg/float64.hpp"
@@ -188,6 +189,9 @@ private:
     bool GetSurroundingForwardSimAgents(ForwardPropAgentSet &forward_prop_agents,
                                         const std::vector<FrenetPoint> static_obs_frent_coords,
                                         const std::vector<FrenetPoint> dynamic_obs_frent_coords);
+
+    bool PredictTrajectoryDynamicObs(const std::shared_ptr<std::vector<PathPoint>> reference_line, const std::shared_ptr<VehicleState> ego_state);
+
     bool PrepareMultiThreadContainers(const int num_sequence);
 
     bool PropagateActionSequence(const FrenetPoint ego_state,
@@ -291,6 +295,11 @@ private:
     // 坐标存储，为了甘文乾实现预测算法
     int _frame_number = 0;
     std::string _filename = "predict_data.csv";
+
+    // 储存动态障碍物的历史轨迹，用于UKF预测
+    std::unordered_map<int, std::vector<TrajectoryPoint>> _history_trajectory_dynamic_obstacles;
+    std::unordered_map<int, std::vector<FrenetPoint>> _predict_trajectory_dynamic_obstacles;
+    std::vector<int> _cur_detected_obs_id;
 
     // BezierSpline
     vec_E<SpatioTemporalSemanticCubeNd<2>> _cubes;

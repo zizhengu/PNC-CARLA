@@ -344,7 +344,7 @@ TrajectoryPoint object_to_trajectory_point(const derived_object_msgs::msg::Objec
                                    std::pow(object.twist.linear.y, 2));
     trajectory_point.kappa = 0;
     trajectory_point.ax = object.accel.linear.x;
-    trajectory_point.ax = object.accel.linear.y;
+    trajectory_point.ay = object.accel.linear.y;
 
     // 利用tf2读取四元数，提取yaw角
     tf2::Quaternion tf2_q;
@@ -542,6 +542,8 @@ void cartesion_set_to_frenet_set(const TrajectoryPoint &trajectory_point, const 
     object.pose.position.z = 0.0;
     object.accel.linear.x = trajectory_point.ax;
     object.accel.linear.y = trajectory_point.ay;
+    object.twist.linear.x = trajectory_point.vx;
+    object.twist.linear.y = trajectory_point.vy;
     tf2::Quaternion tf_q;
     tf_q.setEuler(0.0, 0.0, trajectory_point.heading);
     object.pose.orientation.x = tf_q.x();

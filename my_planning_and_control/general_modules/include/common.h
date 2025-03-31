@@ -27,6 +27,8 @@ struct TrajectoryPoint
     double ay;
     double a_tau; // 切向加速度
     double time_stamped;
+    double vx;
+    double vy;
 };
 
 // 路径点，不包含速度

@@ -149,6 +149,13 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
         }
     }
 
+    // 1.4 预测障碍物轨迹
+    if (!PredictTrajectoryDynamicObs(reference_line, ego_state))
+    {
+        LOG(ERROR) << "GetSurroundingForwardSimAgents False! ";
+        return false;
+    }
+
     //----------------------------2.确定规划起点并将其投影到frenet坐标系--------------------------
     // RCLCPP_INFO(this->get_logger(), "Start CalculatePlanningStartPoint !!!");
     TrajectoryPoint planning_start_point = CalculatePlanningStartPoint(ego_state);
@@ -721,6 +728,7 @@ void UMBPlanner::ObstacleFileter(const std::shared_ptr<VehicleState> ego_state, 
     // 将障碍物分成动态与静态障碍物
     _static_obstacles.clear();
     _dynamic_obstacles.clear();
+    _cur_detected_obs_id.clear();
     if (obstacles.empty())
     {
         return;
@@ -756,31 +764,58 @@ void UMBPlanner::ObstacleFileter(const std::shared_ptr<VehicleState> ego_state, 
             {
                 _dynamic_obstacles.push_back(obs);
                 // 坐标存储，为了甘文乾实现预测算法
-                std::ifstream infile(_filename);
-                bool file_exists = infile.good();
-                infile.close();
-                if (!file_exists)
+                // std::ifstream infile(_filename);
+                // bool file_exists = infile.good();
+                // infile.close();
+                // if (!file_exists)
+                // {
+                //     std::ofstream file(_filename);
+                //     file << "Vehicle_ID,Frame_ID,Local_X,Local_Y,v_Vel\n";
+                //     file.close();
+                // }
+                // std::ofstream file;
+                // file.open(_filename, std::ios::app); // 以追加模式打开文件
+                // if (!file.is_open())
+                // {
+                //     LOG(ERROR) << "无法打开文件";
+                // }
+                // for (const auto obs : _dynamic_obstacles)
+                // {
+                //     int id = obs.id;
+                //     double local_x = lateral_d;
+                //     double local_y = longitudinal_d;
+                //     double v_obs = std::sqrt(std::pow(obs.twist.linear.x, 2.0) + std::pow(obs.twist.linear.y, 2.0));
+                //     double frame_number = _frame_number;
+                //     file << id << "," << frame_number << "," << local_x << "," << local_y << "," << v_obs << "\n";
+                // }
+                // file.close();
+
+                /**
+                 * record history trajectory from dynamic_obstacles
+                 */
+                TrajectoryPoint cur_trajectory;
+                cur_trajectory.x = obs.pose.position.x;
+                cur_trajectory.y = obs.pose.position.y;
+                cur_trajectory.v = std::sqrt(std::pow(obs.twist.linear.x, 2.0) + std::pow(obs.twist.linear.y, 2.0));
+                cur_trajectory.vx = obs.twist.linear.x;
+                cur_trajectory.vy = obs.twist.linear.y;
+                cur_trajectory.ax = obs.accel.linear.x;
+                cur_trajectory.ay = obs.accel.linear.y;
+                // 利用tf2读取四元数，提取yaw角
+                tf2::Quaternion tf2_q;
+                tf2::fromMsg(obs.pose.orientation, tf2_q);
+                double roll, pitch, yaw;
+                tf2::Matrix3x3(tf2_q).getRPY(roll, pitch, yaw);
+                cur_trajectory.heading = yaw;
+
+                _history_trajectory_dynamic_obstacles[obs.id].emplace_back(cur_trajectory);
+
+                if (_history_trajectory_dynamic_obstacles[obs.id].size() > 50)
                 {
-                    std::ofstream file(_filename);
-                    file << "Vehicle_ID,Frame_ID,Local_X,Local_Y,v_Vel\n";
-                    file.close();
+                    _history_trajectory_dynamic_obstacles[obs.id].erase(_history_trajectory_dynamic_obstacles[obs.id].begin());
                 }
-                std::ofstream file;
-                file.open(_filename, std::ios::app); // 以追加模式打开文件
-                if (!file.is_open())
-                {
-                    LOG(ERROR) << "无法打开文件";
-                }
-                for (const auto obs : _dynamic_obstacles)
-                {
-                    int id = obs.id;
-                    double local_x = lateral_d;
-                    double local_y = longitudinal_d;
-                    double v_obs = std::sqrt(std::pow(obs.twist.linear.x, 2.0) + std::pow(obs.twist.linear.y, 2.0));
-                    double frame_number = _frame_number;
-                    file << id << "," << frame_number << "," << local_x << "," << local_y << "," << v_obs << "\n";
-                }
-                file.close();
+
+                _cur_detected_obs_id.emplace_back(obs.id);
             }
             else
             {
@@ -822,6 +857,112 @@ bool UMBPlanner::GetSurroundingForwardSimAgents(ForwardPropAgentSet &forward_pro
         forward_prop_agent_set.forward_prop_agents.emplace(obs_id, cur_agent);
         obs_id++;
     }
+    return true;
+}
+
+bool UMBPlanner::PredictTrajectoryDynamicObs(const std::shared_ptr<std::vector<PathPoint>> reference_line, const std::shared_ptr<VehicleState> ego_state)
+{
+    _predict_trajectory_dynamic_obstacles.clear();
+    for (const auto &id : _cur_detected_obs_id)
+    {
+        auto cur_history_trajectory = _history_trajectory_dynamic_obstacles[id];
+        std::vector<TrajectoryPoint> sample_trajectory;
+        if (cur_history_trajectory.size() >= 50)
+        {
+            LOG(INFO) << "Active UnscentedKalmanFilter";
+            // Predict by UKF
+            // Step1: Init
+            UnscentedKalmanFilter ukf;
+            Eigen::VectorXd initial_state(STATE_DIM);
+            auto tra_point = cur_history_trajectory[0];
+            initial_state << tra_point.x, tra_point.y, tra_point.vx, tra_point.vy, tra_point.ax, tra_point.ay, tra_point.heading;
+            Eigen::MatrixXd initial_covariance = Eigen::MatrixXd::Identity(STATE_DIM, STATE_DIM) * 0.1;
+            ukf.initialize(initial_state, initial_covariance);
+
+            // Step2: Get measurement
+            std::vector<Eigen::VectorXd> measurements;
+            for (const auto &tra_point : cur_history_trajectory)
+            {
+                Eigen::VectorXd measurement(STATE_DIM);
+                measurement(0) = tra_point.x;
+                measurement(1) = tra_point.y;
+                measurement(2) = tra_point.vx;
+                measurement(3) = tra_point.vy;
+                measurement(4) = tra_point.ax;
+                measurement(5) = tra_point.ay;
+                measurement(6) = tra_point.heading;
+                measurements.emplace_back(measurement);
+            }
+
+            // Step3: Update filter by measurement
+            double dt = 0.1;
+            // 使用测量数据更新滤波器
+            for (const auto &measurement : measurements)
+            {
+                ukf.predict(dt);
+                ukf.update(measurement);
+            }
+
+            // Step4: Predict
+            int future_steps = 50;
+            auto predictions = ukf.predictFuturePositions(future_steps, dt);
+
+            // Step5: Get Predict Trajectory
+            for (int i = 1; i <= 5; i++)
+            {
+                auto prediction = predictions[10 * i - 1];
+                TrajectoryPoint temp_point;
+                temp_point.x = prediction(0);
+                temp_point.y = prediction(1);
+                temp_point.vx = prediction(2);
+                temp_point.vy = prediction(3);
+                temp_point.ax = prediction(4);
+                temp_point.ay = prediction(5);
+                temp_point.heading = prediction(6);
+                sample_trajectory.emplace_back(temp_point);
+            }
+        }
+        else
+        {
+            // Predict through motion equation
+            auto latest_trajectory = cur_history_trajectory.back();
+
+            double dt = 1.0;
+            auto temp = latest_trajectory;
+            for (int i = 1; i <= 5; i++)
+            {
+                temp.x = latest_trajectory.x + latest_trajectory.vx * dt + 0.5 * latest_trajectory.ax * dt * dt;
+                temp.y = latest_trajectory.y + latest_trajectory.vy * dt + 0.5 * latest_trajectory.ay * dt * dt;
+                temp.vx = latest_trajectory.vx;
+                temp.vy = latest_trajectory.vy;
+                temp.ax = latest_trajectory.ax;
+                temp.ay = latest_trajectory.ay;
+                temp.heading = latest_trajectory.heading;
+                latest_trajectory = temp;
+                sample_trajectory.emplace_back(temp);
+            }
+        }
+
+        // Step6: Transfer to Frenet Point
+        std::vector<FrenetPoint> temp_set;
+        for (const auto &trajectory : sample_trajectory)
+        {
+            cartesion_set_to_frenet_set(trajectory, *reference_line, ego_state, temp_set);
+            _predict_trajectory_dynamic_obstacles[id].emplace_back(temp_set.front());
+            temp_set.clear();
+        }
+    }
+
+    for (const auto &pair : _predict_trajectory_dynamic_obstacles)
+    {
+        const auto &agent = pair.second;
+        for (int i = 0; i <= 4; i++)
+        {
+            LOG(INFO) << "Agent_ID " << pair.first << " at time " << i + 1 << " : (s: " << agent[i].s << ",l: "
+                      << agent[i].l << ",s_dot: " << agent[i].s_dot << ",l_dot: " << agent[i].l_dot << ")";
+        }
+    }
+
     return true;
 }
 
@@ -1087,7 +1228,7 @@ bool UMBPlanner::PropagateScenario(
     //     count++;
     // }
 
-    // get surrounding agent next sample point
+    // predict surrounding agent next sample point
     std::unordered_map<int, std::vector<FrenetPoint>> sub_surround_trajs_iter;
     for (const auto &fpa : surrounding_fsagents.forward_prop_agents)
     {
@@ -1098,10 +1239,6 @@ bool UMBPlanner::PropagateScenario(
             FrenetPoint new_frenet_point(sub_surround_trajs->at(fpa.first).back());
             new_frenet_point.l += sub_surround_trajs->at(fpa.first).back().l_dot * _sim_param.layer_time;
             new_frenet_point.s += sub_surround_trajs->at(fpa.first).back().s_dot * _sim_param.layer_time;
-            /**
-             * 使用 push_back  points.push_back(p);  // 需要先创建对象，再拷贝/移动
-             * 使用 emplace_back points.emplace_back(1, 2);  // 直接在容器中构造对象，无需拷贝/移动
-             */
             sub_surround_trajs->at(fpa.first).emplace_back(new_frenet_point);
         }
         // LOG(INFO) << std::fixed << std::setprecision(3) << "sub_surround_trajs[" << fpa.first << "]" << " "
