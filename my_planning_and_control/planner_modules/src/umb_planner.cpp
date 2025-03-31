@@ -1225,20 +1225,25 @@ bool UMBPlanner::PropagateScenario(
     std::unordered_map<int, std::vector<FrenetPoint>> sub_surround_trajs_iter;
     for (const auto &fpa : surrounding_fsagents.forward_prop_agents)
     {
-        // if (std::hypot(fpa.second.obs_frenet_point.s_dot, fpa.second.obs_frenet_point.l_dot) > 0.1)
-        // {
-        //     continue;
-        // }
-        sub_surround_trajs_iter.emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
-        sub_surround_trajs->emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
-        for (size_t i = 0; i < action_seq.size(); i++)
+        if (std::find(_cur_detected_obs_id.begin(), _cur_detected_obs_id.end(), fpa.first) != _cur_detected_obs_id.end())
         {
-            FrenetPoint new_frenet_point(sub_surround_trajs->at(fpa.first).back());
-            new_frenet_point.l += sub_surround_trajs->at(fpa.first).back().l_dot * _sim_param.layer_time;
-            new_frenet_point.s += sub_surround_trajs->at(fpa.first).back().s_dot * _sim_param.layer_time;
-            sub_surround_trajs->at(fpa.first).emplace_back(new_frenet_point);
+            auto trajectory = _predict_trajectory_dynamic_obstacles.at(fpa.first);
+            sub_surround_trajs->emplace(fpa.first, std::vector<FrenetPoint>{});
+            for (size_t i = 0; i < action_seq.size() + 1; i++)
+            {
+                sub_surround_trajs->at(fpa.first).emplace_back(trajectory[i]);
+            }
         }
-
+        else
+        {
+            sub_surround_trajs->emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
+            for (size_t i = 0; i < action_seq.size(); i++)
+            {
+                FrenetPoint new_frenet_point(sub_surround_trajs->at(fpa.first).back());
+                sub_surround_trajs->at(fpa.first).emplace_back(new_frenet_point);
+            }
+        }
+        sub_surround_trajs_iter.emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
         // 五次多项式插值,两点之间有9个插值点（10段线段）
         int sample_num = 10;
         for (size_t i = 0; i < action_seq.size(); i++)
@@ -1264,40 +1269,6 @@ bool UMBPlanner::PropagateScenario(
         }
         sub_surround_trajs_iter.at(fpa.first).emplace_back(sub_surround_trajs->at(fpa.first).back());
     }
-
-    // for (int id : _cur_detected_obs_id)
-    // {
-    //     auto trajectory = _predict_trajectory_dynamic_obstacles.at(id);
-    //     sub_surround_trajs->emplace(id, std::vector<FrenetPoint>{});
-    //     for (size_t i = 0; i < action_seq.size() + 1; i++)
-    //     {
-    //         sub_surround_trajs->at(id).emplace_back(trajectory[i]);
-    //     }
-
-    //     int sample_num = 10;
-    //     for (size_t i = 0; i < action_seq.size(); i++)
-    //     {
-    //         auto start_point = sub_surround_trajs->at(id)[i];
-    //         auto end_point = sub_surround_trajs->at(id)[i + 1];
-    //         double sample_distance = static_cast<double>((end_point.s - start_point.s) / sample_num);
-    //         PolynomialCurve curve;
-    //         curve.curve_fitting(start_point.s, start_point.l, start_point.l_prime, start_point.l_prime_prime,
-    //                             end_point.s, end_point.l, end_point.l_prime, end_point.l_prime_prime);
-    //         for (int j = 0; j < sample_num; j++)
-    //         {
-    //             if ((i == 0) & (j == 0))
-    //             {
-    //                 continue;
-    //             }
-    //             FrenetPoint cur_point;
-    //             double cur_s = start_point.s + j * sample_distance;
-    //             cur_point.s = cur_s;
-    //             cur_point.l = curve.value_evaluation(cur_s, 0);
-    //             sub_surround_trajs_iter.at(id).emplace_back(cur_point);
-    //         }
-    //     }
-    //     sub_surround_trajs_iter.at(id).emplace_back(sub_surround_trajs->at(id).back());
-    // }
 
     // calculate cost
     bool is_risky = false;
@@ -1375,9 +1346,10 @@ bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
 
             if (forward_trajs.size() != surr_traj.second.size())
             {
-                return false;
+
                 LOG(ERROR) << std::fixed << std::setprecision(4)
                            << "[UMBP]****** forward_trajs.size() != surr_traj.second.size()  ******";
+                return false;
             }
             double distance = GetMinDistanceFromEgoToObs(forward_trajs[i], surr_traj.second[i], 5.0, 4.0);
             if (distance >= 8.0)
