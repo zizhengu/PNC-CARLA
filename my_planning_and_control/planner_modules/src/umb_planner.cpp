@@ -799,7 +799,7 @@ void UMBPlanner::ObstacleFileter(const std::shared_ptr<VehicleState> ego_state, 
 
                 _history_trajectory_dynamic_obstacles[obs.id].emplace_back(cur_trajectory);
 
-                if (_history_trajectory_dynamic_obstacles[obs.id].size() > 50)
+                if (_history_trajectory_dynamic_obstacles[obs.id].size() > 30)
                 {
                     _history_trajectory_dynamic_obstacles[obs.id].erase(_history_trajectory_dynamic_obstacles[obs.id].begin());
                 }
@@ -868,7 +868,7 @@ bool UMBPlanner::PredictTrajectoryDynamicObs(const std::shared_ptr<std::vector<P
     {
         auto cur_history_trajectory = _history_trajectory_dynamic_obstacles[id];
         std::vector<TrajectoryPoint> sample_trajectory;
-        if (cur_history_trajectory.size() >= 50)
+        if (cur_history_trajectory.size() >= 30)
         {
             LOG(INFO) << "Active UnscentedKalmanFilter";
             // Predict by UKF
@@ -1221,19 +1221,11 @@ bool UMBPlanner::PropagateScenario(
     }
     sub_forward_trajs_inter.emplace_back(sub_forward_trajs->back());
 
-    // int count = 0;
-    // for (auto &point : sub_forward_trajs_inter)
-    // {
-    //     LOG(INFO) << std::fixed << std::setprecision(3) << "sub_forward_trajs_inter " << count
-    //               << " (s , l)" << point.s << point.l;
-    //     count++;
-    // }
-
     // predict surrounding agent next sample point
     std::unordered_map<int, std::vector<FrenetPoint>> sub_surround_trajs_iter;
     for (const auto &fpa : surrounding_fsagents.forward_prop_agents)
     {
-        // if (std::hypot(fpa.second.obs_frenet_point.s_dot, fpa.second.obs_frenet_point.l_dot) > 0.01)
+        // if (std::hypot(fpa.second.obs_frenet_point.s_dot, fpa.second.obs_frenet_point.l_dot) > 0.1)
         // {
         //     continue;
         // }
@@ -1246,13 +1238,6 @@ bool UMBPlanner::PropagateScenario(
             new_frenet_point.s += sub_surround_trajs->at(fpa.first).back().s_dot * _sim_param.layer_time;
             sub_surround_trajs->at(fpa.first).emplace_back(new_frenet_point);
         }
-        // LOG(INFO) << std::fixed << std::setprecision(3) << "sub_surround_trajs[" << fpa.first << "]" << " "
-        //           << sub_surround_trajs->at(fpa.first)[0].s << ", " << sub_surround_trajs->at(fpa.first)[0].l << " from 0, "
-        //           << sub_surround_trajs->at(fpa.first)[1].s << ", " << sub_surround_trajs->at(fpa.first)[1].l << " from 1; "
-        //           << sub_surround_trajs->at(fpa.first)[2].s << ", " << sub_surround_trajs->at(fpa.first)[2].l << " from 2; "
-        //           << sub_surround_trajs->at(fpa.first)[3].s << ", " << sub_surround_trajs->at(fpa.first)[3].l << " from 3; "
-        //           << sub_surround_trajs->at(fpa.first)[4].s << ", " << sub_surround_trajs->at(fpa.first)[4].l << " from 4; "
-        //           << sub_surround_trajs->at(fpa.first)[5].s << ", " << sub_surround_trajs->at(fpa.first)[5].l << " from 5; ";
 
         // 五次多项式插值,两点之间有9个插值点（10段线段）
         int sample_num = 10;
