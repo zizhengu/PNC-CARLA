@@ -266,5 +266,3 @@
     2025.03.29 16:46(距离稳定, win_size = 10, hdi_weight = 1.0 )  
     [my_planning_and_control]: 计算指标完成! Efficiency: 11.55903 Safety: 0.01776 UD: 0.53936 LCC: 0.07872 total_frame: 2477.00000
 
-
-

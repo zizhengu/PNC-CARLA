@@ -120,7 +120,7 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     // 1.1区别动态与静态障碍物，将其储存在成员变量 std::vector<derived_object_msgs::msg::Object> _static_/dynamic_obstacles中
     UMBPlanner::ObstacleFileter(ego_state, obstacles);
 
-    // 1.3 障碍物转换为前向传播智能体
+    // 1.2 障碍物转换为前向传播智能体
     ForwardPropAgentSet forward_prop_agent_set;
     if (!GetSurroundingForwardSimAgents(forward_prop_agent_set, reference_line, ego_state))
     {
@@ -138,12 +138,16 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
         }
     }
 
-    // 1.4 预测障碍物轨迹
+    // 1.3 预测障碍物轨迹
+    TicToc Predict_timer;
     if (!PredictTrajectoryDynamicObs(reference_line, ego_state))
     {
         LOG(ERROR) << "PredictTrajectoryDynamicObs False! ";
         return false;
     }
+    LOG(INFO) << std::fixed << std::setprecision(4)
+              << "[UMBP][Process] PredictTrajectory Time :"
+              << Predict_timer.toc() << "ms";
 
     //----------------------------2.确定规划起点并将其投影到frenet坐标系--------------------------
     // RCLCPP_INFO(this->get_logger(), "Start CalculatePlanningStartPoint !!!");
@@ -321,15 +325,6 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     {
         // 求解成功 转换轨迹
         LOG(INFO) << "[UMBP]****** GetBezierSplineUsingCorridor  Success ******";
-        // for (size_t i = 0; i < bezier_spline.ctrl_pts().size(); ++i)
-        // {
-        //     LOG(INFO) << "Segment " << i << ":";
-        //     for (int row = 0; row < bezier_spline.ctrl_pts()[i].rows(); ++row)
-        //     {
-        //         LOG(INFO) << std::fixed << std::setprecision(4)
-        //                   << "  Control Point " << row << ": " << bezier_spline.ctrl_pts()[i].row(row);
-        //     }
-        // }
         getbezierspline = true;
         for (size_t i = 0; i < bezier_spline.ctrl_pts().size(); ++i)
         {
@@ -401,16 +396,6 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
         {
             _previous_trajectory.emplace_back(trajectory_point);
         }
-        // int count = 0;
-        // for (auto trajectory : bezier_trajectory_init)
-        // {
-        //     if (count % 10 == 0)
-        //     {
-        //         LOG(INFO) << std::fixed << std::setprecision(4)
-        //                   << "  Point (x: " << trajectory.x << " y:  " << trajectory.y << " t:  " << trajectory.time_stamped << " v:  " << trajectory.v
-        //                   << " heading:  " << trajectory.heading << " kappa:  " << trajectory.kappa << " a_tau:  " << trajectory.a_tau;
-        //     }
-        // }
     }
 
     // 绘制SL图
@@ -1233,41 +1218,45 @@ bool UMBPlanner::PropagateScenario(
             {
                 sub_surround_trajs->at(fpa.first).emplace_back(trajectory[i]);
             }
+            sub_surround_trajs_iter.emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
+            // 五次多项式插值,两点之间有9个插值点（10段线段）
+            int sample_num = 10;
+            for (size_t i = 0; i < action_seq.size(); i++)
+            {
+                auto start_point = sub_surround_trajs->at(fpa.first)[i];
+                auto end_point = sub_surround_trajs->at(fpa.first)[i + 1];
+                double sample_distance = static_cast<double>((end_point.s - start_point.s) / sample_num);
+                PolynomialCurve curve;
+                curve.curve_fitting(start_point.s, start_point.l, start_point.l_prime, start_point.l_prime_prime,
+                                    end_point.s, end_point.l, end_point.l_prime, end_point.l_prime_prime);
+                for (int j = 0; j < sample_num; j++)
+                {
+                    if ((i == 0) & (j == 0))
+                    {
+                        continue;
+                    }
+                    FrenetPoint cur_point;
+                    double cur_s = start_point.s + j * sample_distance;
+                    cur_point.s = cur_s;
+                    cur_point.l = curve.value_evaluation(cur_s, 0);
+                    sub_surround_trajs_iter.at(fpa.first).emplace_back(cur_point);
+                }
+            }
+            sub_surround_trajs_iter.at(fpa.first).emplace_back(sub_surround_trajs->at(fpa.first).back());
         }
         else
         {
             sub_surround_trajs->emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
             for (size_t i = 0; i < action_seq.size(); i++)
             {
-                FrenetPoint new_frenet_point(sub_surround_trajs->at(fpa.first).back());
-                sub_surround_trajs->at(fpa.first).emplace_back(new_frenet_point);
+                sub_surround_trajs->at(fpa.first).emplace_back(fpa.second.obs_frenet_point);
             }
-        }
-        sub_surround_trajs_iter.emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
-        // 五次多项式插值,两点之间有9个插值点（10段线段）
-        int sample_num = 10;
-        for (size_t i = 0; i < action_seq.size(); i++)
-        {
-            auto start_point = sub_surround_trajs->at(fpa.first)[i];
-            auto end_point = sub_surround_trajs->at(fpa.first)[i + 1];
-            double sample_distance = static_cast<double>((end_point.s - start_point.s) / sample_num);
-            PolynomialCurve curve;
-            curve.curve_fitting(start_point.s, start_point.l, start_point.l_prime, start_point.l_prime_prime,
-                                end_point.s, end_point.l, end_point.l_prime, end_point.l_prime_prime);
-            for (int j = 0; j < sample_num; j++)
+            sub_surround_trajs_iter.emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
+            for (int i = 0; i < 10 * 5; i++)
             {
-                if ((i == 0) & (j == 0))
-                {
-                    continue;
-                }
-                FrenetPoint cur_point;
-                double cur_s = start_point.s + j * sample_distance;
-                cur_point.s = cur_s;
-                cur_point.l = curve.value_evaluation(cur_s, 0);
-                sub_surround_trajs_iter.at(fpa.first).emplace_back(cur_point);
+                sub_surround_trajs_iter.at(fpa.first).emplace_back(fpa.second.obs_frenet_point);
             }
         }
-        sub_surround_trajs_iter.at(fpa.first).emplace_back(sub_surround_trajs->at(fpa.first).back());
     }
 
     // calculate cost

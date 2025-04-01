@@ -38,8 +38,8 @@ propogate {
     l_ref_to_right_road_bound: 2
   }
   sample {
-    s_sample_distance: 1.0
-    s_sample_num: 60
+    s_sample_distance: 2.0
+    s_sample_num: 30
     l_sample_distance: 4.0
     l_sample_num: 2
     acc_ref : 3.0 
