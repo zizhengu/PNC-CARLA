@@ -147,9 +147,10 @@ private:
   double _uncomfortable_acc_frame = 0.0;
   double _large_curvature_changing_frame = 0.0;
   double _total_v = 0.0;
-  double Safety, Efficiency, UD, LCC;
+  double Safety, Efficiency, UD, LCC, AveRunTime;
   double _previous_heading;
   double _current_omega, _previous_omega;
+  double _total_run_time = 0.0;
   rclcpp::Time _previous_time;
   bool _is_fisrt_evaluation = true;
   int _add_localiation_noise_type = 0;
@@ -305,14 +306,19 @@ public:
     LOG(INFO) << std::fixed << std::setprecision(4)
               << "[UMBP][Process] Umbp Runonce Time :"
               << umbp_runonce_timer.toc() << "ms";
+               _total_run_time += (double)umbp_runonce_timer.toc();
     LOG(INFO) << "----------------------------------";
 
     // Evaluate
-    if (std::abs(_current_ego_state->v) > 0.01)
+
+    if (std::abs(_current_ego_state->v) > 0.001)
     {
       _total_v += std::abs(_current_ego_state->v);
       _total_frame += 1.0;
     }
+    // 计算平均运行时间
+    AveRunTime = _total_run_time / _total_frame;
+
     // 计算平均车速
     Efficiency = _total_v / _total_frame;
 
@@ -369,7 +375,7 @@ public:
     }
     LCC = _large_curvature_changing_frame / _total_frame;
 
-    RCLCPP_INFO(this->get_logger(), "计算指标完成! Efficiency: %.5f Safety: %.5f UD: %.5f LCC: %.5f total_frame: %.5f", Efficiency, Safety, UD, LCC, _total_frame);
+    RCLCPP_INFO(this->get_logger(), "计算指标完成! Efficiency: %.5f Safety: %.5f UD: %.5f LCC: %.5f AveRunTime: %.5fms TotalFrame: %.5f", Efficiency, Safety, UD, LCC, AveRunTime, _total_frame);
 
     // if (_current_ego_state->x <= 338 && _current_ego_state->x >= 336 && _current_ego_state->y <= -89 && _current_ego_state->y >= -90)
     // {

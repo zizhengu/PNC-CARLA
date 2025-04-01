@@ -266,3 +266,7 @@
     2025.03.29 16:46(距离稳定, win_size = 10, hdi_weight = 1.0 )  
     [my_planning_and_control]: 计算指标完成! Efficiency: 11.55903 Safety: 0.01776 UD: 0.53936 LCC: 0.07872 total_frame: 2477.00000
 
+    #------------------------------------------------------------------#
+    ref_speed = 10.0
+    2025.04.01.10:56(静态障碍物不用插, 插值sample_num = 5)
+    计算指标完成! Efficiency: 11.55305 Safety: 0.01141 UD: 0.61483 LCC: 0.11521 AveRunTime: 60.53278ms total_frame: 2630.00000  
