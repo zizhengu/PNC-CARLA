@@ -186,11 +186,11 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     {
         _history_decision.pop_front();
     }
-    int record_history = 0;
-    if (record_history % 2 == 0)
+
+    if (_record_history % 2 == 0)
     {
         _history_decision.push_back(fpb_path);
-        record_history++;
+        _record_history++;
     }
 
     if (fpb_path[0].s == fpb_path[1].s)
@@ -929,7 +929,7 @@ bool UMBPlanner::PredictTrajectoryDynamicObs(const std::shared_ptr<std::vector<P
             }
         }
 
-        // Step6: Transfer to Frenet Point
+        // Step5: Transfer to Frenet Point
         std::vector<FrenetPoint> temp_set;
         for (const auto &trajectory : sample_trajectory)
         {
@@ -939,15 +939,15 @@ bool UMBPlanner::PredictTrajectoryDynamicObs(const std::shared_ptr<std::vector<P
         }
     }
 
-    for (const auto &pair : _predict_trajectory_dynamic_obstacles)
-    {
-        const auto &agent = pair.second;
-        for (int i = 0; i <= 4; i++)
-        {
-            LOG(INFO) << "Agent_ID " << pair.first << " at time " << i + 1 << " : (s: " << agent[i].s << ",l: "
-                      << agent[i].l << ",s_dot: " << agent[i].s_dot << ",l_dot: " << agent[i].l_dot << ")";
-        }
-    }
+    // for (const auto &pair : _predict_trajectory_dynamic_obstacles)
+    // {
+    //     const auto &agent = pair.second;
+    //     for (int i = 0; i <= 4; i++)
+    //     {
+    //         LOG(INFO) << "Agent_ID " << pair.first << " at time " << i + 1 << " : (s: " << agent[i].s << ",l: "
+    //                   << agent[i].l << ",s_dot: " << agent[i].s_dot << ",l_dot: " << agent[i].l_dot << ")";
+    //     }
+    // }
 
     return true;
 }
@@ -1186,7 +1186,8 @@ bool UMBPlanner::PropagateScenario(
 
     // 五次多项式插值
     std::vector<FrenetPoint> sub_forward_trajs_inter;
-    int sample_num = 10;
+    // int sample_num = 10;
+    int sample_num = 5;
     for (size_t i = 0; i < action_seq.size(); i++)
     {
         auto start_point = sub_forward_trajs->at(i);
@@ -1220,7 +1221,8 @@ bool UMBPlanner::PropagateScenario(
             }
             sub_surround_trajs_iter.emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
             // 五次多项式插值,两点之间有9个插值点（10段线段）
-            int sample_num = 10;
+            // int sample_num = 10;
+            int sample_num = 5;
             for (size_t i = 0; i < action_seq.size(); i++)
             {
                 auto start_point = sub_surround_trajs->at(fpa.first)[i];
@@ -1252,7 +1254,7 @@ bool UMBPlanner::PropagateScenario(
                 sub_surround_trajs->at(fpa.first).emplace_back(fpa.second.obs_frenet_point);
             }
             sub_surround_trajs_iter.emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
-            for (int i = 0; i < 10 * 5; i++)
+            for (int i = 0; i < 5 * 5; i++)
             {
                 sub_surround_trajs_iter.at(fpa.first).emplace_back(fpa.second.obs_frenet_point);
             }
@@ -1329,6 +1331,7 @@ bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
         }
         cost_tmp.efficiency.ego_to_desired_vel = _cost_param.ego_lack_speed_to_desired_unit_cost * std::abs(ego_velocity - _reference_speed);
         // LOG(INFO) << std::fixed << std::setprecision(4) << " cost_tmp.efficiency.ego_to_desired_vel " << cost_tmp.efficiency.ego_to_desired_vel;
+
         // safety:
         for (const auto &surr_traj : surround_trajs)
         {

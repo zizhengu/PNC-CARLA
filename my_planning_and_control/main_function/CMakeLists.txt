@@ -39,7 +39,7 @@ find_package(OsqpEigen REQUIRED)
 find_package(Matplot++ REQUIRED)
 find_package(carla_waypoint_types REQUIRED)
 find_package(Protobuf REQUIRED)
-
+find_package(OpenMP REQUIRED)
 PROTOBUF_GENERATE_CPP(PROTO_SRCS PROTO_HDRS
         /home/guzizhen/PNC-CARLA/my_planning_and_control/planner_modules/proto/umbp_config.proto
 )

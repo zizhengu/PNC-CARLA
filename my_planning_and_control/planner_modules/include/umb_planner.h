@@ -291,6 +291,7 @@ private:
     std::vector<std::vector<FpbLonAction>> _forward_lon_behaviors = std::vector<std::vector<FpbLonAction>>(500);
     std::vector<std::unordered_map<int, std::vector<FrenetPoint>>> _surround_trajs = std::vector<std::unordered_map<int, std::vector<FrenetPoint>>>(500);
     double _time_cost = 0.0;
+    int _record_history = 0;
 
     // 坐标存储，为了甘文乾实现预测算法
     int _frame_number = 0;
