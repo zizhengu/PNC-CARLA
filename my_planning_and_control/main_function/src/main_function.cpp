@@ -109,7 +109,6 @@ private:
   rclcpp::Subscription<carla_msgs::msg::CarlaEgoVehicleInfo>::SharedPtr _ego_info_subscriber; // 定于车辆的车道信息
   std::shared_ptr<VehicleState> _current_ego_state;
   std::shared_ptr<VehicleState> _current_ego_state_filter;
-  std::deque<VehicleState> _history_ego_state;
   rclcpp::Subscription<derived_object_msgs::msg::ObjectArray>::SharedPtr _object_array_subscriber; // 对象序列，包含本车和障碍物
   std::vector<derived_object_msgs::msg::Object> _object_arrry;
   std::vector<derived_object_msgs::msg::Object> _object_arrry_noise;
@@ -160,13 +159,16 @@ private:
 
   // kalman estimation
   int _add_localiation_noise_type = 1;
-  kalman::KalmanFilter _kf;
-
   bool is_kalman_first_run = true;
+  // KalmanFilterCTRV _kf;
+  kalman::KalmanFilter _kf;
   Eigen::MatrixXd _P_ego_state;
+  std::deque<std::shared_ptr<VehicleState>> _history_ego_state;
   std::unordered_map<int, bool> is_obs_kalman_first_run;
+  // std::unordered_map<int, KalmanFilterCTRV> _kf_obs;
   std::unordered_map<int, kalman::KalmanFilter> _kf_obs;
   std::unordered_map<int, Eigen::MatrixXd> _P_obstacles;
+  std::unordered_map<int, std::deque<derived_object_msgs::msg::Object>> _history_obs_state;
 
 // 绘图
 #ifdef PLOT
@@ -181,7 +183,12 @@ public:
   // 里程计订阅方回调函数，获取当前本车位姿与速度
   void odometry_cb(nav_msgs::msg::Odometry::SharedPtr msg)
   {
-    std::default_random_engine generator(42);
+    std::random_device rd;
+    // 获取随机种子值
+    unsigned int seed = rd();
+
+    // 使用随机种子初始化随机数引擎
+    std::default_random_engine generator(seed);
     std::normal_distribution<double> distribution(0.0, 1.0);
     switch (static_cast<int>(_add_localiation_noise_type))
     {
@@ -192,10 +199,11 @@ public:
       break;
 
     case 1:
+      RCLCPP_INFO(this->get_logger(), "True x: %.3f, True y: %.3f", msg->pose.pose.position.x, msg->pose.pose.position.y);
       _current_ego_state->x = msg->pose.pose.position.x + distribution(generator);
       _current_ego_state->y = msg->pose.pose.position.y + distribution(generator);
       _current_ego_state->z = msg->pose.pose.position.z;
-      RCLCPP_INFO(this->get_logger(), "adding localization noise");
+      RCLCPP_INFO(this->get_logger(), "Noise x: %.3f, Noise y: %.3f", _current_ego_state->x, _current_ego_state->y);
       break;
     case 2:
       if ((msg->pose.pose.position.y >= -165.8 && msg->pose.pose.position.y <= -100.5 && msg->pose.pose.position.x >= 91 && msg->pose.pose.position.x <= 93) || (msg->pose.pose.position.y >= -80.0 && msg->pose.pose.position.y <= -58.0 && msg->pose.pose.position.x >= 290 && msg->pose.pose.position.x <= 340))
@@ -203,7 +211,6 @@ public:
         _current_ego_state->x = msg->pose.pose.position.x + distribution(generator);
         _current_ego_state->y = msg->pose.pose.position.y + distribution(generator);
         _current_ego_state->z = msg->pose.pose.position.z;
-        RCLCPP_INFO(this->get_logger(), "adding localization noise");
         break;
       }
       else
@@ -222,6 +229,7 @@ public:
     tf2::Matrix3x3(tf_q).getRPY(roll, pitch, yaw);
     _current_ego_state->heading = tf2NormalizeAngle(yaw);
     _current_ego_state->flag_ode = true;
+    _current_ego_state->omega = msg->twist.twist.angular.z;
   }
 
   void imu_cb(sensor_msgs::msg::Imu::SharedPtr imu_msg)
@@ -333,7 +341,9 @@ public:
       Eigen::VectorXd x_l_k(3);
       _kf.x_l_k << _current_ego_state->x, _current_ego_state->y, _current_ego_state->heading;
       is_kalman_first_run = false;
-      _P_ego_state = _kf.GetCovariance();
+      Eigen::MatrixXd uncerten_matrix(2, 2);
+      uncerten_matrix << _kf.GetCovariance().diagonal()(0), 0, 0, _kf.GetCovariance().diagonal()(1);
+      _P_ego_state = uncerten_matrix;
     }
     else
     {
@@ -356,15 +366,15 @@ public:
       x_l_k = _kf.update();
       _current_ego_state->x = x_l_k(0);
       _current_ego_state->y = x_l_k(1);
-      _P_ego_state = _kf.GetCovariance();
-      // 打印 _P_ego_state
-      std::ostringstream ego_state_stream;
-      ego_state_stream << _P_ego_state;
-      LOG(INFO) << std::fixed << std::setprecision(4)
-                << "[主车状态信息][Process] 主车 ID : " << _current_ego_state->id << "状态协方差矩阵 _P_ego_state:\n"
-                << ego_state_stream.str();
-      // RCLCPP_INFO(this->get_logger(), "主车状态协方差矩阵 _P_ego_state:\n%s", ego_state_stream.str().c_str());
+      Eigen::MatrixXd uncerten_matrix(2, 2);
+      uncerten_matrix << _kf.GetCovariance().diagonal()(0), 0, 0, _kf.GetCovariance().diagonal()(1);
+      _P_ego_state = uncerten_matrix;
     }
+    std::ostringstream ego_state_stream;
+    ego_state_stream << _P_ego_state;
+    LOG(INFO) << std::fixed << std::setprecision(4)
+              << "[主车状态信息][Process] 主车 ID : " << _current_ego_state->id << "状态协方差矩阵 _P_ego_state:\n"
+              << ego_state_stream.str();
 
     // 调用KF进行障碍物空间位置滤波处理及不确定性矩阵输出
     for (auto &obs : _object_arrry)
@@ -384,7 +394,9 @@ public:
         is_obs_kalman_first_run[obs.id] = true;
         kalman::KalmanFilter kalman_obs;
         kalman_obs.x_l_k << obs.pose.position.x, obs.pose.position.y, heading;
-        _P_obstacles[obs.id] = kalman_obs.GetCovariance();
+        Eigen::MatrixXd uncerten_matrix(2, 2);
+        uncerten_matrix << kalman_obs.GetCovariance().diagonal()(0), 0, 0, kalman_obs.GetCovariance().diagonal()(1);
+        _P_obstacles[obs.id] = uncerten_matrix;
         _kf_obs[obs.id] = kalman_obs;
       }
       else
@@ -408,21 +420,54 @@ public:
         x_l_k = _kf_obs[obs.id].update();
         obs.pose.position.x = x_l_k(0);
         obs.pose.position.y = x_l_k(1);
-        _P_obstacles[obs.id] = _kf_obs[obs.id].GetCovariance();
+        Eigen::MatrixXd uncerten_matrix(2, 2);
+        uncerten_matrix << _kf_obs[obs.id].GetCovariance().diagonal()(0), 0, 0, _kf_obs[obs.id].GetCovariance().diagonal()(1);
+        _P_obstacles[obs.id] = uncerten_matrix;
         std::ostringstream obstacle_stream;
         obstacle_stream << _P_obstacles[obs.id];
-        // LOG(INFO) << std::fixed << std::setprecision(4)
-        //           << "[障碍物状态信息][Process] 障碍物 ID: " << obs.id
-        //           << " 的协方差矩阵 _P_obstacles:\n"
-        //           << obstacle_stream.str();
+        LOG(INFO) << std::fixed << std::setprecision(4)
+                  << "[障碍物状态信息][Process] 障碍物 ID: " << obs.id
+                  << " 的协方差矩阵 _P_obstacles:\n"
+                  << obstacle_stream.str();
       };
     }
+    // 调用KF进行自车空间位置滤波处理及不确定性矩阵输出
+    // if (_history_ego_state.size() < 20)
+    // {
+    //   _history_ego_state.push_back(_current_ego_state);
+    //   _P_ego_state << _kf.getCovariance().diagonal()(0), 0, 0, _kf.getCovariance().diagonal()(1);
+    // }
+    // else
+    // {
+    //   auto cur_state = _history_ego_state[0];
+    //   _kf.initializeState(cur_state->x, cur_state->y, cur_state->v, _current_ego_state->heading, _current_ego_state->omega);
+    //   double dt = 1.0; // 时间间隔
+    //   for (const auto &state : _history_ego_state)
+    //   {
+    //     _kf.predict(dt);
+    //     Eigen::VectorXd z(2);
+    //     z << state->x, state->y;
+    //     _kf.update(z);
+    //   }
+    //   Eigen::VectorXd currentData(2);
+    //   currentData << _current_ego_state->x, _current_ego_state->y;
+    //   // 预测和更新
+    //   _kf.predict(dt);
+    //   _kf.update(currentData);
+    //   // 赋值
+    //   Eigen::VectorXd estimatedState = _kf.getState();
+    //   _current_ego_state->x = estimatedState[0];
+    //   _current_ego_state->y = estimatedState[1];
+    //   _history_ego_state.push_back(_current_ego_state);
+    //   _history_ego_state.pop_front();
+    // }
 
     // 调用umbplanner获取轨迹
     auto current_time = this->get_clock()->now();
     // _emplanner->planning_run_step(_reference_line, _current_ego_state, _object_arrry, _trajectory);
     TicToc umbp_runonce_timer;
-    if (!(_umbplanner->RunOnce(_reference_line, _current_ego_state, _object_arrry, _trajectory, _emergency_stop_signal)))
+    RCLCPP_INFO(this->get_logger(), "Input x: %.3f, Input y: %.3f", _current_ego_state->x, _current_ego_state->y);
+    if (!(_umbplanner->RunOnce(_reference_line, _current_ego_state, _P_obstacles, _P_ego_state, _object_arrry, _trajectory, _emergency_stop_signal)))
     {
       LOG(ERROR) << std::fixed << std::setprecision(4)
                  << "[UMBP]****** UMBP RunOnce FAILED  ******";

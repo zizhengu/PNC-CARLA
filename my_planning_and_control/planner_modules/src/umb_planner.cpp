@@ -111,6 +111,7 @@ bool UMBPlanner::GetBezierParam(const planning::umbp::Config &cfg,
 }
 
 bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference_line, const std::shared_ptr<VehicleState> ego_state,
+                         const std::unordered_map<int, Eigen::MatrixXd> &_P_obstacles, const Eigen::MatrixXd &_P_ego_state,
                          const std::vector<derived_object_msgs::msg::Object> &obstacles, std::vector<TrajectoryPoint> &final_trajectory, bool &emergency_stop_signal)
 {
     emergency_stop_signal = false;
@@ -148,6 +149,10 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
     LOG(INFO) << std::fixed << std::setprecision(4)
               << "[UMBP][Process] PredictTrajectory Time :"
               << Predict_timer.toc() << "ms";
+
+    // 1.4 空间位置不确定性矩阵赋值
+    _uncertain_matrix_ego = _P_ego_state;
+    _uncertain_matrix_obs = _P_obstacles;
 
     //----------------------------2.确定规划起点并将其投影到frenet坐标系--------------------------
     // RCLCPP_INFO(this->get_logger(), "Start CalculatePlanningStartPoint !!!");
@@ -1344,6 +1349,7 @@ bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
                 return false;
             }
             double distance = GetMinDistanceFromEgoToObs(forward_trajs[i], surr_traj.second[i], 5.0, 4.0);
+            // double distance = GetDistanceWithuncertainty(forward_trajs[i], surr_traj.second[i], surr_traj.first, 5.0, 4.0);
             if (distance >= 8.0)
             {
                 cost_tmp.safety.ego_to_obs += 0;
@@ -1722,6 +1728,110 @@ double UMBPlanner::GetMinDistanceFromEgoToObs(const FrenetPoint &forward_traj, c
     return min_distance;
 }
 
+double UMBPlanner::GetDistanceWithuncertainty(const FrenetPoint &forward_traj, const FrenetPoint &surr_traj, const int &obs_id,
+                                              const double obs_length, const double obs_width)
+{
+    std::vector<FrenetPoint> obs_points;
+    FrenetPoint point_1, point_2, point_3, point_4;
+    point_1.s = surr_traj.s + obs_length / 2.0;
+    point_2.s = surr_traj.s + obs_length / 2.0;
+    point_3.s = surr_traj.s - obs_length / 2.0;
+    point_4.s = surr_traj.s - obs_length / 2.0;
+    point_1.l = surr_traj.l + obs_width / 2.0;
+    point_2.l = surr_traj.l - obs_width / 2.0;
+    point_3.l = surr_traj.l - obs_width / 2.0;
+    point_4.l = surr_traj.l + obs_width / 2.0;
+    obs_points.emplace_back(point_1);
+    obs_points.emplace_back(point_2);
+    obs_points.emplace_back(point_3);
+    obs_points.emplace_back(point_4);
+
+    // return std::hypot((forward_traj.s - surr_traj.s), (forward_traj.l - surr_traj.l));
+    double min_distance = std::numeric_limits<double>::max();
+    if (forward_traj.s <= point_2.s && forward_traj.s >= point_4.s && forward_traj.l >= point_2.l && forward_traj.l <= point_4.l)
+    {
+        min_distance = 0.01;
+        return min_distance;
+    }
+    // 自车均值及协方差矩阵
+    Eigen::VectorXd mu1(2);
+    mu1 << forward_traj.s, forward_traj.l;
+    Eigen::MatrixXd P1(2, 2);
+    P1 = _uncertain_matrix_ego;
+
+    // 它车均值及协方差矩阵
+    Eigen::VectorXd mu2(2);
+    mu2 << surr_traj.s, surr_traj.l;
+    Eigen::MatrixXd uncertain_matrix(2, 2);
+    auto it = _uncertain_matrix_obs.find(obs_id);
+    if (it != _uncertain_matrix_obs.end())
+    {
+        uncertain_matrix = it->second;
+    }
+    else
+    {
+        // 键不存在
+        LOG(ERROR) << "[UMBP]failed to get  _uncertain_matrix_obs.find(obs_id) " << obs_id;
+        uncertain_matrix.setIdentity();
+    }
+    Eigen::MatrixXd P2(2, 2);
+    P2 << uncertain_matrix;
+
+    // 离散化自车位置
+    std::vector<Eigen::VectorXd> x1;
+    for (double i = forward_traj.s - _ego_param.car_length / 2; i <= forward_traj.s + _ego_param.car_length / 2; i += 1.0)
+    {
+        for (double j = forward_traj.l - _ego_param.car_width / 2; j <= forward_traj.l + _ego_param.car_width / 2; j += 1.0)
+        {
+            Eigen::VectorXd point(2);
+            point << i, j;
+            x1.push_back(point);
+        }
+    }
+    // 离散化它车位置
+    std::vector<Eigen::VectorXd> x2;
+    for (double i = surr_traj.s - obs_length / 2; i <= surr_traj.s + obs_length / 2; i += 1.0)
+    {
+        for (double j = surr_traj.l - obs_width / 2; j <= surr_traj.l + obs_width / 2; j += 1.0)
+        {
+            Eigen::VectorXd point(2);
+            point << i, j;
+            x2.push_back(point);
+        }
+    }
+
+    // 计算期望距离
+    min_distance = ComputeGaussianCost(x1, mu1, P1, x2, mu2, P2);
+
+    return min_distance;
+}
+double UMBPlanner::GaussianProbability(const Eigen::VectorXd &x, const Eigen::VectorXd &mu, const Eigen::MatrixXd &P)
+{
+    Eigen::MatrixXd inv_P = P.inverse();
+    Eigen::VectorXd diff = x - mu;
+    double exponent = -0.5 * diff.transpose() * inv_P * diff;
+    double det_P = P.determinant();
+    double probability = 1 / (2 * M_PI * std::sqrt(det_P)) * std::exp(exponent);
+    return probability;
+}
+
+double UMBPlanner::ComputeGaussianCost(const std::vector<Eigen::VectorXd> &x1, const Eigen::VectorXd &mu1, const Eigen::MatrixXd &P1,
+                                       const std::vector<Eigen::VectorXd> &x2, const Eigen::VectorXd &mu2, const Eigen::MatrixXd &P2)
+{
+    double cost = 0;
+    for (size_t i = 0; i < x1.size(); ++i)
+    {
+        double p1 = GaussianProbability(x1[i], mu1, P1);
+        for (size_t j = 0; j < x2.size(); ++j)
+        {
+            double p2 = GaussianProbability(x2[j], mu2, P2);
+            // 计算代价，这里使用欧式距离
+            double c = (x1[i] - x2[j]).norm();
+            cost += p1 * p2 * c;
+        }
+    }
+    return cost;
+}
 bool UMBPlanner::GenerateSscCube(const std::vector<FrenetPoint> &fpb_path, const ForwardPropAgentSet &forward_prop_agent_set,
                                  const std::vector<TrajectoryPoint> &path_trajectory, const FrenetPoint &planning_start_point_frenet)
 {

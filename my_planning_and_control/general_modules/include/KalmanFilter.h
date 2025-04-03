@@ -12,7 +12,18 @@ namespace kalman
     {
     public:
         // 构造函数
-        KalmanFilter() : dim_x(3), dim_u(5), t(0.1)
+        KalmanFilter()
+            : dim_x(3), dim_u(5), t(0.1)
+        //   x(x,y,theta) u(vx,vy,ax,ay,omega)
+        //   A(Eigen::MatrixXd::Zero(dim_x, dim_x)),
+        //   B(Eigen::MatrixXd::Zero(dim_x, dim_u)),
+        //   H(Eigen::MatrixXd::Zero(dim_x, dim_x)),
+        //   Q(Eigen::MatrixXd::Zero(dim_x, dim_x)),
+        //   R(Eigen::MatrixXd::Zero(dim_x, dim_x)),
+        //   z(Eigen::VectorXd::Zero(dim_x)),
+        //   P(Eigen::MatrixXd::Identity(dim_x, dim_x)),
+        //   x_l_k(Eigen::VectorXd::Zero(dim_x)),
+        //   u(Eigen::VectorXd::Zero(dim_u))
         {
             A.resize(dim_x, dim_x);
             A << 1, 0, 0,
@@ -30,14 +41,14 @@ namespace kalman
                 0, 0, 1;
 
             Q.resize(dim_x, dim_x);
-            Q << 0.05, 0, 0,
-                0, 0.05, 0,
-                0, 0, 0.05;
+            Q << 0.25, 0, 0,
+                0, 0.25, 0,
+                0, 0, 0.25;
 
             R.resize(dim_x, dim_x);
-            R << 1.0, 0, 0,
-                0, 1.0, 0,
-                0, 0, 1.0;
+            R << 0.25, 0, 0,
+                0, 0.25, 0,
+                0, 0, 0.25;
 
             P.resize(dim_x, dim_x);
             P << 1, 0, 0,
@@ -57,8 +68,7 @@ namespace kalman
         Eigen::VectorXd predict(Eigen::VectorXd &u, Eigen::VectorXd &xt);
         // 更新方法（示例）
         Eigen::VectorXd update();
-
-        Eigen::MatrixXd GetCovariance() const;
+        Eigen::MatrixXd GetCovariance();
 
     private:
         int dim_x; // 状态向量的维度

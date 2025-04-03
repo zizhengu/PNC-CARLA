@@ -22,8 +22,7 @@ Eigen::VectorXd kalman::KalmanFilter::update()
     return x_l_k;
 }
 
-// 获取不确定性矩阵 P
-Eigen::MatrixXd kalman::KalmanFilter::GetCovariance() const
+Eigen::MatrixXd kalman::KalmanFilter::GetCovariance()
 {
     return P;
 }

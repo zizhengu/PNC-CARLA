@@ -159,6 +159,7 @@ public:
     UMBPlanner();
 
     bool RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference_line, const std::shared_ptr<VehicleState> ego_state,
+                 const std::unordered_map<int, Eigen::MatrixXd> &_P_obstacles, const Eigen::MatrixXd &_P_ego_state,
                  const std::vector<derived_object_msgs::msg::Object> &objects, std::vector<TrajectoryPoint> &trajectory, bool &emergency_stop_signal);
 
     bool RunUmpb(const FrenetPoint ego_state, const ForwardPropAgentSet &forward_prop_agent_set);
@@ -242,6 +243,13 @@ private:
 
     double GetMinDistanceFromEgoToObs(const FrenetPoint &forward_traj, const FrenetPoint &surr_traj,
                                       const double obs_length, const double obs_width);
+    double GetDistanceWithuncertainty(const FrenetPoint &forward_traj, const FrenetPoint &surr_traj, const int &obs_id,
+                                      const double obs_length, const double obs_width);
+
+    static double GaussianProbability(const Eigen::VectorXd &x, const Eigen::VectorXd &mu, const Eigen::MatrixXd &P);
+
+    static double ComputeGaussianCost(const std::vector<Eigen::VectorXd> &x1, const Eigen::VectorXd &mu1, const Eigen::MatrixXd &P1,
+                                      const std::vector<Eigen::VectorXd> &x2, const Eigen::VectorXd &mu2, const Eigen::MatrixXd &P2);
 
     bool GenerateSscCube(const std::vector<FrenetPoint> &fpb_path, const ForwardPropAgentSet &forward_prop_agent_set,
                          const std::vector<TrajectoryPoint> &path_trajectory, const FrenetPoint &planning_start_point_frenet);
@@ -301,6 +309,10 @@ private:
     std::unordered_map<int, std::vector<TrajectoryPoint>> _history_trajectory_dynamic_obstacles;
     std::unordered_map<int, std::vector<FrenetPoint>> _predict_trajectory_dynamic_obstacles;
     std::vector<int> _cur_detected_obs_id;
+
+    // 储存不确定性矩阵
+    Eigen::MatrixXd _uncertain_matrix_ego;
+    std::unordered_map<int, Eigen::MatrixXd> _uncertain_matrix_obs;
 
     // BezierSpline
     vec_E<SpatioTemporalSemanticCubeNd<2>> _cubes;
