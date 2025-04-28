@@ -274,6 +274,18 @@
                 "pitch": 0.0,
                 "yaw": 0.0
             }
+        },
+        {
+            "type": "vehicle.audi.etron",
+            "id": "vehicle_15",
+            "spawn_point": {
+             "x": 335.5,
+             "y": -73.9,
+             "z": 2.0,
+            "roll": 0.0,
+            "pitch": 0.0,
+             "yaw": -90.0
+             }
         }
     ]
 }

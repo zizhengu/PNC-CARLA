@@ -405,58 +405,58 @@ bool UMBPlanner::RunOnce(const std::shared_ptr<std::vector<PathPoint>> reference
 
     // 绘制SL图
     // RCLCPP_INFO(this->get_logger(), "Start Plot SL !!!");
-    if (_plot_count % 20 == 0)
-    {
-        if (_plot_count == 0) // 初始化窗口，仅执行一次
-        {
-            matplot::figure(_path_plot_handle);
-            matplot::hold(true); // 保持绘图窗口，叠加新内容
-        }
+    // if (_plot_count % 20 == 0)
+    // {
+    //     if (_plot_count == 0) // 初始化窗口，仅执行一次
+    //     {
+    //         matplot::figure(_path_plot_handle);
+    //         matplot::hold(true); // 保持绘图窗口，叠加新内容
+    //     }
 
-        matplot::cla();
-        std::vector<double> s, l;
-        if (getbezierspline == false)
-        {
-            for (size_t i = 0; i < fpb_path_increased.size(); i++)
-            {
-                s.emplace_back(fpb_path_increased[i].s);
-                l.emplace_back(fpb_path_increased[i].l);
-            }
-        }
-        else
-        {
-            for (size_t i = 0; i < bezier_control_points.size(); i++)
-            {
-                s.emplace_back(bezier_control_points[i].s);
-                l.emplace_back(bezier_control_points[i].l);
-            }
-        }
+    //     matplot::cla();
+    //     std::vector<double> s, l;
+    //     if (getbezierspline == false)
+    //     {
+    //         for (size_t i = 0; i < fpb_path_increased.size(); i++)
+    //         {
+    //             s.emplace_back(fpb_path_increased[i].s);
+    //             l.emplace_back(fpb_path_increased[i].l);
+    //         }
+    //     }
+    //     else
+    //     {
+    //         for (size_t i = 0; i < bezier_control_points.size(); i++)
+    //         {
+    //             s.emplace_back(bezier_control_points[i].s);
+    //             l.emplace_back(bezier_control_points[i].l);
+    //         }
+    //     }
 
-        matplot::plot(s, l, "bo-")->line_width(4);
+    //     matplot::plot(s, l, "bo-")->line_width(4);
 
-        // 只需调用一次的原因是，它的作用是保持当前图形，使后续的绘图命令不会清除之前的内容。直到你需要开始一个新的图形时，可以调用 matplot::hold(false); 来重置。
-        matplot::hold(true);
-        // // 凸空间
-        // matplot::plot(final_dp_path_s, final_dp_path_l_min, "r*-")->line_width(2);
-        // matplot::plot(final_dp_path_s, final_dp_path_l_max, "ro-")->line_width(2);
+    //     // 只需调用一次的原因是，它的作用是保持当前图形，使后续的绘图命令不会清除之前的内容。直到你需要开始一个新的图形时，可以调用 matplot::hold(false); 来重置。
+    //     matplot::hold(true);
+    //     // // 凸空间
+    //     // matplot::plot(final_dp_path_s, final_dp_path_l_min, "r*-")->line_width(2);
+    //     // matplot::plot(final_dp_path_s, final_dp_path_l_max, "ro-")->line_width(2);
 
-        // 静态障碍物
-        for (const auto &pair : forward_prop_agent_set.forward_prop_agents)
-        {
-            const auto &agent = pair.second;
-            double obs_s = agent.obs_frenet_point.s;
-            double obs_l = agent.obs_frenet_point.l;
+    //     // 静态障碍物
+    //     for (const auto &pair : forward_prop_agent_set.forward_prop_agents)
+    //     {
+    //         const auto &agent = pair.second;
+    //         double obs_s = agent.obs_frenet_point.s;
+    //         double obs_l = agent.obs_frenet_point.l;
 
-            matplot::line(obs_s - 2.5, obs_l + 1, obs_s + 2.5, obs_l + 1)->line_width(2);
-            matplot::line(obs_s + 2.5, obs_l + 1, obs_s + 2.5, obs_l - 1)->line_width(2);
-            matplot::line(obs_s + 2.5, obs_l - 1, obs_s - 2.5, obs_l - 1)->line_width(2);
-            matplot::line(obs_s - 2.5, obs_l - 1, obs_s - 2.5, obs_l + 1)->line_width(2);
-        }
-        matplot::xlim({-5, 60});  // 使用std::vector<double> 初始化
-        matplot::ylim({-10, 10}); // 使用std::vector<double> 初始化
-        matplot::title("SL Path and Obstacles");
-    }
-    _plot_count++;
+    //         matplot::line(obs_s - 2.5, obs_l + 1, obs_s + 2.5, obs_l + 1)->line_width(2);
+    //         matplot::line(obs_s + 2.5, obs_l + 1, obs_s + 2.5, obs_l - 1)->line_width(2);
+    //         matplot::line(obs_s + 2.5, obs_l - 1, obs_s - 2.5, obs_l - 1)->line_width(2);
+    //         matplot::line(obs_s - 2.5, obs_l - 1, obs_s - 2.5, obs_l + 1)->line_width(2);
+    //     }
+    //     matplot::xlim({-5, 60});  // 使用std::vector<double> 初始化
+    //     matplot::ylim({-10, 10}); // 使用std::vector<double> 初始化
+    //     matplot::title("SL Path and Obstacles");
+    // }
+    // _plot_count++;
     return true;
 }
 
@@ -1191,8 +1191,8 @@ bool UMBPlanner::PropagateScenario(
 
     // 五次多项式插值
     std::vector<FrenetPoint> sub_forward_trajs_inter;
-    // int sample_num = 10;
-    int sample_num = 5;
+    int sample_num = 10;
+    // int sample_num = 5;
     for (size_t i = 0; i < action_seq.size(); i++)
     {
         auto start_point = sub_forward_trajs->at(i);
@@ -1226,8 +1226,8 @@ bool UMBPlanner::PropagateScenario(
             }
             sub_surround_trajs_iter.emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
             // 五次多项式插值,两点之间有9个插值点（10段线段）
+            int sample_num = 10;
             // int sample_num = 10;
-            int sample_num = 5;
             for (size_t i = 0; i < action_seq.size(); i++)
             {
                 auto start_point = sub_surround_trajs->at(fpa.first)[i];
@@ -1259,7 +1259,7 @@ bool UMBPlanner::PropagateScenario(
                 sub_surround_trajs->at(fpa.first).emplace_back(fpa.second.obs_frenet_point);
             }
             sub_surround_trajs_iter.emplace(fpa.first, std::vector<FrenetPoint>({fpa.second.obs_frenet_point}));
-            for (int i = 0; i < 5 * 5; i++)
+            for (int i = 0; i < 10 * 5; i++)
             {
                 sub_surround_trajs_iter.at(fpa.first).emplace_back(fpa.second.obs_frenet_point);
             }
@@ -1270,11 +1270,11 @@ bool UMBPlanner::PropagateScenario(
     bool is_risky = false;
     std::set<size_t> risky_ids;
     double path_diff_cost = 0.0;
+
     // if (!CalculateCost(*sub_forward_trajs, *sub_surround_trajs, sub_progress_cost, &is_risky, &risky_ids))
+
     if (!CalculateCost(sub_forward_trajs_inter, sub_surround_trajs_iter, sub_progress_cost, &is_risky, &risky_ids))
     {
-        // LOG(INFO) << std::fixed << std::setprecision(4)
-        //           << "******Action Sequence " << seq_id << " Sub-Scenario " << sub_seq_id << " May Crash with Obs, Dangerous !! ******";
         return false;
     }
 
@@ -1307,7 +1307,6 @@ bool UMBPlanner::PropagateScenario(
     //           << " sub_tail_cost->safety: " << sub_tail_cost->safety.ego_to_obs << " // "
     //           << " sub_tail_cost.ave: " << sub_tail_cost->ave()
     //           << " sub_risky_res: " << *sub_risky_res;
-
     *sub_sim_res = static_cast<int>(1);
     return true;
 }
@@ -1348,8 +1347,8 @@ bool UMBPlanner::CalculateCost(const std::vector<FrenetPoint> &forward_trajs,
                            << "[UMBP]****** forward_trajs.size() != surr_traj.second.size()  ******";
                 return false;
             }
-            double distance = GetMinDistanceFromEgoToObs(forward_trajs[i], surr_traj.second[i], 5.0, 4.0);
-            // double distance = GetDistanceWithuncertainty(forward_trajs[i], surr_traj.second[i], surr_traj.first, 5.0, 4.0);
+            // double distance = GetMinDistanceFromEgoToObs(forward_trajs[i], surr_traj.second[i], 5.0, 4.0);
+            double distance = GetDistanceWithuncertainty(forward_trajs[i], surr_traj.second[i], surr_traj.first, 5.0, 4.0);
             if (distance >= 8.0)
             {
                 cost_tmp.safety.ego_to_obs += 0;
@@ -1728,6 +1727,84 @@ double UMBPlanner::GetMinDistanceFromEgoToObs(const FrenetPoint &forward_traj, c
     return min_distance;
 }
 
+// double UMBPlanner::GetDistanceWithuncertainty(const FrenetPoint &forward_traj, const FrenetPoint &surr_traj, const int &obs_id,
+//                                               const double obs_length, const double obs_width)
+// {
+//     std::vector<FrenetPoint> obs_points;
+//     FrenetPoint point_1, point_2, point_3, point_4;
+//     point_1.s = surr_traj.s + obs_length / 2.0;
+//     point_2.s = surr_traj.s + obs_length / 2.0;
+//     point_3.s = surr_traj.s - obs_length / 2.0;
+//     point_4.s = surr_traj.s - obs_length / 2.0;
+//     point_1.l = surr_traj.l + obs_width / 2.0;
+//     point_2.l = surr_traj.l - obs_width / 2.0;
+//     point_3.l = surr_traj.l - obs_width / 2.0;
+//     point_4.l = surr_traj.l + obs_width / 2.0;
+//     obs_points.emplace_back(point_1);
+//     obs_points.emplace_back(point_2);
+//     obs_points.emplace_back(point_3);
+//     obs_points.emplace_back(point_4);
+
+//     // return std::hypot((forward_traj.s - surr_traj.s), (forward_traj.l - surr_traj.l));
+//     double min_distance = std::numeric_limits<double>::max();
+//     if (forward_traj.s <= point_2.s && forward_traj.s >= point_4.s && forward_traj.l >= point_2.l && forward_traj.l <= point_4.l)
+//     {
+//         min_distance = 0.01;
+//         return min_distance;
+//     }
+//     // 自车均值及协方差矩阵
+//     Eigen::VectorXd mu1(2);
+//     mu1 << forward_traj.s, forward_traj.l;
+//     Eigen::MatrixXd P1(2, 2);
+//     P1 = _uncertain_matrix_ego;
+
+//     // 它车均值及协方差矩阵
+//     Eigen::VectorXd mu2(2);
+//     mu2 << surr_traj.s, surr_traj.l;
+//     Eigen::MatrixXd uncertain_matrix(2, 2);
+//     auto it = _uncertain_matrix_obs.find(obs_id);
+//     if (it != _uncertain_matrix_obs.end())
+//     {
+//         uncertain_matrix = it->second;
+//     }
+//     else
+//     {
+//         // 键不存在
+//         LOG(ERROR) << "[UMBP]failed to get  _uncertain_matrix_obs.find(obs_id) " << obs_id;
+//         uncertain_matrix.setIdentity();
+//     }
+//     Eigen::MatrixXd P2(2, 2);
+//     P2 << uncertain_matrix;
+
+//     // 离散化自车位置
+//     std::vector<Eigen::VectorXd> x1;
+//     for (double i = forward_traj.s - _ego_param.car_length / 2; i <= forward_traj.s + _ego_param.car_length / 2; i += 2.0)
+//     {
+//         for (double j = forward_traj.l - _ego_param.car_width / 2; j <= forward_traj.l + _ego_param.car_width / 2; j += 2.0)
+//         {
+//             Eigen::VectorXd point(2);
+//             point << i, j;
+//             x1.push_back(point);
+//         }
+//     }
+//     // 离散化它车位置
+//     std::vector<Eigen::VectorXd> x2;
+//     for (double i = surr_traj.s - obs_length / 2; i <= surr_traj.s + obs_length / 2; i += 2.0)
+//     {
+//         for (double j = surr_traj.l - obs_width / 2; j <= surr_traj.l + obs_width / 2; j += 2.0)
+//         {
+//             Eigen::VectorXd point(2);
+//             point << i, j;
+//             x2.push_back(point);
+//         }
+//     }
+
+//     // 计算期望距离
+//     min_distance = ComputeGaussianCost(x1, mu1, P1, x2, mu2, P2);
+
+//     return min_distance;
+// }
+
 double UMBPlanner::GetDistanceWithuncertainty(const FrenetPoint &forward_traj, const FrenetPoint &surr_traj, const int &obs_id,
                                               const double obs_length, const double obs_width)
 {
@@ -1746,7 +1823,6 @@ double UMBPlanner::GetDistanceWithuncertainty(const FrenetPoint &forward_traj, c
     obs_points.emplace_back(point_3);
     obs_points.emplace_back(point_4);
 
-    // return std::hypot((forward_traj.s - surr_traj.s), (forward_traj.l - surr_traj.l));
     double min_distance = std::numeric_limits<double>::max();
     if (forward_traj.s <= point_2.s && forward_traj.s >= point_4.s && forward_traj.l >= point_2.l && forward_traj.l <= point_4.l)
     {
@@ -1777,34 +1853,16 @@ double UMBPlanner::GetDistanceWithuncertainty(const FrenetPoint &forward_traj, c
     Eigen::MatrixXd P2(2, 2);
     P2 << uncertain_matrix;
 
-    // 离散化自车位置
-    std::vector<Eigen::VectorXd> x1;
-    for (double i = forward_traj.s - _ego_param.car_length / 2; i <= forward_traj.s + _ego_param.car_length / 2; i += 1.0)
+    for (int i = 0; i < P1.rows(); ++i)
     {
-        for (double j = forward_traj.l - _ego_param.car_width / 2; j <= forward_traj.l + _ego_param.car_width / 2; j += 1.0)
-        {
-            Eigen::VectorXd point(2);
-            point << i, j;
-            x1.push_back(point);
-        }
+        P1(i, i) += 1.0;
+        P2(i, i) += 1.0;
     }
-    // 离散化它车位置
-    std::vector<Eigen::VectorXd> x2;
-    for (double i = surr_traj.s - obs_length / 2; i <= surr_traj.s + obs_length / 2; i += 1.0)
-    {
-        for (double j = surr_traj.l - obs_width / 2; j <= surr_traj.l + obs_width / 2; j += 1.0)
-        {
-            Eigen::VectorXd point(2);
-            point << i, j;
-            x2.push_back(point);
-        }
-    }
-
     // 计算期望距离
-    min_distance = ComputeGaussianCost(x1, mu1, P1, x2, mu2, P2);
-
+    min_distance = computeMahalanobisDistance(mu1, P1, mu2, P2);
     return min_distance;
 }
+
 double UMBPlanner::GaussianProbability(const Eigen::VectorXd &x, const Eigen::VectorXd &mu, const Eigen::MatrixXd &P)
 {
     Eigen::MatrixXd inv_P = P.inverse();
@@ -1831,6 +1889,17 @@ double UMBPlanner::ComputeGaussianCost(const std::vector<Eigen::VectorXd> &x1, c
         }
     }
     return cost;
+}
+
+double UMBPlanner::computeMahalanobisDistance(const Eigen::VectorXd &mu1, const Eigen::MatrixXd &P1, const Eigen::VectorXd &mu2, const Eigen::MatrixXd &P2)
+{
+    Eigen::MatrixXd Sigma = (P1 + P2) / 2.0;
+    // 计算协方差矩阵的逆
+    Eigen::MatrixXd inv_Sigma = Sigma.inverse();
+    // 计算均值向量的差值
+    Eigen::VectorXd diff = mu1 - mu2;
+    // 计算马氏距离
+    return std::sqrt(diff.transpose() * inv_Sigma * diff);
 }
 bool UMBPlanner::GenerateSscCube(const std::vector<FrenetPoint> &fpb_path, const ForwardPropAgentSet &forward_prop_agent_set,
                                  const std::vector<TrajectoryPoint> &path_trajectory, const FrenetPoint &planning_start_point_frenet)

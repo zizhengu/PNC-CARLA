@@ -33,6 +33,146 @@ bool FpbTree::GenarateFpbTree()
     return true;
 }
 
+// bool FpbTree::GenarateFpbTree()
+// {
+//     behaviour_tree_.clear();
+//     std::vector<FpbAction> behaviour_seq;
+//     FpbAction temp_behaviour;
+//     int num_lon_action = (int)FpbLonAction::MAX_COUNT;
+//     // std::vector<std::vector<FpbTree::FpbLatAction>> valid_lat_behaviour_seqs = GenerateLatActionSequences();
+//     std::vector<std::vector<FpbTree::FpbLatAction>> valid_lat_behaviour_seqs = GenerateValidCombinations(tree_height_);
+//     for (int lon = 0; lon < num_lon_action; lon++)
+//     {
+
+//         // KLLLL
+//         behaviour_seq.clear();
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(1), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(1), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(1), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(1), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         behaviour_tree_.push_back(behaviour_seq);
+
+//         // KRRRR
+//         behaviour_seq.clear();
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(2), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(2), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(2), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(2), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         behaviour_tree_.push_back(behaviour_seq);
+
+//         // KKLLL
+//         behaviour_seq.clear();
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(1), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(1), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(1), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         behaviour_tree_.push_back(behaviour_seq);
+
+//         // KKRRR
+//         behaviour_seq.clear();
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(2), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(2), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(2), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         behaviour_tree_.push_back(behaviour_seq);
+
+//         // KKKLL
+//         behaviour_seq.clear();
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(1), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(1), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         behaviour_tree_.push_back(behaviour_seq);
+
+//         // KKKRR
+//         behaviour_seq.clear();
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(2), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(2), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         behaviour_tree_.push_back(behaviour_seq);
+
+//         // KKKKL
+//         behaviour_seq.clear();
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(1), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         behaviour_tree_.push_back(behaviour_seq);
+
+//         // KKKKR
+//         behaviour_seq.clear();
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(2), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         behaviour_tree_.push_back(behaviour_seq);
+
+//         // KKKKK
+//         behaviour_seq.clear();
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         temp_behaviour = FpbAction(FpbLonAction(lon), FpbLatAction(0), action_time_);
+//         behaviour_seq.push_back(temp_behaviour);
+//         behaviour_tree_.push_back(behaviour_seq);
+//     }
+//     return true;
+// }
+
 bool FpbTree::isValidCombination(const std::vector<FpbLatAction> &combination)
 {
     int turnCount = 0;

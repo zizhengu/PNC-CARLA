@@ -267,6 +267,11 @@
     [my_planning_and_control]: 计算指标完成! Efficiency: 11.55903 Safety: 0.01776 UD: 0.53936 LCC: 0.07872 total_frame: 2477.00000
 
     #------------------------------------------------------------------#
+    #加了UKF做预测
     ref_speed = 10.0
     2025.04.01.10:56(静态障碍物不用插, 插值sample_num = 5)
-    计算指标完成! Efficiency: 11.55305 Safety: 0.01141 UD: 0.61483 LCC: 0.11521 AveRunTime: 60.53278ms total_frame: 2630.00000  
+    Efficiency: 11.55305 Safety: 0.01141 UD: 0.61483 LCC: 0.11521 AveRunTime: 60.53278ms total_frame: 2630.00000 
+    2025.04.03.13:27(放弃插值，加噪声，用不确定性矩阵做， delta i = 2)
+    Efficiency: 11.149 Safety: 0.011 UD: 0.844 LCC: 0.080 AveUmbpRunTime: 112.009ms AvePlanRunTime: 116.135ms TotalFrame: 1881.0
+    统计时间： 预测时间=动态障碍物数目x5ms    前向传播时间=25ms + 障碍物数目x30ms+KDE时间10ms  根据决策进行规划的时间：7ms
+    

@@ -90,8 +90,8 @@ target_link_libraries(
   gfortran
 )
 target_link_libraries(main_function /usr/lib/x86_64-linux-gnu/libglog.so)
-target_link_libraries(main_function /usr/local/lib/libprotobuf.so)
-
+# target_link_libraries(main_function /usr/local/lib/libprotobuf.so)
+target_link_libraries(main_function /usr/lib/x86_64-linux-gnu/libprotobuf.so)
 
 install(TARGETS main_function
   DESTINATION lib/${PROJECT_NAME})

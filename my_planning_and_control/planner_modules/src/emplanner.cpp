@@ -14,7 +14,7 @@ EMPlanner::EMPlanner() : Node("emplanner")
         "/carla_waypoint_publisher/ego_vehicle/get_waypoint");
 
     // 路径决策代价初始化
-    _weight_coefficients.path_dp_w_ref = 200.0;
+    _weight_coefficients.path_dp_w_ref = 500.0;
     _weight_coefficients.path_dp_w_dl = 300.0;
     _weight_coefficients.path_dp_w_ddl = 200.0;
     _weight_coefficients.path_dp_w_dddl = 1000.0;
@@ -31,13 +31,13 @@ EMPlanner::EMPlanner() : Node("emplanner")
     _weight_coefficients.path_qp_w_ddl_end = 40.0;
 
     // 速度决策代价初始化
-    _weight_coefficients.speed_dp_w_ref_speed = 1000.0;
+    _weight_coefficients.speed_dp_w_ref_speed = 5000.0;
     _weight_coefficients.speed_dp_w_a = 400.0;
     _weight_coefficients.speed_dp_w_jerk = 400.0;
     // _weight_coefficients.speed_dp_w_obs = 2000;
     _weight_coefficients.speed_dp_w_obs = 1e5;
     // 速度规划代价初始化
-    _weight_coefficients.speed_qp_w_ref_speed = 400.0;
+    _weight_coefficients.speed_qp_w_ref_speed = 500.0;
     _weight_coefficients.speed_qp_w_a = 200.0;
     _weight_coefficients.speed_qp_w_jerk = 200.0;
 
@@ -53,7 +53,7 @@ EMPlanner::EMPlanner() : Node("emplanner")
     _speed_qp_solver.settings()->setWarmStart(true);
     // TODO:
     // 改动这里，看看能不能加速
-    _reference_speed = 11.0;
+    _reference_speed = 20.0;
 }
 
 void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> reference_line, const std::shared_ptr<VehicleState> ego_state,
@@ -374,87 +374,87 @@ void EMPlanner::planning_run_step(const std::shared_ptr<std::vector<PathPoint>> 
 
     //-------------------------------------6.绘制ST、SL图----------------------------------------
     // 6.1绘制SL图
-    if (_plot_count % 5 == 0)
-    {
-        matplot::figure(_path_plot_handle);
-        matplot::cla();
-        std::vector<double> init_dp_path_s, init_dp_path_l;
-        std::vector<double> final_dp_path_s, final_dp_path_l;
-        std::vector<double> init_qp_path_s, init_qp_path_l;
-        // 储存增密前的DP_PATH
-        for (size_t i = 0; i < dp_best_path.size(); i++)
-        {
-            init_dp_path_s.emplace_back(dp_best_path[i].s);
-            init_dp_path_l.emplace_back(dp_best_path[i].l);
-        }
-        // 储存增密后的DP_PATH及QP_PATH
-        for (size_t i = 0; i < final_dp_path.size(); i++)
-        {
-            final_dp_path_s.emplace_back(final_dp_path[i].s);
-            final_dp_path_l.emplace_back(final_dp_path[i].l);
-            init_qp_path_s.emplace_back(init_qp_path[i].s);
-            init_qp_path_l.emplace_back(init_qp_path[i].l);
-        }
-        // 增密后的DP_PATH，蓝色
-        matplot::plot(final_dp_path_s, final_dp_path_l, "bo-")->line_width(4);
+    // if (_plot_count % 5 == 0)
+    // {
+    //     matplot::figure(_path_plot_handle);
+    //     matplot::cla();
+    //     std::vector<double> init_dp_path_s, init_dp_path_l;
+    //     std::vector<double> final_dp_path_s, final_dp_path_l;
+    //     std::vector<double> init_qp_path_s, init_qp_path_l;
+    //     // 储存增密前的DP_PATH
+    //     for (size_t i = 0; i < dp_best_path.size(); i++)
+    //     {
+    //         init_dp_path_s.emplace_back(dp_best_path[i].s);
+    //         init_dp_path_l.emplace_back(dp_best_path[i].l);
+    //     }
+    //     // 储存增密后的DP_PATH及QP_PATH
+    //     for (size_t i = 0; i < final_dp_path.size(); i++)
+    //     {
+    //         final_dp_path_s.emplace_back(final_dp_path[i].s);
+    //         final_dp_path_l.emplace_back(final_dp_path[i].l);
+    //         init_qp_path_s.emplace_back(init_qp_path[i].s);
+    //         init_qp_path_l.emplace_back(init_qp_path[i].l);
+    //     }
+    //     // 增密后的DP_PATH，蓝色
+    //     matplot::plot(final_dp_path_s, final_dp_path_l, "bo-")->line_width(4);
 
-        // 只需调用一次的原因是，它的作用是保持当前图形，使后续的绘图命令不会清除之前的内容。直到你需要开始一个新的图形时，可以调用 matplot::hold(false); 来重置。
-        matplot::hold(true);
-        // 凸空间
-        matplot::plot(final_dp_path_s, final_dp_path_l_min, "r*-")->line_width(2);
-        matplot::plot(final_dp_path_s, final_dp_path_l_max, "ro-")->line_width(2);
-        // QP_PATH
-        matplot::plot(init_qp_path_s, init_qp_path_l, "go-")->line_width(2);
-        // 静态障碍物
-        for (auto &&static_obs_sl_point : static_obstacles_frent_coords)
-        {
-            matplot::line(static_obs_sl_point.s - 2.5, static_obs_sl_point.l + 1, static_obs_sl_point.s + 2.5, static_obs_sl_point.l + 1)->line_width(2);
-            matplot::line(static_obs_sl_point.s + 2.5, static_obs_sl_point.l + 1, static_obs_sl_point.s + 2.5, static_obs_sl_point.l - 1)->line_width(2);
-            matplot::line(static_obs_sl_point.s + 2.5, static_obs_sl_point.l - 1, static_obs_sl_point.s - 2.5, static_obs_sl_point.l - 1)->line_width(2);
-            matplot::line(static_obs_sl_point.s - 2.5, static_obs_sl_point.l - 1, static_obs_sl_point.s - 2.5, static_obs_sl_point.l + 1)->line_width(2);
-        }
-        matplot::title("SL Path and Obstacles");
-    }
-    // 6.2绘制ST图
-    if (_plot_count % 5 == 0)
-    {
-        matplot::figure(_trajectory_plot_handle);
-        matplot::cla();
-        std::vector<double> init_t_set, init_s_set;
-        std::vector<double> init_qp_speed_profile_t_set, init_qp_speed_profile_s_set;
-        matplot::hold(true);
-        // 储存DP_SPEED
-        for (auto &&st_point : dp_speed_profile)
-        {
-            init_t_set.emplace_back(st_point.t);
-            init_s_set.emplace_back(st_point.s);
-        }
-        matplot::plot(init_t_set, init_s_set, "bo-")->line_width(2);
+    //     // 只需调用一次的原因是，它的作用是保持当前图形，使后续的绘图命令不会清除之前的内容。直到你需要开始一个新的图形时，可以调用 matplot::hold(false); 来重置。
+    //     matplot::hold(true);
+    //     // 凸空间
+    //     matplot::plot(final_dp_path_s, final_dp_path_l_min, "r*-")->line_width(2);
+    //     matplot::plot(final_dp_path_s, final_dp_path_l_max, "ro-")->line_width(2);
+    //     // QP_PATH
+    //     matplot::plot(init_qp_path_s, init_qp_path_l, "go-")->line_width(2);
+    //     // 静态障碍物
+    //     for (auto &&static_obs_sl_point : static_obstacles_frent_coords)
+    //     {
+    //         matplot::line(static_obs_sl_point.s - 2.5, static_obs_sl_point.l + 1, static_obs_sl_point.s + 2.5, static_obs_sl_point.l + 1)->line_width(2);
+    //         matplot::line(static_obs_sl_point.s + 2.5, static_obs_sl_point.l + 1, static_obs_sl_point.s + 2.5, static_obs_sl_point.l - 1)->line_width(2);
+    //         matplot::line(static_obs_sl_point.s + 2.5, static_obs_sl_point.l - 1, static_obs_sl_point.s - 2.5, static_obs_sl_point.l - 1)->line_width(2);
+    //         matplot::line(static_obs_sl_point.s - 2.5, static_obs_sl_point.l - 1, static_obs_sl_point.s - 2.5, static_obs_sl_point.l + 1)->line_width(2);
+    //     }
+    //     matplot::title("SL Path and Obstacles");
+    // }
+    // // 6.2绘制ST图
+    // if (_plot_count % 5 == 0)
+    // {
+    //     matplot::figure(_trajectory_plot_handle);
+    //     matplot::cla();
+    //     std::vector<double> init_t_set, init_s_set;
+    //     std::vector<double> init_qp_speed_profile_t_set, init_qp_speed_profile_s_set;
+    //     matplot::hold(true);
+    //     // 储存DP_SPEED
+    //     for (auto &&st_point : dp_speed_profile)
+    //     {
+    //         init_t_set.emplace_back(st_point.t);
+    //         init_s_set.emplace_back(st_point.s);
+    //     }
+    //     matplot::plot(init_t_set, init_s_set, "bo-")->line_width(2);
 
-        // 储存增密前QP_SPEED
-        for (auto &&st_point : init_qp_speed_profile)
-        {
-            init_qp_speed_profile_t_set.emplace_back(st_point.t);
-            init_qp_speed_profile_s_set.emplace_back(st_point.s);
-        }
-        matplot::plot(init_qp_speed_profile_t_set, init_qp_speed_profile_s_set, "g*-")->line_width(4);
+    //     // 储存增密前QP_SPEED
+    //     for (auto &&st_point : init_qp_speed_profile)
+    //     {
+    //         init_qp_speed_profile_t_set.emplace_back(st_point.t);
+    //         init_qp_speed_profile_s_set.emplace_back(st_point.s);
+    //     }
+    //     matplot::plot(init_qp_speed_profile_t_set, init_qp_speed_profile_s_set, "g*-")->line_width(4);
 
-        // ST图中的动态障碍物
-        for (auto &&st_graph_node : dynamic_obs_st_graph)
-        {
-            matplot::line(st_graph_node.at("t_in"), st_graph_node.at("s_in"), st_graph_node.at("t_out"), st_graph_node.at("s_out"))->line_width(4);
-        }
-        matplot::xlim({0, 8});  // 使用std::vector<double> 初始化
-        matplot::ylim({0, 80}); // 使用std::vector<double> 初始化
+    //     // ST图中的动态障碍物
+    //     for (auto &&st_graph_node : dynamic_obs_st_graph)
+    //     {
+    //         matplot::line(st_graph_node.at("t_in"), st_graph_node.at("s_in"), st_graph_node.at("t_out"), st_graph_node.at("s_out"))->line_width(4);
+    //     }
+    //     matplot::xlim({0, 8});  // 使用std::vector<double> 初始化
+    //     matplot::ylim({0, 80}); // 使用std::vector<double> 初始化
 
-        matplot::title("ST Path and Dynamic Obstacles");
-    }
+    //     matplot::title("ST Path and Dynamic Obstacles");
+    // }
 
-    _plot_count++;
-    if (_plot_count == 1e10)
-    {
-        _plot_count = 0;
-    }
+    // _plot_count++;
+    // if (_plot_count == 1e10)
+    // {
+    //     _plot_count = 0;
+    // }
     // RCLCPP_INFO(this->get_logger(), "轨迹包含点数:%d", final_trajectory.size());
     // RCLCPP_INFO(this->get_logger(), "emplanner绘图完成");
 }

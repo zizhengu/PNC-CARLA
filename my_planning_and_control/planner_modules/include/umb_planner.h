@@ -248,6 +248,8 @@ private:
 
     static double GaussianProbability(const Eigen::VectorXd &x, const Eigen::VectorXd &mu, const Eigen::MatrixXd &P);
 
+    double computeMahalanobisDistance(const Eigen::VectorXd& mu1, const Eigen::MatrixXd& P1, const Eigen::VectorXd& mu2, const Eigen::MatrixXd& P2);
+
     static double ComputeGaussianCost(const std::vector<Eigen::VectorXd> &x1, const Eigen::VectorXd &mu1, const Eigen::MatrixXd &P1,
                                       const std::vector<Eigen::VectorXd> &x2, const Eigen::VectorXd &mu2, const Eigen::MatrixXd &P2);
 

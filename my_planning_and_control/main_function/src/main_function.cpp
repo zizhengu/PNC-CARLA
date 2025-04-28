@@ -42,6 +42,7 @@ public:
      * 10表示队列大小
      */
     _current_ego_state = std::make_shared<VehicleState>();
+    _current_ego_state_truth = std::make_shared<VehicleState>();
     _odometry_subscriber = this->create_subscription<nav_msgs::msg::Odometry>(
         // 话题名称
         "/carla/" + role_name + "/odometry",
@@ -108,10 +109,10 @@ private:
   rclcpp::Subscription<sensor_msgs::msg::Imu>::SharedPtr _imu_subscriber;                     // 惯性导航订阅方，订阅加速度与角速度
   rclcpp::Subscription<carla_msgs::msg::CarlaEgoVehicleInfo>::SharedPtr _ego_info_subscriber; // 定于车辆的车道信息
   std::shared_ptr<VehicleState> _current_ego_state;
-  std::shared_ptr<VehicleState> _current_ego_state_filter;
+  std::shared_ptr<VehicleState> _current_ego_state_truth;
   rclcpp::Subscription<derived_object_msgs::msg::ObjectArray>::SharedPtr _object_array_subscriber; // 对象序列，包含本车和障碍物
   std::vector<derived_object_msgs::msg::Object> _object_arrry;
-  std::vector<derived_object_msgs::msg::Object> _object_arrry_noise;
+  std::vector<derived_object_msgs::msg::Object> _object_arrry_truth;
 
   rclcpp::Subscription<std_msgs::msg::Float64>::SharedPtr _target_speed_subscriber; // 期望速度订阅方
   double _reference_speed;                                                          // 期望速度,单位为km/h
@@ -199,11 +200,11 @@ public:
       break;
 
     case 1:
-      RCLCPP_INFO(this->get_logger(), "True x: %.3f, True y: %.3f", msg->pose.pose.position.x, msg->pose.pose.position.y);
+      // RCLCPP_INFO(this->get_logger(), "True x: %.3f, True y: %.3f", msg->pose.pose.position.x, msg->pose.pose.position.y);
       _current_ego_state->x = msg->pose.pose.position.x + distribution(generator);
       _current_ego_state->y = msg->pose.pose.position.y + distribution(generator);
       _current_ego_state->z = msg->pose.pose.position.z;
-      RCLCPP_INFO(this->get_logger(), "Noise x: %.3f, Noise y: %.3f", _current_ego_state->x, _current_ego_state->y);
+      // RCLCPP_INFO(this->get_logger(), "Noise x: %.3f, Noise y: %.3f", _current_ego_state->x, _current_ego_state->y);
       break;
     case 2:
       if ((msg->pose.pose.position.y >= -165.8 && msg->pose.pose.position.y <= -100.5 && msg->pose.pose.position.x >= 91 && msg->pose.pose.position.x <= 93) || (msg->pose.pose.position.y >= -80.0 && msg->pose.pose.position.y <= -58.0 && msg->pose.pose.position.x >= 290 && msg->pose.pose.position.x <= 340))
@@ -221,8 +222,13 @@ public:
         break;
       }
     }
+
+    _current_ego_state_truth->x = msg->pose.pose.position.x;
+    _current_ego_state_truth->y = msg->pose.pose.position.y;
+    _current_ego_state_truth->z = msg->pose.pose.position.z;
     // RCLCPP_INFO(this->get_logger(), "current_x : %5.f,  current_y: %5.f", msg->pose.pose.position.x, msg->pose.pose.position.y);
     _current_ego_state->v = std::sqrt(std::pow(msg->twist.twist.linear.x, 2) + std::pow(msg->twist.twist.linear.y, 2) + std::pow(msg->twist.twist.linear.z, 2));
+    _current_ego_state_truth->v = _current_ego_state->v;
     tf2::Quaternion tf_q;
     tf2::fromMsg(msg->pose.pose.orientation, tf_q);
     double roll, pitch, yaw;
@@ -276,24 +282,14 @@ public:
     _object_arrry.clear();
     for (auto &&object : object_array->objects)
     {
+      _object_arrry_truth.push_back(object);
       std::random_device rd;
-      // 获取随机种子值
       unsigned int seed = rd();
-
-      // 使用随机种子初始化随机数引擎
       std::default_random_engine generator(seed);
-      if (count % 2 == 0)
-      {
-        std::normal_distribution<double> distribution(0.0, 0.5);
-        object.pose.position.x += distribution(generator);
-        object.pose.position.y += distribution(generator);
-      }
-      else
-      {
-        std::normal_distribution<double> distribution(0.0, 1.0);
-        object.pose.position.x += distribution(generator);
-        object.pose.position.y += distribution(generator);
-      }
+
+      std::normal_distribution<double> distribution(0.0, 1.0);
+      object.pose.position.x += distribution(generator);
+      object.pose.position.y += distribution(generator);
       _object_arrry.push_back(object);
       count++;
     }
@@ -336,101 +332,105 @@ public:
     _reference_line_publisher->publish(nav_reference_line);
 
     // 调用KF进行自车空间位置滤波处理及不确定性矩阵输出
-    if (is_kalman_first_run)
+    if (_add_localiation_noise_type != 0)
     {
-      Eigen::VectorXd x_l_k(3);
-      _kf.x_l_k << _current_ego_state->x, _current_ego_state->y, _current_ego_state->heading;
-      is_kalman_first_run = false;
-      Eigen::MatrixXd uncerten_matrix(2, 2);
-      uncerten_matrix << _kf.GetCovariance().diagonal()(0), 0, 0, _kf.GetCovariance().diagonal()(1);
-      _P_ego_state = uncerten_matrix;
-    }
-    else
-    {
-      // 观测值x,y,theta
-      Eigen::VectorXd xt(3);
-      xt << _current_ego_state->x, _current_ego_state->y, _current_ego_state->heading;
-      // 控制输入
-      // vx,xy,ax,ay,omega
-      double vx = _current_ego_state->v * cos(_current_ego_state->heading);
-      double vy = _current_ego_state->v * sin(_current_ego_state->heading);
-      double ax = sqrt(pow(_current_ego_state->ax, 2) + pow(_current_ego_state->ay, 2)) * cos(_current_ego_state->heading);
-      double ay = sqrt(pow(_current_ego_state->ax, 2) + pow(_current_ego_state->ay, 2)) * sin(_current_ego_state->heading);
-      double omega = _current_ego_state->omega;
-      Eigen::VectorXd u(5);
-      u << vx, vy, ax, ay, omega;
-      // 预测
-      Eigen::VectorXd x_p_k(3);
-      x_p_k = _kf.predict(u, xt);
-      Eigen::VectorXd x_l_k(3);
-      x_l_k = _kf.update();
-      _current_ego_state->x = x_l_k(0);
-      _current_ego_state->y = x_l_k(1);
-      Eigen::MatrixXd uncerten_matrix(2, 2);
-      uncerten_matrix << _kf.GetCovariance().diagonal()(0), 0, 0, _kf.GetCovariance().diagonal()(1);
-      _P_ego_state = uncerten_matrix;
-    }
-    std::ostringstream ego_state_stream;
-    ego_state_stream << _P_ego_state;
-    LOG(INFO) << std::fixed << std::setprecision(4)
-              << "[主车状态信息][Process] 主车 ID : " << _current_ego_state->id << "状态协方差矩阵 _P_ego_state:\n"
-              << ego_state_stream.str();
-
-    // 调用KF进行障碍物空间位置滤波处理及不确定性矩阵输出
-    for (auto &obs : _object_arrry)
-    {
-      if (obs.id == _current_ego_state->id)
+      if (is_kalman_first_run)
       {
-        continue;
-      }
-      tf2::Quaternion tf2_q;
-      tf2::fromMsg(obs.pose.orientation, tf2_q);
-      double roll, pitch, yaw;
-      tf2::Matrix3x3(tf2_q).getRPY(roll, pitch, yaw);
-      double heading = tf2NormalizeAngle(yaw);
-
-      if (is_obs_kalman_first_run.find(obs.id) == is_obs_kalman_first_run.end())
-      {
-        is_obs_kalman_first_run[obs.id] = true;
-        kalman::KalmanFilter kalman_obs;
-        kalman_obs.x_l_k << obs.pose.position.x, obs.pose.position.y, heading;
+        Eigen::VectorXd x_l_k(3);
+        _kf.x_l_k << _current_ego_state->x, _current_ego_state->y, _current_ego_state->heading;
+        is_kalman_first_run = false;
         Eigen::MatrixXd uncerten_matrix(2, 2);
-        uncerten_matrix << kalman_obs.GetCovariance().diagonal()(0), 0, 0, kalman_obs.GetCovariance().diagonal()(1);
-        _P_obstacles[obs.id] = uncerten_matrix;
-        _kf_obs[obs.id] = kalman_obs;
+        uncerten_matrix << _kf.GetCovariance().diagonal()(0), 0, 0, _kf.GetCovariance().diagonal()(1);
+        _P_ego_state = uncerten_matrix;
       }
       else
       {
         // 观测值x,y,theta
         Eigen::VectorXd xt(3);
-        xt << obs.pose.position.x, obs.pose.position.y, heading;
+        xt << _current_ego_state->x, _current_ego_state->y, _current_ego_state->heading;
         // 控制输入
         // vx,xy,ax,ay,omega
-        double vx = obs.twist.linear.x;
-        double vy = obs.twist.linear.y;
-        double ax = obs.accel.linear.x;
-        double ay = obs.accel.linear.y;
-        double omega = obs.twist.angular.z;
+        double vx = _current_ego_state->v * cos(_current_ego_state->heading);
+        double vy = _current_ego_state->v * sin(_current_ego_state->heading);
+        double ax = sqrt(pow(_current_ego_state->ax, 2) + pow(_current_ego_state->ay, 2)) * cos(_current_ego_state->heading);
+        double ay = sqrt(pow(_current_ego_state->ax, 2) + pow(_current_ego_state->ay, 2)) * sin(_current_ego_state->heading);
+        double omega = _current_ego_state->omega;
         Eigen::VectorXd u(5);
         u << vx, vy, ax, ay, omega;
         // 预测
         Eigen::VectorXd x_p_k(3);
-        x_p_k = _kf_obs[obs.id].predict(u, xt);
+        x_p_k = _kf.predict(u, xt);
         Eigen::VectorXd x_l_k(3);
-        x_l_k = _kf_obs[obs.id].update();
-        obs.pose.position.x = x_l_k(0);
-        obs.pose.position.y = x_l_k(1);
+        x_l_k = _kf.update();
+        _current_ego_state->x = x_l_k(0);
+        _current_ego_state->y = x_l_k(1);
         Eigen::MatrixXd uncerten_matrix(2, 2);
-        uncerten_matrix << _kf_obs[obs.id].GetCovariance().diagonal()(0), 0, 0, _kf_obs[obs.id].GetCovariance().diagonal()(1);
-        _P_obstacles[obs.id] = uncerten_matrix;
-        std::ostringstream obstacle_stream;
-        obstacle_stream << _P_obstacles[obs.id];
-        LOG(INFO) << std::fixed << std::setprecision(4)
-                  << "[障碍物状态信息][Process] 障碍物 ID: " << obs.id
-                  << " 的协方差矩阵 _P_obstacles:\n"
-                  << obstacle_stream.str();
-      };
+        uncerten_matrix << _kf.GetCovariance().diagonal()(0), 0, 0, _kf.GetCovariance().diagonal()(1);
+        _P_ego_state = uncerten_matrix;
+      }
+      std::ostringstream ego_state_stream;
+      ego_state_stream << _P_ego_state;
+      LOG(INFO) << std::fixed << std::setprecision(4)
+                << "[主车状态信息][Process] 主车 ID : " << _current_ego_state->id << "状态协方差矩阵 _P_ego_state:\n"
+                << ego_state_stream.str();
+
+      // 调用KF进行障碍物空间位置滤波处理及不确定性矩阵输出
+      for (auto &obs : _object_arrry)
+      {
+        if (obs.id == _current_ego_state->id)
+        {
+          continue;
+        }
+        tf2::Quaternion tf2_q;
+        tf2::fromMsg(obs.pose.orientation, tf2_q);
+        double roll, pitch, yaw;
+        tf2::Matrix3x3(tf2_q).getRPY(roll, pitch, yaw);
+        double heading = tf2NormalizeAngle(yaw);
+
+        if (is_obs_kalman_first_run.find(obs.id) == is_obs_kalman_first_run.end())
+        {
+          is_obs_kalman_first_run[obs.id] = true;
+          kalman::KalmanFilter kalman_obs;
+          kalman_obs.x_l_k << obs.pose.position.x, obs.pose.position.y, heading;
+          Eigen::MatrixXd uncerten_matrix(2, 2);
+          uncerten_matrix << kalman_obs.GetCovariance().diagonal()(0), 0, 0, kalman_obs.GetCovariance().diagonal()(1);
+          _P_obstacles[obs.id] = uncerten_matrix;
+          _kf_obs[obs.id] = kalman_obs;
+        }
+        else
+        {
+          // 观测值x,y,theta
+          Eigen::VectorXd xt(3);
+          xt << obs.pose.position.x, obs.pose.position.y, heading;
+          // 控制输入
+          // vx,xy,ax,ay,omega
+          double vx = obs.twist.linear.x;
+          double vy = obs.twist.linear.y;
+          double ax = obs.accel.linear.x;
+          double ay = obs.accel.linear.y;
+          double omega = obs.twist.angular.z;
+          Eigen::VectorXd u(5);
+          u << vx, vy, ax, ay, omega;
+          // 预测
+          Eigen::VectorXd x_p_k(3);
+          x_p_k = _kf_obs[obs.id].predict(u, xt);
+          Eigen::VectorXd x_l_k(3);
+          x_l_k = _kf_obs[obs.id].update();
+          obs.pose.position.x = x_l_k(0);
+          obs.pose.position.y = x_l_k(1);
+          Eigen::MatrixXd uncerten_matrix(2, 2);
+          uncerten_matrix << _kf_obs[obs.id].GetCovariance().diagonal()(0), 0, 0, _kf_obs[obs.id].GetCovariance().diagonal()(1);
+          _P_obstacles[obs.id] = uncerten_matrix;
+          // std::ostringstream obstacle_stream;
+          // obstacle_stream << _P_obstacles[obs.id];
+          // LOG(INFO) << std::fixed << std::setprecision(4)
+          //           << "[障碍物状态信息][Process] 障碍物 ID: " << obs.id
+          //           << " 的协方差矩阵 _P_obstacles:\n"
+          //           << obstacle_stream.str();
+        };
+      }
     }
+
     // 调用KF进行自车空间位置滤波处理及不确定性矩阵输出
     // if (_history_ego_state.size() < 20)
     // {
@@ -464,9 +464,10 @@ public:
 
     // 调用umbplanner获取轨迹
     auto current_time = this->get_clock()->now();
-    // _emplanner->planning_run_step(_reference_line, _current_ego_state, _object_arrry, _trajectory);
     TicToc umbp_runonce_timer;
-    RCLCPP_INFO(this->get_logger(), "Input x: %.3f, Input y: %.3f", _current_ego_state->x, _current_ego_state->y);
+    // _emplanner->planning_run_step(_reference_line, _current_ego_state, _object_arrry, _trajectory);
+
+    // RCLCPP_INFO(this->get_logger(), "Input x: %.3f, Input y: %.3f", _current_ego_state->x, _current_ego_state->y);
     if (!(_umbplanner->RunOnce(_reference_line, _current_ego_state, _P_obstacles, _P_ego_state, _object_arrry, _trajectory, _emergency_stop_signal)))
     {
       LOG(ERROR) << std::fixed << std::setprecision(4)
@@ -496,10 +497,10 @@ public:
     {
       _uncomfortable_acc_frame += 1.0;
     }
-    UD = _uncomfortable_acc_frame / _total_frame;
+    UD = _uncomfortable_acc_frame / _total_frame * 100;
 
     // 计算Safety
-    for (auto &&obs : _object_arrry)
+    for (auto &&obs : _object_arrry_truth)
     {
       // 障碍物不包含主车
       if (obs.id == _current_ego_state->id)
@@ -507,7 +508,7 @@ public:
         continue;
       }
       // 主车到障碍物的向量
-      Eigen::Vector2d host_to_obs(obs.pose.position.x - _current_ego_state->x, obs.pose.position.y - _current_ego_state->y);
+      Eigen::Vector2d host_to_obs(obs.pose.position.x - _current_ego_state_truth->x, obs.pose.position.y - _current_ego_state_truth->y);
       double length = host_to_obs.norm();
       if (length < 3.0)
       {
@@ -515,7 +516,7 @@ public:
         break;
       }
     }
-    Safety = _dangerous_frame / _total_frame;
+    Safety = _dangerous_frame / _total_frame * 100;
 
     // 计算LCC
     if (_is_fisrt_evaluation)
@@ -542,17 +543,17 @@ public:
       _previous_time = this->get_clock()->now();
       _previous_omega = _current_omega;
     }
-    LCC = _large_curvature_changing_frame / _total_frame;
+    LCC = _large_curvature_changing_frame / _total_frame * 100;
 
     _total_planning_time += (double)planning_run_timer.toc();
     AvePlanTime = _total_planning_time / _total_frame;
     LOG(INFO) << "----------------------------------";
     RCLCPP_INFO(this->get_logger(), "Efficiency: %.3f Safety: %.3f UD: %.3f LCC: %.3f AveUmbpRunTime: %.3fms AvePlanRunTime: %.3fms TotalFrame: %.1f", Efficiency, Safety, UD, LCC, AveRunTime, AvePlanTime, _total_frame);
 
-    // if (_current_ego_state->x <= 338 && _current_ego_state->x >= 336 && _current_ego_state->y <= -89 && _current_ego_state->y >= -90)
-    // {
-    //   exit(0);
-    // }
+    if (_current_ego_state->x <= 340 && _current_ego_state->x >= 330 && _current_ego_state->y <= -89 && _current_ego_state->y >= -90)
+    {
+      exit(0);
+    }
   }
 
   void control_run_step() // 单步控制
